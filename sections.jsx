@@ -104,46 +104,199 @@ function DemoShowcase() {
   );
 }
 
+const INBOX_THREADS = [
+  {
+    id: 0, avatar: 'M', bg: 'linear-gradient(135deg,#f0a17a,#d8543e)',
+    name: 'Marcus Webb', role: 'Head of Engineering · Northwind',
+    when: 'Mon 9:14 AM', unread: true,
+    subj: 'Re: Founding PE · from a 0→1 builder',
+    preview: 'This stood out from the 240+ applications we got…',
+    tag: 'INTERVIEW →', tagColor: '#1a56db', tagBg: '#e8f0ff',
+    thread: [
+      { from: 'Arjun (via JobPilot)', time: 'Mon 6:02 AM', dir: 'sent', body: `Hi Marcus,\n\nSaw Northwind's Founding PE role — your March changelog on shipping v3 in six weeks is exactly the pace I want.\n\nTwo years doing this: solo-shipped 3 products, grew last app 2k → 80k MAU. Full-stack across TS, Go, Postgres.\n\nResume attached. Happy to pair on a real bug.\n\n— Arjun` },
+      { from: 'Marcus Webb', time: 'Mon 9:14 AM', dir: 'recv', body: `Arjun —\n\nThis stood out from the 240+ applications we got this week. The v3 reference — that tells me you actually read what we shipped.\n\nForwarding to Priya (Head of Eng). She'll set up a chat this week.\n\n— Marcus` },
+    ],
+  },
+  {
+    id: 1, avatar: 'D', bg: 'linear-gradient(135deg,#5562eb,#3a1f9c)',
+    name: 'Devon Reilly', role: 'CEO · Plover',
+    when: 'Tue 11:42 AM', unread: false,
+    subj: 'Re: Head of Growth · loved what you\'ve built',
+    preview: 'Most candidates send the same Notion template…',
+    tag: 'INTERVIEW SET', tagColor: '#057642', tagBg: '#e6f4ea',
+    thread: [
+      { from: 'Arjun (via JobPilot)', time: 'Tue 8:15 AM', dir: 'sent', body: `Hi Devon,\n\nLumen AI's approach to contextual retrieval caught my attention — especially the zero-shot work from your Feb post.\n\nI've grown products from 0 → 80k MAU in 18 months. Comfortable at the product × distribution intersection.\n\nWould love to talk about the Head of Growth role.\n\n— Arjun` },
+      { from: 'Devon Reilly', time: 'Tue 11:42 AM', dir: 'recv', body: `Most candidates send the same Notion-template cover letter. Yours read like a real person — and you actually understood the brief.\n\nCan we schedule a quick chat this week? I'm open Thu/Fri afternoon.\n\n— Devon` },
+    ],
+  },
+  {
+    id: 2, avatar: 'S', bg: 'linear-gradient(135deg,#3aa178,#1b6448)',
+    name: 'Sana Iyer', role: 'Co-founder · Reed Labs',
+    when: 'Wed 2:08 PM', unread: false,
+    subj: 'Re: Backend Engineer · saw the changelog',
+    preview: 'The reference to our changelog gave it away…',
+    tag: 'FORWARDED TO HR', tagColor: '#b45309', tagBg: '#fff0e0',
+    thread: [
+      { from: 'Arjun (via JobPilot)', time: 'Wed 9:30 AM', dir: 'sent', body: `Hi Sana,\n\nReed Labs' distributed systems work stands out — I've been following the Raft consensus posts on your eng blog.\n\nI've shipped Go services at 10k+ RPS. Resume attached — happy to do a take-home or a system design session.\n\n— Arjun` },
+      { from: 'Sana Iyer', time: 'Wed 2:08 PM', dir: 'recv', body: `The reference to our changelog gave it away — you actually read it. We don't see that often.\n\nForwarding this to our eng team. Calendar's open Thursday afternoon.\n\n— Sana` },
+    ],
+  },
+  {
+    id: 3, avatar: 'P', bg: 'linear-gradient(135deg,#5fb6c4,#1f6b78)',
+    name: 'Priya Shah', role: 'CTO · Atlas Health',
+    when: 'Thu 8:04 AM', unread: false,
+    subj: 'Re: Backend Engineer — strong profile',
+    preview: 'Strong signal. The way you framed the v3 migration…',
+    tag: 'WORKING SESSION', tagColor: '#6d28d9', tagBg: '#ede9fe',
+    thread: [
+      { from: 'Arjun (via JobPilot)', time: 'Wed 11:00 AM', dir: 'sent', body: `Hi Priya,\n\nAtlas Health's HIPAA-compliant data pipeline work resonated — especially the v3 migration case study.\n\nI've built production Go + Postgres services under strict compliance requirements. Happy to share specifics.\n\n— Arjun` },
+      { from: 'Priya Shah', time: 'Thu 8:04 AM', dir: 'recv', body: `Strong signal. The way you framed the v3 migration tells me you'd ship from week one.\n\nLet's do a working session instead of a panel — I'll send a calendar invite today.\n\n— Priya` },
+    ],
+  },
+  {
+    id: 4, avatar: 'T', bg: 'linear-gradient(135deg,#e1b14a,#a67919)',
+    name: 'Theo Marchetti', role: 'Founder · Lumen AI',
+    when: 'Thu 3:51 PM', unread: false,
+    subj: 'Re: Founding Designer — loved the specificity',
+    preview: 'Most cold inbound goes straight to spam…',
+    tag: 'FORWARDED TO HR', tagColor: '#b45309', tagBg: '#fff0e0',
+    thread: [
+      { from: 'Arjun (via JobPilot)', time: 'Thu 10:00 AM', dir: 'sent', body: `Hi Theo,\n\nLumen AI's design direction — particularly the information density work in the dashboard — is exactly the kind of problem I want.\n\nI've shipped design systems at scale. Portfolio attached.\n\n— Arjun` },
+      { from: 'Theo Marchetti', time: 'Thu 3:51 PM', dir: 'recv', body: `Most cold inbound goes straight to spam. Yours got through because it was specific and short.\n\nSending to our hiring lead now. Expect a note from her tomorrow.\n\n— Theo` },
+    ],
+  },
+  {
+    id: 5, avatar: 'J', bg: 'linear-gradient(135deg,#a07ad8,#5b34a1)',
+    name: 'Jules Bennett', role: 'Founder · Cloudpack',
+    when: 'Fri 10:50 AM', unread: false,
+    subj: 'Re: One of the best applications we\'ve seen',
+    preview: 'Direct, no fluff, no AI smell. Resume on point…',
+    tag: 'INTERVIEW SET', tagColor: '#057642', tagBg: '#e6f4ea',
+    thread: [
+      { from: 'Arjun (via JobPilot)', time: 'Fri 7:30 AM', dir: 'sent', body: `Hi Jules,\n\nCloudpack's edge caching architecture — the April teardown — showed exactly the kind of engineering I want to be close to.\n\nI've shipped infrastructure at scale (Go, k8s, Cloudflare Workers). Resume attached.\n\n— Arjun` },
+      { from: 'Jules Bennett', time: 'Fri 10:50 AM', dir: 'recv', body: `Direct, no fluff, no AI smell. Resume on point.\n\nBooked you in with our CEO for next week — calendar invite incoming shortly.\n\n— Jules` },
+    ],
+  },
+];
+
+const STATS = [
+  { k: 'Sent', v: 14, sub: 'this week', color: 'var(--ink-3)' },
+  { k: 'Opened', v: 11, sub: '79% open rate', color: 'var(--accent)' },
+  { k: 'Replied', v: 6, sub: '43% reply rate', color: '#0a8a4a' },
+  { k: 'Interviews', v: 4, sub: 'scheduled', color: '#7c3aed' },
+];
+
 function Testimonials() {
-  // Gmail-style founder reply cards
-  const items = [
-    { name: 'Maya Okafor', role: 'Founder · Northwind', avatar: 'M', bg: 'linear-gradient(135deg,#f0a17a,#d8543e)', when: 'Mon 9:14 AM', subj: 'Re: Founding PE · from a 0→1 builder', body: <>Arjun — <strong>this stood out</strong> from the 240+ applications we got this week. Forwarding to Priya (Head of Eng), she'll set up a chat. Appreciate the v3 reference.</>, tag: 'Forwarded to Eng' },
-    { name: 'Devon Reilly', role: 'CEO · Plover', avatar: 'D', bg: 'linear-gradient(135deg,#5562eb,#3a1f9c)', when: 'Tue 11:42 AM', subj: 'Re: Loved the initiative', body: <>Most candidates send the same Notion-template cover letter. Yours read like a real person — and you actually understood the brief. <strong>Can we schedule a quick chat this week?</strong></>, tag: 'Interview set' },
-    { name: 'Sana Iyer', role: 'Co-founder · Reed Labs', avatar: 'S', bg: 'linear-gradient(135deg,#3aa178,#1b6448)', when: 'Wed 2:08 PM', subj: 'Re: Growth Engineer · saw the changelog', body: <>The reference to our changelog gave it away — you <strong>actually read it</strong>. We don't see that often. Calendar's open Thursday afternoon.</>, tag: 'Replied' },
-    { name: 'Theo Marchetti', role: 'Founder · Lumen AI', avatar: 'T', bg: 'linear-gradient(135deg,#e1b14a,#a67919)', when: 'Wed 5:31 PM', subj: 'Re: Founding Designer', body: <>Most cold inbound goes straight to spam. Yours got through because it was specific and short. <strong>Sending to our hiring lead now.</strong></>, tag: 'Forwarded to HR' },
-    { name: 'Priya Shah', role: 'CTO · Atlas Health', avatar: 'P', bg: 'linear-gradient(135deg,#5fb6c4,#1f6b78)', when: 'Thu 8:04 AM', subj: 'Re: Backend Engineer', body: <>Strong signal. The way you framed the v3 migration tells me you'd ship from week one. <strong>Let's do a working session</strong> instead of a panel.</>, tag: 'Replied' },
-    { name: 'Jules Bennett', role: 'Founder · Cloudpack', avatar: 'J', bg: 'linear-gradient(135deg,#a07ad8,#5b34a1)', when: 'Fri 10:50 AM', subj: 'Re: One of the best applications', body: <>Direct, no fluff, no AI smell. Resume on point. <strong>Booked you in with our CEO</strong> for next week — calendar invite incoming.</>, tag: 'Interview set' },
-  ];
+  const { useState: useStateT, useEffect: useEffectT, useRef: useRefT } = React;
+  const [activeThread, setActiveThread] = useStateT(0);
+  const timerRef = useRefT(null);
+
+  const activate = (i) => {
+    setActiveThread(i);
+    clearInterval(timerRef.current);
+    timerRef.current = setInterval(() => {
+      setActiveThread(t => (t + 1) % INBOX_THREADS.length);
+    }, 4200);
+  };
+
+  useEffectT(() => {
+    timerRef.current = setInterval(() => {
+      setActiveThread(t => (t + 1) % INBOX_THREADS.length);
+    }, 4200);
+    return () => clearInterval(timerRef.current);
+  }, []);
+
+  const thread = INBOX_THREADS[activeThread];
+
   return (
     <section className="section" id="proof">
       <div className="wrap">
         <div className="section-head" data-reveal>
-          <span className="eyebrow"><span className="dot" />Founder replies</span>
-          <h2 className="h-section">Founders reply to intent.<br />Here's what that looks like.</h2>
+          <span className="eyebrow"><span className="dot" />Real founder replies</span>
+          <h2 className="h-section">Founders reply to intent.<br /><em>Here's what that looks like.</em></h2>
+          <p className="lead">These are the actual inboxes that fill up after using JobPilot. Personal outreach generates real conversations.</p>
         </div>
-        <div className="tests-grid">
-          {items.map((t, i) => (
-            <div className="gmail-card" key={i} data-reveal style={{ transitionDelay: (i * 50) + 'ms' }}>
-              <div className="gmail-head">
-                <div className="avatar-bubble" style={{ background: t.bg }}>{t.avatar}</div>
-                <div style={{ flex: 1, minWidth: 0 }}>
-                  <div className="gmail-name-row">
-                    <span className="name">{t.name}</span>
-                    <span className="when">{t.when}</span>
-                  </div>
-                  <div style={{ fontSize: 11.5, color: 'var(--ink-4)' }}>{t.role}</div>
-                </div>
-              </div>
-              <div className="gmail-subj">{t.subj}</div>
-              <div className="gmail-body">{t.body}</div>
-              <div className="gmail-foot">
-                <span className="pill">{t.tag.toUpperCase()}</span>
-                <span style={{ marginLeft: 'auto', display: 'inline-flex', gap: 6, alignItems: 'center' }}>
-                  <Icon name="forward" size={12} /> Reply
-                </span>
-              </div>
+
+        {/* Stats bar */}
+        <div className="inbox-stats-row" data-reveal>
+          {STATS.map(({ k, v, sub, color }) => (
+            <div key={k} className="inbox-stat-card">
+              <div style={{ fontSize: 40, fontWeight: 700, letterSpacing: '-0.04em', color, lineHeight: 1 }}>{v}</div>
+              <div style={{ fontSize: 13, fontWeight: 600, marginTop: 4 }}>{k}</div>
+              <div style={{ fontSize: 12, color: 'var(--ink-4)', marginTop: 2 }}>{sub}</div>
             </div>
           ))}
+        </div>
+
+        {/* Gmail inbox mock */}
+        <div className="inbox-shell" data-reveal>
+          {/* Left: thread list */}
+          <div className="inbox-list">
+            <div className="inbox-list-header">
+              <span style={{ fontSize: 13, fontWeight: 600 }}>Inbox</span>
+              <span className="inbox-badge">{INBOX_THREADS.filter(t => t.unread).length} new</span>
+            </div>
+            {INBOX_THREADS.map((t, i) => (
+              <div
+                key={t.id}
+                className={`inbox-row${activeThread === i ? ' active' : ''}${t.unread ? ' unread' : ''}`}
+                onClick={() => activate(i)}
+              >
+                <div className="inbox-row-av" style={{ background: t.bg }}>{t.avatar}</div>
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div className="inbox-row-name">{t.name}</div>
+                  <div className="inbox-row-subj">{t.subj}</div>
+                  <div className="inbox-row-preview">{t.preview}</div>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 5, flexShrink: 0 }}>
+                  <span className="inbox-row-time">{t.when.split(' ')[0]}</span>
+                  <span className="inbox-row-tag" style={{ background: t.tagBg, color: t.tagColor }}>{t.tag}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Right: email view */}
+          <div className="inbox-view">
+            <div className="inbox-view-header">
+              <h3 className="inbox-view-subj">{thread.subj}</h3>
+              <div style={{ display: 'flex', gap: 6, marginTop: 6 }}>
+                <span className="inbox-tag-pill" style={{ background: thread.tagBg, color: thread.tagColor }}>{thread.tag}</span>
+                <span className="inbox-tag-pill" style={{ background: 'var(--accent-soft)', color: 'var(--accent-ink)' }}>via JobPilot</span>
+              </div>
+            </div>
+
+            <div className="inbox-thread">
+              {thread.thread.map((msg, i) => (
+                <div key={i} className={`inbox-msg${msg.dir === 'recv' ? ' recv' : ' sent-msg'}`}>
+                  <div className="inbox-msg-header">
+                    <div className="inbox-msg-av" style={{ background: msg.dir === 'recv' ? thread.bg : 'linear-gradient(135deg,#6366f1,#4f46e5)' }}>
+                      {msg.dir === 'recv' ? thread.avatar : 'A'}
+                    </div>
+                    <div>
+                      <div className="inbox-msg-from">{msg.from}</div>
+                      <div className="inbox-msg-time">{msg.time}</div>
+                    </div>
+                    {msg.dir === 'sent' && (
+                      <span style={{ marginLeft: 'auto', fontSize: 10, padding: '2px 7px', borderRadius: 4, background: 'var(--accent-soft)', color: 'var(--accent-ink)', fontFamily: 'var(--font-mono)', fontWeight: 600 }}>SENT VIA JOBPILOT</span>
+                    )}
+                  </div>
+                  <div className="inbox-msg-body">{msg.body}</div>
+                </div>
+              ))}
+
+              {/* Reply prompt */}
+              <div className="inbox-reply-box">
+                <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+                  <div style={{ width: 26, height: 26, borderRadius: '50%', background: 'linear-gradient(135deg,#6366f1,#4f46e5)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontSize: 10, fontWeight: 700, flexShrink: 0 }}>A</div>
+                  <div style={{ flex: 1, height: 32, borderRadius: 6, border: '1px solid var(--line-2)', background: 'var(--bg-soft)', display: 'flex', alignItems: 'center', padding: '0 12px', fontSize: 12.5, color: 'var(--ink-4)' }}>
+                    Reply to {thread.name}…
+                  </div>
+                  <button style={{ padding: '6px 12px', borderRadius: 6, background: 'var(--accent)', color: 'white', fontSize: 12, fontWeight: 600, border: 'none', cursor: 'pointer' }}>Send</button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
