@@ -1,0 +1,87 @@
+Make the Hero section feel exactly like a real modern LinkedIn job application workflow UI — not a generic SaaS animation.
+
+Requirements:
+
+• Replace current floating/random animations with ultra-smooth realistic UI motion
+• Cursor movement should feel human and intentional
+• Smooth easing everywhere (Apple-level smoothness)
+• Remove exaggerated motion and fake floating cards
+• Match LinkedIn’s actual layout density, spacing, typography rhythm, and interaction patterns
+
+Hero Section:
+• Show a realistic LinkedIn-style jobs feed
+• Left side: list of jobs with company logo, title, location, applicants, easy apply badge
+• When cursor clicks a job, open the detailed side panel exactly like LinkedIn
+• The panel should slide smoothly from the right
+• Include:
+
+* Job description
+* Skills
+* Recruiter section
+* Easy Apply button
+* Saved job button
+* Company insights
+
+Then show the JobPilot extension workflow:
+
+1. User clicks “Apply with JobPilot”
+2. Extension side panel opens
+3. Resume detected automatically
+4. AI generates personalized cover letter
+5. Auto-fills application
+6. Sends email/application automatically
+7. Success state appears
+
+Animation style:
+• Extremely smooth transitions
+• Framer-motion quality micro-interactions
+• Real cursor path animation
+• Subtle hover states
+• Soft shadows
+• Glassmorphism only where appropriate
+• No flashy gradients
+• Premium minimalist SaaS feel
+
+How It Works section:
+Create a full LinkedIn application simulation flow.
+
+Step 1:
+• LinkedIn jobs page visible
+• Multiple jobs listed
+• Cursor scrolling naturally
+
+Step 2:
+• User clicks a job
+• Right-side job detail panel opens
+
+Step 3:
+• User clicks “Apply with JobPilot”
+• Chrome extension opens from right side
+
+Step 4:
+• AI scans resume automatically
+• Generates tailored cover letter in real time
+• Match score increases visually
+
+Step 5:
+• Email/application gets sent automatically
+• Show success animation + applied badge
+
+UI Requirements:
+• Match LinkedIn’s visual hierarchy closely
+• Similar spacing and component density
+• Similar card styling and sidebar structure
+• Neutral professional color palette
+• Keep branding subtle and premium
+• Desktop-first polished interactions
+
+Technical:
+• Use smooth spring animations
+• Optimize all animations to 60fps
+• Add subtle motion blur where needed
+• Ensure cursor movement interpolation is smooth
+• Add staggered reveal animations
+• Make every interaction feel responsive and premium
+
+Overall goal:
+It should feel like a premium AI automation tool operating directly inside LinkedIn, with realistic product-demo quality interactions similar to Arc Browser, Linear, or modern YC SaaS landing pages.
