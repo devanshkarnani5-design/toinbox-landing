@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>JobPilot — The Chrome extension for founder-first LinkedIn applications</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-aesthetic="saas" data-energy="standard" data-surface="paper">
+  <div id="app"></div>
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+  <script type="text/babel" src="icons.jsx"></script>
+  <script type="text/babel" src="tweaks-panel.jsx"></script>
+  <script type="text/babel" src="hero-demo.jsx"></script>
+  <script type="text/babel" src="how-it-works.jsx"></script>
+  <script type="text/babel" src="sections.jsx"></script>
+
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+      "aesthetic": "saas",
+      "accentHue": 252,
+      "surface": "paper",
+      "energy": "standard"
+    }/*EDITMODE-END*/;
+
+    const ACCENT_OPTIONS = [
+      { label: 'Electric', hue: 252, swatch: '#3b6cf2' },
+      { label: 'Acid',     hue: 142, swatch: '#27b86b' },
+      { label: 'Amber',    hue: 60,  swatch: '#c79a1f' },
+      { label: 'Magenta',  hue: 340, swatch: '#d4377a' },
+    ];
+
+    function Nav() {
+      const [scrolled, setScrolled] = useState(false);
+      useEffect(() => {
+        const onScroll = () => setScrolled(window.scrollY > 8);
+        window.addEventListener('scroll', onScroll, { passive: true });
+        return () => window.removeEventListener('scroll', onScroll);
+      }, []);
+      return (
+        <nav className={`nav ${scrolled ? 'scrolled' : ''}`}>
+          <div className="wrap nav-inner">
+            <div className="brand"><span className="brand-mark" /> JobPilot</div>
+            <div className="nav-links">
+              <a href="#why">Why</a>
+              <a href="#how-section">How it works</a>
+              <a href="#product">Product</a>
+              <a href="#pricing">Pricing</a>
+            </div>
+            <div className="nav-cta">
+              <a href="#" className="btn btn-ghost btn-sm">Sign in</a>
+              <a href="#pricing" className="btn btn-primary btn-sm">Add to Chrome <Icon name="arrow" size={13} className="chev" /></a>
+            </div>
+          </div>
+        </nav>
+      );
+    }
+
+    function Hero() {
+      return (
+        <section className="hero">
+          <div className="hero-bg" />
+          <div className="wrap">
+            <div className="hero-grid">
+              <div data-reveal>
+                <span className="eyebrow"><span className="dot" />Chrome extension · works inside LinkedIn</span>
+                <h1 className="h-display" style={{ marginTop: 18 }}>
+                  Stop getting ignored<br />on LinkedIn. <em>Apply<br />through founders.</em>
+                </h1>
+                <p className="lead" style={{ marginTop: 22 }}>
+                  JobPilot reads any LinkedIn job page, finds the founder, and sends a personal email with your resume — straight to their inbox. No portals. No Easy Apply queues.
+                </p>
+                <div className="hero-cta-row">
+                  <a href="#pricing" className="btn btn-accent">Add to Chrome — free <Icon name="arrow" size={14} className="chev" /></a>
+                  <a href="#how-section" className="btn btn-ghost">
+                    <Icon name="play" size={12} /> Watch the 30-second demo
+                  </a>
+                </div>
+                <div className="hero-trust">
+                  <div className="hero-trust-stack">
+                    <span>A</span><span>S</span><span>D</span><span>M</span>
+                  </div>
+                  <span>Used by 4,200+ applicants targeting YC &amp; seed-stage startups</span>
+                </div>
+              </div>
+              <div data-reveal style={{ transitionDelay: '120ms' }}>
+                <HeroDemo />
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    function ApplyTweaks({ t }) {
+      useEffect(() => {
+        document.body.setAttribute('data-aesthetic', t.aesthetic);
+        document.body.setAttribute('data-energy', t.energy);
+        document.body.setAttribute('data-surface', t.surface);
+        document.documentElement.style.setProperty('--accent-h', String(t.accentHue));
+      }, [t.aesthetic, t.energy, t.surface, t.accentHue]);
+      return null;
+    }
+
+    function App() {
+      const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
+
+      useEffect(() => {
+        const els = document.querySelectorAll('[data-reveal]');
+        const fallback = setTimeout(() => { els.forEach((el) => el.classList.add('in')); }, 250);
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add('in'); });
+        }, { threshold: 0.08 });
+        els.forEach((el) => io.observe(el));
+        return () => { clearTimeout(fallback); io.disconnect(); };
+      }, []);
+
+      return (
+        <>
+          <ApplyTweaks t={t} />
+          <Nav />
+          <Hero />
+          <ProofBar />
+          <Benefits />
+          <section className="section"><div className="wrap"><HowItWorks /></div></section>
+          <DemoShowcase />
+          <Testimonials />
+          <Pricing />
+          <FinalCTA />
+          <Footer />
+
+          <TweaksPanel title="Tweaks">
+            <TweakSection label="Aesthetic" />
+            <TweakRadio
+              label="Type system"
+              value={t.aesthetic}
+              options={['saas', 'editorial', 'terminal']}
+              onChange={(v) => setTweak('aesthetic', v)}
+            />
+            <TweakRadio
+              label="Energy"
+              value={t.energy}
+              options={['calm', 'standard', 'loud']}
+              onChange={(v) => setTweak('energy', v)}
+            />
+            <TweakSection label="Palette" />
+            <TweakRadio
+              label="Surface"
+              value={t.surface}
+              options={['paper', 'cool', 'ink']}
+              onChange={(v) => setTweak('surface', v)}
+            />
+            <TweakColor
+              label="Accent"
+              value={ACCENT_OPTIONS.find(o => o.hue === t.accentHue)?.swatch || ACCENT_OPTIONS[0].swatch}
+              options={ACCENT_OPTIONS.map(o => o.swatch)}
+              onChange={(v) => {
+                const opt = ACCENT_OPTIONS.find(o => o.swatch === v);
+                if (opt) setTweak('accentHue', opt.hue);
+              }}
+            />
+          </TweaksPanel>
+        </>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('app')).render(<App />);
+  </script>
+</body>
+</html>
