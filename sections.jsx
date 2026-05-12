@@ -499,33 +499,9 @@ function Footer() {
   );
 }
 
-function ProofBar() {
-  const logos = [
-    { l: 'Northwind', g: 'N' },
-    { l: 'Plover', g: 'P' },
-    { l: 'Lumen', g: 'L' },
-    { l: 'Reed Labs', g: 'R' },
-    { l: 'Atlas', g: 'A' },
-    { l: 'Cloudpack', g: 'C' },
-  ];
-  return (
-    <section className="proof">
-      <div className="wrap">
-        <div className="proof-inner">
-          <span className="proof-label">Used by applicants targeting</span>
-          {logos.map((x) => (
-            <div className="proof-logo" key={x.l}><span className="glyph">{x.g}</span>{x.l}</div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 window.Benefits = Benefits;
 window.DemoShowcase = DemoShowcase;
 window.Testimonials = Testimonials;
 window.Pricing = Pricing;
 window.FinalCTA = FinalCTA;
 window.Footer = Footer;
-window.ProofBar = ProofBar;
