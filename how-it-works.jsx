@@ -271,7 +271,7 @@ function HowitworksBrowser({ step, typed, jobStates, showDash, dashStats, replyV
           </div>
           <div style={{ fontSize: 13, fontWeight: 700, color: '#1a1a1a', letterSpacing: '-0.01em', marginBottom: 4, lineHeight: 1.2 }}>Founding Product Engineer</div>
           <div style={{ fontSize: 9.5, color: '#888', marginBottom: 7, display: 'flex', gap: 4, alignItems: 'center', flexWrap: 'wrap' }}>
-            <span>Remote</span><span>·</span><span>2d ago</span><span>·</span><span>784 applicants</span>
+            <span>Remote</span><span>·</span><span>2d ago</span><span>·</span><span>702 applicants</span>
           </div>
           <div style={{ display: 'flex', gap: 5, marginBottom: 8 }}>
             <button style={{ padding: '5px 9px', borderRadius: 4, background: '#0a66c2', color: 'white', fontSize: 10.5, fontWeight: 600, border: 'none' }}>Easy Apply</button>
