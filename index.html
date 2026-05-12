@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="styles.css?v=3" />
+  <link rel="stylesheet" href="styles.css?v=4" />
 </head>
 <body data-aesthetic="saas" data-energy="standard" data-surface="paper">
   <div id="app"></div>
@@ -18,11 +18,11 @@
   <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
 
-  <script type="text/babel" src="icons.jsx?v=3"></script>
-  <script type="text/babel" src="tweaks-panel.jsx?v=3"></script>
-  <script type="text/babel" src="hero-demo.jsx?v=3"></script>
-  <script type="text/babel" src="how-it-works.jsx?v=3"></script>
-  <script type="text/babel" src="sections.jsx?v=3"></script>
+  <script type="text/babel" src="icons.jsx?v=4"></script>
+  <script type="text/babel" src="tweaks-panel.jsx?v=4"></script>
+  <script type="text/babel" src="hero-demo.jsx?v=4"></script>
+  <script type="text/babel" src="how-it-works.jsx?v=4"></script>
+  <script type="text/babel" src="sections.jsx?v=4"></script>
 
   <script type="text/babel">
     const { useState, useEffect } = React;
@@ -75,8 +75,8 @@
             <div className="hero-grid">
               <div data-reveal>
                 <span className="eyebrow"><span className="dot" />Chrome extension · works inside LinkedIn</span>
-                <h1 className="h-display" style={{ marginTop: 18 }}>
-                  Tired of applying<br />on LinkedIn? <em>Send<br />direct to founders.<br />Get 10× interviews.</em>
+                <h1 className="h-display hero-h1" style={{ marginTop: 18 }}>
+                  Tired of applying on LinkedIn? <em>Send your job application directly to founders and get 10× interview calls.</em>
                 </h1>
                 <p className="lead" style={{ marginTop: 22 }}>
                   JobPilot finds the founder behind any LinkedIn job and sends your application straight to their inbox — not a portal, not Easy Apply. Founders reply. Interviews happen.
@@ -84,14 +84,8 @@
                 <div className="hero-cta-row">
                   <a href="#pricing" className="btn btn-accent">Add to Chrome — free <Icon name="arrow" size={14} className="chev" /></a>
                   <a href="#how-section" className="btn btn-ghost">
-                    <Icon name="play" size={12} /> Watch the 30-second demo
+                    <Icon name="play" size={12} /> How it works
                   </a>
-                </div>
-                <div className="hero-trust">
-                  <div className="hero-trust-stack">
-                    <span>A</span><span>S</span><span>D</span><span>M</span>
-                  </div>
-                  <span>Used by 4,200+ applicants targeting YC &amp; seed-stage startups</span>
                 </div>
               </div>
               <div data-reveal style={{ transitionDelay: '120ms' }}>

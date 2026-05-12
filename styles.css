@@ -202,6 +202,11 @@ h1, h2, h3, h4 { margin: 0; letter-spacing: -0.02em; font-weight: 500; }
   font-weight: var(--display-weight);
 }
 .h-display em { font-style: var(--display-italic); color: var(--ink-3); }
+/* Hero-specific override — longer sentence needs smaller size */
+.hero-h1 {
+  font-size: clamp(26px, 3vw, 46px);
+  line-height: 1.08;
+}
 .h-section {
   font-family: var(--font-display);
   font-size: var(--section-display);
@@ -737,6 +742,28 @@ h1, h2, h3, h4 { margin: 0; letter-spacing: -0.02em; font-weight: 500; }
   box-shadow: var(--shadow-3);
   overflow: hidden;
   margin-top: 8px;
+}
+
+/* ─── Full Dashboard browser mock (DemoShowcase) ─── */
+.dash-browser {
+  border-radius: 16px;
+  border: 1px solid var(--line-2);
+  box-shadow: var(--shadow-3);
+  overflow: hidden;
+  background: var(--bg-elev);
+  display: flex;
+  flex-direction: column;
+  height: 620px;
+  margin-top: 48px;
+}
+.dash-browser-chrome {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  background: linear-gradient(180deg, #fafaf9, #f3f2ee);
+  border-bottom: 1px solid var(--line);
+  flex-shrink: 0;
 }
 
 /* demo cards layered */

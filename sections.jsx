@@ -32,70 +32,168 @@ function Benefits() {
 }
 
 function DemoShowcase() {
+  const DASH_APPS = [
+    { logo: 'N', bg: '#1e3a5f',  co: 'Northwind',    role: 'Founding Product Engineer',  sent: 'Mon 6:02 AM',  opened: 'Mon 6:48 AM',  status: 'replied',   label: 'Replied ✓' },
+    { logo: 'L', bg: '#3730a3',  co: 'Lumen AI',     role: 'Head of Growth',              sent: 'Mon 8:15 AM',  opened: 'Mon 9:00 AM',  status: 'interview', label: 'Interview Set' },
+    { logo: 'R', bg: '#7c2d12',  co: 'Reed Labs',    role: 'Backend Engineer',            sent: 'Tue 9:30 AM',  opened: 'Tue 11:00 AM', status: 'fwd',       label: 'Fwd to HR' },
+    { logo: 'P', bg: '#5b34a1',  co: 'Plover',       role: 'Product Manager',             sent: 'Tue 11:00 AM', opened: 'Tue 2:45 PM',  status: 'replied',   label: 'Replied ✓' },
+    { logo: 'A', bg: '#1b6448',  co: 'Atlas Health', role: 'Backend Engineer',            sent: 'Wed 7:00 AM',  opened: 'Wed 10:00 AM', status: 'opened',    label: 'Opened' },
+    { logo: 'C', bg: '#374151',  co: 'Cloudpack',    role: 'Infrastructure Engineer',     sent: 'Wed 9:15 AM',  opened: '—',            status: 'sent',      label: 'Sent' },
+    { logo: 'V', bg: '#7c3aed',  co: 'Volta',        role: 'Founding Engineer',           sent: 'Thu 8:00 AM',  opened: '—',            status: 'sent',      label: 'Sent' },
+    { logo: 'M', bg: '#b45309',  co: 'Meso',         role: 'Growth Engineer',             sent: 'Thu 10:30 AM', opened: '—',            status: 'sent',      label: 'Sent' },
+  ];
+  const REPLIES = [
+    { avatar: 'M', bg: 'linear-gradient(135deg,#f0a17a,#d8543e)', name: 'Marcus Webb', co: 'Northwind', when: 'Mon 9:14 AM', tag: 'INTERVIEW', tagColor: '#1a56db', tagBg: '#e8f0ff', body: 'Stood out from 240+ applications. The v3 reference tells me you actually read what we shipped. Forwarding to Priya — she\'ll set up a chat this week.' },
+    { avatar: 'D', bg: 'linear-gradient(135deg,#5562eb,#3a1f9c)', name: 'Devon Reilly', co: 'Plover',    when: 'Tue 11:42 AM', tag: 'INTERVIEW SET', tagColor: '#057642', tagBg: '#e6f4ea', body: 'Most candidates send the same Notion template. Yours read like a real person. Can we schedule a quick chat — I\'m open Thu/Fri.' },
+    { avatar: 'S', bg: 'linear-gradient(135deg,#3aa178,#1b6448)', name: 'Sana Iyer',   co: 'Reed Labs', when: 'Tue 2:08 PM',  tag: 'FWD TO HR',  tagColor: '#b45309', tagBg: '#fff0e0', body: 'The reference to our changelog gave it away — you actually read it. Forwarding to our eng team. Calendar\'s open Thursday.' },
+  ];
+  const statusStyle = {
+    replied:   { bg: '#e6f4ea', color: '#057642' },
+    interview: { bg: '#e8f0ff', color: '#1a56db' },
+    fwd:       { bg: '#fff0e0', color: '#b45309' },
+    opened:    { bg: 'var(--accent-soft)', color: 'var(--accent-ink)' },
+    sent:      { bg: '#f0ede8', color: '#888' },
+  };
+
   return (
     <section className="section" id="product">
-      <div className="wrap">
+      <div style={{ maxWidth: 1560, margin: '0 auto', padding: '0 clamp(24px,5vw,72px)' }}>
         <div className="section-head" data-reveal>
           <span className="eyebrow"><span className="dot" />Inside the extension</span>
           <h2 className="h-section">A founder copilot pinned<br />to every LinkedIn tab.</h2>
-          <p className="lead">Track every founder you've reached, the quality of each draft, and what's coming back.</p>
+          <p className="lead">Your personalized dashboard tracks every application — who opened it, who replied, what's coming back.</p>
         </div>
 
-        <div className="demo">
-          <div className="demo-card" data-reveal>
-            <h4>This week's outreach</h4>
-            <div className="kpi-row">
-              <div className="kpi"><div className="k">Founders reached</div><div className="v">14</div><div className="delta">+6 vs last week</div></div>
-              <div className="kpi"><div className="k">Reply rate</div><div className="v">31%</div><div className="delta">+22pp vs Easy Apply</div></div>
-              <div className="kpi"><div className="k">Forwards to HR</div><div className="v">5</div><div className="delta">straight to hiring</div></div>
+        {/* Full dashboard browser mock */}
+        <div className="dash-browser" data-reveal>
+          {/* Chrome bar */}
+          <div className="dash-browser-chrome">
+            <div style={{ display: 'flex', gap: 5 }}>
+              <span style={{ width: 11, height: 11, borderRadius: '50%', background: '#ff6058', display: 'inline-block' }} />
+              <span style={{ width: 11, height: 11, borderRadius: '50%', background: '#ffbe2e', display: 'inline-block' }} />
+              <span style={{ width: 11, height: 11, borderRadius: '50%', background: '#28c941', display: 'inline-block' }} />
             </div>
-            <div className="applist">
-              {[
-                { co: 'N', bg: 'linear-gradient(135deg,#1b1b1b,#404040)', name: 'Northwind', role: 'Founding PE', state: 'replied' },
-                { co: 'L', bg: 'linear-gradient(135deg,#5562eb,#3a1f9c)', name: 'Lumen', role: 'Founding Designer', state: 'fwd' },
-                { co: 'R', bg: 'linear-gradient(135deg,#d8543e,#9c2a1c)', name: 'Reed Labs', role: 'Growth Engineer', state: 'sent' },
-                { co: 'A', bg: 'linear-gradient(135deg,#3aa178,#1b6448)', name: 'Atlas Health', role: 'Backend Engineer', state: 'sent' },
-                { co: 'P', bg: 'linear-gradient(135deg,#e1b14a,#a67919)', name: 'Plover', role: 'Product Manager', state: 'replied' },
-              ].map((a, i) => (
-                <div key={i} className="appline">
-                  <div className="co" style={{ background: a.bg }}>{a.co}</div>
-                  <div className="meta">
-                    <div>{a.name}</div>
-                    <div className="role">{a.role}</div>
-                  </div>
-                  <span className={`state ${a.state}`}>{a.state.toUpperCase()}</span>
-                </div>
-              ))}
+            <div style={{ flex: 1, height: 26, borderRadius: 7, background: 'var(--bg-elev)', border: '1px solid var(--line)', display: 'flex', alignItems: 'center', padding: '0 10px', gap: 7, fontSize: 12, color: 'var(--ink-4)', fontFamily: 'var(--font-mono)' }}>
+              <Icon name="lock" size={11} /> app.jobpilot.co/dashboard
             </div>
           </div>
 
-          <div className="demo-stack">
-            <div className="demo-card" data-reveal>
-              <h4>Founder profile</h4>
-              <div className="founder-card" style={{ marginTop: 12 }}>
-                <div className="avatar-bubble" style={{ background: 'linear-gradient(135deg, #f0a17a, #d8543e)' }}>M</div>
-                <div>
-                  <div className="name">Maya Okafor</div>
-                  <div className="role">Co-founder & CEO · Northwind</div>
-                </div>
-                <span className="tag">HOT</span>
+          {/* App body */}
+          <div style={{ display: 'flex', flex: 1, minHeight: 0 }}>
+            {/* Left nav */}
+            <div style={{ width: 192, flexShrink: 0, background: '#111', display: 'flex', flexDirection: 'column', padding: '20px 12px', gap: 4 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '4px 8px', marginBottom: 16 }}>
+                <div style={{ width: 24, height: 24, borderRadius: 6, background: 'linear-gradient(135deg, oklch(0.65 0.21 252), oklch(0.42 0.2 270))' }} />
+                <span style={{ fontSize: 14, fontWeight: 700, color: 'white', letterSpacing: '-0.02em' }}>JobPilot</span>
               </div>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, marginTop: 12 }}>
-                <div className="kpi" style={{ padding: 10 }}><div className="k">Last post</div><div className="v" style={{ fontSize: 16 }}>3d ago</div></div>
-                <div className="kpi" style={{ padding: 10 }}><div className="k">Hiring signal</div><div className="v" style={{ fontSize: 16 }}>Strong</div></div>
+              {[
+                { icon: '⊞', label: 'Dashboard', active: true },
+                { icon: '↗', label: 'Applications', active: false },
+                { icon: '✉', label: 'Emails', active: false },
+                { icon: '⚙', label: 'Settings', active: false },
+              ].map((item) => (
+                <div key={item.label} style={{ display: 'flex', alignItems: 'center', gap: 9, padding: '9px 12px', borderRadius: 8, background: item.active ? 'rgba(255,255,255,0.1)' : 'transparent', color: item.active ? 'white' : 'rgba(255,255,255,0.4)', fontSize: 13, fontWeight: item.active ? 600 : 400 }}>
+                  <span style={{ fontSize: 14 }}>{item.icon}</span>{item.label}
+                </div>
+              ))}
+              <div style={{ marginTop: 'auto', borderTop: '1px solid rgba(255,255,255,0.07)', paddingTop: 14 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '0 8px' }}>
+                  <div style={{ width: 28, height: 28, borderRadius: '50%', background: 'linear-gradient(135deg,#6366f1,#4f46e5)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 700, fontSize: 11 }}>A</div>
+                  <div>
+                    <div style={{ fontSize: 12, fontWeight: 600, color: 'white' }}>Arjun Sharma</div>
+                    <div style={{ fontSize: 10.5, color: 'rgba(255,255,255,0.4)', marginTop: 1 }}>42 credits left</div>
+                  </div>
+                </div>
               </div>
             </div>
 
-            <div className="demo-card" data-reveal>
-              <h4>Credits</h4>
-              <div style={{ marginTop: 8, display: 'flex', alignItems: 'baseline', gap: 8 }}>
-                <div style={{ fontSize: 38, letterSpacing: '-0.03em', fontWeight: 500 }}>42</div>
-                <div style={{ color: 'var(--ink-3)', fontSize: 13 }}>of 50 remaining</div>
+            {/* Main */}
+            <div style={{ flex: 1, overflowY: 'hidden', display: 'flex', flexDirection: 'column', minWidth: 0, background: 'var(--bg)' }}>
+              {/* Header */}
+              <div style={{ padding: '20px 24px 16px', borderBottom: '1px solid var(--line)', display: 'flex', alignItems: 'center', gap: 16, background: 'var(--bg-elev)' }}>
+                <div style={{ flex: 1 }}>
+                  <div style={{ fontSize: 18, fontWeight: 700, letterSpacing: '-0.03em', color: 'var(--ink)' }}>Dashboard</div>
+                  <div style={{ fontSize: 12.5, color: 'var(--ink-4)', marginTop: 2 }}>Week of May 12, 2026 · Arjun Sharma</div>
+                </div>
+                <div style={{ display: 'flex', gap: 8 }}>
+                  <div style={{ fontSize: 12, padding: '6px 12px', borderRadius: 7, background: '#e6f4ea', color: '#057642', fontWeight: 600, fontFamily: 'var(--font-mono)', display: 'flex', alignItems: 'center', gap: 5 }}>
+                    <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#057642', display: 'inline-block', animation: 'pulseGlow 2s ease infinite' }} /> Live
+                  </div>
+                  <div style={{ fontSize: 12, padding: '6px 14px', borderRadius: 7, background: 'var(--accent)', color: 'white', fontWeight: 600 }}>+ Enroll jobs</div>
+                </div>
               </div>
-              <div style={{ height: 8, borderRadius: 99, background: 'var(--bg-soft)', overflow: 'hidden', marginTop: 12 }}>
-                <div style={{ height: '100%', width: '84%', background: 'linear-gradient(90deg, var(--accent), var(--accent-2, oklch(0.7 0.21 252)))' }} />
+
+              <div style={{ flex: 1, padding: '20px 24px', display: 'flex', flexDirection: 'column', gap: 20, overflowY: 'hidden' }}>
+                {/* Stats row */}
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: 12 }}>
+                  {[
+                    { k: 'Enrolled',     v: 18, delta: '+8 this week',      color: 'var(--ink-2)' },
+                    { k: 'Sent',         v: 14, delta: '78% send rate',      color: 'var(--ink-2)' },
+                    { k: 'Opened',       v: 11, delta: '79% open rate',      color: 'var(--accent)' },
+                    { k: 'Replied',      v: 6,  delta: '43% reply rate',     color: '#057642' },
+                    { k: 'Interviews',   v: 4,  delta: '2 this week',        color: '#1a56db' },
+                    { k: 'Queue Skipped',v: 14, delta: 'vs Easy Apply',      color: '#b45309' },
+                  ].map(({ k, v, delta, color }) => (
+                    <div key={k} style={{ padding: '14px 16px', background: 'var(--bg-elev)', borderRadius: 12, border: '1px solid var(--line)', boxShadow: 'var(--shadow-1)' }}>
+                      <div style={{ fontSize: 28, fontWeight: 700, letterSpacing: '-0.04em', color, lineHeight: 1 }}>{v}</div>
+                      <div style={{ fontSize: 11.5, fontWeight: 600, color: 'var(--ink-2)', marginTop: 5 }}>{k}</div>
+                      <div style={{ fontSize: 10.5, color: 'var(--ink-4)', marginTop: 2, fontFamily: 'var(--font-mono)' }}>{delta}</div>
+                    </div>
+                  ))}
+                </div>
+
+                <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: 20, flex: 1, minHeight: 0 }}>
+                  {/* App table */}
+                  <div style={{ background: 'var(--bg-elev)', borderRadius: 14, border: '1px solid var(--line)', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+                    <div style={{ padding: '14px 18px', borderBottom: '1px solid var(--line)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                      <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--ink)', letterSpacing: '-0.01em' }}>Applications</div>
+                      <div style={{ fontSize: 11, color: 'var(--ink-4)', fontFamily: 'var(--font-mono)' }}>8 total</div>
+                    </div>
+                    <div style={{ display: 'grid', gridTemplateColumns: '28px 1fr 100px 80px 90px', gap: 8, padding: '8px 18px', borderBottom: '1px solid var(--line)', fontSize: 10, color: 'var(--ink-4)', textTransform: 'uppercase', letterSpacing: '0.06em', fontFamily: 'var(--font-mono)' }}>
+                      <div />
+                      <div>Company / Role</div>
+                      <div>Sent</div>
+                      <div>Opened</div>
+                      <div style={{ textAlign: 'right' }}>Status</div>
+                    </div>
+                    {DASH_APPS.map((a, i) => (
+                      <div key={i} style={{ display: 'grid', gridTemplateColumns: '28px 1fr 100px 80px 90px', gap: 8, padding: '9px 18px', borderBottom: i < DASH_APPS.length - 1 ? '1px solid var(--line)' : 'none', alignItems: 'center', background: i === 0 ? 'color-mix(in oklab, oklch(0.62 0.15 152) 6%, transparent)' : 'transparent' }}>
+                        <div style={{ width: 22, height: 22, borderRadius: 5, background: a.bg, color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 9.5, fontWeight: 700 }}>{a.logo}</div>
+                        <div>
+                          <div style={{ fontSize: 12.5, fontWeight: 600, color: 'var(--ink)' }}>{a.co}</div>
+                          <div style={{ fontSize: 11, color: 'var(--ink-4)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{a.role}</div>
+                        </div>
+                        <div style={{ fontSize: 11, color: 'var(--ink-4)', fontFamily: 'var(--font-mono)' }}>{a.sent.split(' ')[0]}</div>
+                        <div style={{ fontSize: 11, color: a.opened !== '—' ? '#057642' : 'var(--ink-4)', fontFamily: 'var(--font-mono)' }}>{a.opened !== '—' ? '✓' : '—'}</div>
+                        <div style={{ textAlign: 'right' }}>
+                          <span style={{ fontSize: 10.5, padding: '3px 8px', borderRadius: 5, fontWeight: 600, fontFamily: 'var(--font-mono)', ...(statusStyle[a.status]) }}>{a.label}</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Reply threads */}
+                  <div style={{ background: 'var(--bg-elev)', borderRadius: 14, border: '1px solid var(--line)', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+                    <div style={{ padding: '14px 18px', borderBottom: '1px solid var(--line)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                      <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--ink)', letterSpacing: '-0.01em' }}>Founder Replies</div>
+                      <div style={{ fontSize: 11, padding: '3px 8px', borderRadius: 999, background: '#e6f4ea', color: '#057642', fontFamily: 'var(--font-mono)', fontWeight: 600 }}>6 new</div>
+                    </div>
+                    {REPLIES.map((r, i) => (
+                      <div key={i} style={{ padding: '12px 18px', borderBottom: i < REPLIES.length - 1 ? '1px solid var(--line)' : 'none', display: 'flex', flexDirection: 'column', gap: 8 }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                          <div style={{ width: 30, height: 30, borderRadius: '50%', background: r.bg, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 700, fontSize: 12, flexShrink: 0 }}>{r.avatar}</div>
+                          <div style={{ flex: 1 }}>
+                            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--ink)' }}>{r.name} · {r.co}</div>
+                            <div style={{ fontSize: 11, color: 'var(--ink-4)', fontFamily: 'var(--font-mono)' }}>{r.when}</div>
+                          </div>
+                          <span style={{ fontSize: 10, padding: '3px 8px', borderRadius: 5, fontWeight: 700, fontFamily: 'var(--font-mono)', background: r.tagBg, color: r.tagColor }}>{r.tag}</span>
+                        </div>
+                        <div style={{ fontSize: 12.5, color: 'var(--ink-3)', lineHeight: 1.55, paddingLeft: 40 }}>"{r.body}"</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
-              <div style={{ marginTop: 12, fontSize: 12.5, color: 'var(--ink-3)' }}>1 credit = 1 personalized founder email + resume send.</div>
             </div>
           </div>
         </div>
