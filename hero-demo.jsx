@@ -284,7 +284,7 @@ function HeroDemo() {
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div className="lin-job-title">{j.title}</div>
                 <div className="lin-job-co">{j.co} · {j.loc}</div>
-                <div className="lin-job-time">1d ago · 344 applicants</div>
+                <div className="lin-job-time">2d ago · 649 applicants</div>
                 <div style={{ display: 'flex', gap: 4, marginTop: 4 }}>
                   <span className="lin-badge-easy">Easy Apply</span>
                   {jobStates[i] === 'sent' && <span className="lin-badge-applied">✓ Applied</span>}
