@@ -277,7 +277,7 @@ function HiwLinkedIn({ step, typed }) {
         </div>
         <div style={{ fontSize: 12.5, fontWeight: 700, color: '#1a1a1a', letterSpacing: '-0.01em', marginBottom: 3, lineHeight: 1.2 }}>Founding Product Engineer</div>
         <div style={{ fontSize: 9, color: '#888', marginBottom: 6, display: 'flex', gap: 4, alignItems: 'center', flexWrap: 'wrap' }}>
-          <span>San Francisco</span><span>·</span><span>2d ago</span><span>·</span><span style={{ color: '#d93900', fontWeight: 600 }}>649 applicants</span>
+          <span>San Francisco</span><span>·</span><span>1w ago</span><span>·</span><span style={{ color: '#d93900', fontWeight: 600 }}>811 applicants</span>
         </div>
         <div style={{ display: 'flex', gap: 4, marginBottom: 7 }}>
           <button style={{ padding: '4px 8px', borderRadius: 4, background: '#0a66c2', color: 'white', fontSize: 10, fontWeight: 600, border: 'none' }}>Easy Apply</button>
