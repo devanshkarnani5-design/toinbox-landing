@@ -3,7 +3,7 @@ const { useState, useEffect, useRef } = React;
 
 const JOBS = [
   { id: 0, co: 'Northwind', title: 'Founding Product Engineer', logo: 'N', bg: '#1e3a5f', loc: 'San Francisco', match: 94, email: 'marcus@nwind.co', ai: 'High priority' },
-  { id: 1, co: 'Lumen AI', title: 'Head of Growth', logo: 'L', bg: '#3730a3', loc: 'Remote', match: 87, email: 'theo@lumen.ai', ai: 'Strong fit' },
+  { id: 1, co: 'Lumen AI', title: 'Head of Growth', logo: 'L', bg: '#3730a3', loc: 'Delhi, India', match: 87, email: 'theo@lumen.ai', ai: 'Strong fit' },
   { id: 2, co: 'Reed Labs', title: 'Backend Engineer', logo: 'R', bg: '#7c2d12', loc: 'Remote', match: 78, email: 'sana@reedlabs.io', ai: 'Good match' },
 ];
 

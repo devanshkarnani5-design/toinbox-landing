@@ -249,7 +249,7 @@ function HiwLinkedIn({ step, typed }) {
             <div style={{ width: 20, height: 20, borderRadius: 4, background: j.bg, color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 8.5, fontWeight: 700, flexShrink: 0 }}>{j.logo}</div>
             <div style={{ flex: 1, minWidth: 0 }}>
               <div style={{ fontSize: 9.5, fontWeight: 600, color: '#1a1a1a', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', lineHeight: 1.2 }}>{j.title}</div>
-              <div style={{ fontSize: 8.5, color: '#888', marginTop: 2 }}>{j.co} · {i === 0 ? 'San Francisco' : 'Remote'}</div>
+              <div style={{ fontSize: 8.5, color: '#888', marginTop: 2 }}>{j.co} · {i === 0 ? 'San Francisco' : i === 1 ? 'Delhi, India' : 'Remote'}</div>
               <div style={{ display: 'flex', gap: 3, marginTop: 3, flexWrap: 'wrap' }}>
                 <span style={{ fontSize: 8, padding: '1px 4px', borderRadius: 999, background: '#e8f3ff', color: '#0a66c2', border: '1px solid #b6d4f7' }}>Easy Apply</span>
                 {step >= 4 && i === 0 && <span style={{ fontSize: 8, padding: '1px 4px', borderRadius: 999, background: '#e6f4ea', color: '#057642', border: '1px solid #b8e6cc' }}>✓ Applied</span>}
