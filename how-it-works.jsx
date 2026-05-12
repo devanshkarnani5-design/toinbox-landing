@@ -14,7 +14,7 @@ const HIW_STEPS = [
 const STEP_MS = [3000, 2000, 2800, 3200, 2000, 3200, 3200];
 
 const HIW_JOBS = [
-  { logo: 'N', bg: '#1e3a5f', title: 'Founding Product Engineer', co: 'Northwind', match: 94, email: 'marcus@northwind.co' },
+  { logo: 'N', bg: '#1e3a5f', title: 'Founding Product Engineer', co: 'Northwind', match: 94, email: 'marcus@nwind.co' },
   { logo: 'L', bg: '#3730a3', title: 'Head of Growth', co: 'Lumen AI', match: 87, email: 'theo@lumen.ai' },
   { logo: 'R', bg: '#7c2d12', title: 'Backend Engineer', co: 'Reed Labs', match: 78, email: 'sana@reedlabs.io' },
 ];
@@ -189,7 +189,7 @@ function HiwLinkedIn({ step, typed }) {
           {[
             { k: 'Resume parsed', v: '14 signals', ok: true },
             { k: 'JD analyzed', v: '9 keywords', ok: true },
-            { k: 'Founder found', v: 'marcus@northwind.co', ok: true },
+            { k: 'Founder found', v: 'marcus@nwind.co', ok: true },
             { k: 'Match score', v: '94%', ok: true },
           ].map(({ k, v, ok }, i) => (
             <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 7, padding: '7px 9px', background: '#f0faf5', border: '1px solid #b8e6cc', borderRadius: 7 }}>
@@ -212,7 +212,7 @@ function HiwLinkedIn({ step, typed }) {
       <div className="jp-sidebar-body">
         <div className="jp-detect-status"><span className="dotpulse" /> Generating…</div>
         <div style={{ flex: 1, padding: '6px 8px 0', display: 'flex', flexDirection: 'column', gap: 5 }}>
-          <div style={{ fontSize: 9, fontFamily: 'var(--font-mono)', color: '#aaa', textTransform: 'uppercase', letterSpacing: '0.06em' }}>To · marcus@northwind.co</div>
+          <div style={{ fontSize: 9, fontFamily: 'var(--font-mono)', color: '#aaa', textTransform: 'uppercase', letterSpacing: '0.06em' }}>To · marcus@nwind.co</div>
           <div style={{ fontSize: 10.5, lineHeight: 1.55, color: '#333', whiteSpace: 'pre-wrap', flex: 1, overflow: 'hidden' }}>
             {typed}<span className="caret" />
           </div>
@@ -225,7 +225,7 @@ function HiwLinkedIn({ step, typed }) {
         <div style={{ padding: '16px 12px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10, textAlign: 'center' }}>
           <div style={{ width: 44, height: 44, borderRadius: '50%', background: '#e6f4ea', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20 }}>✓</div>
           <div>
-            <div style={{ fontSize: 12, fontWeight: 600, color: '#1a1a1a' }}>Sent to marcus@northwind.co</div>
+            <div style={{ fontSize: 12, fontWeight: 600, color: '#1a1a1a' }}>Sent to marcus@nwind.co</div>
             <div style={{ fontSize: 10.5, color: '#888', marginTop: 3 }}>Resume attached · delivery confirmed</div>
           </div>
         </div>
