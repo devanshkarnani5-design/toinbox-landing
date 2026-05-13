@@ -1742,6 +1742,8 @@ h1, h2, h3, h4 { margin: 0; letter-spacing: -0.02em; font-weight: 500; }
 }
 .inbox-msg-meta {
   padding: 2px 0;
+  margin-left: 6px;
+  margin-right: 6px;
 }
 .inbox-msg-header {
   display: flex;
