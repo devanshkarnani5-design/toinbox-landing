@@ -1740,6 +1740,9 @@ h1, h2, h3, h4 { margin: 0; letter-spacing: -0.02em; font-weight: 500; }
   flex-direction: column;
   gap: 8px;
 }
+.inbox-msg-meta {
+  padding: 2px 0;
+}
 .inbox-msg-header {
   display: flex;
   align-items: center;
