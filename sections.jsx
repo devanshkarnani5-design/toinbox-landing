@@ -264,15 +264,15 @@ const INBOX_THREADS = [
     ],
   },
   {
-    id: 5, avatar: 'J', bg: 'linear-gradient(135deg,#a07ad8,#5b34a1)',
-    name: 'Jules Bennett', role: 'Founder · Cloudpack',
+    id: 5, avatar: 'P', bg: 'linear-gradient(135deg,#a07ad8,#5b34a1)',
+    name: 'Priya Shah', role: 'Founder · Cloudpack',
     when: 'Fri 10:50 AM', unread: false,
     subj: 'Re: One of the best applications we\'ve seen',
     preview: 'Direct, no fluff, no AI smell. Resume on point…',
     tag: 'INTERVIEW SET', tagColor: '#057642', tagBg: '#e6f4ea',
     thread: [
-      { from: 'Arjun (via JobPilot)', time: 'Fri 7:30 AM', dir: 'sent', body: `Hi Jules,\n\nCloudpack's edge caching architecture — the April teardown — showed exactly the kind of engineering I want to be close to. The decision to run Cloudflare Workers at the cache invalidation layer instead of a central coordinator was a particularly elegant call.\n\nI've shipped infrastructure at scale using Go, Kubernetes, and Cloudflare Workers. I understand the operational tradeoffs at that level — not just the code, but the incidents, the runbooks, the on-call culture that makes it sustainable.\n\nI want to work somewhere where infrastructure is a first-class product concern, not an afterthought. Cloudpack's public engineering work signals that's exactly the culture here.\n\nResume attached.\n\n— Arjun` },
-      { from: 'Jules Bennett', time: 'Fri 10:50 AM', dir: 'recv', body: `Direct, no fluff, no AI smell. Resume on point.\n\nBooked you in with our CEO for next week — calendar invite incoming shortly.\n\n— Jules` },
+      { from: 'Arjun (via JobPilot)', time: 'Fri 7:30 AM', dir: 'sent', body: `Hi Priya,\n\nCloudpack's edge caching architecture — the April teardown — showed exactly the kind of engineering I want to be close to. The decision to run Cloudflare Workers at the cache invalidation layer instead of a central coordinator was a particularly elegant call.\n\nI've shipped infrastructure at scale using Go, Kubernetes, and Cloudflare Workers. I understand the operational tradeoffs at that level — not just the code, but the incidents, the runbooks, the on-call culture that makes it sustainable.\n\nI want to work somewhere where infrastructure is a first-class product concern, not an afterthought. Cloudpack's public engineering work signals that's exactly the culture here.\n\nResume attached.\n\n— Arjun` },
+      { from: 'Priya Shah', time: 'Fri 10:50 AM', dir: 'recv', body: `Direct, no fluff, no AI smell. Resume on point.\n\nBooked you in with our CEO for next week — calendar invite incoming shortly.\n\n— Priya` },
     ],
   },
 ];
