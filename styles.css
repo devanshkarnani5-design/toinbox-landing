@@ -1782,6 +1782,7 @@ h1, h2, h3, h4 { margin: 0; letter-spacing: -0.02em; font-weight: 500; }
   color: var(--ink-2);
   white-space: pre-wrap;
   margin-left: 40px;
+  margin-bottom: 5px;
 }
 .inbox-msg.recv .inbox-msg-body {
   background: color-mix(in oklab, var(--accent-soft) 60%, var(--bg-elev));
