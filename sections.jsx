@@ -4,7 +4,7 @@ const { useEffect: useEffectS } = React;
 function Benefits() {
   const items = [
     { ico: 'panel', t: 'Lives where you already are', s: "A Chrome extension that sits inside LinkedIn. No new app to learn, no second tab to keep open." },
-    { ico: 'target', t: 'Skip ATS queues entirely', s: 'Your application reaches a human inbox, not the bottom of an ATS pile. Founder inboxes are far less crowded.' },
+    { ico: 'target', t: 'Skip Easy Apply queues', s: 'Your application reaches a human inbox, not the bottom of an ATS pile. Founder inboxes are far less crowded.' },
     { ico: 'forward', t: 'Forwarded to hiring directly', s: 'Founders introduce strong candidates to their team. Founder-forwarded applications move faster than any portal.' },
     { ico: 'sparkle', t: 'Tailored, never templated', s: 'Every email cites the job, the changelog, the founder by name. No mail-merge smell. No AI tells.' },
     { ico: 'bolt', t: 'Fifteen-second applications', s: 'Detect → enroll → send. Personalized outreach creates stronger intent, and strong intent increases replies.' },
