@@ -5,7 +5,7 @@ function Benefits() {
   const items = [
     { ico: 'panel', t: 'Lives where you already are', s: "A Chrome extension that sits inside LinkedIn. No new app to learn, no second tab to keep open." },
     { ico: 'target', t: 'Skip Easy Apply queues', s: 'Thousands apply through LinkedIn and go unseen. Reach founders\' inbox directly where your application gets noticed.' },
-    { ico: 'forward', t: 'Forwarded to hiring directly', s: 'Founders introduce strong candidates to their team. Founder-forwarded applications move faster than any portal.' },
+    { ico: 'forward', t: 'Forwarded to hiring directly', s: 'Founders often move such applications directly into interviews or forward them to HR. These applications carry an advantage and move quicker.' },
     { ico: 'sparkle', t: 'Tailored, never templated', s: 'Every email cites the job, the changelog, the founder by name. No mail-merge smell. No AI tells.' },
     { ico: 'bolt', t: 'Fifteen-second applications', s: 'Detect → enroll → send. Personalized outreach creates stronger intent, and strong intent increases replies.' },
     { ico: 'chart', t: 'Founders reply at multiples', s: 'Personal cold outreach beats Easy Apply on reply rate by a wide margin. The funnel just works.' },
