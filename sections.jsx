@@ -43,7 +43,7 @@ function DemoShowcase() {
     { logo: 'M', bg: '#b45309',  co: 'Meso',         role: 'Growth Engineer',             sent: 'Thu 10:30 AM', opened: '—',            status: 'sent',      label: 'Sent' },
   ];
   const REPLIES = [
-    { avatar: 'M', bg: 'linear-gradient(135deg,#f0a17a,#d8543e)', name: 'Marcus Webb', co: 'Northwind', when: 'Mon 9:14 AM', tag: 'INTERVIEW', tagColor: '#1a56db', tagBg: '#e8f0ff', body: 'Stood out from 240+ applications. The v3 reference tells me you actually read what we shipped. Forwarding to Priya — she\'ll set up a chat this week.' },
+    { avatar: 'M', bg: 'linear-gradient(135deg,#f0a17a,#d8543e)', name: 'Marcus Webb', co: 'Northwind', when: 'Tue 3:20 PM', tag: 'INTERVIEW', tagColor: '#1a56db', tagBg: '#e8f0ff', body: 'Stood out from 240+ applications. The v3 reference tells me you actually read what we shipped. Forwarding to Priya — she\'ll set up a chat this week.' },
     { avatar: 'D', bg: 'linear-gradient(135deg,#5562eb,#3a1f9c)', name: 'Devon Reilly', co: 'Plover',    when: 'Tue 11:42 AM', tag: 'INTERVIEW SET', tagColor: '#057642', tagBg: '#e6f4ea', body: 'Most candidates send the same Notion template. Yours read like a real person. Can we schedule a quick chat — I\'m open Thu/Fri.' },
     { avatar: 'P', bg: 'linear-gradient(135deg,#10b981,#0f4c3a)', name: 'Priya Menon',  co: 'GrowthBase', when: 'Tue 3:20 PM',  tag: 'FWD TO HR',  tagColor: '#b45309', tagBg: '#fff0e0', body: 'You referenced our newsletter series specifically — that stood out immediately. Forwarding to our content lead. Calendar\'s open Thursday.' },
   ];
@@ -206,13 +206,13 @@ const INBOX_THREADS = [
   {
     id: 0, avatar: 'M', bg: 'linear-gradient(135deg,#f0a17a,#d8543e)',
     name: 'Marcus Webb', role: 'Head of Engineering · Northwind',
-    when: 'Mon 9:14 AM', unread: true,
+    when: 'Tue 3:20 PM', unread: true,
     subj: 'Re: Founding PE · from a 0→1 builder',
     preview: 'This stood out from the 240+ applications we got…',
     tag: 'INTERVIEW →', tagColor: '#1a56db', tagBg: '#e8f0ff',
     thread: [
       { from: 'Arjun (via JobPilot)', time: 'Mon 6:02 AM', dir: 'sent', body: `Hi Marcus,\n\nSaw Northwind's Founding PE role — your March changelog on shipping v3 in six weeks is exactly the pace I want to work at.\n\nI've spent two years doing this end-to-end: solo-shipped 3 products from zero, grew my last app from 2,000 to 80,000 monthly active users in 14 months. Full-stack across TypeScript, Go, and Postgres. I've handled everything from API design to deployment pipelines to growth experiments.\n\nWhat drew me specifically to Northwind is your obsession with craft in the product layer — the attention to UX detail in your onboarding flow stood out. I've built similar zero-friction onboarding and know how much it moves retention.\n\nI'm not looking for a big-company role. I want to own real surface area and ship things that matter. Northwind feels like that.\n\nResume attached. Happy to pair on a real bug.\n\n— Arjun` },
-      { from: 'Marcus Webb', time: 'Mon 9:14 AM', dir: 'recv', body: `Arjun —\n\nThis stood out from the 240+ applications we got this week. The v3 reference — that tells me you actually read what we shipped.\n\nForwarding to Priya (Head of Eng). She'll set up a chat this week.\n\n— Marcus` },
+      { from: 'Marcus Webb', time: 'Tue 3:20 PM', dir: 'recv', body: `Arjun —\n\nThis stood out from the 240+ applications we got this week. The v3 reference — that tells me you actually read what we shipped.\n\nForwarding to Priya (Head of Eng). She'll set up a chat this week.\n\n— Marcus` },
     ],
   },
   {
@@ -369,7 +369,7 @@ function Testimonials() {
                 <div key={i} className={`inbox-msg ${msg.dir}`}>
                   <div className="inbox-msg-meta">
                     <span style={{ fontWeight: 600, color: 'var(--ink)' }}>{msg.from}</span>
-                    <span style={{ color: 'var(--ink-4)', fontSize: 11, fontFamily: 'var(--font-mono)' }}>{msg.time}</span>
+                    <span style={{ color: '#000000', fontSize: 11, fontFamily: 'var(--font-mono)', marginLeft: 6, marginRight: 6 }}>{msg.time}</span>
                   </div>
                   <div className="inbox-msg-body">{msg.body}</div>
                 </div>
