@@ -224,7 +224,7 @@ const INBOX_THREADS = [
     tag: 'INTERVIEW SET', tagColor: '#057642', tagBg: '#e6f4ea',
     thread: [
       { from: 'Arjun (via JobPilot)', time: 'Tue 8:15 AM', dir: 'sent', body: `Hi Devon,\n\nLumen AI's zero-shot retrieval work caught my eye — especially the February deep-dive on contextual ranking. That's exactly the kind of infrastructure problem I want to be building around.\n\nI've led growth from both sides: product and distribution. Took one product from 0 to 80,000 MAU in 18 months — primarily through content, SEO, and founder-led outreach, not paid spend. I understand acquisition economics, retention loops, and what it takes to grow a technical product with a small team.\n\nAt my last role I owned the full growth stack: landing pages, onboarding, email sequences, A/B testing, and funnel analytics. I've worked closely with engineering to instrument the product for growth insights.\n\nThe Head of Growth role at Lumen AI is a rare intersection of technical depth and distribution ambition. That's exactly where I operate best.\n\nHappy to share specific numbers.\n\n— Arjun` },
-      { from: 'Devon Reilly', time: 'Tue 11:42 AM', dir: 'recv', body: `Most candidates send the same Notion-template cover letter. Yours read like a real person — and you actually understood the brief.\n\nCan we schedule a quick chat this week? I'm open Thu/Fri afternoon.\n\n— Devon` },
+      { from: 'Devon Reilly', time: 'Tue 11:42 AM', dir: 'recv', body: `Strong signal. The way you framed the v3 migration tells me you'd ship from week one.\n\nLet's do a working session instead of a panel — I'll send a calendar invite today.\n\n— Priya` },
     ],
   },
   {
