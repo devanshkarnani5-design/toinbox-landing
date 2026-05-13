@@ -312,7 +312,7 @@ function Testimonials() {
         <div className="section-head" data-reveal>
           <span className="eyebrow"><span className="dot" />Real founder replies</span>
           <h2 className="h-section">Founders reply to intent.<br /><em>Here's what that looks like.</em></h2>
-          <p className="lead">These are the actual inboxes that fill up after using JobPilot. Personal outreach generates real conversations.</p>
+          <p className="lead">These are the actual mailboxes that fill up after using JobPilot. Personal outreach generates real conversations.</p>
         </div>
 
         {/* Stats bar */}
