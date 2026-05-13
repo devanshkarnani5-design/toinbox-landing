@@ -4,10 +4,10 @@ const { useEffect: useEffectS } = React;
 function Benefits() {
   const items = [
     { ico: 'panel', t: 'Lives where you already are', s: "A Chrome extension that sits inside LinkedIn. No new app to learn, no second tab to keep open." },
-    { ico: 'target', t: 'Skip Easy Apply queues', s: 'Your application reaches a human inbox, not the bottom of an ATS pile tagged "auto-reject".' },
-    { ico: 'forward', t: 'Forwarded to hiring directly', s: 'Founders introduce strong candidates to their team. You start the process two steps ahead.' },
-    { ico: 'sparkle', t: 'Tailored, never templated', s: 'Every email cites the job, the changelog, the founder. No mail-merge smell. No AI tells.' },
-    { ico: 'bolt', t: 'Fifteen-second applications', s: 'Detect → enroll → send. You stay in flow on LinkedIn while JobPilot does the choreography.' },
+    { ico: 'target', t: 'Skip ATS queues entirely', s: 'Your application reaches a human inbox, not the bottom of an ATS pile. Founder inboxes are far less crowded.' },
+    { ico: 'forward', t: 'Forwarded to hiring directly', s: 'Founders introduce strong candidates to their team. Founder-forwarded applications move faster than any portal.' },
+    { ico: 'sparkle', t: 'Tailored, never templated', s: 'Every email cites the job, the changelog, the founder by name. No mail-merge smell. No AI tells.' },
+    { ico: 'bolt', t: 'Fifteen-second applications', s: 'Detect → enroll → send. Personalized outreach creates stronger intent, and strong intent increases replies.' },
     { ico: 'chart', t: 'Founders reply at multiples', s: 'Personal cold outreach beats Easy Apply on reply rate by a wide margin. The funnel just works.' },
   ];
   return (
@@ -15,7 +15,7 @@ function Benefits() {
       <div className="wrap">
         <div className="section-head" data-reveal>
           <span className="eyebrow"><span className="dot" />Why this works</span>
-          <h2 className="h-section">Stop getting ignored on LinkedIn.<br /><em>Start a founder conversation.</em></h2>
+          <h2 className="h-section">Stop getting ignored on LinkedIn.<br /><em>Start getting interview calls.</em></h2>
         </div>
         <div className="cards-grid">
           {items.map((b, i) => (
@@ -35,9 +35,9 @@ function DemoShowcase() {
   const DASH_APPS = [
     { logo: 'N', bg: '#1e3a5f',  co: 'Northwind',    role: 'Founding Product Engineer',  sent: 'Mon 6:02 AM',  opened: 'Mon 6:48 AM',  status: 'replied',   label: 'Replied ✓' },
     { logo: 'L', bg: '#3730a3',  co: 'Lumen AI',     role: 'Head of Growth',              sent: 'Mon 8:15 AM',  opened: 'Mon 9:00 AM',  status: 'interview', label: 'Interview Set' },
-    { logo: 'R', bg: '#7c2d12',  co: 'Reed Labs',    role: 'Backend Engineer',            sent: 'Tue 9:30 AM',  opened: 'Tue 11:00 AM', status: 'fwd',       label: 'Fwd to HR' },
+    { logo: 'G', bg: '#0f4c3a',  co: 'GrowthBase',   role: 'Marketing Intern',            sent: 'Tue 9:30 AM',  opened: 'Tue 11:00 AM', status: 'fwd',       label: 'Fwd to HR' },
     { logo: 'P', bg: '#5b34a1',  co: 'Plover',       role: 'Product Manager',             sent: 'Tue 11:00 AM', opened: 'Tue 2:45 PM',  status: 'replied',   label: 'Replied ✓' },
-    { logo: 'A', bg: '#1b6448',  co: 'Atlas Health', role: 'Backend Engineer',            sent: 'Wed 7:00 AM',  opened: 'Wed 10:00 AM', status: 'opened',    label: 'Opened' },
+    { logo: 'A', bg: '#1b6448',  co: 'Atlas Health', role: 'Full Stack Engineer',         sent: 'Wed 7:00 AM',  opened: 'Wed 10:00 AM', status: 'opened',    label: 'Opened' },
     { logo: 'C', bg: '#374151',  co: 'Cloudpack',    role: 'Infrastructure Engineer',     sent: 'Wed 9:15 AM',  opened: '—',            status: 'sent',      label: 'Sent' },
     { logo: 'V', bg: '#7c3aed',  co: 'Volta',        role: 'Founding Engineer',           sent: 'Thu 8:00 AM',  opened: '—',            status: 'sent',      label: 'Sent' },
     { logo: 'M', bg: '#b45309',  co: 'Meso',         role: 'Growth Engineer',             sent: 'Thu 10:30 AM', opened: '—',            status: 'sent',      label: 'Sent' },
@@ -45,14 +45,14 @@ function DemoShowcase() {
   const REPLIES = [
     { avatar: 'M', bg: 'linear-gradient(135deg,#f0a17a,#d8543e)', name: 'Marcus Webb', co: 'Northwind', when: 'Mon 9:14 AM', tag: 'INTERVIEW', tagColor: '#1a56db', tagBg: '#e8f0ff', body: 'Stood out from 240+ applications. The v3 reference tells me you actually read what we shipped. Forwarding to Priya — she\'ll set up a chat this week.' },
     { avatar: 'D', bg: 'linear-gradient(135deg,#5562eb,#3a1f9c)', name: 'Devon Reilly', co: 'Plover',    when: 'Tue 11:42 AM', tag: 'INTERVIEW SET', tagColor: '#057642', tagBg: '#e6f4ea', body: 'Most candidates send the same Notion template. Yours read like a real person. Can we schedule a quick chat — I\'m open Thu/Fri.' },
-    { avatar: 'S', bg: 'linear-gradient(135deg,#3aa178,#1b6448)', name: 'Sana Iyer',   co: 'Reed Labs', when: 'Tue 2:08 PM',  tag: 'FWD TO HR',  tagColor: '#b45309', tagBg: '#fff0e0', body: 'The reference to our changelog gave it away — you actually read it. Forwarding to our eng team. Calendar\'s open Thursday.' },
+    { avatar: 'P', bg: 'linear-gradient(135deg,#10b981,#0f4c3a)', name: 'Priya Menon',  co: 'GrowthBase', when: 'Tue 3:20 PM',  tag: 'FWD TO HR',  tagColor: '#b45309', tagBg: '#fff0e0', body: 'You referenced our newsletter series specifically — that stood out immediately. Forwarding to our content lead. Calendar\'s open Thursday.' },
   ];
   const statusStyle = {
     replied:   { bg: '#e6f4ea', color: '#057642' },
     interview: { bg: '#e8f0ff', color: '#1a56db' },
     fwd:       { bg: '#fff0e0', color: '#b45309' },
     opened:    { bg: 'var(--accent-soft)', color: 'var(--accent-ink)' },
-    sent:      { bg: '#f0ede8', color: '#888' },
+    sent:      { bg: '#f0ede8', color: '#666' },
   };
 
   return (
@@ -60,8 +60,8 @@ function DemoShowcase() {
       <div style={{ maxWidth: 1560, margin: '0 auto', padding: '0 clamp(24px,5vw,72px)' }}>
         <div className="section-head" data-reveal>
           <span className="eyebrow"><span className="dot" />Inside the extension</span>
-          <h2 className="h-section">A founder copilot pinned<br />to every LinkedIn tab.</h2>
-          <p className="lead">Your personalized dashboard tracks every application — who opened it, who replied, what's coming back.</p>
+          <h2 className="h-section">Track every application, reply,<br />and interview — in one place.</h2>
+          <p className="lead">Your complete outreach dashboard: who opened it, who replied, who's booking interviews — all live.</p>
         </div>
 
         {/* Full dashboard browser mock */}
@@ -92,7 +92,7 @@ function DemoShowcase() {
                 { icon: '✉', label: 'Emails', active: false },
                 { icon: '⚙', label: 'Settings', active: false },
               ].map((item) => (
-                <div key={item.label} style={{ display: 'flex', alignItems: 'center', gap: 9, padding: '9px 12px', borderRadius: 8, background: item.active ? 'rgba(255,255,255,0.1)' : 'transparent', color: item.active ? 'white' : 'rgba(255,255,255,0.4)', fontSize: 13, fontWeight: item.active ? 600 : 400 }}>
+                <div key={item.label} style={{ display: 'flex', alignItems: 'center', gap: 9, padding: '9px 12px', borderRadius: 8, background: item.active ? 'rgba(255,255,255,0.1)' : 'transparent', color: item.active ? 'white' : 'rgba(255,255,255,0.45)', fontSize: 13, fontWeight: item.active ? 600 : 400 }}>
                   <span style={{ fontSize: 14 }}>{item.icon}</span>{item.label}
                 </div>
               ))}
@@ -101,7 +101,7 @@ function DemoShowcase() {
                   <div style={{ width: 28, height: 28, borderRadius: '50%', background: 'linear-gradient(135deg,#6366f1,#4f46e5)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 700, fontSize: 11 }}>A</div>
                   <div>
                     <div style={{ fontSize: 12, fontWeight: 600, color: 'white' }}>Arjun Sharma</div>
-                    <div style={{ fontSize: 10.5, color: 'rgba(255,255,255,0.4)', marginTop: 1 }}>42 credits left</div>
+                    <div style={{ fontSize: 10.5, color: 'rgba(255,255,255,0.45)', marginTop: 1 }}>42 credits left</div>
                   </div>
                 </div>
               </div>
@@ -161,7 +161,7 @@ function DemoShowcase() {
                         <div style={{ width: 22, height: 22, borderRadius: 5, background: a.bg, color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 9.5, fontWeight: 700 }}>{a.logo}</div>
                         <div>
                           <div style={{ fontSize: 12.5, fontWeight: 600, color: 'var(--ink)' }}>{a.co}</div>
-                          <div style={{ fontSize: 11, color: 'var(--ink-4)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{a.role}</div>
+                          <div style={{ fontSize: 11, color: 'var(--ink-3)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{a.role}</div>
                         </div>
                         <div style={{ fontSize: 11, color: 'var(--ink-4)', fontFamily: 'var(--font-mono)' }}>{a.sent.split(' ')[0]}</div>
                         <div style={{ fontSize: 11, color: a.opened !== '—' ? '#057642' : 'var(--ink-4)', fontFamily: 'var(--font-mono)' }}>{a.opened !== '—' ? '✓' : '—'}</div>
@@ -211,7 +211,7 @@ const INBOX_THREADS = [
     preview: 'This stood out from the 240+ applications we got…',
     tag: 'INTERVIEW →', tagColor: '#1a56db', tagBg: '#e8f0ff',
     thread: [
-      { from: 'Arjun (via JobPilot)', time: 'Mon 6:02 AM', dir: 'sent', body: `Hi Marcus,\n\nSaw Northwind's Founding PE role — your March changelog on shipping v3 in six weeks is exactly the pace I want.\n\nTwo years doing this: solo-shipped 3 products, grew last app 2k → 80k MAU. Full-stack across TS, Go, Postgres.\n\nResume attached. Happy to pair on a real bug.\n\n— Arjun` },
+      { from: 'Arjun (via JobPilot)', time: 'Mon 6:02 AM', dir: 'sent', body: `Hi Marcus,\n\nSaw Northwind's Founding PE role — your March changelog on shipping v3 in six weeks is exactly the pace I want to work at.\n\nI've spent two years doing this end-to-end: solo-shipped 3 products from zero, grew my last app from 2,000 to 80,000 monthly active users in 14 months. Full-stack across TypeScript, Go, and Postgres. I've handled everything from API design to deployment pipelines to growth experiments.\n\nWhat drew me specifically to Northwind is your obsession with craft in the product layer — the attention to UX detail in your onboarding flow stood out. I've built similar zero-friction onboarding and know how much it moves retention.\n\nI'm not looking for a big-company role. I want to own real surface area and ship things that matter. Northwind feels like that.\n\nResume attached. Happy to pair on a real bug.\n\n— Arjun` },
       { from: 'Marcus Webb', time: 'Mon 9:14 AM', dir: 'recv', body: `Arjun —\n\nThis stood out from the 240+ applications we got this week. The v3 reference — that tells me you actually read what we shipped.\n\nForwarding to Priya (Head of Eng). She'll set up a chat this week.\n\n— Marcus` },
     ],
   },
@@ -223,31 +223,31 @@ const INBOX_THREADS = [
     preview: 'Most candidates send the same Notion template…',
     tag: 'INTERVIEW SET', tagColor: '#057642', tagBg: '#e6f4ea',
     thread: [
-      { from: 'Arjun (via JobPilot)', time: 'Tue 8:15 AM', dir: 'sent', body: `Hi Devon,\n\nLumen AI's approach to contextual retrieval caught my attention — especially the zero-shot work from your Feb post.\n\nI've grown products from 0 → 80k MAU in 18 months. Comfortable at the product × distribution intersection.\n\nWould love to talk about the Head of Growth role.\n\n— Arjun` },
+      { from: 'Arjun (via JobPilot)', time: 'Tue 8:15 AM', dir: 'sent', body: `Hi Devon,\n\nLumen AI's zero-shot retrieval work caught my eye — especially the February deep-dive on contextual ranking. That's exactly the kind of infrastructure problem I want to be building around.\n\nI've led growth from both sides: product and distribution. Took one product from 0 to 80,000 MAU in 18 months — primarily through content, SEO, and founder-led outreach, not paid spend. I understand acquisition economics, retention loops, and what it takes to grow a technical product with a small team.\n\nAt my last role I owned the full growth stack: landing pages, onboarding, email sequences, A/B testing, and funnel analytics. I've worked closely with engineering to instrument the product for growth insights.\n\nThe Head of Growth role at Lumen AI is a rare intersection of technical depth and distribution ambition. That's exactly where I operate best.\n\nHappy to share specific numbers.\n\n— Arjun` },
       { from: 'Devon Reilly', time: 'Tue 11:42 AM', dir: 'recv', body: `Most candidates send the same Notion-template cover letter. Yours read like a real person — and you actually understood the brief.\n\nCan we schedule a quick chat this week? I'm open Thu/Fri afternoon.\n\n— Devon` },
     ],
   },
   {
-    id: 2, avatar: 'S', bg: 'linear-gradient(135deg,#3aa178,#1b6448)',
-    name: 'Sana Iyer', role: 'Co-founder · Reed Labs',
-    when: 'Wed 2:08 PM', unread: false,
-    subj: 'Re: Backend Engineer · saw the changelog',
-    preview: 'The reference to our changelog gave it away…',
+    id: 2, avatar: 'P', bg: 'linear-gradient(135deg,#10b981,#0f4c3a)',
+    name: 'Priya Menon', role: 'Co-founder · GrowthBase',
+    when: 'Tue 3:20 PM', unread: false,
+    subj: 'Re: Marketing Intern · loved the specifics',
+    preview: 'You referenced our newsletter series specifically…',
     tag: 'FORWARDED TO HR', tagColor: '#b45309', tagBg: '#fff0e0',
     thread: [
-      { from: 'Arjun (via JobPilot)', time: 'Wed 9:30 AM', dir: 'sent', body: `Hi Sana,\n\nReed Labs' distributed systems work stands out — I've been following the Raft consensus posts on your eng blog.\n\nI've shipped Go services at 10k+ RPS. Resume attached — happy to do a take-home or a system design session.\n\n— Arjun` },
-      { from: 'Sana Iyer', time: 'Wed 2:08 PM', dir: 'recv', body: `The reference to our changelog gave it away — you actually read it. We don't see that often.\n\nForwarding this to our eng team. Calendar's open Thursday afternoon.\n\n— Sana` },
+      { from: 'Arjun (via JobPilot)', time: 'Tue 9:30 AM', dir: 'sent', body: `Hi Priya,\n\nGrowthBase's approach to product-led content stood out to me — your LinkedIn teardowns and founder interview series are exactly the kind of marketing I believe in: genuine, specific, no fluff.\n\nI'm looking for a Marketing Intern role where I can contribute meaningfully from day one. I've run content calendars, managed social accounts, written long-form SEO articles, and analyzed campaign performance using Google Analytics and Mixpanel. I understand the difference between vanity metrics and metrics that move revenue.\n\nLast semester I helped a student startup grow their newsletter from 200 to 4,000 subscribers in 12 weeks through organic content and strategic outreach. I took full ownership of the content pipeline — from ideation to publication to distribution.\n\nI'm a fast learner, comfortable with ambiguity, and genuinely excited about what GrowthBase is building. I'd love to bring that same energy to your team.\n\nResume attached.\n\n— Arjun` },
+      { from: 'Priya Menon', time: 'Tue 3:20 PM', dir: 'recv', body: `You referenced our newsletter series specifically — that stood out immediately. We get a lot of generic intern applications. Yours felt researched.\n\nForwarding this to our content lead. Calendar's open Thursday afternoon.\n\n— Priya` },
     ],
   },
   {
     id: 3, avatar: 'P', bg: 'linear-gradient(135deg,#5fb6c4,#1f6b78)',
     name: 'Priya Shah', role: 'CTO · Atlas Health',
     when: 'Thu 8:04 AM', unread: false,
-    subj: 'Re: Backend Engineer — strong profile',
+    subj: 'Re: Full Stack Engineer — strong profile',
     preview: 'Strong signal. The way you framed the v3 migration…',
     tag: 'WORKING SESSION', tagColor: '#6d28d9', tagBg: '#ede9fe',
     thread: [
-      { from: 'Arjun (via JobPilot)', time: 'Wed 11:00 AM', dir: 'sent', body: `Hi Priya,\n\nAtlas Health's HIPAA-compliant data pipeline work resonated — especially the v3 migration case study.\n\nI've built production Go + Postgres services under strict compliance requirements. Happy to share specifics.\n\n— Arjun` },
+      { from: 'Arjun (via JobPilot)', time: 'Wed 11:00 AM', dir: 'sent', body: `Hi Priya,\n\nAtlas Health's HIPAA-compliant data pipeline work resonated — especially the v3 migration case study you published in March. The way your team approached schema versioning under compliance constraints was exactly the kind of engineering problem I find interesting.\n\nI've built production Go + Postgres services under strict compliance requirements. I understand the operational weight of healthcare data and have shipped features that required coordinating closely with security and legal.\n\nI'm not just looking for a job — I'm looking for a place where engineering quality is taken seriously at every layer. Atlas Health's engineering blog tells me that's the culture here.\n\nResume attached. Happy to share specifics or do a take-home.\n\n— Arjun` },
       { from: 'Priya Shah', time: 'Thu 8:04 AM', dir: 'recv', body: `Strong signal. The way you framed the v3 migration tells me you'd ship from week one.\n\nLet's do a working session instead of a panel — I'll send a calendar invite today.\n\n— Priya` },
     ],
   },
@@ -259,7 +259,7 @@ const INBOX_THREADS = [
     preview: 'Most cold inbound goes straight to spam…',
     tag: 'FORWARDED TO HR', tagColor: '#b45309', tagBg: '#fff0e0',
     thread: [
-      { from: 'Arjun (via JobPilot)', time: 'Thu 10:00 AM', dir: 'sent', body: `Hi Theo,\n\nLumen AI's design direction — particularly the information density work in the dashboard — is exactly the kind of problem I want.\n\nI've shipped design systems at scale. Portfolio attached.\n\n— Arjun` },
+      { from: 'Arjun (via JobPilot)', time: 'Thu 10:00 AM', dir: 'sent', body: `Hi Theo,\n\nLumen AI's design direction — particularly the information density work in your dashboard and the zero-clutter approach to the query interface — is exactly the kind of problem I want to be solving.\n\nI've shipped design systems at scale across two B2B SaaS products. I care about the intersection of function and craft: components that are both beautiful and fast to build with. I've worked directly with engineering to keep design tokens in sync across platforms.\n\nThe specificity of what you're building at Lumen AI is rare. I'd rather work on one hard problem well than ten easy ones quickly.\n\nPortfolio attached.\n\n— Arjun` },
       { from: 'Theo Marchetti', time: 'Thu 3:51 PM', dir: 'recv', body: `Most cold inbound goes straight to spam. Yours got through because it was specific and short.\n\nSending to our hiring lead now. Expect a note from her tomorrow.\n\n— Theo` },
     ],
   },
@@ -271,7 +271,7 @@ const INBOX_THREADS = [
     preview: 'Direct, no fluff, no AI smell. Resume on point…',
     tag: 'INTERVIEW SET', tagColor: '#057642', tagBg: '#e6f4ea',
     thread: [
-      { from: 'Arjun (via JobPilot)', time: 'Fri 7:30 AM', dir: 'sent', body: `Hi Jules,\n\nCloudpack's edge caching architecture — the April teardown — showed exactly the kind of engineering I want to be close to.\n\nI've shipped infrastructure at scale (Go, k8s, Cloudflare Workers). Resume attached.\n\n— Arjun` },
+      { from: 'Arjun (via JobPilot)', time: 'Fri 7:30 AM', dir: 'sent', body: `Hi Jules,\n\nCloudpack's edge caching architecture — the April teardown — showed exactly the kind of engineering I want to be close to. The decision to run Cloudflare Workers at the cache invalidation layer instead of a central coordinator was a particularly elegant call.\n\nI've shipped infrastructure at scale using Go, Kubernetes, and Cloudflare Workers. I understand the operational tradeoffs at that level — not just the code, but the incidents, the runbooks, the on-call culture that makes it sustainable.\n\nI want to work somewhere where infrastructure is a first-class product concern, not an afterthought. Cloudpack's public engineering work signals that's exactly the culture here.\n\nResume attached.\n\n— Arjun` },
       { from: 'Jules Bennett', time: 'Fri 10:50 AM', dir: 'recv', body: `Direct, no fluff, no AI smell. Resume on point.\n\nBooked you in with our CEO for next week — calendar invite incoming shortly.\n\n— Jules` },
     ],
   },
@@ -340,59 +340,40 @@ function Testimonials() {
                 className={`inbox-row${activeThread === i ? ' active' : ''}${t.unread ? ' unread' : ''}`}
                 onClick={() => activate(i)}
               >
-                <div className="inbox-row-av" style={{ background: t.bg }}>{t.avatar}</div>
+                <div style={{ width: 32, height: 32, borderRadius: '50%', background: t.bg, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 700, fontSize: 13, flexShrink: 0 }}>{t.avatar}</div>
                 <div style={{ flex: 1, minWidth: 0 }}>
-                  <div className="inbox-row-name">{t.name}</div>
-                  <div className="inbox-row-subj">{t.subj}</div>
-                  <div className="inbox-row-preview">{t.preview}</div>
-                </div>
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 5, flexShrink: 0 }}>
-                  <span className="inbox-row-time">{t.when.split(' ')[0]}</span>
-                  <span className="inbox-row-tag" style={{ background: t.tagBg, color: t.tagColor }}>{t.tag}</span>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8 }}>
+                    <span style={{ fontSize: 13, fontWeight: t.unread ? 700 : 500, color: 'var(--ink)' }}>{t.name}</span>
+                    <span style={{ fontSize: 11, color: 'var(--ink-4)', fontFamily: 'var(--font-mono)', flexShrink: 0 }}>{t.when}</span>
+                  </div>
+                  <div style={{ fontSize: 12, color: 'var(--ink-2)', fontWeight: t.unread ? 600 : 400, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{t.subj}</div>
+                  <div style={{ fontSize: 11.5, color: 'var(--ink-4)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{t.preview}</div>
                 </div>
               </div>
             ))}
           </div>
 
-          {/* Right: email view */}
-          <div className="inbox-view">
-            <div className="inbox-view-header">
-              <h3 className="inbox-view-subj">{thread.subj}</h3>
-              <div style={{ display: 'flex', gap: 6, marginTop: 6 }}>
-                <span className="inbox-tag-pill" style={{ background: thread.tagBg, color: thread.tagColor }}>{thread.tag}</span>
-                <span className="inbox-tag-pill" style={{ background: 'var(--accent-soft)', color: 'var(--accent-ink)' }}>via JobPilot</span>
+          {/* Right: thread view */}
+          <div className="inbox-thread">
+            <div className="inbox-thread-header">
+              <div style={{ flex: 1 }}>
+                <div style={{ fontSize: 17, fontWeight: 700, color: 'var(--ink)', letterSpacing: '-0.02em' }}>{thread.subj}</div>
+                <div style={{ display: 'flex', gap: 6, marginTop: 6, alignItems: 'center' }}>
+                  <span style={{ fontSize: 11, padding: '3px 9px', borderRadius: 5, fontWeight: 700, fontFamily: 'var(--font-mono)', background: thread.tagBg, color: thread.tagColor }}>{thread.tag}</span>
+                  <span style={{ fontSize: 11.5, color: 'var(--ink-4)' }}>{thread.role}</span>
+                </div>
               </div>
             </div>
-
-            <div className="inbox-thread">
+            <div className="inbox-thread-body">
               {thread.thread.map((msg, i) => (
-                <div key={i} className={`inbox-msg${msg.dir === 'recv' ? ' recv' : ' sent-msg'}`}>
-                  <div className="inbox-msg-header">
-                    <div className="inbox-msg-av" style={{ background: msg.dir === 'recv' ? thread.bg : 'linear-gradient(135deg,#6366f1,#4f46e5)' }}>
-                      {msg.dir === 'recv' ? thread.avatar : 'A'}
-                    </div>
-                    <div>
-                      <div className="inbox-msg-from">{msg.from}</div>
-                      <div className="inbox-msg-time">{msg.time}</div>
-                    </div>
-                    {msg.dir === 'sent' && (
-                      <span style={{ marginLeft: 'auto', fontSize: 10, padding: '2px 7px', borderRadius: 4, background: 'var(--accent-soft)', color: 'var(--accent-ink)', fontFamily: 'var(--font-mono)', fontWeight: 600 }}>SENT VIA JOBPILOT</span>
-                    )}
+                <div key={i} className={`inbox-msg ${msg.dir}`}>
+                  <div className="inbox-msg-meta">
+                    <span style={{ fontWeight: 600, color: 'var(--ink)' }}>{msg.from}</span>
+                    <span style={{ color: 'var(--ink-4)', fontSize: 11, fontFamily: 'var(--font-mono)' }}>{msg.time}</span>
                   </div>
                   <div className="inbox-msg-body">{msg.body}</div>
                 </div>
               ))}
-
-              {/* Reply prompt */}
-              <div className="inbox-reply-box">
-                <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-                  <div style={{ width: 26, height: 26, borderRadius: '50%', background: 'linear-gradient(135deg,#6366f1,#4f46e5)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontSize: 10, fontWeight: 700, flexShrink: 0 }}>A</div>
-                  <div style={{ flex: 1, height: 32, borderRadius: 6, border: '1px solid var(--line-2)', background: 'var(--bg-soft)', display: 'flex', alignItems: 'center', padding: '0 12px', fontSize: 12.5, color: 'var(--ink-4)' }}>
-                    Reply to {thread.name}…
-                  </div>
-                  <button style={{ padding: '6px 12px', borderRadius: 6, background: 'var(--accent)', color: 'white', fontSize: 12, fontWeight: 600, border: 'none', cursor: 'pointer' }}>Send</button>
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -410,19 +391,19 @@ function Pricing() {
           <h2 className="h-section">Pay only when you're applying.</h2>
           <p className="lead" style={{ textAlign: 'center' }}>No subscription. No expiring credits. Buy a pack, send when it counts.</p>
         </div>
-        <div className="pricing-grid">
+        <div className="pricing-grid" style={{ gridTemplateColumns: 'repeat(3, 1fr)' }}>
           <div className="price-card" data-reveal>
             <div>
-              <div className="price-name">Free trial</div>
+              <div className="price-name">Free Trial</div>
               <div style={{ display: 'flex', alignItems: 'baseline', gap: 4, marginTop: 8 }}>
                 <span className="price-amt"><span className="currency">₹</span>0</span>
               </div>
-              <div className="price-sub">7 free credits to feel the difference.</div>
+              <div className="price-sub">Limited credits. Try before you commit.</div>
             </div>
             <div className="price-feats">
-              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>7 personalized founder sends</div>
+              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>5 personalized founder sends</div>
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>LinkedIn auto-detection</div>
-              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Resume parsing & matching</div>
+              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Basic resume matching</div>
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Reply tracking</div>
             </div>
             <a href="#" className="btn btn-outline" style={{ marginTop: 'auto' }}>Add to Chrome <Icon name="arrow" size={14} className="chev" /></a>
@@ -431,20 +412,38 @@ function Pricing() {
           <div className="price-card featured" data-reveal style={{ transitionDelay: '90ms' }}>
             <div className="price-tag">BEST VALUE</div>
             <div>
-              <div className="price-name">Starter pack</div>
+              <div className="price-name">Starter</div>
               <div style={{ display: 'flex', alignItems: 'baseline', gap: 4, marginTop: 8 }}>
                 <span className="price-amt"><span className="currency">₹</span>499<span className="per">one-time</span></span>
               </div>
-              <div className="price-sub">50 credits. About ₹10 per founder reach.</div>
+              <div className="price-sub">100 credits. About ₹5 per founder reach.</div>
             </div>
             <div className="price-feats">
-              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>50 personalized founder sends</div>
+              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>100 personalized founder sends</div>
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Cover letter + cold email pair</div>
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Founder profile enrichment</div>
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Reply, forward & interview tracking</div>
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Credits never expire</div>
             </div>
             <a href="#" className="btn btn-accent" style={{ marginTop: 'auto', alignSelf: 'flex-start' }}>Get the pack <Icon name="arrow" size={14} className="chev" /></a>
+          </div>
+
+          <div className="price-card" data-reveal style={{ transitionDelay: '180ms' }}>
+            <div>
+              <div className="price-name">Pro</div>
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: 4, marginTop: 8 }}>
+                <span className="price-amt"><span className="currency">₹</span>799<span className="per">one-time</span></span>
+              </div>
+              <div className="price-sub">200 credits. Best for serious job searches.</div>
+            </div>
+            <div className="price-feats">
+              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>200 personalized founder sends</div>
+              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Priority email delivery</div>
+              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Advanced match scoring</div>
+              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Full dashboard analytics</div>
+              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Credits never expire</div>
+            </div>
+            <a href="#" className="btn btn-primary" style={{ marginTop: 'auto' }}>Go Pro <Icon name="arrow" size={14} className="chev" /></a>
           </div>
         </div>
         <div style={{ textAlign: 'center', color: 'var(--ink-3)', fontSize: 13, marginTop: 24 }}>
@@ -469,7 +468,7 @@ function FinalCTA() {
             <a href="#" className="btn btn-accent">Add JobPilot to Chrome <Icon name="arrow" size={14} className="chev" /></a>
             <a href="#how-section" className="btn btn-ghost" style={{ color: 'rgba(255,255,255,0.8)' }}>See how it works</a>
           </div>
-          <div style={{ marginTop: 20, fontSize: 12.5, color: 'rgba(255,255,255,0.5)', fontFamily: 'var(--font-mono)' }}>NO CARD REQUIRED · 7 FREE CREDITS · WORKS ON LINKEDIN</div>
+          <div style={{ marginTop: 20, fontSize: 12.5, color: 'rgba(255,255,255,0.5)', fontFamily: 'var(--font-mono)' }}>NO CARD REQUIRED · 5 FREE CREDITS · WORKS ON LINKEDIN</div>
         </div>
       </div>
     </section>

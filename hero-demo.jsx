@@ -4,13 +4,57 @@ const { useState, useEffect, useRef } = React;
 const JOBS = [
   { id: 0, co: 'Northwind', title: 'Founding Product Engineer', logo: 'N', bg: '#1e3a5f', loc: 'San Francisco', match: 94, email: 'm.v@northwind.co', ai: 'High priority' },
   { id: 1, co: 'Lumen AI', title: 'Head of Growth', logo: 'L', bg: '#3730a3', loc: 'Delhi, India', match: 87, email: 'theo@lumen.ai', ai: 'Strong fit' },
-  { id: 2, co: 'Reed Labs', title: 'Backend Engineer', logo: 'R', bg: '#7c2d12', loc: 'Remote', match: 78, email: 'sana@reedlabs.io', ai: 'Good match' },
+  { id: 2, co: 'GrowthBase', title: 'Marketing Intern', logo: 'G', bg: '#0f4c3a', loc: 'Remote', match: 82, email: 'priya@growthbase.io', ai: 'Good match' },
+];
+
+const JOB_META = [
+  { time: '2d ago', applicants: '784 applicants' },
+  { time: '1w ago', applicants: '142 applicants' },
+  { time: '5d ago', applicants: '61 applicants' },
 ];
 
 const LETTERS = [
-  `Hi Marcus,\n\nSaw Northwind's Founding PE role — your v3 changelog is exactly the pace I want.\n\n2 years: solo-shipped 3 products, grew last app 2k → 80k MAU. TS, Go, Postgres.\n\nResume attached. Happy to pair on a real bug.\n\n— Arjun`,
-  `Hi Theo,\n\nLumen AI's zero-shot retrieval work caught my eye — exactly the kind of infra problem I want.\n\nI've grown products from 0 → 80k MAU. Comfortable at product × distribution intersection.\n\n— Arjun`,
-  `Hi Sana,\n\nReed Labs' distributed systems work stands out. I've shipped Go services at 10k+ RPS.\n\nResume attached — happy to do a take-home.\n\n— Arjun`,
+  `Hi Marcus,
+
+Saw Northwind's Founding PE role — your March changelog on shipping v3 in six weeks is exactly the pace I want to work at.
+
+I've spent two years doing this end-to-end: solo-shipped 3 products from zero, grew my last app from 2,000 to 80,000 monthly active users in 14 months. Full-stack across TypeScript, Go, and Postgres. I've handled everything from API design to deployment pipelines to growth experiments.
+
+What drew me specifically to Northwind is your obsession with craft in the product layer — the attention to UX detail in your onboarding flow stood out. I've built similar zero-friction onboarding and know how much it moves retention.
+
+I'm not looking for a big-company role. I want to own real surface area and ship things that matter. Northwind feels like that.
+
+Resume attached. Happy to pair on a real bug.
+
+— Arjun`,
+
+  `Hi Theo,
+
+Lumen AI's zero-shot retrieval work caught my eye — especially the February deep-dive on contextual ranking. That's exactly the kind of infrastructure problem I want to be building around.
+
+I've led growth from both sides: product and distribution. Took one product from 0 to 80,000 MAU in 18 months — primarily through content, SEO, and founder-led outreach, not paid spend. I understand acquisition economics, retention loops, and what it takes to grow a technical product with a small team.
+
+At my last role I owned the full growth stack: landing pages, onboarding, email sequences, A/B testing, and funnel analytics. I've also worked closely with engineering to instrument the product for growth insights.
+
+The Head of Growth role at Lumen AI is a rare intersection of technical depth and distribution ambition. That's exactly where I operate best.
+
+Happy to share specific numbers.
+
+— Arjun`,
+
+  `Hi Priya,
+
+GrowthBase's approach to product-led content stood out to me — your LinkedIn teardowns and founder interview series are exactly the kind of marketing I believe in: genuine, specific, no fluff.
+
+I'm looking for a Marketing Intern role where I can contribute meaningfully from day one. I've run content calendars, managed social accounts, written long-form SEO articles, and analyzed campaign performance using Google Analytics and Mixpanel. I understand the difference between vanity metrics and metrics that move revenue.
+
+Last semester I helped a student startup grow their newsletter from 200 to 4,000 subscribers in 12 weeks through organic content and strategic outreach. I took full ownership of the content pipeline — from ideation to publication to distribution.
+
+I'm a fast learner, comfortable with ambiguity, and genuinely excited about what GrowthBase is building. I'd love to bring that same energy to your team.
+
+Resume attached.
+
+— Arjun`,
 ];
 
 function JPPanel({ detecting, jobStates, activeJobIdx, typed, showDash, dashStats, dashRows, replyVisible, enrollRefs }) {
@@ -40,9 +84,9 @@ function JPPanel({ detecting, jobStates, activeJobIdx, typed, showDash, dashStat
                   <div className="jp-job-logo-sm" style={{ background: j.bg }}>{j.logo}</div>
                   <div style={{ flex: 1, minWidth: 0 }}>
                     <div style={{ fontSize: 11.5, fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', color: '#1a1a1a' }}>{j.title}</div>
-                    <div style={{ fontSize: 10, color: '#888', marginTop: 1 }}>{j.co}</div>
-                    <div style={{ fontSize: 10, color: '#057642', marginTop: 2, display: 'flex', alignItems: 'center', gap: 3 }}>
-                      <span style={{ fontSize: 8 }}>●</span>
+                    <div style={{ fontSize: 10, color: '#666', marginTop: 1 }}>{j.co}</div>
+                    <div style={{ fontSize: 10, marginTop: 2, display: 'flex', alignItems: 'center', gap: 3 }}>
+                      <span style={{ color: '#057642', fontSize: 8 }}>●</span>
                       <span style={{ color: '#555' }}>{j.email}</span>
                     </div>
                   </div>
@@ -61,10 +105,10 @@ function JPPanel({ detecting, jobStates, activeJobIdx, typed, showDash, dashStat
 
                 {isActive && typed && (st === 'generating' || st === 'sending') && (
                   <div className="jp-letter-expand">
-                    <div style={{ fontFamily: 'var(--font-mono)', fontSize: 9, color: '#aaa', letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: 5 }}>
+                    <div style={{ fontFamily: 'var(--font-mono)', fontSize: 9, color: '#888', letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: 5 }}>
                       AI Cover Letter · To {j.email}
                     </div>
-                    <div style={{ fontSize: 11, lineHeight: 1.55, color: '#333', whiteSpace: 'pre-wrap', maxHeight: 120, overflow: 'hidden' }}>
+                    <div style={{ fontSize: 10.5, lineHeight: 1.55, color: '#333', whiteSpace: 'pre-wrap', maxHeight: 120, overflow: 'hidden' }}>
                       {typed}{st === 'generating' && <span className="caret" />}
                     </div>
                   </div>
@@ -77,13 +121,13 @@ function JPPanel({ detecting, jobStates, activeJobIdx, typed, showDash, dashStat
         <div className="jp-sidebar-body">
           <div className="jp-dash-stats-row">
             {[
-              { k: 'Sent', v: dashStats.sent, color: '#555' },
+              { k: 'Sent', v: dashStats.sent, color: '#444' },
               { k: 'Opened', v: dashStats.opened, color: 'var(--accent)' },
               { k: 'Replied', v: dashStats.replied, color: '#057642' },
             ].map(({ k, v, color }) => (
               <div key={k} className="jp-dash-stat-cell">
                 <div style={{ fontSize: 24, fontWeight: 700, letterSpacing: '-0.04em', color }}>{v}</div>
-                <div style={{ fontSize: 10, color: '#888', textTransform: 'uppercase', letterSpacing: '0.05em', fontFamily: 'var(--font-mono)' }}>{k}</div>
+                <div style={{ fontSize: 10, color: '#666', textTransform: 'uppercase', letterSpacing: '0.05em', fontFamily: 'var(--font-mono)' }}>{k}</div>
               </div>
             ))}
           </div>
@@ -94,11 +138,11 @@ function JPPanel({ detecting, jobStates, activeJobIdx, typed, showDash, dashStat
                 <div className="jp-job-logo-sm" style={{ background: row.job.bg, flexShrink: 0 }}>{row.job.logo}</div>
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div style={{ fontSize: 11.5, fontWeight: 600, color: '#1a1a1a' }}>{row.job.co}</div>
-                  <div style={{ fontSize: 10, color: '#888', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{row.job.email}</div>
+                  <div style={{ fontSize: 10, color: '#666', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{row.job.email}</div>
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 2 }}>
                   <span className={`jp-status-pill ${row.status}`}>{row.status}</span>
-                  <span style={{ fontSize: 9, color: '#bbb', fontFamily: 'var(--font-mono)' }}>{row.time}</span>
+                  <span style={{ fontSize: 9, color: '#999', fontFamily: 'var(--font-mono)' }}>{row.time}</span>
                 </div>
               </div>
             ))}
@@ -109,7 +153,7 @@ function JPPanel({ detecting, jobStates, activeJobIdx, typed, showDash, dashStat
               <div style={{ display: 'flex', alignItems: 'center', gap: 7, marginBottom: 8 }}>
                 <div style={{ width: 24, height: 24, borderRadius: '50%', background: 'linear-gradient(135deg,#f0a17a,#d8543e)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 700, fontSize: 10, flexShrink: 0 }}>M</div>
                 <div style={{ flex: 1 }}>
-                  <div style={{ fontSize: 12, fontWeight: 600 }}>Marcus Webb · Northwind</div>
+                  <div style={{ fontSize: 12, fontWeight: 600, color: '#1a1a1a' }}>Marcus Webb · Northwind</div>
                   <div style={{ fontSize: 10, color: '#888' }}>2 hours ago</div>
                 </div>
                 <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#057642', display: 'inline-block' }} />
@@ -163,24 +207,28 @@ function HeroDemo() {
       const btn = enrollRefs.current[idx];
       if (btn) moveTo(btn);
       await wait(900);
+      if (dead) return;
       setCurClick(true);
-      await wait(140);
+      await wait(160);
       setCurClick(false);
       setJobState(idx, 'working');
       setActiveJobIdx(idx);
       setTyped('');
-      await wait(600);
+      await wait(700);
+      if (dead) return;
       setJobState(idx, 'generating');
       const letter = LETTERS[idx];
       for (let i = 0; i <= letter.length; i += 3) {
         if (dead) return;
         setTyped(letter.slice(0, i));
-        await wait(idx === 0 ? 22 : 13);
+        await wait(idx === 0 ? 18 : 11);
       }
       setTyped(letter);
-      await wait(350);
+      await wait(400);
+      if (dead) return;
       setJobState(idx, 'sending');
       await wait(900);
+      if (dead) return;
       setJobState(idx, 'sent');
       setActiveJobIdx(null);
       setTyped('');
@@ -200,21 +248,22 @@ function HeroDemo() {
         await wait(1000);
         if (dead) return;
 
-        await wait(1300);
+        await wait(1400);
+        if (dead) return;
         setDetecting(false);
-        await wait(800);
+        await wait(900);
 
         await enrollJob(0);
         if (dead) return;
-        await wait(300);
+        await wait(400);
 
         await enrollJob(1);
         if (dead) return;
-        await wait(300);
+        await wait(400);
 
         await enrollJob(2);
         if (dead) return;
-        await wait(700);
+        await wait(800);
 
         setShowDash(true);
         setDashRows([
@@ -223,14 +272,16 @@ function HeroDemo() {
           { job: JOBS[2], status: 'sent', time: '1h ago' },
         ]);
         setDashStats({ sent: 3, opened: 0, replied: 0 });
-        await wait(1400);
+        await wait(1500);
+        if (dead) return;
         setDashStats(s => ({ ...s, opened: 1 }));
         setDashRows(prev => { const n = [...prev]; n[0] = { ...n[0], status: 'opened' }; return n; });
-        await wait(1200);
+        await wait(1300);
+        if (dead) return;
         setDashStats(s => ({ ...s, replied: 1 }));
         setDashRows(prev => { const n = [...prev]; n[0] = { ...n[0], status: 'replied' }; return n; });
         setReplyVisible(true);
-        await wait(3500);
+        await wait(3800);
         if (dead) return;
       }
     };
@@ -284,7 +335,7 @@ function HeroDemo() {
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div className="lin-job-title">{j.title}</div>
                 <div className="lin-job-co">{j.co} · {j.loc}</div>
-                <div className="lin-job-time">1w ago · 811 applicants</div>
+                <div className="lin-job-time">{JOB_META[i].time} · {JOB_META[i].applicants}</div>
                 <div style={{ display: 'flex', gap: 4, marginTop: 4 }}>
                   <span className="lin-badge-easy">Easy Apply</span>
                   {jobStates[i] === 'sent' && <span className="lin-badge-applied">✓ Applied</span>}
@@ -300,16 +351,16 @@ function HeroDemo() {
             <div style={{ width: 32, height: 32, borderRadius: 6, background: '#1e3a5f', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, fontWeight: 700, flexShrink: 0 }}>N</div>
             <div>
               <div style={{ fontSize: 11.5, color: '#0a66c2', fontWeight: 600 }}>Northwind</div>
-              <div style={{ fontSize: 10, color: '#888' }}>Series A · 48 employees · San Francisco</div>
+              <div style={{ fontSize: 10, color: '#666' }}>Series A · 48 employees · San Francisco</div>
             </div>
           </div>
           <h3 style={{ fontSize: 16, fontWeight: 700, color: '#1a1a1a', letterSpacing: '-0.015em', margin: '0 0 5px', lineHeight: 1.2 }}>Founding Product Engineer</h3>
-          <div style={{ fontSize: 11, color: '#666', marginBottom: 8, display: 'flex', gap: 5, flexWrap: 'wrap', alignItems: 'center' }}>
+          <div style={{ fontSize: 11, color: '#555', marginBottom: 8, display: 'flex', gap: 5, flexWrap: 'wrap', alignItems: 'center' }}>
             <span>Remote</span>
             <span style={{ width: 3, height: 3, borderRadius: '50%', background: '#ccc', display: 'inline-block' }} />
             <span>2 days ago</span>
             <span style={{ width: 3, height: 3, borderRadius: '50%', background: '#ccc', display: 'inline-block' }} />
-            <span>344 applicants · Promoted</span>
+            <span>784 applicants · Promoted</span>
           </div>
           <div style={{ display: 'flex', gap: 5, marginBottom: 10 }}>
             <button style={{ padding: '6px 11px', borderRadius: 5, background: '#0a66c2', color: 'white', fontSize: 12, fontWeight: 600, border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 4 }}>Easy Apply</button>
@@ -317,7 +368,7 @@ function HeroDemo() {
           </div>
           <div style={{ padding: '8px 10px', background: '#f0faf5', borderRadius: 7, border: '1px solid #b8e6cc', display: 'flex', alignItems: 'flex-start', gap: 7, marginBottom: 12, fontSize: 11.5 }}>
             <span style={{ color: '#057642', fontSize: 13, flexShrink: 0 }}>✦</span>
-            <span><strong>Top applicant</strong> — your profile matches 94% of the JD</span>
+            <span style={{ color: '#1a1a1a' }}><strong>Top applicant</strong> — your profile matches 94% of the JD</span>
           </div>
           <div style={{ fontSize: 12.5, fontWeight: 700, color: '#1a1a1a', marginBottom: 6 }}>About the job</div>
           {[98, 85, 72, 90, 60, 78, 68].map((w, i) => (
@@ -334,7 +385,7 @@ function HeroDemo() {
             <div style={{ width: 28, height: 28, borderRadius: '50%', background: 'linear-gradient(135deg,#f0a17a,#d8543e)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 700, fontSize: 11, flexShrink: 0 }}>M</div>
             <div>
               <div style={{ fontSize: 11.5, fontWeight: 600, color: '#0a66c2' }}>Marcus Webb</div>
-              <div style={{ fontSize: 10, color: '#888' }}>Head of Engineering · Northwind</div>
+              <div style={{ fontSize: 10, color: '#666' }}>Head of Engineering · Northwind</div>
             </div>
           </div>
         </div>
@@ -351,8 +402,6 @@ function HeroDemo() {
           replyVisible={replyVisible}
           enrollRefs={enrollRefs}
         />
-
-        {/* Animated cursor — absolute within .browser */}
       </div>
 
       {/* Cursor sits outside the body div so it's relative to .browser */}
