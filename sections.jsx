@@ -8,7 +8,7 @@ function Benefits() {
     { ico: 'forward', t: 'Forwarded to hiring directly', s: 'Founders often move such applications directly into interviews or forward them to HR. These applications carry an advantage and move quicker.' },
     { ico: 'sparkle', t: 'Tailored, never templated', s: 'Every application sent to a founder is unique and personalised based on job description and your resume.' },
     { ico: 'bolt', t: 'Fifteen-second applications', s: 'Detect → enroll → send. Personalized outreach creates stronger intent, and strong intent increases replies.' },
-    { ico: 'chart', t: 'Founders reply at multiples', s: 'Personal cold outreach beats Easy Apply on reply rate by a wide margin. The funnel just works.' },
+    { ico: 'chart', t: 'Founders reply at multiples', s: 'Founders value candidates who show genuine interest. Personalized outreach leads to more replies and interviews.' },
   ];
   return (
     <section className="section" id="why">
