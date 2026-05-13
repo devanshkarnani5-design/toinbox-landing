@@ -16,7 +16,7 @@ const STEP_MS = [3000, 2000, 2800, 3200, 2000, 3200, 3200];
 const HIW_JOBS = [
   { logo: 'N', bg: '#1e3a5f', title: 'Founding Product Engineer', co: 'Northwind', match: 94, email: 'm.v@northwind.co' },
   { logo: 'L', bg: '#3730a3', title: 'Head of Growth', co: 'Lumen AI', match: 87, email: 'theo@lumen.ai' },
-  { logo: 'G', bg: '#0f4c3a', title: 'Marketing Intern', co: 'GrowthBase', match: 82, email: 'priya@growthbase.io' },
+  { logo: 'R', bg: '#7c2d12', title: 'Backend Engineer', co: 'Reed Labs', match: 78, email: 'sana@reedlabs.io' },
 ];
 
 const FULL_LETTER = `Hi Marcus,

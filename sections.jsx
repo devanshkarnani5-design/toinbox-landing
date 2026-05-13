@@ -35,7 +35,7 @@ function DemoShowcase() {
   const DASH_APPS = [
     { logo: 'N', bg: '#1e3a5f',  co: 'Northwind',    role: 'Founding Product Engineer',  sent: 'Mon 6:02 AM',  opened: 'Mon 6:48 AM',  status: 'replied',   label: 'Replied ✓' },
     { logo: 'L', bg: '#3730a3',  co: 'Lumen AI',     role: 'Head of Growth',              sent: 'Mon 8:15 AM',  opened: 'Mon 9:00 AM',  status: 'interview', label: 'Interview Set' },
-    { logo: 'G', bg: '#0f4c3a',  co: 'GrowthBase',   role: 'Marketing Intern',            sent: 'Tue 9:30 AM',  opened: 'Tue 11:00 AM', status: 'fwd',       label: 'Fwd to HR' },
+    { logo: 'R', bg: '#7c2d12',  co: 'Reed Labs',    role: 'Backend Engineer',            sent: 'Tue 9:30 AM',  opened: 'Tue 11:00 AM', status: 'fwd',       label: 'Fwd to HR' },
     { logo: 'P', bg: '#5b34a1',  co: 'Plover',       role: 'Product Manager',             sent: 'Tue 11:00 AM', opened: 'Tue 2:45 PM',  status: 'replied',   label: 'Replied ✓' },
     { logo: 'A', bg: '#1b6448',  co: 'Atlas Health', role: 'Full Stack Engineer',         sent: 'Wed 7:00 AM',  opened: 'Wed 10:00 AM', status: 'opened',    label: 'Opened' },
     { logo: 'C', bg: '#374151',  co: 'Cloudpack',    role: 'Infrastructure Engineer',     sent: 'Wed 9:15 AM',  opened: '—',            status: 'sent',      label: 'Sent' },
@@ -45,7 +45,7 @@ function DemoShowcase() {
   const REPLIES = [
     { avatar: 'M', bg: 'linear-gradient(135deg,#f0a17a,#d8543e)', name: 'Marcus Webb', co: 'Northwind', when: 'Tue 3:20 PM', tag: 'INTERVIEW', tagColor: '#1a56db', tagBg: '#e8f0ff', body: 'Stood out from 240+ applications. The v3 reference tells me you actually read what we shipped. Forwarding to Priya — she\'ll set up a chat this week.' },
     { avatar: 'D', bg: 'linear-gradient(135deg,#5562eb,#3a1f9c)', name: 'Devon Reilly', co: 'Plover',    when: 'Tue 11:42 AM', tag: 'INTERVIEW SET', tagColor: '#057642', tagBg: '#e6f4ea', body: 'Most candidates send the same Notion template. Yours read like a real person. Can we schedule a quick chat — I\'m open Thu/Fri.' },
-    { avatar: 'P', bg: 'linear-gradient(135deg,#10b981,#0f4c3a)', name: 'Priya Menon',  co: 'GrowthBase', when: 'Tue 3:20 PM',  tag: 'FWD TO HR',  tagColor: '#b45309', tagBg: '#fff0e0', body: 'You referenced our newsletter series specifically — that stood out immediately. Forwarding to our content lead. Calendar\'s open Thursday.' },
+    { avatar: 'S', bg: 'linear-gradient(135deg,#3aa178,#1b6448)', name: 'Sana Iyer',   co: 'Reed Labs', when: 'Tue 2:08 PM',  tag: 'FWD TO HR',  tagColor: '#b45309', tagBg: '#fff0e0', body: 'The reference to our changelog gave it away — you actually read it. We don\'t see that often. Forwarding to our eng team. Calendar\'s open Thursday.' },
   ];
   const statusStyle = {
     replied:   { bg: '#e6f4ea', color: '#057642' },
@@ -228,15 +228,15 @@ const INBOX_THREADS = [
     ],
   },
   {
-    id: 2, avatar: 'P', bg: 'linear-gradient(135deg,#10b981,#0f4c3a)',
-    name: 'Priya Menon', role: 'Co-founder · GrowthBase',
-    when: 'Tue 3:20 PM', unread: false,
-    subj: 'Re: Marketing Intern · loved the specifics',
-    preview: 'You referenced our newsletter series specifically…',
+    id: 2, avatar: 'S', bg: 'linear-gradient(135deg,#3aa178,#1b6448)',
+    name: 'Sana Iyer', role: 'Co-founder · Reed Labs',
+    when: 'Tue 2:08 PM', unread: false,
+    subj: 'Re: Backend Engineer · saw the changelog',
+    preview: 'The reference to our changelog gave it away…',
     tag: 'FORWARDED TO HR', tagColor: '#b45309', tagBg: '#fff0e0',
     thread: [
-      { from: 'Arjun (via JobPilot)', time: 'Tue 9:30 AM', dir: 'sent', body: `Hi Priya,\n\nGrowthBase's approach to product-led content stood out to me — your LinkedIn teardowns and founder interview series are exactly the kind of marketing I believe in: genuine, specific, no fluff.\n\nI'm looking for a Marketing Intern role where I can contribute meaningfully from day one. I've run content calendars, managed social accounts, written long-form SEO articles, and analyzed campaign performance using Google Analytics and Mixpanel. I understand the difference between vanity metrics and metrics that move revenue.\n\nLast semester I helped a student startup grow their newsletter from 200 to 4,000 subscribers in 12 weeks through organic content and strategic outreach. I took full ownership of the content pipeline — from ideation to publication to distribution.\n\nI'm a fast learner, comfortable with ambiguity, and genuinely excited about what GrowthBase is building. I'd love to bring that same energy to your team.\n\nResume attached.\n\n— Arjun` },
-      { from: 'Priya Menon', time: 'Tue 3:20 PM', dir: 'recv', body: `You referenced our newsletter series specifically — that stood out immediately. We get a lot of generic intern applications. Yours felt researched.\n\nForwarding this to our content lead. Calendar's open Thursday afternoon.\n\n— Priya` },
+      { from: 'Arjun (via JobPilot)', time: 'Wed 9:30 AM', dir: 'sent', body: `Hi Sana,\n\nReed Labs' distributed systems work stands out — I've been following the Raft consensus posts on your eng blog closely. The way your team approached leader election under network partitions in the March post was particularly sharp.\n\nI've shipped Go services at 10,000+ RPS in production, handling distributed state across multiple regions. I understand the operational weight of that — not just the code, but the incidents, the runbooks, the culture that keeps systems reliable at scale.\n\nI've also worked on consensus-adjacent problems: building eventually-consistent caches and designing for graceful degradation under partial failures. These are exactly the kinds of problems I want to keep working on.\n\nReed Labs feels like the right place to do serious systems engineering. Resume attached — happy to do a take-home or a system design session.\n\n— Arjun` },
+      { from: 'Sana Iyer', time: 'Tue 2:08 PM', dir: 'recv', body: `The reference to our changelog gave it away — you actually read it. We don't see that often.\n\nForwarding this to our eng team. Calendar's open Thursday afternoon.\n\n— Sana` },
     ],
   },
   {

@@ -4,7 +4,7 @@ const { useState, useEffect, useRef } = React;
 const JOBS = [
   { id: 0, co: 'Northwind', title: 'Founding Product Engineer', logo: 'N', bg: '#1e3a5f', loc: 'San Francisco', match: 94, email: 'm.v@northwind.co', ai: 'High priority' },
   { id: 1, co: 'Lumen AI', title: 'Head of Growth', logo: 'L', bg: '#3730a3', loc: 'Delhi, India', match: 87, email: 'theo@lumen.ai', ai: 'Strong fit' },
-  { id: 2, co: 'GrowthBase', title: 'Marketing Intern', logo: 'G', bg: '#0f4c3a', loc: 'Remote', match: 82, email: 'priya@growthbase.io', ai: 'Good match' },
+  { id: 2, co: 'Reed Labs', title: 'Backend Engineer', logo: 'R', bg: '#7c2d12', loc: 'Remote', match: 78, email: 'sana@reedlabs.io', ai: 'Good match' },
 ];
 
 const JOB_META = [
@@ -42,17 +42,17 @@ Happy to share specific numbers.
 
 — Arjun`,
 
-  `Hi Priya,
+  `Hi Sana,
 
-GrowthBase's approach to product-led content stood out to me — your LinkedIn teardowns and founder interview series are exactly the kind of marketing I believe in: genuine, specific, no fluff.
+Reed Labs' distributed systems work stands out — I've been following the Raft consensus posts on your eng blog closely. The way your team approached leader election under network partitions in the March post was particularly sharp.
 
-I'm looking for a Marketing Intern role where I can contribute meaningfully from day one. I've run content calendars, managed social accounts, written long-form SEO articles, and analyzed campaign performance using Google Analytics and Mixpanel. I understand the difference between vanity metrics and metrics that move revenue.
+I've shipped Go services at 10,000+ RPS in production, handling distributed state across multiple regions. I understand the operational weight of that — not just the code, but the incidents, the runbooks, the culture that keeps systems reliable at scale.
 
-Last semester I helped a student startup grow their newsletter from 200 to 4,000 subscribers in 12 weeks through organic content and strategic outreach. I took full ownership of the content pipeline — from ideation to publication to distribution.
+I've also worked on consensus-adjacent problems: building eventually-consistent caches and designing for graceful degradation under partial failures. These are exactly the kinds of problems I want to keep working on.
 
-I'm a fast learner, comfortable with ambiguity, and genuinely excited about what GrowthBase is building. I'd love to bring that same energy to your team.
+Reed Labs feels like the right place to do serious systems engineering. I'm not looking for a role where backend is an afterthought — I want it to be the core.
 
-Resume attached.
+Resume attached — happy to do a take-home or a system design session.
 
 — Arjun`,
 ];
