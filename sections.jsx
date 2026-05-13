@@ -207,7 +207,7 @@ const INBOX_THREADS = [
     id: 0, avatar: 'M', bg: 'linear-gradient(135deg,#f0a17a,#d8543e)',
     name: 'Marcus Webb', role: 'Head of Engineering · Northwind',
     when: 'Tue 3:20 PM', unread: true,
-    subj: 'Re: Founding PE · from a 0→1 builder',
+    subj: 'Re: Head of Growth · loved what you\'ve built',
     preview: 'This stood out from the 240+ applications we got…',
     tag: 'INTERVIEW →', tagColor: '#1a56db', tagBg: '#e8f0ff',
     thread: [
