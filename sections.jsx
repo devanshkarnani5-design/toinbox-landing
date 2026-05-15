@@ -207,7 +207,7 @@ const INBOX_THREADS = [
     preview: 'This stood out from the 240+ applications we got…',
     tag: 'INTERVIEW →', tagColor: '#1a56db', tagBg: '#e8f0ff',
     thread: [
-      { from: 'Arjun (via JobPilot)', time: 'Mon 6:02 AM', dir: 'sent', body: `Hi Marcus,\n\nRead the March changelog — shipping v3 in six weeks with a team of four is the kind of pace I'm looking for.\n\nI've built full-stack products end to end: TypeScript, Go, Postgres. Grew one from 2k to 80k MAU in about 14 months, mostly by shipping fast and iterating on what the data showed.\n\nYour onboarding flow is unusually clean for a Series A. I've spent a lot of time on zero-friction onboarding — it's one of the highest-ROI things a small team can ship.\n\nI want a role where I own real surface area. This looks like it.\n\nResume attached. Happy to look at an open bug if that's more useful.\n\n— Arjun` },
+      { from: 'Arjun (via JobPilot)', time: 'Mon 6:02 AM', dir: 'sent', body: `Hi Marcus,\n\nSaw the March changelog — shipping v3 in six weeks with four people is the kind of pace I want.\n\nBuilt full-stack products end to end: TypeScript, Go, Postgres. Grew one from 2k to 80k MAU in 14 months. I own everything — API design, infra, onboarding, growth experiments.\n\nApplying for the Founding Product Engineer role. Looking forward to hearing from you.\n\nResume attached.\n\n— Arjun` },
       { from: 'Marcus Webb', time: 'Tue 3:20 PM', dir: 'recv', body: `Arjun —\n\nThis stood out from the 240+ applications we got this week. The v3 reference — that tells me you actually read what we shipped.\n\nForwarding to Priya (Head of Eng). She'll set up a chat this week.\n\n— Marcus` },
     ],
   },
@@ -219,7 +219,7 @@ const INBOX_THREADS = [
     preview: 'Most candidates send the same Notion template…',
     tag: 'INTERVIEW SET', tagColor: '#057642', tagBg: '#e6f4ea',
     thread: [
-      { from: 'Arjun (via JobPilot)', time: 'Tue 8:15 AM', dir: 'sent', body: `Hi Devon,\n\nPlover's retention loop — building habit triggers into the core product before layering on growth — is a smarter sequence than most early-stage companies get right.\n\nI've run growth for technical products from scratch. 0 to 80k MAU in 18 months, mostly content, SEO, and direct outreach. No paid spend. I owned the full stack: landing pages, onboarding, email, funnel analytics.\n\nWhat I do differently: I work with eng to instrument the product for growth signals early, before they're obvious. That's where the real leverage is at your stage.\n\nResume attached. Happy to share numbers.\n\n— Arjun` },
+      { from: 'Arjun (via JobPilot)', time: 'Tue 8:15 AM', dir: 'sent', body: `Hi Devon,\n\nTook a B2B product from 0 to 80k MAU in 18 months — content, SEO, direct outreach, no paid spend. Owned everything from landing pages to funnel analytics.\n\nI work with eng to instrument the product for growth signals early, before they're obvious. That's where the real leverage is.\n\nApplying for the Head of Growth role. Looking forward to hearing from you.\n\nResume attached.\n\n— Arjun` },
       { from: 'Devon Reilly', time: 'Tue 11:42 AM', dir: 'recv', body: `Most candidates send the same Notion template. Yours read like a real person.\n\nCan we schedule a quick chat — I'm open Thu/Fri.\n\n— Devon` },
     ],
   },
@@ -231,20 +231,20 @@ const INBOX_THREADS = [
     preview: 'The reference to our changelog gave it away…',
     tag: 'FORWARDED TO HR', tagColor: '#b45309', tagBg: '#fff0e0',
     thread: [
-      { from: 'Arjun (via JobPilot)', time: 'Wed 9:30 AM', dir: 'sent', body: `Hi Sana,\n\nYour March post on leader election — specifically the call to sacrifice availability in the split-brain case — was a really clear piece of thinking.\n\nI've shipped Go services in production at 10k+ RPS. Worked on distributed state, cache invalidation, graceful degradation under partial failures. I care about systems that stay running when things go wrong.\n\nI'm looking for backend work that's actually hard. Reed Labs seems like the right place for that.\n\nResume attached. Happy to do a system design call.\n\n— Arjun` },
+      { from: 'Arjun (via JobPilot)', time: 'Wed 9:30 AM', dir: 'sent', body: `Hi Sana,\n\nYour March post on leader election — the call on split-brain — was really clear thinking.\n\nShipped Go services at 10k+ RPS in production. Distributed state, cache invalidation, graceful degradation. I care about systems that stay running when things go wrong.\n\nApplying for the Backend Engineer role. Looking forward to hearing from you.\n\nResume attached.\n\n— Arjun` },
       { from: 'Sana Iyer', time: 'Tue 2:08 PM', dir: 'recv', body: `The reference to our changelog gave it away — you actually read it. We don't see that often.\n\nForwarding this to our eng team. Calendar's open Thursday afternoon.\n\n— Sana` },
     ],
   },
   {
-    id: 3, avatar: 'P', bg: 'linear-gradient(135deg,#5fb6c4,#1f6b78)',
-    name: 'Priya Shah', role: 'CTO · Atlas Health',
-    when: 'Thu 8:04 AM', unread: false,
-    subj: 'Re: Full Stack Engineer — strong profile',
-    preview: 'Strong signal. The way you framed the v3 migration…',
-    tag: 'WORKING SESSION', tagColor: '#6d28d9', tagBg: '#ede9fe',
+    id: 3, avatar: 'T', bg: 'linear-gradient(135deg,#f472b6,#be185d)',
+    name: 'Tanvi Mehta', role: 'Head of Marketing · Tempo',
+    when: 'Wed 4:15 PM', unread: false,
+    subj: 'Re: Marketing Lead — let\'s talk',
+    preview: 'Short and specific — actually refreshing…',
+    tag: 'CALL BOOKED', tagColor: '#057642', tagBg: '#e6f4ea',
     thread: [
-      { from: 'Arjun (via JobPilot)', time: 'Wed 11:00 AM', dir: 'sent', body: `Hi Priya,\n\nAtlas Health moving to patient-owned records instead of provider-owned — that's the right data model, and it's a much harder engineering problem. I've been following the work.\n\nI've built full-stack products where data integrity wasn't optional — real-time sync across mobile and web, HIPAA-compliant storage, API design where a wrong response could matter. That's a different standard than most product engineering.\n\nI want to work on software that affects real health outcomes. Most full-stack roles don't offer that.\n\nResume attached.\n\n— Arjun` },
-      { from: 'Priya Shah', time: 'Thu 8:04 AM', dir: 'recv', body: `You clearly read what we're building. We get a lot of generic applications — this wasn't one.\n\nLet's do a working session. I'll send a calendar invite today.\n\n— Priya` },
+      { from: 'Arjun (via JobPilot)', time: 'Wed 9:00 AM', dir: 'sent', body: `Hi Tanvi,\n\nYour case studies are way more honest than most startup marketing. That's rare — and it actually converts.\n\nI've run email campaigns, paid channels, and content. Grew a newsletter from 400 to 12k subscribers in 8 months. I focus on what moves revenue, not vanity metrics.\n\nApplying for the Marketing Lead role. Looking forward to hearing from you.\n\nResume attached.\n\n— Arjun` },
+      { from: 'Tanvi Mehta', time: 'Wed 4:15 PM', dir: 'recv', body: `Short and specific — actually refreshing.\n\nOur current marketing is all over the place. Would be good to talk. Free for a call Thursday?\n\n— Tanvi` },
     ],
   },
   {
@@ -255,7 +255,7 @@ const INBOX_THREADS = [
     preview: 'Most cold inbound goes straight to spam…',
     tag: 'FORWARDED TO HR', tagColor: '#b45309', tagBg: '#fff0e0',
     thread: [
-      { from: 'Arjun (via JobPilot)', time: 'Thu 10:00 AM', dir: 'sent', body: `Hi Theo,\n\nLumen AI's query interface gets something right that most AI products miss — it doesn't try to hide complexity, it just reduces friction around it. That takes real design conviction.\n\nI've shipped design systems across two B2B SaaS products, working directly with eng to keep components and tokens in sync. I care about the intersection of craft and speed — design that's both good and fast to build with.\n\nThe density problem in AI interfaces is genuinely hard. I'd like to work on it.\n\nPortfolio attached.\n\n— Arjun` },
+      { from: 'Arjun (via JobPilot)', time: 'Thu 10:00 AM', dir: 'sent', body: `Hi Theo,\n\nThe query interface doesn't hide complexity — it just reduces friction around it. That takes real design conviction.\n\nShipped design systems across two B2B products, working directly with eng to keep components and tokens in sync. Care about design that's both good and fast to build with.\n\nApplying for the Founding Designer role. Looking forward to hearing from you.\n\nPortfolio attached.\n\n— Arjun` },
       { from: 'Theo Marchetti', time: 'Thu 3:51 PM', dir: 'recv', body: `Most cold inbound goes straight to spam. Yours got through because it was specific and short.\n\nSending to our hiring lead now. Expect a note from her tomorrow.\n\n— Theo` },
     ],
   },
@@ -267,7 +267,7 @@ const INBOX_THREADS = [
     preview: 'Direct, no fluff, no AI smell. Resume on point…',
     tag: 'INTERVIEW SET', tagColor: '#057642', tagBg: '#e6f4ea',
     thread: [
-      { from: 'Arjun (via JobPilot)', time: 'Fri 7:30 AM', dir: 'sent', body: `Hi Priya,\n\nThe April teardown of your edge caching architecture was the clearest public explanation of cache invalidation tradeoffs I've read. The call to use Workers at the invalidation layer instead of a central coordinator — most engineers wouldn't have made that.\n\nI've shipped Go and Kubernetes infrastructure in production. I've dealt with partial failures, degraded modes, and the on-call culture that makes systems sustainable. I don't just write the code — I own what happens when it breaks.\n\nInfrastructure as a first-class product concern is what drew me here.\n\nResume attached.\n\n— Arjun` },
+      { from: 'Arjun (via JobPilot)', time: 'Fri 7:30 AM', dir: 'sent', body: `Hi Priya,\n\nThe April teardown on edge caching was the clearest explanation of those tradeoffs I've read.\n\nShipped Go + Kubernetes infrastructure in production. I own what happens when things break, not just when they don't.\n\nApplying for the Infrastructure Engineer role. Looking forward to hearing from you.\n\nResume attached.\n\n— Arjun` },
       { from: 'Priya Shah', time: 'Fri 10:50 AM', dir: 'recv', body: `Direct, no fluff, no AI smell. Resume on point.\n\nBooked you in with our CEO for next week — calendar invite incoming shortly.\n\n— Priya` },
     ],
   },

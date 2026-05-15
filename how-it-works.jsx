@@ -10,7 +10,7 @@ const HIW_STEPS = [
   { t: 'Founder replies', s: 'Founders reply to intent. You land in a real conversation — two steps ahead of every other applicant.' },
 ];
 
-const STEP_MS = [3500, 2800, 3200, 2000, 3200, 3200];
+const STEP_MS = [6500, 2800, 3200, 2000, 3200, 3200];
 
 const HIW_JOBS = [
   { logo: 'N', bg: '#1e3a5f', title: 'Founding Product Engineer', co: 'Northwind', match: 94, email: 'm.v@northwind.co' },
@@ -20,13 +20,11 @@ const HIW_JOBS = [
 
 const FULL_LETTER = `Hi Marcus,
 
-Read the March changelog — shipping v3 in six weeks with a team of four is the kind of pace I'm looking for.
+Saw the March changelog — shipping v3 in six weeks with four people is the kind of pace I want.
 
-I've built full-stack products end to end: TypeScript, Go, Postgres. Grew one from 2k to 80k MAU in about 14 months, mostly by shipping fast and iterating on what the data showed.
+Built full-stack products end to end: TypeScript, Go, Postgres. Grew one from 2k to 80k MAU in 14 months.
 
-Your onboarding flow is unusually clean for a Series A. I've spent a lot of time on zero-friction onboarding — it's one of the highest-ROI things a small team can ship.
-
-I want a role where I own real surface area. This looks like it.
+Applying for the Founding Product Engineer role. Looking forward to hearing from you.
 
 Resume attached.
 
@@ -143,33 +141,62 @@ function HiwDashboard({ replyVisible }) {
   );
 }
 
-// ── Animated cursor for step 0 ──
-function HiwCursor() {
-  const [pos, setPos] = useStateHIW({ x: 130, y: 28 });
+// ── Step 0: detect + enroll panel with animated cursor ──
+function HiwEnrollPanel() {
+  const [states, setStates] = useStateHIW(['idle', 'idle', 'idle']);
+  const [curPos, setCurPos] = useStateHIW({ x: 135, y: 28 });
   const [clicking, setClicking] = useStateHIW(false);
   useEffectHIW(() => {
     let timers = [];
     const after = (ms, fn) => { const t = setTimeout(fn, ms); timers.push(t); };
+    const setS = (i, s) => setStates(p => { const n = [...p]; n[i] = s; return n; });
     const loop = () => {
-      setPos({ x: 130, y: 28 }); setClicking(false);
-      after(800,  () => setPos({ x: 182, y: 54 }));
-      after(1300, () => setClicking(true));
-      after(1460, () => { setClicking(false); setPos({ x: 182, y: 96 }); });
-      after(1960, () => setClicking(true));
-      after(2110, () => { setClicking(false); setPos({ x: 182, y: 138 }); });
-      after(2610, () => setClicking(true));
-      after(2760, () => { setClicking(false); after(500, loop); });
+      setStates(['idle', 'idle', 'idle']); setCurPos({ x: 135, y: 28 }); setClicking(false);
+      after(700,  () => setCurPos({ x: 183, y: 56 }));
+      after(1200, () => { setClicking(true); setS(0, 'working'); });
+      after(1380, () => setClicking(false));
+      after(2050, () => setS(0, 'sent'));
+      after(2350, () => setCurPos({ x: 183, y: 100 }));
+      after(2850, () => { setClicking(true); setS(1, 'working'); });
+      after(3030, () => setClicking(false));
+      after(3700, () => setS(1, 'sent'));
+      after(4000, () => setCurPos({ x: 183, y: 144 }));
+      after(4500, () => { setClicking(true); setS(2, 'working'); });
+      after(4680, () => setClicking(false));
+      after(5350, () => setS(2, 'sent'));
+      after(6300, loop);
     };
     loop();
     return () => timers.forEach(clearTimeout);
   }, []);
   return (
-    <div style={{
-      position: 'absolute', left: pos.x, top: pos.y, pointerEvents: 'none', zIndex: 99,
-      transition: 'left 0.38s cubic-bezier(0.22,1,0.36,1), top 0.38s cubic-bezier(0.22,1,0.36,1)',
-      transform: clicking ? 'scale(0.82)' : 'scale(1)', filter: clicking ? 'brightness(0.6)' : 'none',
-    }}>
-      <Icon name="cursor" size={16} />
+    <div className="jp-sidebar-body" style={{ position: 'relative' }}>
+      <div className="jp-detect-status"><span className="ok-dot" /> 3 startup roles detected</div>
+      {HIW_JOBS.map((j, i) => {
+        const st = states[i];
+        return (
+          <div key={i} className={`jp-job-entry${st === 'sent' ? ' done' : ''}`}>
+            <div className="jp-job-entry-row">
+              <div className="jp-job-logo-sm" style={{ background: j.bg }}>{j.logo}</div>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{ fontSize: 11, fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', color: '#1a1a1a' }}>{j.title}</div>
+                <div style={{ fontSize: 9.5, color: st === 'sent' ? '#057642' : '#666', marginTop: 1 }}>{st === 'sent' ? '✓ Enrolled' : j.co}</div>
+              </div>
+              <button className={`jp-enroll-btn-new ${st}`} style={{ fontSize: 9.5, padding: '3px 8px', flexShrink: 0 }}>
+                {st === 'sent' ? '✓ Sent' : st === 'working' ? 'Working…' : 'Enroll'}
+              </button>
+            </div>
+          </div>
+        );
+      })}
+      <div style={{
+        position: 'absolute', left: curPos.x, top: curPos.y, pointerEvents: 'none', zIndex: 99,
+        transition: 'left 0.42s cubic-bezier(0.22,1,0.36,1), top 0.42s cubic-bezier(0.22,1,0.36,1), transform 0.1s ease',
+        transform: clicking ? 'scale(0.76)' : 'scale(1)',
+        filter: clicking ? 'drop-shadow(0 0 6px rgba(99,102,241,0.9))' : 'drop-shadow(0 1px 3px rgba(0,0,0,0.35))',
+      }}>
+        <Icon name="cursor" size={20} />
+      </div>
     </div>
   );
 }
@@ -177,25 +204,8 @@ function HiwCursor() {
 // ── 3-col LinkedIn browser body ──
 function HiwLinkedIn({ step, typed }) {
   const jpPanel = () => {
-    // Step 0: detect + enroll merged, with cursor
-    if (step === 0) return (
-      <div className="jp-sidebar-body" style={{ position: 'relative' }}>
-        <div className="jp-detect-status"><span className="ok-dot" /> 3 startup roles detected</div>
-        {HIW_JOBS.map((j, i) => (
-          <div key={i} className="jp-job-entry">
-            <div className="jp-job-entry-row">
-              <div className="jp-job-logo-sm" style={{ background: j.bg }}>{j.logo}</div>
-              <div style={{ flex: 1, minWidth: 0 }}>
-                <div style={{ fontSize: 11, fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', color: '#1a1a1a' }}>{j.title}</div>
-                <div style={{ fontSize: 9.5, color: '#666', marginTop: 1 }}>{j.co}</div>
-              </div>
-              <button className="jp-enroll-btn-new idle" style={{ fontSize: 9.5, padding: '3px 8px', flexShrink: 0 }}>Enroll</button>
-            </div>
-          </div>
-        ))}
-        <HiwCursor />
-      </div>
-    );
+    // Step 0: detect + enroll with animated cursor
+    if (step === 0) return <HiwEnrollPanel />;
     // Step 1: AI scanning (was step 2)
     if (step === 1) return (
       <div className="jp-sidebar-body">
@@ -361,9 +371,17 @@ function HowitworksBrowser({ step, typed, replyVisible }) {
 
 function HowItWorks() {
   const [active, setActive] = useStateHIW(0);
-  const [progress, setProgress] = useStateHIW(0);
   const [typed, setTyped] = useStateHIW('');
   const [visible, setVisible] = useStateHIW(true);
+
+  // Inject smooth CSS keyframe for progress bar — avoids rAF/setState jank
+  useEffectHIW(() => {
+    const s = document.createElement('style');
+    s.id = 'hiw-bar-kf';
+    s.textContent = '@keyframes hiwBarFill { from { width:0% } to { width:100% } }';
+    document.head.appendChild(s);
+    return () => { const el = document.getElementById('hiw-bar-kf'); if (el) el.remove(); };
+  }, []);
   const tickRef = useRefHIW(null);
   const typeRef = useRefHIW(null);
   const startedRef = useRefHIW(false);
@@ -387,7 +405,6 @@ function HowItWorks() {
     setTimeout(() => {
       setActive(idx);
       activeRef.current = idx;
-      setProgress(0);
       setTyped('');
       setVisible(true);
     }, 180);
@@ -396,15 +413,13 @@ function HowItWorks() {
   const start = () => {
     let idx = 0;
     activeRef.current = 0;
-    setActive(0); setProgress(0); setVisible(true);
+    setActive(0); setVisible(true);
     let startTime = Date.now();
     cancelAnimationFrame(tickRef.current);
 
     const tick = () => {
       const elapsed = Date.now() - startTime;
-      const p = Math.min(100, (elapsed / STEP_MS[idx]) * 100);
-      setProgress(p);
-      if (p >= 100) {
+      if (elapsed >= STEP_MS[idx]) {
         const next = (idx + 1) % HIW_STEPS.length;
         idx = next;
         startTime = Date.now();
@@ -444,9 +459,7 @@ function HowItWorks() {
 
     const tick = () => {
       const elapsed = Date.now() - startTime;
-      const p = Math.min(100, (elapsed / STEP_MS[idx]) * 100);
-      setProgress(p);
-      if (p >= 100) {
+      if (elapsed >= STEP_MS[idx]) {
         const next = (idx + 1) % HIW_STEPS.length;
         idx = next;
         startTime = Date.now();
@@ -484,7 +497,7 @@ function HowItWorks() {
                 </div>
                 {i === active && (
                   <div className="hiw-step-bar">
-                    <span style={{ width: progress + '%', transition: 'width 0.1s linear' }} />
+                    <span key={active} style={{ animation: `hiwBarFill ${STEP_MS[active]}ms linear forwards` }} />
                   </div>
                 )}
               </div>

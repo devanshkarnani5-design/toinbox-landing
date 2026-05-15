@@ -16,39 +16,35 @@ const JOB_META = [
 const LETTERS = [
   `Hi Marcus,
 
-Read the March changelog — shipping v3 in six weeks with a team of four is the kind of pace I'm looking for.
+Saw the March changelog — shipping v3 in six weeks with four people is the kind of pace I want.
 
-I've built full-stack products end to end: TypeScript, Go, Postgres. Grew one from 2k to 80k MAU in about 14 months, mostly by shipping fast and iterating on what the data showed.
+Built full-stack products end to end: TypeScript, Go, Postgres. Grew one from 2k to 80k MAU in 14 months. I own everything — API design, infra, onboarding, growth experiments.
 
-Your onboarding flow is unusually clean for a Series A. I've spent a lot of time on zero-friction onboarding — it's one of the highest-ROI things a small team can ship.
+Applying for the Founding Product Engineer role. Looking forward to hearing from you.
 
-I want a role where I own real surface area. This looks like it.
-
-Resume attached. Happy to look at an open bug if that's more useful.
+Resume attached.
 
 — Arjun`,
 
   `Hi Theo,
 
-The February post on contextual ranking was the most honest thing I've read about retrieval in months. That's the kind of company I want to help grow.
+Took a B2B product from 0 to 80k MAU in 18 months — content, SEO, direct outreach, no paid spend. Owned everything from landing pages to funnel analytics.
 
-I've run growth for technical products — 0 to 80k MAU in 18 months, mostly content, SEO, and direct outreach. No paid spend. I've owned the full stack: landing pages, onboarding, email sequences, funnel analytics.
+I work with eng to instrument the product for growth signals, not just marketing metrics. That's where real leverage comes from.
 
-What I do differently: I work closely with eng to instrument the product for growth signals, not just marketing metrics. That matters a lot at your stage.
+Applying for the Head of Growth role. Looking forward to hearing from you.
 
-Resume attached. Happy to share specific numbers.
+Resume attached.
 
 — Arjun`,
 
   `Hi Sana,
 
-Your March post on leader election — specifically the call to sacrifice availability in the split-brain case — was a really clear piece of thinking.
+Shipped Go services at 10k+ RPS in production. Distributed state, cache invalidation, graceful degradation. I care about systems that stay running when things go wrong.
 
-I've shipped Go services in production at 10k+ RPS. Worked on distributed state, cache invalidation, graceful degradation under partial failures. I care about systems that stay running when things go wrong.
+Applying for the Backend Engineer role. Looking forward to hearing from you.
 
-I'm looking for backend work that's actually hard. Reed Labs seems like the right place for that.
-
-Resume attached. Happy to do a system design call.
+Resume attached.
 
 — Arjun`,
 ];
