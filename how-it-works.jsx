@@ -142,56 +142,110 @@ function HiwDashboard({ replyVisible }) {
 }
 
 // ── Step 0: detect + enroll panel with animated cursor ──
+// Cursor is rendered OUTSIDE jp-sidebar-body (overflow:hidden) to avoid clipping.
 function HiwEnrollPanel() {
   const [states, setStates] = useStateHIW(['idle', 'idle', 'idle']);
-  const [curPos, setCurPos] = useStateHIW({ x: 135, y: 28 });
+  const [curX, setCurX] = useStateHIW(135);
+  const [curY, setCurY] = useStateHIW(28);
   const [clicking, setClicking] = useStateHIW(false);
   useEffectHIW(() => {
     let timers = [];
     const after = (ms, fn) => { const t = setTimeout(fn, ms); timers.push(t); };
     const setS = (i, s) => setStates(p => { const n = [...p]; n[i] = s; return n; });
     const loop = () => {
-      setStates(['idle', 'idle', 'idle']); setCurPos({ x: 135, y: 28 }); setClicking(false);
-      after(700,  () => setCurPos({ x: 183, y: 56 }));
+      setStates(['idle', 'idle', 'idle']); setCurX(135); setCurY(28); setClicking(false);
+      // Job 0 — y accounts for jp-sidebar-body padding(10) + status(~24) + gap(8) + entry-pad(9) + half-row(12) ≈ 63
+      after(700,  () => { setCurX(178); setCurY(63); });
       after(1200, () => { setClicking(true); setS(0, 'working'); });
       after(1380, () => setClicking(false));
-      after(2050, () => setS(0, 'sent'));
-      after(2350, () => setCurPos({ x: 183, y: 100 }));
+      after(2050, () => setS(0, 'enrolled'));
+      // Job 1 — 63 + entry-height(~42) + gap(8) ≈ 113
+      after(2350, () => { setCurX(178); setCurY(113); });
       after(2850, () => { setClicking(true); setS(1, 'working'); });
       after(3030, () => setClicking(false));
-      after(3700, () => setS(1, 'sent'));
-      after(4000, () => setCurPos({ x: 183, y: 144 }));
+      after(3700, () => setS(1, 'enrolled'));
+      // Job 2 — 113 + 50 ≈ 163
+      after(4000, () => { setCurX(178); setCurY(163); });
       after(4500, () => { setClicking(true); setS(2, 'working'); });
       after(4680, () => setClicking(false));
-      after(5350, () => setS(2, 'sent'));
+      after(5350, () => setS(2, 'enrolled'));
       after(6300, loop);
     };
     loop();
     return () => timers.forEach(clearTimeout);
   }, []);
   return (
-    <div className="jp-sidebar-body" style={{ position: 'relative' }}>
-      <div className="jp-detect-status"><span className="ok-dot" /> 3 startup roles detected</div>
-      {HIW_JOBS.map((j, i) => {
-        const st = states[i];
-        return (
-          <div key={i} className={`jp-job-entry${st === 'sent' ? ' done' : ''}`}>
-            <div className="jp-job-entry-row">
-              <div className="jp-job-logo-sm" style={{ background: j.bg }}>{j.logo}</div>
-              <div style={{ flex: 1, minWidth: 0 }}>
-                <div style={{ fontSize: 11, fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', color: '#1a1a1a' }}>{j.title}</div>
-                <div style={{ fontSize: 9.5, color: st === 'sent' ? '#057642' : '#666', marginTop: 1 }}>{st === 'sent' ? '✓ Enrolled' : j.co}</div>
+    // Wrapper has position:relative + overflow:visible so cursor is never clipped
+    <div style={{ position: 'relative', overflow: 'visible', flex: 1, display: 'flex', flexDirection: 'column' }}>
+      <div className="jp-sidebar-body">
+        <div className="jp-detect-status"><span className="ok-dot" /> 3 startup roles detected</div>
+        {HIW_JOBS.map((j, i) => {
+          const st = states[i];
+          return (
+            <div key={i} className={`jp-job-entry${st === 'enrolled' ? ' done' : ''}`}>
+              <div className="jp-job-entry-row">
+                <div className="jp-job-logo-sm" style={{ background: j.bg }}>{j.logo}</div>
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div style={{ fontSize: 11, fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', color: '#1a1a1a' }}>{j.title}</div>
+                  <div style={{ fontSize: 9.5, color: st === 'enrolled' ? '#057642' : '#666', marginTop: 1 }}>{st === 'enrolled' ? '✓ Enrolled' : j.co}</div>
+                </div>
+                <button className={`jp-enroll-btn-new ${st === 'enrolled' ? 'sent' : st}`} style={{ fontSize: 9.5, padding: '3px 8px', flexShrink: 0 }}>
+                  {st === 'enrolled' ? '✓ Enrolled' : st === 'working' ? 'Working…' : 'Enroll'}
+                </button>
               </div>
-              <button className={`jp-enroll-btn-new ${st}`} style={{ fontSize: 9.5, padding: '3px 8px', flexShrink: 0 }}>
-                {st === 'sent' ? '✓ Sent' : st === 'working' ? 'Working…' : 'Enroll'}
-              </button>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
+      {/* Cursor lives here — outside overflow:hidden jp-sidebar-body */}
       <div style={{
-        position: 'absolute', left: curPos.x, top: curPos.y, pointerEvents: 'none', zIndex: 99,
+        position: 'absolute', left: curX, top: curY, pointerEvents: 'none', zIndex: 99,
         transition: 'left 0.42s cubic-bezier(0.22,1,0.36,1), top 0.42s cubic-bezier(0.22,1,0.36,1), transform 0.1s ease',
+        transform: clicking ? 'scale(0.76)' : 'scale(1)',
+        filter: clicking ? 'drop-shadow(0 0 6px rgba(99,102,241,0.9))' : 'drop-shadow(0 1px 3px rgba(0,0,0,0.35))',
+      }}>
+        <Icon name="cursor" size={20} />
+      </div>
+    </div>
+  );
+}
+
+// ── Step 3 sent panel: cursor clicks "View Dashboard" button ──
+function HiwSentPanel() {
+  const [clicking, setClicking] = useStateHIW(false);
+  useEffectHIW(() => {
+    let timers = [];
+    const after = (ms, fn) => { const t = setTimeout(fn, ms); timers.push(t); };
+    const loop = () => {
+      setClicking(false);
+      after(900,  () => setClicking(true));
+      after(1070, () => setClicking(false));
+      after(2800, loop);
+    };
+    loop();
+    return () => timers.forEach(clearTimeout);
+  }, []);
+  return (
+    <div style={{ position: 'relative', overflow: 'visible', flex: 1, display: 'flex', flexDirection: 'column' }}>
+      <div className="jp-sidebar-body">
+        <div className="jp-detect-status"><span className="ok-dot" /> Sent successfully</div>
+        <div style={{ padding: '16px 12px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10, textAlign: 'center' }}>
+          <div style={{ width: 44, height: 44, borderRadius: '50%', background: '#e6f4ea', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20 }}>✓</div>
+          <div>
+            <div style={{ fontSize: 12, fontWeight: 600, color: '#1a1a1a' }}>Sent to m.v@northwind.co</div>
+            <div style={{ fontSize: 10.5, color: '#666', marginTop: 3 }}>Resume attached · delivery confirmed</div>
+          </div>
+        </div>
+        <div style={{ padding: '0 10px 10px' }}>
+          <div style={{ width: '100%', padding: '10px 0', borderRadius: 8, background: 'var(--ink)', color: 'white', fontWeight: 600, fontSize: 12, border: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7, animation: 'pulseGlow 2s ease infinite' }}>
+            📊 View Dashboard →
+          </div>
+        </div>
+      </div>
+      {/* Cursor on the View Dashboard button — estimated y≈172 (status+gap+success-block+button-center) */}
+      <div style={{
+        position: 'absolute', left: 90, top: 172, pointerEvents: 'none', zIndex: 99,
+        transition: 'transform 0.1s ease',
         transform: clicking ? 'scale(0.76)' : 'scale(1)',
         filter: clicking ? 'drop-shadow(0 0 6px rgba(99,102,241,0.9))' : 'drop-shadow(0 1px 3px rgba(0,0,0,0.35))',
       }}>
@@ -237,24 +291,8 @@ function HiwLinkedIn({ step, typed }) {
         </div>
       </div>
     );
-    // Step 3: sent (was step 4)
-    if (step === 3) return (
-      <div className="jp-sidebar-body">
-        <div className="jp-detect-status"><span className="ok-dot" /> Sent successfully</div>
-        <div style={{ padding: '16px 12px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10, textAlign: 'center' }}>
-          <div style={{ width: 44, height: 44, borderRadius: '50%', background: '#e6f4ea', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20 }}>✓</div>
-          <div>
-            <div style={{ fontSize: 12, fontWeight: 600, color: '#1a1a1a' }}>Sent to m.v@northwind.co</div>
-            <div style={{ fontSize: 10.5, color: '#666', marginTop: 3 }}>Resume attached · delivery confirmed</div>
-          </div>
-        </div>
-        <div style={{ padding: '0 10px 10px' }}>
-          <div style={{ width: '100%', padding: '10px 0', borderRadius: 8, background: 'var(--ink)', color: 'white', fontWeight: 600, fontSize: 12, border: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7, animation: 'pulseGlow 2s ease infinite' }}>
-            📊 View Dashboard →
-          </div>
-        </div>
-      </div>
-    );
+    // Step 3: sent — uses HiwSentPanel which includes animated cursor
+    if (step === 3) return <HiwSentPanel />;
     return null;
   };
 
