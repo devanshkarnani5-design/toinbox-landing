@@ -125,14 +125,12 @@ function DemoShowcase() {
 
               <div style={{ flex: 1, padding: '20px 24px', display: 'flex', flexDirection: 'column', gap: 20, overflowY: 'hidden' }}>
                 {/* Stats row */}
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: 12 }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12 }}>
                   {[
-                    { k: 'Enrolled',     v: 18, delta: '+8 this week',      color: 'var(--ink-2)' },
-                    { k: 'Sent',         v: 14, delta: '78% send rate',      color: 'var(--ink-2)' },
-                    { k: 'Opened',       v: 11, delta: '79% open rate',      color: 'var(--accent)' },
-                    { k: 'Replied',      v: 6,  delta: '43% reply rate',     color: '#057642' },
-                    { k: 'Interviews',   v: 4,  delta: '2 this week',        color: '#1a56db' },
-                    { k: 'Queue Skipped',v: 14, delta: 'vs Easy Apply',      color: '#b45309' },
+                    { k: 'Enrolled',   v: 18, delta: '+8 this week',  color: 'var(--ink-2)' },
+                    { k: 'Sent',       v: 14, delta: '78% send rate', color: 'var(--ink-2)' },
+                    { k: 'Replied',    v: 6,  delta: '43% reply rate',color: '#057642' },
+                    { k: 'Interviews', v: 4,  delta: '2 this week',   color: '#1a56db' },
                   ].map(({ k, v, delta, color }) => (
                     <div key={k} style={{ padding: '14px 16px', background: 'var(--bg-elev)', borderRadius: 12, border: '1px solid var(--line)', boxShadow: 'var(--shadow-1)' }}>
                       <div style={{ fontSize: 28, fontWeight: 700, letterSpacing: '-0.04em', color, lineHeight: 1 }}>{v}</div>
@@ -149,22 +147,20 @@ function DemoShowcase() {
                       <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--ink)', letterSpacing: '-0.01em' }}>Applications</div>
                       <div style={{ fontSize: 11, color: 'var(--ink-4)', fontFamily: 'var(--font-mono)' }}>8 total</div>
                     </div>
-                    <div style={{ display: 'grid', gridTemplateColumns: '28px 1fr 100px 80px 90px', gap: 8, padding: '8px 18px', borderBottom: '1px solid var(--line)', fontSize: 10, color: 'var(--ink-4)', textTransform: 'uppercase', letterSpacing: '0.06em', fontFamily: 'var(--font-mono)' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: '28px 1fr 100px 90px', gap: 8, padding: '8px 18px', borderBottom: '1px solid var(--line)', fontSize: 10, color: 'var(--ink-4)', textTransform: 'uppercase', letterSpacing: '0.06em', fontFamily: 'var(--font-mono)' }}>
                       <div />
                       <div>Company / Role</div>
                       <div>Sent</div>
-                      <div>Opened</div>
                       <div style={{ textAlign: 'right' }}>Status</div>
                     </div>
                     {DASH_APPS.map((a, i) => (
-                      <div key={i} style={{ display: 'grid', gridTemplateColumns: '28px 1fr 100px 80px 90px', gap: 8, padding: '9px 18px', borderBottom: i < DASH_APPS.length - 1 ? '1px solid var(--line)' : 'none', alignItems: 'center', background: i === 0 ? 'color-mix(in oklab, oklch(0.62 0.15 152) 6%, transparent)' : 'transparent' }}>
+                      <div key={i} style={{ display: 'grid', gridTemplateColumns: '28px 1fr 100px 90px', gap: 8, padding: '9px 18px', borderBottom: i < DASH_APPS.length - 1 ? '1px solid var(--line)' : 'none', alignItems: 'center', background: i === 0 ? 'color-mix(in oklab, oklch(0.62 0.15 152) 6%, transparent)' : 'transparent' }}>
                         <div style={{ width: 22, height: 22, borderRadius: 5, background: a.bg, color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 9.5, fontWeight: 700 }}>{a.logo}</div>
                         <div>
                           <div style={{ fontSize: 12.5, fontWeight: 600, color: 'var(--ink)' }}>{a.co}</div>
                           <div style={{ fontSize: 11, color: 'var(--ink-3)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{a.role}</div>
                         </div>
                         <div style={{ fontSize: 11, color: 'var(--ink-4)', fontFamily: 'var(--font-mono)' }}>{a.sent.split(' ')[0]}</div>
-                        <div style={{ fontSize: 11, color: a.opened !== '—' ? '#057642' : 'var(--ink-4)', fontFamily: 'var(--font-mono)' }}>{a.opened !== '—' ? '✓' : '—'}</div>
                         <div style={{ textAlign: 'right' }}>
                           <span style={{ fontSize: 10.5, padding: '3px 8px', borderRadius: 5, fontWeight: 600, fontFamily: 'var(--font-mono)', ...(statusStyle[a.status]) }}>{a.label}</span>
                         </div>

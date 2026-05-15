@@ -2,16 +2,15 @@
 const { useState: useStateHIW, useEffect: useEffectHIW, useRef: useRefHIW } = React;
 
 const HIW_STEPS = [
-  { t: 'LinkedIn opens, JobPilot detects roles', s: 'Extension loads instantly on any LinkedIn jobs page — scans every card, identifies startup roles, and surfaces founder emails in the sidebar.' },
-  { t: 'Enroll with one click', s: 'Hit Enroll inside the panel. Your cursor never leaves the extension — no form, no portal, no separate tab.' },
-  { t: 'AI scans resume + JD', s: 'Cross-references your experience and the job description in seconds. Builds a 94% match profile automatically.' },
-  { t: 'Cover letter generated', s: 'Specific, human-sounding, no template smell. Cites the role, the changelog, the founder by name. 150–180 words.' },
+  { t: 'Open LinkedIn, detect roles and enroll', s: 'JobPilot loads instantly on any LinkedIn jobs page — scans every card, finds founder emails, and enrolls each role with a single click. Cursor never leaves the panel.' },
+  { t: 'AI scans resume + JD', s: 'Cross-references your experience and the job description in seconds. Identifies the right signals from your resume automatically.' },
+  { t: 'Cover letter generated', s: 'Specific, human-sounding, no template smell. Cites the role, the changelog, the founder by name. Around 160 words.' },
   { t: 'Sent to founder inbox', s: 'Email + resume lands in the founder\'s personal inbox. Skips ATS entirely. No Easy Apply queue.' },
-  { t: 'Dashboard tracks it all', s: 'Click "View Dashboard" in the panel — every metric live: enrolled, sent, opened, replied, interviews scheduled.' },
+  { t: 'Dashboard tracks it all', s: 'Every metric live: enrolled, sent, replied, interviews scheduled.' },
   { t: 'Founder replies', s: 'Founders reply to intent. You land in a real conversation — two steps ahead of every other applicant.' },
 ];
 
-const STEP_MS = [3000, 2000, 2800, 3200, 2000, 3200, 3200];
+const STEP_MS = [3500, 2800, 3200, 2000, 3200, 3200];
 
 const HIW_JOBS = [
   { logo: 'N', bg: '#1e3a5f', title: 'Founding Product Engineer', co: 'Northwind', match: 94, email: 'm.v@northwind.co' },
@@ -85,14 +84,12 @@ function HiwDashboard({ replyVisible }) {
         </div>
 
         {/* Stats row */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: 6 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 6 }}>
           {[
-            { k: 'Enrolled', v: 18, color: '#333' },
-            { k: 'Sent', v: 14, color: '#333' },
-            { k: 'Opened', v: 11, color: 'var(--accent)' },
-            { k: 'Replied', v: replyVisible ? 6 : 5, color: '#057642' },
-            { k: 'Interviews', v: 4, color: '#1a56db' },
-            { k: 'Queue skip', v: 14, color: '#b45309' },
+            { k: 'Enrolled',   v: 18,                    color: '#333' },
+            { k: 'Sent',       v: 14,                    color: '#333' },
+            { k: 'Replied',    v: replyVisible ? 6 : 5,  color: '#057642' },
+            { k: 'Interviews', v: 4,                     color: '#1a56db' },
           ].map(({ k, v, color }) => (
             <div key={k} style={{ padding: '8px 8px', background: 'white', borderRadius: 8, border: '1px solid #e8e7e4', textAlign: 'center' }}>
               <div style={{ fontSize: 18, fontWeight: 700, letterSpacing: '-0.03em', color, lineHeight: 1 }}>{v}</div>
@@ -146,11 +143,43 @@ function HiwDashboard({ replyVisible }) {
   );
 }
 
+// ── Animated cursor for step 0 ──
+function HiwCursor() {
+  const [pos, setPos] = useStateHIW({ x: 130, y: 28 });
+  const [clicking, setClicking] = useStateHIW(false);
+  useEffectHIW(() => {
+    let timers = [];
+    const after = (ms, fn) => { const t = setTimeout(fn, ms); timers.push(t); };
+    const loop = () => {
+      setPos({ x: 130, y: 28 }); setClicking(false);
+      after(800,  () => setPos({ x: 182, y: 54 }));
+      after(1300, () => setClicking(true));
+      after(1460, () => { setClicking(false); setPos({ x: 182, y: 96 }); });
+      after(1960, () => setClicking(true));
+      after(2110, () => { setClicking(false); setPos({ x: 182, y: 138 }); });
+      after(2610, () => setClicking(true));
+      after(2760, () => { setClicking(false); after(500, loop); });
+    };
+    loop();
+    return () => timers.forEach(clearTimeout);
+  }, []);
+  return (
+    <div style={{
+      position: 'absolute', left: pos.x, top: pos.y, pointerEvents: 'none', zIndex: 99,
+      transition: 'left 0.38s cubic-bezier(0.22,1,0.36,1), top 0.38s cubic-bezier(0.22,1,0.36,1)',
+      transform: clicking ? 'scale(0.82)' : 'scale(1)', filter: clicking ? 'brightness(0.6)' : 'none',
+    }}>
+      <Icon name="cursor" size={16} />
+    </div>
+  );
+}
+
 // ── 3-col LinkedIn browser body ──
 function HiwLinkedIn({ step, typed }) {
   const jpPanel = () => {
+    // Step 0: detect + enroll merged, with cursor
     if (step === 0) return (
-      <div className="jp-sidebar-body">
+      <div className="jp-sidebar-body" style={{ position: 'relative' }}>
         <div className="jp-detect-status"><span className="ok-dot" /> 3 startup roles detected</div>
         {HIW_JOBS.map((j, i) => (
           <div key={i} className="jp-job-entry">
@@ -158,35 +187,17 @@ function HiwLinkedIn({ step, typed }) {
               <div className="jp-job-logo-sm" style={{ background: j.bg }}>{j.logo}</div>
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{ fontSize: 11, fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', color: '#1a1a1a' }}>{j.title}</div>
-                <div style={{ fontSize: 9.5, color: '#057642', marginTop: 2 }}>{j.email}</div>
+                <div style={{ fontSize: 9.5, color: '#666', marginTop: 1 }}>{j.co}</div>
               </div>
-              <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--accent)', flexShrink: 0 }}>{j.match}%</div>
+              <button className="jp-enroll-btn-new idle" style={{ fontSize: 9.5, padding: '3px 8px', flexShrink: 0 }}>Enroll</button>
             </div>
           </div>
         ))}
+        <HiwCursor />
       </div>
     );
+    // Step 1: AI scanning (was step 2)
     if (step === 1) return (
-      <div className="jp-sidebar-body">
-        <div className="jp-detect-status"><span className="ok-dot" /> 3 startup roles detected</div>
-        {HIW_JOBS.map((j, i) => (
-          <div key={i} className={`jp-job-entry${i === 0 ? ' active' : ''}`}>
-            <div className="jp-job-entry-row">
-              <div className="jp-job-logo-sm" style={{ background: j.bg }}>{j.logo}</div>
-              <div style={{ flex: 1, minWidth: 0 }}>
-                <div style={{ fontSize: 11, fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', color: '#1a1a1a' }}>{j.title}</div>
-                <div style={{ fontSize: 9.5, color: '#666' }}>{j.co}</div>
-              </div>
-              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 3 }}>
-                <div style={{ fontSize: 12, fontWeight: 700, color: i === 0 ? 'var(--accent)' : '#bbb' }}>{j.match}%</div>
-                <button className="jp-enroll-btn-new idle" style={{ fontSize: 9.5, padding: '3px 8px', opacity: i === 0 ? 1 : 0.45 }}>{i === 0 ? '⚡ Enroll' : 'Enroll'}</button>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    );
-    if (step === 2) return (
       <div className="jp-sidebar-body">
         <div className="jp-detect-status"><span className="dotpulse" /> AI analyzing…</div>
         <div style={{ padding: '8px 8px 0', display: 'flex', flexDirection: 'column', gap: 6 }}>
@@ -194,7 +205,6 @@ function HiwLinkedIn({ step, typed }) {
             { k: 'Resume parsed', v: '14 signals' },
             { k: 'JD analyzed', v: '9 keywords' },
             { k: 'Founder found', v: 'm.v@northwind.co' },
-            { k: 'Match score', v: '94%' },
           ].map(({ k, v }, i) => (
             <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 7, padding: '7px 9px', background: '#f0faf5', border: '1px solid #b8e6cc', borderRadius: 7 }}>
               <span style={{ fontSize: 10, color: '#057642' }}>✓</span>
@@ -202,17 +212,11 @@ function HiwLinkedIn({ step, typed }) {
               <span style={{ fontSize: 9.5, color: '#057642', fontFamily: 'var(--font-mono)', fontWeight: 600 }}>{v}</span>
             </div>
           ))}
-          <div style={{ padding: '8px 10px', background: 'var(--accent-soft)', borderRadius: 7, border: '1px solid color-mix(in oklab, var(--accent) 30%, transparent)', display: 'flex', alignItems: 'center', gap: 8, marginTop: 2 }}>
-            <span style={{ fontSize: 22, fontWeight: 700, letterSpacing: '-0.04em', color: 'var(--accent)' }}>94%</span>
-            <div>
-              <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--accent-ink)' }}>Match score</div>
-              <div style={{ fontSize: 9.5, color: 'var(--accent-ink)', opacity: 0.7 }}>Top 6% of applicants</div>
-            </div>
-          </div>
         </div>
       </div>
     );
-    if (step === 3) return (
+    // Step 2: cover letter generation (was step 3)
+    if (step === 2) return (
       <div className="jp-sidebar-body">
         <div className="jp-detect-status"><span className="dotpulse" /> Generating…</div>
         <div style={{ flex: 1, padding: '6px 8px 0', display: 'flex', flexDirection: 'column', gap: 5 }}>
@@ -223,7 +227,8 @@ function HiwLinkedIn({ step, typed }) {
         </div>
       </div>
     );
-    if (step === 4) return (
+    // Step 3: sent (was step 4)
+    if (step === 3) return (
       <div className="jp-sidebar-body">
         <div className="jp-detect-status"><span className="ok-dot" /> Sent successfully</div>
         <div style={{ padding: '16px 12px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10, textAlign: 'center' }}>
@@ -256,7 +261,7 @@ function HiwLinkedIn({ step, typed }) {
               <div style={{ fontSize: 8.5, color: '#666', marginTop: 2 }}>{j.co} · {i === 0 ? '2d · 784' : i === 1 ? '1w · 142' : '5d · 61'}</div>
               <div style={{ display: 'flex', gap: 3, marginTop: 3, flexWrap: 'wrap' }}>
                 <span style={{ fontSize: 8, padding: '1px 4px', borderRadius: 999, background: '#e8f3ff', color: '#0a66c2', border: '1px solid #b6d4f7' }}>Easy Apply</span>
-                {step >= 4 && i === 0 && <span style={{ fontSize: 8, padding: '1px 4px', borderRadius: 999, background: '#e6f4ea', color: '#057642', border: '1px solid #b8e6cc' }}>✓ Applied</span>}
+                {step >= 3 && i === 0 && <span style={{ fontSize: 8, padding: '1px 4px', borderRadius: 999, background: '#e6f4ea', color: '#057642', border: '1px solid #b8e6cc' }}>✓ Applied</span>}
               </div>
             </div>
           </div>
@@ -317,7 +322,7 @@ function HiwLinkedIn({ step, typed }) {
 }
 
 function HowitworksBrowser({ step, typed, replyVisible }) {
-  const isDash = step >= 5;
+  const isDash = step >= 4;
   return (
     <div className="hiw-browser">
       {/* Chrome bar */}
@@ -347,7 +352,7 @@ function HowitworksBrowser({ step, typed, replyVisible }) {
       </div>
 
       {isDash
-        ? <HiwDashboard replyVisible={step === 6} />
+        ? <HiwDashboard replyVisible={step === 5} />
         : <HiwLinkedIn step={step} typed={typed} />
       }
     </div>
@@ -410,9 +415,9 @@ function HowItWorks() {
     tickRef.current = requestAnimationFrame(tick);
   };
 
-  // Typing effect for step 3 (cover letter)
+  // Typing effect for step 2 (cover letter)
   useEffectHIW(() => {
-    if (active === 3) {
+    if (active === 2) {
       setTyped('');
       let i = 0;
       const type = () => {
@@ -479,7 +484,7 @@ function HowItWorks() {
                 </div>
                 {i === active && (
                   <div className="hiw-step-bar">
-                    <span style={{ width: progress + '%' }} />
+                    <span style={{ width: progress + '%', transition: 'width 0.1s linear' }} />
                   </div>
                 )}
               </div>
@@ -488,7 +493,7 @@ function HowItWorks() {
 
           {/* Continuous browser */}
           <div className="hiw-browser-col" style={{ opacity: visible ? 1 : 0, transition: 'opacity 0.18s ease' }}>
-            <HowitworksBrowser step={active} typed={typed} replyVisible={active === 6} />
+            <HowitworksBrowser step={active} typed={typed} replyVisible={active === 5} />
           </div>
         </div>
       </div>

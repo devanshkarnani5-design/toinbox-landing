@@ -87,7 +87,6 @@ function JPPanel({ detecting, jobStates, activeJobIdx, typed, showDash, dashStat
                     </div>
                   </div>
                   <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 5, flexShrink: 0 }}>
-                    <div style={{ fontSize: 14, fontWeight: 700, letterSpacing: '-0.03em', color: st === 'sent' ? '#057642' : 'var(--accent)' }}>{j.match}%</div>
                     <button
                       ref={el => enrollRefs.current[i] = el}
                       className={`jp-enroll-btn-new ${st}`}
