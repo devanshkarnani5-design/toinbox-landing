@@ -21,13 +21,15 @@ const HIW_JOBS = [
 
 const FULL_LETTER = `Hi Marcus,
 
-Saw Northwind's Founding PE role — your March changelog on shipping v3 in six weeks is exactly the pace I want to work at.
+Read the March changelog — shipping v3 in six weeks with a team of four is the kind of pace I'm looking for.
 
-I've spent two years doing this end-to-end: solo-shipped 3 products from zero, grew my last app from 2,000 to 80,000 monthly active users in 14 months. Full-stack across TypeScript, Go, and Postgres. I've handled everything from API design to deployment pipelines to growth experiments.
+I've built full-stack products end to end: TypeScript, Go, Postgres. Grew one from 2k to 80k MAU in about 14 months, mostly by shipping fast and iterating on what the data showed.
 
-What drew me specifically to Northwind is your obsession with craft — the UX detail in your onboarding stood out. I've built similar zero-friction flows and know how much they move retention.
+Your onboarding flow is unusually clean for a Series A. I've spent a lot of time on zero-friction onboarding — it's one of the highest-ROI things a small team can ship.
 
-Resume attached. Happy to pair on a real bug.
+I want a role where I own real surface area. This looks like it.
+
+Resume attached.
 
 — Arjun`;
 

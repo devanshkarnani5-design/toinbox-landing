@@ -16,43 +16,39 @@ const JOB_META = [
 const LETTERS = [
   `Hi Marcus,
 
-Saw Northwind's Founding PE role — your March changelog on shipping v3 in six weeks is exactly the pace I want to work at.
+Read the March changelog — shipping v3 in six weeks with a team of four is the kind of pace I'm looking for.
 
-I've spent two years doing this end-to-end: solo-shipped 3 products from zero, grew my last app from 2,000 to 80,000 monthly active users in 14 months. Full-stack across TypeScript, Go, and Postgres. I've handled everything from API design to deployment pipelines to growth experiments.
+I've built full-stack products end to end: TypeScript, Go, Postgres. Grew one from 2k to 80k MAU in about 14 months, mostly by shipping fast and iterating on what the data showed.
 
-What drew me specifically to Northwind is your obsession with craft in the product layer — the attention to UX detail in your onboarding flow stood out. I've built similar zero-friction onboarding and know how much it moves retention.
+Your onboarding flow is unusually clean for a Series A. I've spent a lot of time on zero-friction onboarding — it's one of the highest-ROI things a small team can ship.
 
-I'm not looking for a big-company role. I want to own real surface area and ship things that matter. Northwind feels like that.
+I want a role where I own real surface area. This looks like it.
 
-Resume attached. Happy to pair on a real bug.
+Resume attached. Happy to look at an open bug if that's more useful.
 
 — Arjun`,
 
   `Hi Theo,
 
-Lumen AI's zero-shot retrieval work caught my eye — especially the February deep-dive on contextual ranking. That's exactly the kind of infrastructure problem I want to be building around.
+The February post on contextual ranking was the most honest thing I've read about retrieval in months. That's the kind of company I want to help grow.
 
-I've led growth from both sides: product and distribution. Took one product from 0 to 80,000 MAU in 18 months — primarily through content, SEO, and founder-led outreach, not paid spend. I understand acquisition economics, retention loops, and what it takes to grow a technical product with a small team.
+I've run growth for technical products — 0 to 80k MAU in 18 months, mostly content, SEO, and direct outreach. No paid spend. I've owned the full stack: landing pages, onboarding, email sequences, funnel analytics.
 
-At my last role I owned the full growth stack: landing pages, onboarding, email sequences, A/B testing, and funnel analytics. I've also worked closely with engineering to instrument the product for growth insights.
+What I do differently: I work closely with eng to instrument the product for growth signals, not just marketing metrics. That matters a lot at your stage.
 
-The Head of Growth role at Lumen AI is a rare intersection of technical depth and distribution ambition. That's exactly where I operate best.
-
-Happy to share specific numbers.
+Resume attached. Happy to share specific numbers.
 
 — Arjun`,
 
   `Hi Sana,
 
-Reed Labs' distributed systems work stands out — I've been following the Raft consensus posts on your eng blog closely. The way your team approached leader election under network partitions in the March post was particularly sharp.
+Your March post on leader election — specifically the call to sacrifice availability in the split-brain case — was a really clear piece of thinking.
 
-I've shipped Go services at 10,000+ RPS in production, handling distributed state across multiple regions. I understand the operational weight of that — not just the code, but the incidents, the runbooks, the culture that keeps systems reliable at scale.
+I've shipped Go services in production at 10k+ RPS. Worked on distributed state, cache invalidation, graceful degradation under partial failures. I care about systems that stay running when things go wrong.
 
-I've also worked on consensus-adjacent problems: building eventually-consistent caches and designing for graceful degradation under partial failures. These are exactly the kinds of problems I want to keep working on.
+I'm looking for backend work that's actually hard. Reed Labs seems like the right place for that.
 
-Reed Labs feels like the right place to do serious systems engineering. I'm not looking for a role where backend is an afterthought — I want it to be the core.
-
-Resume attached — happy to do a take-home or a system design session.
+Resume attached. Happy to do a system design call.
 
 — Arjun`,
 ];
