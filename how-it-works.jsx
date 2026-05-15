@@ -10,7 +10,7 @@ const HIW_STEPS = [
   { t: 'Founder replies', s: 'Founders reply to intent. You land in a real conversation — two steps ahead of every other applicant.' },
 ];
 
-const STEP_MS = [6500, 2800, 3200, 2000, 3200, 3200];
+const STEP_MS = [3800, 2800, 3200, 2000, 3200, 3200];
 
 const HIW_JOBS = [
   { logo: 'N', bg: '#1e3a5f', title: 'Founding Product Engineer', co: 'Northwind', match: 94, email: 'm.v@northwind.co' },
@@ -18,17 +18,17 @@ const HIW_JOBS = [
   { logo: 'R', bg: '#7c2d12', title: 'Backend Engineer', co: 'Reed Labs', match: 78, email: 'sana@reedlabs.io' },
 ];
 
-const FULL_LETTER = `Hi Marcus,
+const FULL_LETTER = `Hey Marcus,
 
-Saw the March changelog — shipping v3 in six weeks with four people is the kind of pace I want.
+I'd like to apply for the Founding Product Engineer role at Northwind.
 
-Built full-stack products end to end: TypeScript, Go, Postgres. Grew one from 2k to 80k MAU in 14 months.
+I've built full-stack products end to end — TypeScript, Go, Postgres — and grown one from 2k to 80k MAU in 14 months. API design, zero-friction onboarding, and shipping fast are where I do my best work.
 
-Applying for the Founding Product Engineer role. Looking forward to hearing from you.
+Attaching my resume for your reference.
+Looking forward to hearing from you.
 
-Resume attached.
-
-— Arjun`;
+Best,
+Arjun`;
 
 // ── Dashboard full view ──
 function HiwDashboard({ replyVisible }) {
@@ -154,22 +154,13 @@ function HiwEnrollPanel() {
     const setS = (i, s) => setStates(p => { const n = [...p]; n[i] = s; return n; });
     const loop = () => {
       setStates(['idle', 'idle', 'idle']); setCurX(135); setCurY(28); setClicking(false);
-      // Job 0 — y accounts for jp-sidebar-body padding(10) + status(~24) + gap(8) + entry-pad(9) + half-row(12) ≈ 63
+      // Move to first job's Enroll button, click it
       after(700,  () => { setCurX(178); setCurY(63); });
       after(1200, () => { setClicking(true); setS(0, 'working'); });
       after(1380, () => setClicking(false));
-      after(2050, () => setS(0, 'enrolled'));
-      // Job 1 — 63 + entry-height(~42) + gap(8) ≈ 113
-      after(2350, () => { setCurX(178); setCurY(113); });
-      after(2850, () => { setClicking(true); setS(1, 'working'); });
-      after(3030, () => setClicking(false));
-      after(3700, () => setS(1, 'enrolled'));
-      // Job 2 — 113 + 50 ≈ 163
-      after(4000, () => { setCurX(178); setCurY(163); });
-      after(4500, () => { setClicking(true); setS(2, 'working'); });
-      after(4680, () => setClicking(false));
-      after(5350, () => setS(2, 'enrolled'));
-      after(6300, loop);
+      after(2150, () => setS(0, 'enrolled'));
+      // Brief pause, then loop — only job 0 is enrolled per cycle
+      after(3500, loop);
     };
     loop();
     return () => timers.forEach(clearTimeout);
@@ -242,14 +233,14 @@ function HiwSentPanel() {
           </div>
         </div>
       </div>
-      {/* Cursor on the View Dashboard button — estimated y≈172 (status+gap+success-block+button-center) */}
+      {/* Cursor on the View Dashboard button */}
       <div style={{
-        position: 'absolute', left: 90, top: 172, pointerEvents: 'none', zIndex: 99,
-        transition: 'transform 0.1s ease',
-        transform: clicking ? 'scale(0.76)' : 'scale(1)',
-        filter: clicking ? 'drop-shadow(0 0 6px rgba(99,102,241,0.9))' : 'drop-shadow(0 1px 3px rgba(0,0,0,0.35))',
+        position: 'absolute', left: 80, top: 155, pointerEvents: 'none', zIndex: 99,
+        transition: 'transform 0.12s ease',
+        transform: clicking ? 'scale(0.74)' : 'scale(1)',
+        filter: clicking ? 'drop-shadow(0 0 8px rgba(99,102,241,1))' : 'drop-shadow(0 1px 4px rgba(0,0,0,0.4))',
       }}>
-        <Icon name="cursor" size={20} />
+        <Icon name="cursor" size={22} />
       </div>
     </div>
   );

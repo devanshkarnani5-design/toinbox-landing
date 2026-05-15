@@ -14,39 +14,41 @@ const JOB_META = [
 ];
 
 const LETTERS = [
-  `Hi Marcus,
+  `Hey Marcus,
 
-Saw the March changelog — shipping v3 in six weeks with four people is the kind of pace I want.
+I'd like to apply for the Founding Product Engineer role at Northwind.
 
-Built full-stack products end to end: TypeScript, Go, Postgres. Grew one from 2k to 80k MAU in 14 months. I own everything — API design, infra, onboarding, growth experiments.
+I've built full-stack products end to end — TypeScript, Go, Postgres — and grown one from 2k to 80k MAU in 14 months. API design, zero-friction onboarding, and shipping fast are where I do my best work.
 
-Applying for the Founding Product Engineer role. Looking forward to hearing from you.
+Attaching my resume for your reference.
+Looking forward to hearing from you.
 
-Resume attached.
+Best,
+Arjun`,
 
-— Arjun`,
+  `Hey Theo,
 
-  `Hi Theo,
+I'd like to apply for the Head of Growth role at Lumen AI.
 
-Took a B2B product from 0 to 80k MAU in 18 months — content, SEO, direct outreach, no paid spend. Owned everything from landing pages to funnel analytics.
+Took a B2B product from 0 to 80k MAU in 18 months — content, SEO, direct outreach, no paid spend. I work with eng to instrument the product for growth signals early, not just marketing metrics.
 
-I work with eng to instrument the product for growth signals, not just marketing metrics. That's where real leverage comes from.
+Attaching my resume for your reference.
+Looking forward to hearing from you.
 
-Applying for the Head of Growth role. Looking forward to hearing from you.
+Best,
+Arjun`,
 
-Resume attached.
+  `Hey Sana,
 
-— Arjun`,
+I'd like to apply for the Backend Engineer role at Reed Labs.
 
-  `Hi Sana,
+I've shipped Go services at 10k+ RPS in production — distributed state, cache invalidation, graceful degradation. Systems that hold when things go wrong are what I care about most.
 
-Shipped Go services at 10k+ RPS in production. Distributed state, cache invalidation, graceful degradation. I care about systems that stay running when things go wrong.
+Attaching my resume for your reference.
+Looking forward to hearing from you.
 
-Applying for the Backend Engineer role. Looking forward to hearing from you.
-
-Resume attached.
-
-— Arjun`,
+Best,
+Arjun`,
 ];
 
 function JPPanel({ detecting, jobStates, activeJobIdx, typed, showDash, dashStats, dashRows, replyVisible, enrollRefs }) {

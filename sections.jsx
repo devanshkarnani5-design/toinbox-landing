@@ -207,7 +207,7 @@ const INBOX_THREADS = [
     preview: 'This stood out from the 240+ applications we got…',
     tag: 'INTERVIEW →', tagColor: '#1a56db', tagBg: '#e8f0ff',
     thread: [
-      { from: 'Arjun (via JobPilot)', time: 'Mon 6:02 AM', dir: 'sent', body: `Hi Marcus,\n\nSaw the March changelog — shipping v3 in six weeks with four people is the kind of pace I want.\n\nBuilt full-stack products end to end: TypeScript, Go, Postgres. Grew one from 2k to 80k MAU in 14 months. I own everything — API design, infra, onboarding, growth experiments.\n\nApplying for the Founding Product Engineer role. Looking forward to hearing from you.\n\nResume attached.\n\n— Arjun` },
+      { from: 'Arjun (via JobPilot)', time: 'Mon 6:02 AM', dir: 'sent', body: `Hey Marcus,\n\nI'd like to apply for the Founding Product Engineer role at Northwind.\n\nI've built full-stack products end to end — TypeScript, Go, Postgres — and grown one from 2k to 80k MAU in 14 months. API design, zero-friction onboarding, and shipping fast are where I do my best work.\n\nAttaching my resume for your reference.\nLooking forward to hearing from you.\n\nBest,\nArjun` },
       { from: 'Marcus Webb', time: 'Tue 3:20 PM', dir: 'recv', body: `Arjun —\n\nThis stood out from the 240+ applications we got this week. The v3 reference — that tells me you actually read what we shipped.\n\nForwarding to Priya (Head of Eng). She'll set up a chat this week.\n\n— Marcus` },
     ],
   },
@@ -219,7 +219,7 @@ const INBOX_THREADS = [
     preview: 'Most candidates send the same Notion template…',
     tag: 'INTERVIEW SET', tagColor: '#057642', tagBg: '#e6f4ea',
     thread: [
-      { from: 'Arjun (via JobPilot)', time: 'Tue 8:15 AM', dir: 'sent', body: `Hi Devon,\n\nTook a B2B product from 0 to 80k MAU in 18 months — content, SEO, direct outreach, no paid spend. Owned everything from landing pages to funnel analytics.\n\nI work with eng to instrument the product for growth signals early, before they're obvious. That's where the real leverage is.\n\nApplying for the Head of Growth role. Looking forward to hearing from you.\n\nResume attached.\n\n— Arjun` },
+      { from: 'Arjun (via JobPilot)', time: 'Tue 8:15 AM', dir: 'sent', body: `Hey Devon,\n\nI'd like to apply for the Head of Growth role at Plover.\n\nTook a B2B product from 0 to 80k MAU in 18 months — content, SEO, direct outreach, no paid spend. I work with eng to instrument the product for growth signals early. Growth strategy, content, and funnel analytics are my core strengths.\n\nAttaching my resume for your reference.\nLooking forward to hearing from you.\n\nBest,\nArjun` },
       { from: 'Devon Reilly', time: 'Tue 11:42 AM', dir: 'recv', body: `Most candidates send the same Notion template. Yours read like a real person.\n\nCan we schedule a quick chat — I'm open Thu/Fri.\n\n— Devon` },
     ],
   },
@@ -231,7 +231,7 @@ const INBOX_THREADS = [
     preview: 'The reference to our changelog gave it away…',
     tag: 'FORWARDED TO HR', tagColor: '#b45309', tagBg: '#fff0e0',
     thread: [
-      { from: 'Arjun (via JobPilot)', time: 'Wed 9:30 AM', dir: 'sent', body: `Hi Sana,\n\nYour March post on leader election — the call on split-brain — was really clear thinking.\n\nShipped Go services at 10k+ RPS in production. Distributed state, cache invalidation, graceful degradation. I care about systems that stay running when things go wrong.\n\nApplying for the Backend Engineer role. Looking forward to hearing from you.\n\nResume attached.\n\n— Arjun` },
+      { from: 'Arjun (via JobPilot)', time: 'Wed 9:30 AM', dir: 'sent', body: `Hey Sana,\n\nI'd like to apply for the Backend Engineer role at Reed Labs.\n\nI've shipped Go services at 10k+ RPS in production — distributed state, cache invalidation, graceful degradation under partial failures. Systems that hold when things go wrong are what I care about most.\n\nAttaching my resume for your reference.\nLooking forward to hearing from you.\n\nBest,\nArjun` },
       { from: 'Sana Iyer', time: 'Tue 2:08 PM', dir: 'recv', body: `The reference to our changelog gave it away — you actually read it. We don't see that often.\n\nForwarding this to our eng team. Calendar's open Thursday afternoon.\n\n— Sana` },
     ],
   },
@@ -243,7 +243,7 @@ const INBOX_THREADS = [
     preview: 'Short and specific — actually refreshing…',
     tag: 'CALL BOOKED', tagColor: '#057642', tagBg: '#e6f4ea',
     thread: [
-      { from: 'Arjun (via JobPilot)', time: 'Wed 9:00 AM', dir: 'sent', body: `Hi Tanvi,\n\nYour case studies are way more honest than most startup marketing. That's rare — and it actually converts.\n\nI've run email campaigns, paid channels, and content. Grew a newsletter from 400 to 12k subscribers in 8 months. I focus on what moves revenue, not vanity metrics.\n\nApplying for the Marketing Lead role. Looking forward to hearing from you.\n\nResume attached.\n\n— Arjun` },
+      { from: 'Arjun (via JobPilot)', time: 'Wed 9:00 AM', dir: 'sent', body: `Hey Tanvi,\n\nI'd like to apply for the Marketing Lead role at Tempo.\n\nI've run email campaigns, paid channels, and content that converts — grew a newsletter from 400 to 12k subscribers in 8 months. Revenue metrics, not vanity metrics, are what I optimize for.\n\nAttaching my resume for your reference.\nLooking forward to hearing from you.\n\nBest,\nArjun` },
       { from: 'Tanvi Mehta', time: 'Wed 4:15 PM', dir: 'recv', body: `Short and specific — actually refreshing.\n\nOur current marketing is all over the place. Would be good to talk. Free for a call Thursday?\n\n— Tanvi` },
     ],
   },
@@ -255,7 +255,7 @@ const INBOX_THREADS = [
     preview: 'Most cold inbound goes straight to spam…',
     tag: 'FORWARDED TO HR', tagColor: '#b45309', tagBg: '#fff0e0',
     thread: [
-      { from: 'Arjun (via JobPilot)', time: 'Thu 10:00 AM', dir: 'sent', body: `Hi Theo,\n\nThe query interface doesn't hide complexity — it just reduces friction around it. That takes real design conviction.\n\nShipped design systems across two B2B products, working directly with eng to keep components and tokens in sync. Care about design that's both good and fast to build with.\n\nApplying for the Founding Designer role. Looking forward to hearing from you.\n\nPortfolio attached.\n\n— Arjun` },
+      { from: 'Arjun (via JobPilot)', time: 'Thu 10:00 AM', dir: 'sent', body: `Hey Theo,\n\nI'd like to apply for the Founding Designer role at Lumen AI.\n\nI've shipped design systems across two B2B products, working directly with eng to keep components and tokens in sync. The density problem in AI interfaces is exactly the kind of hard design challenge I want to work on.\n\nAttaching my portfolio for your reference.\nLooking forward to hearing from you.\n\nBest,\nArjun` },
       { from: 'Theo Marchetti', time: 'Thu 3:51 PM', dir: 'recv', body: `Most cold inbound goes straight to spam. Yours got through because it was specific and short.\n\nSending to our hiring lead now. Expect a note from her tomorrow.\n\n— Theo` },
     ],
   },
@@ -267,7 +267,7 @@ const INBOX_THREADS = [
     preview: 'Direct, no fluff, no AI smell. Resume on point…',
     tag: 'INTERVIEW SET', tagColor: '#057642', tagBg: '#e6f4ea',
     thread: [
-      { from: 'Arjun (via JobPilot)', time: 'Fri 7:30 AM', dir: 'sent', body: `Hi Priya,\n\nThe April teardown on edge caching was the clearest explanation of those tradeoffs I've read.\n\nShipped Go + Kubernetes infrastructure in production. I own what happens when things break, not just when they don't.\n\nApplying for the Infrastructure Engineer role. Looking forward to hearing from you.\n\nResume attached.\n\n— Arjun` },
+      { from: 'Arjun (via JobPilot)', time: 'Fri 7:30 AM', dir: 'sent', body: `Hey Priya,\n\nI'd like to apply for the Infrastructure Engineer role at Cloudpack.\n\nI've shipped Go + Kubernetes infrastructure in production — I own what happens when things break, not just when they don't. On-call reliability, degraded modes, and systems at scale are my core strengths.\n\nAttaching my resume for your reference.\nLooking forward to hearing from you.\n\nBest,\nArjun` },
       { from: 'Priya Shah', time: 'Fri 10:50 AM', dir: 'recv', body: `Direct, no fluff, no AI smell. Resume on point.\n\nBooked you in with our CEO for next week — calendar invite incoming shortly.\n\n— Priya` },
     ],
   },
