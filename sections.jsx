@@ -202,72 +202,78 @@ const INBOX_THREADS = [
   {
     id: 0, avatar: 'M', bg: 'linear-gradient(135deg,#f0a17a,#d8543e)',
     name: 'Marcus Webb', role: 'Head of Engineering · Northwind',
+    email: 'marcus@northwindai.com',
     when: 'Tue 3:20 PM', unread: true,
-    subj: 'Re: Head of Growth · loved what you\'ve built',
+    subj: 'Re: Founding Product Eng — loved what you\'ve built',
     preview: 'This stood out from the 240+ applications we got…',
     tag: 'INTERVIEW →', tagColor: '#1a56db', tagBg: '#e8f0ff',
     thread: [
-      { from: 'Arjun (via JobPilot)', time: 'Mon 6:02 AM', dir: 'sent', body: `Hey Marcus,\n\nI'd like to apply for the Founding Product Engineer role at Northwind.\n\nI've built full-stack products end to end — TypeScript, Go, Postgres — and grown one from 2k to 80k MAU in 14 months. API design, zero-friction onboarding, and shipping fast are where I do my best work.\n\nAttaching my resume for your reference.\nLooking forward to hearing from you.\n\nBest,\nArjun` },
+      { from: 'Arjun (via JobPilot)', time: 'Mon 6:02 AM', dir: 'sent', attachment: 'resume_arjun.pdf', body: `Hey Marcus,\n\nI came across the Founding Product Engineer opening at Northwind and wanted to reach out directly — felt like the right move rather than applying through a portal.\n\nI've been building products from scratch for about three years now, mostly using TypeScript, Go, and Postgres. I joined a startup as the third engineer, and by the time I left, the product had grown from 2,000 to 80,000 monthly users. I handled everything from the database design to user-facing features to being the person who got paged at 2 AM when something broke — and fixed it.\n\nI've learned that the early decisions on a product are the ones that come back to haunt you. I try really hard to get those right — not over-engineer, but not cut corners that cost more to fix six months later either.\n\nI also noticed you just shipped v3 — the new dashboard flow is genuinely impressive. You can tell a lot of thought went into how users actually move through the product.\n\nMy resume is attached. Would love to connect if this sounds like a fit.\n\nBest,\nArjun` },
       { from: 'Marcus Webb', time: 'Tue 3:20 PM', dir: 'recv', body: `Arjun —\n\nThis stood out from the 240+ applications we got this week. The v3 reference — that tells me you actually read what we shipped.\n\nForwarding to Priya (Head of Eng). She'll set up a chat this week.\n\n— Marcus` },
     ],
   },
   {
     id: 1, avatar: 'D', bg: 'linear-gradient(135deg,#5562eb,#3a1f9c)',
     name: 'Devon Reilly', role: 'CEO · Plover',
+    email: 'devon@plover.io',
     when: 'Tue 11:42 AM', unread: false,
-    subj: 'Re: Head of Growth · loved what you\'ve built',
+    subj: 'Re: Head of Growth — your approach stood out',
     preview: 'Most candidates send the same Notion template…',
     tag: 'INTERVIEW SET', tagColor: '#057642', tagBg: '#e6f4ea',
     thread: [
-      { from: 'Arjun (via JobPilot)', time: 'Tue 8:15 AM', dir: 'sent', body: `Hey Devon,\n\nI'd like to apply for the Head of Growth role at Plover.\n\nTook a B2B product from 0 to 80k MAU in 18 months — content, SEO, direct outreach, no paid spend. I work with eng to instrument the product for growth signals early. Growth strategy, content, and funnel analytics are my core strengths.\n\nAttaching my resume for your reference.\nLooking forward to hearing from you.\n\nBest,\nArjun` },
+      { from: 'Arjun (via JobPilot)', time: 'Tue 8:15 AM', dir: 'sent', attachment: 'resume_arjun.pdf', body: `Hey Devon,\n\nI saw the Head of Growth opening at Plover and wanted to reach out personally instead of applying through a form — this role felt too relevant to let it get lost in a queue.\n\nI've spent the last few years doing growth at early-stage B2B startups where budgets were tight and results had to be real. My biggest result: I took a product from zero to 80,000 monthly active users in 18 months — entirely through content, SEO, and direct outreach, no paid ads. I also worked closely with engineering to build growth signals into the product early, so we always knew what was actually working.\n\nWhat I care most about is growth you can explain to someone who looks at revenue, not just at charts. I like building systems that keep working even after I've moved on to the next problem.\n\nI also had a look at how Plover currently talks to its users and I think there's a real opportunity you're not fully going after yet — happy to share my thinking on a call.\n\nResume attached. Looking forward to hearing from you.\n\nBest,\nArjun` },
       { from: 'Devon Reilly', time: 'Tue 11:42 AM', dir: 'recv', body: `Most candidates send the same Notion template. Yours read like a real person.\n\nCan we schedule a quick chat — I'm open Thu/Fri.\n\n— Devon` },
     ],
   },
   {
     id: 2, avatar: 'S', bg: 'linear-gradient(135deg,#3aa178,#1b6448)',
     name: 'Sana Iyer', role: 'Co-founder · Reed Labs',
+    email: 'sana@reedlabs.co',
     when: 'Tue 2:08 PM', unread: false,
     subj: 'Re: Backend Engineer · saw the changelog',
     preview: 'The reference to our changelog gave it away…',
     tag: 'FORWARDED TO HR', tagColor: '#b45309', tagBg: '#fff0e0',
     thread: [
-      { from: 'Arjun (via JobPilot)', time: 'Wed 9:30 AM', dir: 'sent', body: `Hey Sana,\n\nI'd like to apply for the Backend Engineer role at Reed Labs.\n\nI've shipped Go services at 10k+ RPS in production — distributed state, cache invalidation, graceful degradation under partial failures. Systems that hold when things go wrong are what I care about most.\n\nAttaching my resume for your reference.\nLooking forward to hearing from you.\n\nBest,\nArjun` },
+      { from: 'Arjun (via JobPilot)', time: 'Wed 9:30 AM', dir: 'sent', attachment: 'resume_arjun.pdf', body: `Hey Sana,\n\nI spotted the Backend Engineer opening at Reed Labs and wanted to apply directly — the kind of infrastructure problems you're solving are exactly what I want to be spending my time on.\n\nI've been building Go services in production for the past few years, mostly in environments where downtime actually costs money. At one point I was running services handling over 10,000 requests per second, and I had to design the system to fall back gracefully when parts of it failed — instead of everything going down at once. That kind of reliability engineering is where I feel most at home.\n\nI also went through your recent changelog — the way you're approaching the caching layer is really thoughtful. It tells me this is a team that cares about getting the internals right, not just shipping features on top of something fragile.\n\nI don't enjoy writing code that only works when everything is perfect. I want to own the 3 AM pages too — and make sure they stop happening.\n\nMy resume is attached. Would love to chat if this sounds like a match.\n\nBest,\nArjun` },
       { from: 'Sana Iyer', time: 'Tue 2:08 PM', dir: 'recv', body: `The reference to our changelog gave it away — you actually read it. We don't see that often.\n\nForwarding this to our eng team. Calendar's open Thursday afternoon.\n\n— Sana` },
     ],
   },
   {
     id: 3, avatar: 'T', bg: 'linear-gradient(135deg,#f472b6,#be185d)',
     name: 'Tanvi Mehta', role: 'Head of Marketing · Tempo',
+    email: 'tanvi@tempo.app',
     when: 'Wed 4:15 PM', unread: false,
     subj: 'Re: Marketing Lead — let\'s talk',
     preview: 'Short and specific — actually refreshing…',
     tag: 'CALL BOOKED', tagColor: '#057642', tagBg: '#e6f4ea',
     thread: [
-      { from: 'Arjun (via JobPilot)', time: 'Wed 9:00 AM', dir: 'sent', body: `Hey Tanvi,\n\nI'd like to apply for the Marketing Lead role at Tempo.\n\nI've run email campaigns, paid channels, and content that converts — grew a newsletter from 400 to 12k subscribers in 8 months. Revenue metrics, not vanity metrics, are what I optimize for.\n\nAttaching my resume for your reference.\nLooking forward to hearing from you.\n\nBest,\nArjun` },
+      { from: 'Arjun (via JobPilot)', time: 'Wed 9:00 AM', dir: 'sent', attachment: 'resume_arjun.pdf', body: `Hey Tanvi,\n\nI came across the Marketing Lead opening at Tempo and wanted to reach out directly — the way you're positioning the product caught my attention, and I think I can help push it further.\n\nI've spent the last few years running marketing end-to-end for early-stage startups — email, paid channels, content, and everything in between. My most concrete result: I grew a newsletter from 400 to 12,000 subscribers in eight months, which turned into a real customer acquisition channel that cost almost nothing compared to running ads.\n\nWhat makes me a bit different from most marketing hires is that I don't separate strategy from execution. I'll build the campaign, write the copy, track the numbers, and keep adjusting until it's actually working. I don't hand things off and wait — I stay in it.\n\nI had a look at how Tempo currently talks to users across different channels, and I think there are a few places where the message isn't landing as strongly as it could. I'd love to share some specific ideas on a call.\n\nMy resume is attached.\n\nBest,\nArjun` },
       { from: 'Tanvi Mehta', time: 'Wed 4:15 PM', dir: 'recv', body: `Short and specific — actually refreshing.\n\nOur current marketing is all over the place. Would be good to talk. Free for a call Thursday?\n\n— Tanvi` },
     ],
   },
   {
     id: 4, avatar: 'T', bg: 'linear-gradient(135deg,#e1b14a,#a67919)',
     name: 'Theo Marchetti', role: 'Founder · Lumen AI',
+    email: 'theo@lumenai.com',
     when: 'Thu 3:51 PM', unread: false,
     subj: 'Re: Founding Designer — loved the specificity',
     preview: 'Most cold inbound goes straight to spam…',
     tag: 'FORWARDED TO HR', tagColor: '#b45309', tagBg: '#fff0e0',
     thread: [
-      { from: 'Arjun (via JobPilot)', time: 'Thu 10:00 AM', dir: 'sent', body: `Hey Theo,\n\nI'd like to apply for the Founding Designer role at Lumen AI.\n\nI've shipped design systems across two B2B products, working directly with eng to keep components and tokens in sync. The density problem in AI interfaces is exactly the kind of hard design challenge I want to work on.\n\nAttaching my portfolio for your reference.\nLooking forward to hearing from you.\n\nBest,\nArjun` },
+      { from: 'Arjun (via JobPilot)', time: 'Thu 10:00 AM', dir: 'sent', attachment: 'portfolio_arjun.pdf', body: `Hey Theo,\n\nI saw the Founding Designer opening at Lumen AI and wanted to reach out personally — this one matched closely enough with what I actually want to work on that I didn't want it to disappear into a portal.\n\nI've spent the last few years designing for B2B products, building design systems and working side by side with engineers so that what gets built actually matches what was designed. The part I care most about is the handoff — keeping components and tokens in sync so the product doesn't quietly drift away from the designs over time.\n\nWhat drew me specifically to Lumen AI is the density problem in AI interfaces. Most AI tools look like they were designed for a feature list, not for a real person using it every day at a desk. Getting that right is genuinely hard, and it's exactly the kind of problem I want to be solving.\n\nI've also worked at a founding stage before, so I understand what it means to make design decisions fast — ship something, get it in front of real users, and iterate without losing the thread.\n\nMy portfolio and resume are attached. Would love to connect.\n\nBest,\nArjun` },
       { from: 'Theo Marchetti', time: 'Thu 3:51 PM', dir: 'recv', body: `Most cold inbound goes straight to spam. Yours got through because it was specific and short.\n\nSending to our hiring lead now. Expect a note from her tomorrow.\n\n— Theo` },
     ],
   },
   {
     id: 5, avatar: 'P', bg: 'linear-gradient(135deg,#a07ad8,#5b34a1)',
     name: 'Priya Shah', role: 'Founder · Cloudpack',
+    email: 'priya@cloudpack.io',
     when: 'Fri 10:50 AM', unread: false,
     subj: 'Re: One of the best applications we\'ve seen',
     preview: 'Direct, no fluff, no AI smell. Resume on point…',
     tag: 'INTERVIEW SET', tagColor: '#057642', tagBg: '#e6f4ea',
     thread: [
-      { from: 'Arjun (via JobPilot)', time: 'Fri 7:30 AM', dir: 'sent', body: `Hey Priya,\n\nI'd like to apply for the Infrastructure Engineer role at Cloudpack.\n\nI've shipped Go + Kubernetes infrastructure in production — I own what happens when things break, not just when they don't. On-call reliability, degraded modes, and systems at scale are my core strengths.\n\nAttaching my resume for your reference.\nLooking forward to hearing from you.\n\nBest,\nArjun` },
+      { from: 'Arjun (via JobPilot)', time: 'Fri 7:30 AM', dir: 'sent', attachment: 'resume_arjun.pdf', body: `Hey Priya,\n\nI came across the Infrastructure Engineer role at Cloudpack and wanted to apply directly — cloud infrastructure at scale is the work I've been doing for the past few years and it's what I genuinely want to keep doing.\n\nMy background is mostly Go and Kubernetes in production environments where the stakes are real. I've been on call when services go down at 3 AM and someone has to figure out why, fast — I've been that person more than once. I design systems with the assumption that things will break, not the hope that they won't. That mindset changes a lot of early decisions.\n\nThe project I'm most proud of: I led a reliability overhaul that cut incident response time by over 60%. No new features, no product announcements — just better alerting, cleaner runbooks, and smarter degraded-mode handling. It made the team's lives significantly better.\n\nI've looked at how Cloudpack handles multi-region failover and I have some specific thoughts on where the gaps might be. Happy to share on a call.\n\nMy resume is attached. Looking forward to hearing from you.\n\nBest,\nArjun` },
       { from: 'Priya Shah', time: 'Fri 10:50 AM', dir: 'recv', body: `Direct, no fluff, no AI smell. Resume on point.\n\nBooked you in with our CEO for next week — calendar invite incoming shortly.\n\n— Priya` },
     ],
   },
@@ -322,55 +328,123 @@ function Testimonials() {
           ))}
         </div>
 
+        {/* Real inbox label */}
+        <div style={{ textAlign: 'center' }} data-reveal>
+          <span className="inbox-real-label">Real Founder Inbox Replies</span>
+        </div>
+
         {/* Gmail inbox mock */}
         <div className="inbox-shell" data-reveal>
-          {/* Left: thread list */}
-          <div className="inbox-list">
-            <div className="inbox-list-header">
-              <span style={{ fontSize: 13, fontWeight: 600 }}>Inbox</span>
-              <span className="inbox-badge">{INBOX_THREADS.filter(t => t.unread).length} new</span>
+
+          {/* Gmail top bar */}
+          <div className="gmail-topbar">
+            <div className="gmail-topbar-brand">
+              <div className="gmail-m-logo">M</div>
+              <span className="gmail-brand-name">mail</span>
             </div>
-            {INBOX_THREADS.map((t, i) => (
-              <div
-                key={t.id}
-                className={`inbox-row${activeThread === i ? ' active' : ''}${t.unread ? ' unread' : ''}`}
-                onClick={() => activate(i)}
-              >
-                <div style={{ width: 32, height: 32, borderRadius: '50%', background: t.bg, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 700, fontSize: 13, flexShrink: 0 }}>{t.avatar}</div>
-                <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8 }}>
-                    <span style={{ fontSize: 13, fontWeight: t.unread ? 700 : 500, color: 'var(--ink)' }}>{t.name}</span>
-                    <span style={{ fontSize: 11, color: 'var(--ink-4)', fontFamily: 'var(--font-mono)', flexShrink: 0 }}>{t.when}</span>
-                  </div>
-                  <div style={{ fontSize: 12, color: 'var(--ink-2)', fontWeight: t.unread ? 600 : 400, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{t.subj}</div>
-                  <div style={{ fontSize: 11.5, color: 'var(--ink-4)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{t.preview}</div>
-                </div>
-              </div>
-            ))}
+            <div className="gmail-search-bar">
+              <Icon name="search" size={14} />
+              <span>Search mail</span>
+            </div>
+            <div className="gmail-topbar-actions">
+              <div className="gmail-icon-btn" title="Settings">⚙</div>
+              <div className="gmail-icon-btn" title="Apps">⊞</div>
+            </div>
           </div>
 
-          {/* Right: thread view */}
-          <div className="inbox-thread">
-            <div className="inbox-thread-header">
-              <div style={{ flex: 1 }}>
+          {/* 2-column body */}
+          <div className="inbox-shell-body">
+
+            {/* Left: sidebar nav + thread list */}
+            <div className="inbox-list">
+              <div className="gmail-compose-btn">
+                <span className="gmail-compose-plus">+</span>
+                <span>Compose</span>
+              </div>
+              <nav className="gmail-nav">
+                <div className="gmail-nav-item active">
+                  <Icon name="inbox" size={15} />
+                  <span>Inbox</span>
+                  <span className="gmail-nav-count">{INBOX_THREADS.filter(t => t.unread).length}</span>
+                </div>
+                <div className="gmail-nav-item">
+                  <Icon name="star" size={15} />
+                  <span>Starred</span>
+                </div>
+                <div className="gmail-nav-item">
+                  <Icon name="forward" size={15} />
+                  <span>Sent</span>
+                </div>
+                <div className="gmail-nav-item">
+                  <Icon name="file" size={15} />
+                  <span>Drafts</span>
+                </div>
+              </nav>
+              <div className="gmail-nav-divider" />
+
+              {/* Email rows */}
+              {INBOX_THREADS.map((t, i) => (
+                <div
+                  key={t.id}
+                  className={`inbox-row${activeThread === i ? ' active' : ''}${t.unread ? ' unread' : ''}`}
+                  onClick={() => activate(i)}
+                >
+                  {t.unread && <div className="inbox-unread-dot" />}
+                  <div className="inbox-row-av" style={{ background: t.bg }}>{t.avatar}</div>
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 6 }}>
+                      <span className="inbox-row-name" style={{ fontWeight: t.unread ? 700 : 500 }}>{t.name}</span>
+                      <span className="inbox-row-time">{t.when}</span>
+                    </div>
+                    <div className="inbox-row-subj" style={{ fontWeight: t.unread ? 600 : 400 }}>{t.subj}</div>
+                    <div className="inbox-row-preview">{t.preview}</div>
+                  </div>
+                  <div className="inbox-row-tag" style={{ background: t.tagBg, color: t.tagColor }}>{t.tag}</div>
+                </div>
+              ))}
+            </div>
+
+            {/* Right: thread view */}
+            <div className="inbox-thread">
+              <div className="inbox-thread-header">
                 <div style={{ fontSize: 17, fontWeight: 700, color: 'var(--ink)', letterSpacing: '-0.02em' }}>{thread.subj}</div>
                 <div style={{ display: 'flex', gap: 6, marginTop: 6, alignItems: 'center' }}>
                   <span style={{ fontSize: 11, padding: '3px 9px', borderRadius: 5, fontWeight: 700, fontFamily: 'var(--font-mono)', background: thread.tagBg, color: thread.tagColor }}>{thread.tag}</span>
                   <span style={{ fontSize: 11.5, color: 'var(--ink-4)' }}>{thread.role}</span>
                 </div>
               </div>
-            </div>
-            <div className="inbox-thread-body">
-              {thread.thread.map((msg, i) => (
-                <div key={i} className={`inbox-msg ${msg.dir}`}>
-                  <div className="inbox-msg-meta">
-                    <span style={{ fontWeight: 600, color: 'var(--ink)' }}>{msg.from}</span>
-                    <span style={{ color: '#000000', fontSize: 11, fontFamily: 'var(--font-mono)', marginLeft: 6, marginRight: 6 }}>{msg.time}</span>
+              <div className="inbox-thread-body">
+                {thread.thread.map((msg, i) => (
+                  <div key={i} className={`inbox-msg ${msg.dir}`}>
+                    <div className="inbox-email-hdr">
+                      <div className="inbox-email-av" style={{ background: msg.dir === 'sent' ? 'var(--accent)' : thread.bg }}>
+                        {msg.dir === 'sent' ? 'A' : thread.avatar}
+                      </div>
+                      <div style={{ flex: 1, minWidth: 0 }}>
+                        <div style={{ display: 'flex', alignItems: 'baseline', gap: 6, flexWrap: 'wrap' }}>
+                          <span style={{ fontWeight: 700, fontSize: 13.5, color: 'var(--ink)' }}>{msg.from}</span>
+                          <span style={{ fontSize: 11.5, color: 'var(--ink-4)' }}>
+                            {msg.dir === 'sent' ? '<arjun@gmail.com>' : `<${thread.email}>`}
+                          </span>
+                        </div>
+                        <div style={{ fontSize: 11.5, color: 'var(--ink-4)', marginTop: 1 }}>
+                          to {msg.dir === 'sent' ? thread.name : 'me'}
+                        </div>
+                      </div>
+                      <div style={{ fontSize: 11, color: 'var(--ink-4)', fontFamily: 'var(--font-mono)', whiteSpace: 'nowrap', flexShrink: 0 }}>{msg.time}</div>
+                    </div>
+                    <div className="inbox-msg-body">{msg.body}</div>
+                    {msg.attachment && (
+                      <div className="inbox-attachment-chip">
+                        <Icon name="paperclip" size={12} />
+                        <span>{msg.attachment}</span>
+                      </div>
+                    )}
                   </div>
-                  <div className="inbox-msg-body">{msg.body}</div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
+
           </div>
         </div>
       </div>
