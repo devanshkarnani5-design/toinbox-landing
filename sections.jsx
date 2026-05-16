@@ -468,12 +468,11 @@ function Pricing() {
               <div style={{ display: 'flex', alignItems: 'baseline', gap: 4, marginTop: 8 }}>
                 <span className="price-amt"><span className="currency">₹</span>0</span>
               </div>
-              <div className="price-sub">Limited credits. Try before you commit.</div>
+              <div className="price-sub">Try before you commit.</div>
             </div>
             <div className="price-feats">
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>5 personalized founder sends</div>
-              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>LinkedIn auto-detection</div>
-              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Basic resume matching</div>
+              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Cover letter + cold email pair</div>
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Reply tracking</div>
             </div>
             <a href="#" className="btn btn-outline" style={{ marginTop: 'auto' }}>Add to Chrome <Icon name="arrow" size={14} className="chev" /></a>
@@ -484,16 +483,13 @@ function Pricing() {
             <div>
               <div className="price-name">Starter</div>
               <div style={{ display: 'flex', alignItems: 'baseline', gap: 4, marginTop: 8 }}>
-                <span className="price-amt"><span className="currency">₹</span>499<span className="per">one-time</span></span>
+                <span className="price-amt"><span className="currency">₹</span>399<span className="per">/month</span></span>
               </div>
-              <div className="price-sub">100 credits. About ₹5 per founder reach.</div>
             </div>
             <div className="price-feats">
-              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>100 personalized founder sends</div>
+              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>50 personalized founder sends</div>
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Cover letter + cold email pair</div>
-              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Founder profile enrichment</div>
-              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Reply, forward & interview tracking</div>
-              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Credits never expire</div>
+              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Reply tracking</div>
             </div>
             <a href="#" className="btn btn-accent" style={{ marginTop: 'auto', alignSelf: 'flex-start' }}>Get the pack <Icon name="arrow" size={14} className="chev" /></a>
           </div>
@@ -502,22 +498,20 @@ function Pricing() {
             <div>
               <div className="price-name">Pro</div>
               <div style={{ display: 'flex', alignItems: 'baseline', gap: 4, marginTop: 8 }}>
-                <span className="price-amt"><span className="currency">₹</span>799<span className="per">one-time</span></span>
+                <span className="price-amt"><span className="currency">₹</span>699<span className="per">/month</span></span>
               </div>
-              <div className="price-sub">200 credits. Best for serious job searches.</div>
+              <div className="price-sub">Best for active job searches.</div>
             </div>
             <div className="price-feats">
-              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>200 personalized founder sends</div>
-              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Priority email delivery</div>
-              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Advanced match scoring</div>
-              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Full dashboard analytics</div>
-              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Credits never expire</div>
+              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>100 personalized founder sends</div>
+              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Cheaper per send</div>
+              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Everything in Starter included</div>
             </div>
             <a href="#" className="btn btn-primary" style={{ marginTop: 'auto' }}>Go Pro <Icon name="arrow" size={14} className="chev" /></a>
           </div>
         </div>
         <div style={{ textAlign: 'center', color: 'var(--ink-3)', fontSize: 13, marginTop: 24 }}>
-          One Northwind reply pays for the entire pack ten times over.
+          One job placed through JobPilot pays for the entire pack 100 times over.
         </div>
       </div>
     </section>
