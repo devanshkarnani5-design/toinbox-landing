@@ -1,0 +1,63 @@
+Update the hero section demo animation and the “How It Works → Step 1” animation to match the new product behavior and latest extension UI.
+
+Currently the animation shows users enrolling into multiple jobs at once from the left LinkedIn job list. That is outdated.
+
+New behavior:
+
+* User can only send/apply to the currently focused job.
+* A job must be clicked first.
+* When clicked, that job opens in the right-side LinkedIn job detail panel.
+* The ToInbox extension detects only that active/focused job.
+* The extension panel should then display:
+
+  * company logo
+  * company name
+  * role title
+  * credits used
+  * dashboard button
+  * enrolled / sent / replied stats
+  * single CTA button:
+    “Send Application — 1 credit”
+
+Animation flow:
+
+1. Cursor clicks a job in the left LinkedIn jobs column.
+2. Selected job becomes highlighted.
+3. Job details load in the right panel.
+4. ToInbox extension updates dynamically with that focused job info.
+5. User clicks “Send Application”.
+6. Status changes to Sent.
+7. Sent count increases.
+8. Optional subtle success state/glow.
+
+Important:
+
+* Remove all visuals implying bulk enrollment or multi-job sending.
+* Remove stacked enroll cards from the extension.
+* Only one active job should appear in the extension panel at a time.
+* Keep the rest of the page design unchanged.
+
+UI styling requirements:
+
+* Match the attached screenshot exactly.
+* Extension should have:
+
+  * dark black glassmorphism style
+  * rounded corners
+  * minimal clean typography
+  * compact spacing
+  * subtle borders/shadows
+  * modern SaaS feel
+* Typography should feel similar to Linear/Raycast/Notion.
+* Make extension feel premium and focused.
+
+LinkedIn panel behavior:
+
+* Left side = job listings.
+* Right side = selected job details.
+* Extension reacts only to selected/focused job.
+* Add subtle hover and click states for realism.
+
+Goal:
+The demo should instantly communicate:
+“ToInbox detects the currently open LinkedIn job and sends a personalized application directly to the founder/HR from your Gmail.”

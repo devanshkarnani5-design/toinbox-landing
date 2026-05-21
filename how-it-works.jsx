@@ -2,7 +2,7 @@
 const { useState: useStateHIW, useEffect: useEffectHIW, useRef: useRefHIW } = React;
 
 const HIW_STEPS = [
-  { t: 'Open LinkedIn, detect roles and enroll', s: 'JobPilot loads instantly on any LinkedIn jobs page — scans every card, finds founder emails, and enrolls each role with a single click. Cursor never leaves the panel.' },
+  { t: 'Click a job — JobPilot detects it instantly', s: 'Click any LinkedIn job and JobPilot immediately detects it in the panel. One button. It finds the founder\'s email, matches your resume, and is ready to send in seconds.' },
   { t: 'AI scans resume + JD', s: 'Cross-references your experience and the job description in seconds. Identifies the right signals from your resume automatically.' },
   { t: 'Cover letter generated', s: 'Specific, human-sounding, no template smell. Cites the role, the changelog, the founder by name. Around 160 words.' },
   { t: 'Sent to founder inbox', s: 'Email + resume lands in the founder\'s personal inbox. Skips ATS entirely. No Easy Apply queue.' },
@@ -141,59 +141,106 @@ function HiwDashboard({ replyVisible }) {
   );
 }
 
-// ── Step 0: detect + enroll panel with animated cursor ──
-// Cursor is rendered OUTSIDE jp-sidebar-body (overflow:hidden) to avoid clipping.
+// ── Step 0: single-job dark panel with animated cursor ──
 function HiwEnrollPanel() {
-  const [states, setStates] = useStateHIW(['idle', 'idle', 'idle']);
-  const [curX, setCurX] = useStateHIW(135);
-  const [curY, setCurY] = useStateHIW(28);
+  const [phase, setPhase] = useStateHIW('detecting'); // 'detecting' | 'ready' | 'sending' | 'sent'
+  const [activeJob, setActiveJob] = useStateHIW(null);
+  const [curX, setCurX] = useStateHIW(90);
+  const [curY, setCurY] = useStateHIW(30);
   const [clicking, setClicking] = useStateHIW(false);
+
   useEffectHIW(() => {
     let timers = [];
     const after = (ms, fn) => { const t = setTimeout(fn, ms); timers.push(t); };
-    const setS = (i, s) => setStates(p => { const n = [...p]; n[i] = s; return n; });
     const loop = () => {
-      setStates(['idle', 'idle', 'idle']); setCurX(135); setCurY(28); setClicking(false);
-      // Move to first job's Enroll button, click it
-      after(700,  () => { setCurX(178); setCurY(63); });
-      after(1200, () => { setClicking(true); setS(0, 'working'); });
-      after(1380, () => setClicking(false));
-      after(2150, () => setS(0, 'enrolled'));
-      // Brief pause, then loop — only job 0 is enrolled per cycle
-      after(3500, loop);
+      setPhase('detecting'); setActiveJob(null);
+      setCurX(90); setCurY(30); setClicking(false);
+      // Job gets detected
+      after(900, () => { setActiveJob(HIW_JOBS[0]); setPhase('ready'); });
+      // Cursor moves to Send button
+      after(1500, () => { setCurX(90); setCurY(192); });
+      // Click
+      after(2100, () => { setClicking(true); setPhase('sending'); });
+      after(2260, () => setClicking(false));
+      // Sent
+      after(3100, () => setPhase('sent'));
+      after(4600, loop);
     };
     loop();
     return () => timers.forEach(clearTimeout);
   }, []);
+
+  const job = activeJob || HIW_JOBS[0];
+
   return (
-    // Wrapper has position:relative + overflow:visible so cursor is never clipped
-    <div style={{ position: 'relative', overflow: 'visible', flex: 1, display: 'flex', flexDirection: 'column' }}>
-      <div className="jp-sidebar-body">
-        <div className="jp-detect-status"><span className="ok-dot" /> 3 startup roles detected</div>
-        {HIW_JOBS.map((j, i) => {
-          const st = states[i];
-          return (
-            <div key={i} className={`jp-job-entry${st === 'enrolled' ? ' done' : ''}`}>
-              <div className="jp-job-entry-row">
-                <div className="jp-job-logo-sm" style={{ background: j.bg }}>{j.logo}</div>
-                <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{ fontSize: 11, fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', color: '#1a1a1a' }}>{j.title}</div>
-                  <div style={{ fontSize: 9.5, color: st === 'enrolled' ? '#057642' : '#666', marginTop: 1 }}>{st === 'enrolled' ? '✓ Enrolled' : j.co}</div>
-                </div>
-                <button className={`jp-enroll-btn-new ${st === 'enrolled' ? 'sent' : st}`} style={{ fontSize: 9.5, padding: '3px 8px', flexShrink: 0 }}>
-                  {st === 'enrolled' ? '✓ Enrolled' : st === 'working' ? 'Working…' : 'Enroll'}
-                </button>
-              </div>
-            </div>
-          );
-        })}
+    <div style={{ position: 'relative', overflow: 'visible', flex: 1, display: 'flex', flexDirection: 'column', background: '#0d0d0d' }}>
+      {/* Credits row */}
+      <div style={{ padding: '6px 11px 7px', fontSize: 9.5, color: 'rgba(255,255,255,0.3)', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
+        0 of 42 credits used today
       </div>
-      {/* Cursor lives here — outside overflow:hidden jp-sidebar-body */}
+
+      {/* Stats */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', padding: '9px 8px', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
+        {[{ k: 'ENROLLED', v: 4 }, { k: 'SENT', v: 2 }, { k: 'REPLIED', v: 1 }].map(({ k, v }) => (
+          <div key={k} style={{ textAlign: 'center' }}>
+            <div style={{ fontSize: 17, fontWeight: 700, color: 'white', letterSpacing: '-0.04em', lineHeight: 1 }}>{v}</div>
+            <div style={{ fontSize: 7, color: 'rgba(255,255,255,0.28)', fontFamily: 'var(--font-mono)', letterSpacing: '0.07em', marginTop: 3, textTransform: 'uppercase' }}>{k}</div>
+          </div>
+        ))}
+      </div>
+
+      {/* Active job card */}
+      <div style={{ padding: '9px 11px', borderBottom: '1px solid rgba(255,255,255,0.06)', minHeight: 56 }}>
+        {activeJob ? (
+          <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+            <div style={{ width: 30, height: 30, borderRadius: 7, background: job.bg, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 700, fontSize: 11, flexShrink: 0 }}>{job.logo}</div>
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <div style={{ fontSize: 10.5, fontWeight: 600, color: 'white', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', lineHeight: 1.3 }}>{job.title}</div>
+              <div style={{ fontSize: 9.5, color: 'rgba(255,255,255,0.38)', marginTop: 3 }}>{job.co}</div>
+            </div>
+          </div>
+        ) : (
+          <div style={{ display: 'flex', alignItems: 'center', gap: 6, color: 'rgba(255,255,255,0.28)', fontSize: 10 }}>
+            <span className="dotpulse" />
+            Detecting active job…
+          </div>
+        )}
+      </div>
+
+      {/* CTA */}
+      <div style={{ padding: '9px 11px' }}>
+        {phase === 'detecting' && (
+          <div style={{ padding: '7px 0', borderRadius: 7, background: 'rgba(37,99,235,0.14)', border: '1px solid rgba(37,99,235,0.18)', color: 'rgba(255,255,255,0.2)', fontSize: 10.5, textAlign: 'center', fontWeight: 600 }}>
+            Send Application — 1 credit
+          </div>
+        )}
+        {phase === 'ready' && (
+          <div style={{ padding: '7px 0', borderRadius: 7, background: '#2563eb', color: 'white', fontSize: 10.5, textAlign: 'center', fontWeight: 600 }}>
+            Send Application — 1 credit
+          </div>
+        )}
+        {phase === 'sending' && (
+          <div style={{ padding: '7px 0', borderRadius: 7, background: '#1d4ed8', color: 'rgba(255,255,255,0.7)', fontSize: 10.5, textAlign: 'center', fontWeight: 600, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
+            <span style={{ width: 8, height: 8, borderRadius: '50%', border: '1.5px solid rgba(255,255,255,0.3)', borderTopColor: 'white', animation: 'spin 0.8s linear infinite', display: 'inline-block' }} />
+            Sending…
+          </div>
+        )}
+        {phase === 'sent' && (
+          <div style={{ padding: '7px 0', borderRadius: 7, background: 'rgba(5,118,66,0.15)', border: '1px solid rgba(5,118,66,0.3)', color: '#4ade80', fontSize: 10.5, textAlign: 'center', fontWeight: 600 }}>
+            ✓ Application Sent
+          </div>
+        )}
+        <div style={{ textAlign: 'center', fontSize: 8.5, color: 'rgba(255,255,255,0.2)', marginTop: 5 }}>
+          Personalized email sent from your Gmail.
+        </div>
+      </div>
+
+      {/* Cursor — positioned relative to this panel wrapper */}
       <div style={{
         position: 'absolute', left: curX, top: curY, pointerEvents: 'none', zIndex: 99,
-        transition: 'left 0.42s cubic-bezier(0.22,1,0.36,1), top 0.42s cubic-bezier(0.22,1,0.36,1), transform 0.1s ease',
-        transform: clicking ? 'scale(0.76)' : 'scale(1)',
-        filter: clicking ? 'drop-shadow(0 0 6px rgba(99,102,241,0.9))' : 'drop-shadow(0 1px 3px rgba(0,0,0,0.35))',
+        transition: 'left 0.44s cubic-bezier(0.22,1,0.36,1), top 0.44s cubic-bezier(0.22,1,0.36,1), transform 0.1s ease',
+        transform: clicking ? 'scale(0.74)' : 'scale(1)',
+        filter: clicking ? 'drop-shadow(0 0 7px rgba(99,102,241,0.95))' : 'drop-shadow(0 1px 3px rgba(0,0,0,0.5))',
       }}>
         <Icon name="cursor" size={20} />
       </div>
@@ -348,12 +395,24 @@ function HiwLinkedIn({ step, typed }) {
       </div>
 
       {/* JP sidebar */}
-      <div style={{ width: 220, flexShrink: 0, background: 'white', display: 'flex', flexDirection: 'column', boxShadow: '-2px 0 10px rgba(0,0,0,0.04)' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '7px 10px', borderBottom: '1px solid #f0ede8', flexShrink: 0 }}>
-          <div style={{ width: 16, height: 16, borderRadius: 4, background: 'linear-gradient(135deg, oklch(0.65 0.21 252), oklch(0.42 0.2 270))' }} />
-          <span style={{ fontSize: 11.5, fontWeight: 700, color: '#1a1a1a' }}>JobPilot</span>
-          <span style={{ marginLeft: 'auto', fontSize: 9, padding: '2px 6px', borderRadius: 999, background: 'var(--accent-soft)', color: 'var(--accent-ink)', fontFamily: 'var(--font-mono)' }}>42 credits</span>
-        </div>
+      <div style={{ width: 220, flexShrink: 0, background: step === 0 ? '#0d0d0d' : 'white', display: 'flex', flexDirection: 'column', boxShadow: '-2px 0 10px rgba(0,0,0,0.06)' }}>
+        {step !== 0 && (
+          <div style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '7px 10px', borderBottom: '1px solid #f0ede8', flexShrink: 0 }}>
+            <div style={{ width: 16, height: 16, borderRadius: 4, background: 'linear-gradient(135deg, oklch(0.65 0.21 252), oklch(0.42 0.2 270))' }} />
+            <span style={{ fontSize: 11.5, fontWeight: 700, color: '#1a1a1a' }}>JobPilot</span>
+            <span style={{ marginLeft: 'auto', fontSize: 9, padding: '2px 6px', borderRadius: 999, background: 'var(--accent-soft)', color: 'var(--accent-ink)', fontFamily: 'var(--font-mono)' }}>42 credits</span>
+          </div>
+        )}
+        {step === 0 && (
+          <div style={{ display: 'flex', alignItems: 'center', gap: 7, padding: '9px 11px', borderBottom: '1px solid rgba(255,255,255,0.07)', flexShrink: 0 }}>
+            <div style={{ width: 15, height: 15, borderRadius: 3, background: 'linear-gradient(135deg,#6366f1,#4338ca)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <span style={{ color: 'white', fontSize: 6.5, fontWeight: 800 }}>JP</span>
+            </div>
+            <span style={{ fontSize: 11.5, fontWeight: 700, color: 'white', flex: 1 }}>JobPilot</span>
+            <span style={{ fontSize: 8.5, padding: '2px 6px', borderRadius: 4, border: '1px solid rgba(255,255,255,0.13)', color: 'rgba(255,255,255,0.5)' }}>Dashboard</span>
+            <span style={{ fontSize: 14, color: 'rgba(255,255,255,0.2)', lineHeight: 1 }}>−</span>
+          </div>
+        )}
         {jpPanel()}
       </div>
     </div>

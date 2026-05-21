@@ -1,10 +1,10 @@
-// JobPilot — Full LinkedIn workflow simulation
+// JobPilot — Hero demo: click job → extension detects → send application
 const { useState, useEffect, useRef } = React;
 
 const JOBS = [
-  { id: 0, co: 'Northwind', title: 'Founding Product Engineer', logo: 'N', bg: '#1e3a5f', loc: 'San Francisco', match: 94, email: 'm.v@northwind.co', ai: 'High priority' },
-  { id: 1, co: 'Lumen AI', title: 'Head of Growth', logo: 'L', bg: '#3730a3', loc: 'Delhi, India', match: 87, email: 'theo@lumen.ai', ai: 'Strong fit' },
-  { id: 2, co: 'Reed Labs', title: 'Backend Engineer', logo: 'R', bg: '#7c2d12', loc: 'Remote', match: 78, email: 'sana@reedlabs.io', ai: 'Good match' },
+  { id: 0, co: 'Northwind', title: 'Founding Product Engineer', logo: 'N', bg: '#1e3a5f', loc: 'San Francisco', match: 94, email: 'm.v@northwind.co' },
+  { id: 1, co: 'Lumen AI', title: 'Head of Growth', logo: 'L', bg: '#3730a3', loc: 'Delhi, India', match: 87, email: 'theo@lumen.ai' },
+  { id: 2, co: 'Reed Labs', title: 'Backend Engineer', logo: 'R', bg: '#7c2d12', loc: 'Remote', match: 78, email: 'sana@reedlabs.io' },
 ];
 
 const JOB_META = [
@@ -13,146 +13,57 @@ const JOB_META = [
   { time: '5d ago', applicants: '61 applicants' },
 ];
 
-const LETTERS = [
-  `Hey Marcus,
-
-I'd like to apply for the Founding Product Engineer role at Northwind.
-
-I've built full-stack products end to end — TypeScript, Go, Postgres — and grown one from 2k to 80k MAU in 14 months. API design, zero-friction onboarding, and shipping fast are where I do my best work.
-
-Attaching my resume for your reference.
-Looking forward to hearing from you.
-
-Best,
-Arjun`,
-
-  `Hey Theo,
-
-I'd like to apply for the Head of Growth role at Lumen AI.
-
-Took a B2B product from 0 to 80k MAU in 18 months — content, SEO, direct outreach, no paid spend. I work with eng to instrument the product for growth signals early, not just marketing metrics.
-
-Attaching my resume for your reference.
-Looking forward to hearing from you.
-
-Best,
-Arjun`,
-
-  `Hey Sana,
-
-I'd like to apply for the Backend Engineer role at Reed Labs.
-
-I've shipped Go services at 10k+ RPS in production — distributed state, cache invalidation, graceful degradation. Systems that hold when things go wrong are what I care about most.
-
-Attaching my resume for your reference.
-Looking forward to hearing from you.
-
-Best,
-Arjun`,
-];
-
-function JPPanel({ detecting, jobStates, activeJobIdx, typed, showDash, dashStats, dashRows, replyVisible, enrollRefs }) {
-  return (
-    <div className="jp-sidebar">
-      <div className="jp-sidebar-header">
-        <div className="jp-sidebar-logo-mark" />
-        <span style={{ fontSize: 13, fontWeight: 700, letterSpacing: '-0.01em', color: '#1a1a1a' }}>JobPilot</span>
-        <span className="jp-sidebar-credits">{showDash ? 'Dashboard' : '42 credits'}</span>
-      </div>
-
-      {!showDash ? (
-        <div className="jp-sidebar-body">
-          <div className="jp-detect-status">
-            {detecting
-              ? <><span className="dotpulse" /> Detecting jobs on page…</>
-              : <><span className="ok-dot" style={{ background: '#057642', width: 7, height: 7, borderRadius: '50%', display: 'inline-block' }} /> 3 startup roles detected</>}
+function JPPanel({ phase, activeJob, sentToday, stats, sendBtnRef, showDash, dashStats, dashRows, replyVisible }) {
+  if (showDash) {
+    return (
+      <div className="jp-sidebar" style={{ background: '#0d0d0d', borderLeft: '1px solid rgba(255,255,255,0.07)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '10px 12px', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+          <div style={{ width: 18, height: 18, borderRadius: 4, background: 'linear-gradient(135deg,#6366f1,#4338ca)', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <span style={{ color: 'white', fontSize: 7.5, fontWeight: 800 }}>JP</span>
           </div>
-
-          {JOBS.map((j, i) => {
-            const st = jobStates[i];
-            const isActive = activeJobIdx === i;
-            const isWorking = st === 'working' || st === 'generating' || st === 'sending';
-            return (
-              <div key={j.id} className={`jp-job-entry${isActive ? ' active' : ''}${st === 'sent' ? ' done' : ''}`}>
-                <div className="jp-job-entry-row">
-                  <div className="jp-job-logo-sm" style={{ background: j.bg }}>{j.logo}</div>
-                  <div style={{ flex: 1, minWidth: 0 }}>
-                    <div style={{ fontSize: 11.5, fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', color: '#1a1a1a' }}>{j.title}</div>
-                    <div style={{ fontSize: 10, color: '#666', marginTop: 1 }}>{j.co}</div>
-                    <div style={{ fontSize: 10, marginTop: 2, display: 'flex', alignItems: 'center', gap: 3 }}>
-                      <span style={{ color: '#057642', fontSize: 8 }}>●</span>
-                      <span style={{ color: '#555' }}>{j.email}</span>
-                    </div>
-                  </div>
-                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 5, flexShrink: 0 }}>
-                    <button
-                      ref={el => enrollRefs.current[i] = el}
-                      className={`jp-enroll-btn-new ${st}`}
-                      disabled={st !== 'idle' || detecting}
-                    >
-                      {isWorking && <span className="spinner" style={{ width: 9, height: 9, borderRadius: '50%', border: '1.5px solid rgba(255,255,255,0.3)', borderTopColor: 'white', animation: 'spin 0.8s linear infinite', display: 'inline-block' }} />}
-                      {st === 'sent' ? '✓ Sent' : isWorking ? 'Working…' : 'Enroll'}
-                    </button>
-                  </div>
-                </div>
-
-                {isActive && typed && (st === 'generating' || st === 'sending') && (
-                  <div className="jp-letter-expand">
-                    <div style={{ fontFamily: 'var(--font-mono)', fontSize: 9, color: '#888', letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: 5 }}>
-                      AI Cover Letter · To {j.email}
-                    </div>
-                    <div style={{ fontSize: 10.5, lineHeight: 1.55, color: '#333', whiteSpace: 'pre-wrap', maxHeight: 120, overflow: 'hidden' }}>
-                      {typed}{st === 'generating' && <span className="caret" />}
-                    </div>
-                  </div>
-                )}
-              </div>
-            );
-          })}
+          <span style={{ fontSize: 12.5, fontWeight: 700, color: 'white', letterSpacing: '-0.01em', flex: 1 }}>JobPilot</span>
+          <span style={{ fontSize: 9.5, padding: '2px 8px', borderRadius: 5, border: '1px solid rgba(255,255,255,0.14)', color: 'rgba(255,255,255,0.6)' }}>Dashboard</span>
         </div>
-      ) : (
-        <div className="jp-sidebar-body">
+        <div className="jp-sidebar-body" style={{ background: '#0d0d0d' }}>
           <div className="jp-dash-stats-row">
             {[
-              { k: 'Sent', v: dashStats.sent, color: '#444' },
-              { k: 'Opened', v: dashStats.opened, color: 'var(--accent)' },
-              { k: 'Replied', v: dashStats.replied, color: '#057642' },
+              { k: 'Sent', v: dashStats.sent, color: 'rgba(255,255,255,0.8)' },
+              { k: 'Opened', v: dashStats.opened, color: '#60a5fa' },
+              { k: 'Replied', v: dashStats.replied, color: '#4ade80' },
             ].map(({ k, v, color }) => (
               <div key={k} className="jp-dash-stat-cell">
                 <div style={{ fontSize: 24, fontWeight: 700, letterSpacing: '-0.04em', color }}>{v}</div>
-                <div style={{ fontSize: 10, color: '#666', textTransform: 'uppercase', letterSpacing: '0.05em', fontFamily: 'var(--font-mono)' }}>{k}</div>
+                <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.3)', textTransform: 'uppercase', letterSpacing: '0.05em', fontFamily: 'var(--font-mono)' }}>{k}</div>
               </div>
             ))}
           </div>
-
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             {dashRows.map((row, i) => (
-              <div key={i} className={`jp-dash-app-row${row.status === 'replied' ? ' replied' : ''}`}>
+              <div key={i} className={`jp-dash-app-row${row.status === 'replied' ? ' replied' : ''}`} style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
                 <div className="jp-job-logo-sm" style={{ background: row.job.bg, flexShrink: 0 }}>{row.job.logo}</div>
                 <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{ fontSize: 11.5, fontWeight: 600, color: '#1a1a1a' }}>{row.job.co}</div>
-                  <div style={{ fontSize: 10, color: '#666', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{row.job.email}</div>
+                  <div style={{ fontSize: 11.5, fontWeight: 600, color: 'rgba(255,255,255,0.85)' }}>{row.job.co}</div>
+                  <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.3)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{row.job.email}</div>
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 2 }}>
                   <span className={`jp-status-pill ${row.status}`}>{row.status}</span>
-                  <span style={{ fontSize: 9, color: '#999', fontFamily: 'var(--font-mono)' }}>{row.time}</span>
+                  <span style={{ fontSize: 9, color: 'rgba(255,255,255,0.25)', fontFamily: 'var(--font-mono)' }}>{row.time}</span>
                 </div>
               </div>
             ))}
           </div>
-
           {replyVisible && (
-            <div className="jp-reply-card">
+            <div className="jp-reply-card" style={{ background: 'rgba(5,118,66,0.1)', border: '1px solid rgba(5,118,66,0.25)', borderRadius: 10 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 7, marginBottom: 8 }}>
                 <div style={{ width: 24, height: 24, borderRadius: '50%', background: 'linear-gradient(135deg,#f0a17a,#d8543e)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 700, fontSize: 10, flexShrink: 0 }}>M</div>
                 <div style={{ flex: 1 }}>
-                  <div style={{ fontSize: 12, fontWeight: 600, color: '#1a1a1a' }}>Marcus Webb · Northwind</div>
-                  <div style={{ fontSize: 10, color: '#888' }}>2 hours ago</div>
+                  <div style={{ fontSize: 12, fontWeight: 600, color: 'rgba(255,255,255,0.85)' }}>Marcus Webb · Northwind</div>
+                  <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.35)' }}>2 hours ago</div>
                 </div>
-                <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#057642', display: 'inline-block' }} />
+                <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#4ade80', display: 'inline-block' }} />
               </div>
-              <div style={{ fontSize: 12, color: '#333', lineHeight: 1.5 }}>
-                "This stood out from 240+ applications. <strong style={{ color: '#1a1a1a' }}>Forwarding to Priya</strong> (Head of Eng) — she'll reach out this week."
+              <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.7)', lineHeight: 1.5 }}>
+                "This stood out from 240+ applications. <strong style={{ color: 'white' }}>Forwarding to Priya</strong> — she'll reach out this week."
               </div>
               <div style={{ display: 'flex', gap: 5, marginTop: 9 }}>
                 <span className="jp-status-pill replied">Replied</span>
@@ -161,16 +72,97 @@ function JPPanel({ detecting, jobStates, activeJobIdx, typed, showDash, dashStat
             </div>
           )}
         </div>
-      )}
+      </div>
+    );
+  }
+
+  return (
+    <div className="jp-sidebar" style={{ background: '#0d0d0d', borderLeft: '1px solid rgba(255,255,255,0.07)' }}>
+      {/* Header */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '10px 12px', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+        <div style={{ width: 18, height: 18, borderRadius: 4, background: 'linear-gradient(135deg,#6366f1,#4338ca)', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <span style={{ color: 'white', fontSize: 7.5, fontWeight: 800 }}>JP</span>
+        </div>
+        <span style={{ fontSize: 12.5, fontWeight: 700, color: 'white', letterSpacing: '-0.01em', flex: 1 }}>JobPilot</span>
+        <span style={{ fontSize: 9.5, padding: '2px 7px', borderRadius: 5, border: '1px solid rgba(255,255,255,0.14)', color: 'rgba(255,255,255,0.6)', cursor: 'pointer' }}>Dashboard</span>
+        <span style={{ fontSize: 15, color: 'rgba(255,255,255,0.22)', cursor: 'pointer', lineHeight: 1, marginLeft: 2 }}>−</span>
+      </div>
+
+      {/* Credits used today */}
+      <div style={{ padding: '6px 12px 7px', fontSize: 10.5, color: 'rgba(255,255,255,0.32)', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
+        {sentToday} of 42 credits used today
+      </div>
+
+      {/* Stats row */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', padding: '10px 8px', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
+        {[
+          { k: 'ENROLLED', v: stats.enrolled },
+          { k: 'SENT', v: stats.sent },
+          { k: 'REPLIED', v: stats.replied },
+        ].map(({ k, v }) => (
+          <div key={k} style={{ textAlign: 'center' }}>
+            <div style={{ fontSize: 20, fontWeight: 700, color: 'white', letterSpacing: '-0.04em', lineHeight: 1 }}>{v}</div>
+            <div style={{ fontSize: 7.5, color: 'rgba(255,255,255,0.28)', fontFamily: 'var(--font-mono)', letterSpacing: '0.07em', marginTop: 4, textTransform: 'uppercase' }}>{k}</div>
+          </div>
+        ))}
+      </div>
+
+      {/* Active job card */}
+      <div style={{ padding: '10px 12px', borderBottom: '1px solid rgba(255,255,255,0.06)', minHeight: 64 }}>
+        {activeJob ? (
+          <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
+            <div style={{ width: 36, height: 36, borderRadius: 8, background: activeJob.bg, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 700, fontSize: 14, flexShrink: 0 }}>{activeJob.logo}</div>
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <div style={{ fontSize: 12, fontWeight: 600, color: 'white', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', lineHeight: 1.3 }}>{activeJob.title}</div>
+              <div style={{ fontSize: 10.5, color: 'rgba(255,255,255,0.38)', marginTop: 3 }}>{activeJob.co}</div>
+            </div>
+          </div>
+        ) : (
+          <div style={{ display: 'flex', alignItems: 'center', gap: 7, color: 'rgba(255,255,255,0.28)', fontSize: 11 }}>
+            <span className="dotpulse" />
+            Detecting active job…
+          </div>
+        )}
+      </div>
+
+      {/* CTA button */}
+      <div style={{ padding: '11px 12px' }}>
+        {phase === 'detecting' && (
+          <div style={{ width: '100%', padding: '9px 0', borderRadius: 8, background: 'rgba(37,99,235,0.15)', border: '1px solid rgba(37,99,235,0.18)', color: 'rgba(255,255,255,0.22)', fontWeight: 600, fontSize: 12, textAlign: 'center' }}>
+            Send Application — 1 credit
+          </div>
+        )}
+        {phase === 'ready' && (
+          <button ref={sendBtnRef} style={{ width: '100%', padding: '9px 0', borderRadius: 8, background: '#2563eb', color: 'white', fontWeight: 600, fontSize: 12, border: 'none', cursor: 'pointer', display: 'block' }}>
+            Send Application — 1 credit
+          </button>
+        )}
+        {phase === 'sending' && (
+          <div style={{ width: '100%', padding: '9px 0', borderRadius: 8, background: '#1d4ed8', color: 'rgba(255,255,255,0.7)', fontWeight: 600, fontSize: 12, textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7 }}>
+            <span style={{ width: 10, height: 10, borderRadius: '50%', border: '1.5px solid rgba(255,255,255,0.3)', borderTopColor: 'white', animation: 'spin 0.8s linear infinite', display: 'inline-block' }} />
+            Sending…
+          </div>
+        )}
+        {phase === 'sent' && (
+          <div style={{ width: '100%', padding: '9px 0', borderRadius: 8, background: 'rgba(5,118,66,0.16)', border: '1px solid rgba(5,118,66,0.35)', color: '#4ade80', fontWeight: 600, fontSize: 12, textAlign: 'center' }}>
+            ✓ Application Sent
+          </div>
+        )}
+        <div style={{ textAlign: 'center', fontSize: 9.5, color: 'rgba(255,255,255,0.2)', marginTop: 6 }}>
+          Personalized email sent from your Gmail.
+        </div>
+      </div>
     </div>
   );
 }
 
 function HeroDemo() {
-  const [jobStates, setJobStates] = useState(['idle', 'idle', 'idle']);
-  const [activeJobIdx, setActiveJobIdx] = useState(null);
-  const [detecting, setDetecting] = useState(true);
-  const [typed, setTyped] = useState('');
+  const [phase, setPhase] = useState('detecting');
+  const [selectedJobIdx, setSelectedJobIdx] = useState(null);
+  const [activeJob, setActiveJob] = useState(null);
+  const [sentJobs, setSentJobs] = useState([]);
+  const [sentToday, setSentToday] = useState(0);
+  const [stats, setStats] = useState({ enrolled: 4, sent: 2, replied: 1 });
   const [showDash, setShowDash] = useState(false);
   const [dashStats, setDashStats] = useState({ sent: 0, opened: 0, replied: 0 });
   const [dashRows, setDashRows] = useState([]);
@@ -179,7 +171,8 @@ function HeroDemo() {
   const [curClick, setCurClick] = useState(false);
 
   const browserRef = useRef(null);
-  const enrollRefs = useRef([]);
+  const jobCardRefs = useRef([]);
+  const sendBtnRef = useRef(null);
 
   const moveTo = (el, dx = 0, dy = 0) => {
     if (!el || !browserRef.current) return;
@@ -188,76 +181,85 @@ function HeroDemo() {
     setCur({ x: tr.left - br.left + tr.width / 2 + dx, y: tr.top - br.top + tr.height / 2 + dy });
   };
 
-  const setJobState = (idx, state) =>
-    setJobStates(prev => { const n = [...prev]; n[idx] = state; return n; });
-
   useEffect(() => {
     let dead = false;
     const ts = [];
     const wait = ms => new Promise(r => { const t = setTimeout(r, ms); ts.push(t); });
 
-    const enrollJob = async (idx) => {
-      const btn = enrollRefs.current[idx];
-      if (btn) moveTo(btn);
-      await wait(900);
+    const sendJob = async (idx) => {
+      // Move cursor to job card in left panel
+      const card = jobCardRefs.current[idx];
+      if (card) moveTo(card, 0, 0);
+      await wait(750);
       if (dead) return;
+
+      // Click job card
       setCurClick(true);
-      await wait(160);
+      await wait(140);
       setCurClick(false);
-      setJobState(idx, 'working');
-      setActiveJobIdx(idx);
-      setTyped('');
+      setSelectedJobIdx(idx);
+      setPhase('detecting');
+      setActiveJob(null);
+      await wait(500);
+      if (dead) return;
+
+      // Extension detects the job
+      setActiveJob(JOBS[idx]);
+      setPhase('ready');
+      await wait(550);
+      if (dead) return;
+
+      // Move cursor to Send button
+      if (sendBtnRef.current) moveTo(sendBtnRef.current);
       await wait(700);
       if (dead) return;
-      setJobState(idx, 'generating');
-      const letter = LETTERS[idx];
-      for (let i = 0; i <= letter.length; i += 3) {
-        if (dead) return;
-        setTyped(letter.slice(0, i));
-        await wait(idx === 0 ? 18 : 11);
-      }
-      setTyped(letter);
-      await wait(400);
-      if (dead) return;
-      setJobState(idx, 'sending');
+
+      // Click Send button
+      setCurClick(true);
+      await wait(140);
+      setCurClick(false);
+      setPhase('sending');
       await wait(900);
       if (dead) return;
-      setJobState(idx, 'sent');
-      setActiveJobIdx(null);
-      setTyped('');
+
+      setPhase('sent');
+      setSentJobs(prev => [...prev, idx]);
+      setSentToday(prev => prev + 1);
+      setStats(prev => ({ ...prev, sent: prev.sent + 1 }));
+      await wait(1100);
+      if (dead) return;
     };
 
     const run = async () => {
       while (!dead) {
-        setJobStates(['idle', 'idle', 'idle']);
-        setActiveJobIdx(null);
-        setTyped('');
-        setDetecting(true);
+        // Reset state
+        setPhase('detecting');
+        setSelectedJobIdx(null);
+        setActiveJob(null);
+        setSentJobs([]);
+        setSentToday(0);
+        setStats({ enrolled: 4, sent: 2, replied: 1 });
         setShowDash(false);
         setDashStats({ sent: 0, opened: 0, replied: 0 });
         setDashRows([]);
         setReplyVisible(false);
         setCur({ x: 320, y: 28 });
-        await wait(1000);
+        await wait(1100);
         if (dead) return;
 
-        await wait(1400);
-        if (dead) return;
-        setDetecting(false);
-        await wait(900);
-
-        await enrollJob(0);
+        await sendJob(0);
         if (dead) return;
         await wait(400);
 
-        await enrollJob(1);
+        await sendJob(1);
         if (dead) return;
         await wait(400);
 
-        await enrollJob(2);
+        await sendJob(2);
         if (dead) return;
-        await wait(800);
+        await wait(700);
 
+        // Transition to dashboard
         setShowDash(true);
         setDashRows([
           { job: JOBS[0], status: 'sent', time: '3h ago' },
@@ -265,16 +267,16 @@ function HeroDemo() {
           { job: JOBS[2], status: 'sent', time: '1h ago' },
         ]);
         setDashStats({ sent: 3, opened: 0, replied: 0 });
-        await wait(1500);
+        await wait(1400);
         if (dead) return;
         setDashStats(s => ({ ...s, opened: 1 }));
         setDashRows(prev => { const n = [...prev]; n[0] = { ...n[0], status: 'opened' }; return n; });
-        await wait(1300);
+        await wait(1200);
         if (dead) return;
         setDashStats(s => ({ ...s, replied: 1 }));
         setDashRows(prev => { const n = [...prev]; n[0] = { ...n[0], status: 'replied' }; return n; });
         setReplyVisible(true);
-        await wait(3800);
+        await wait(3600);
         if (dead) return;
       }
     };
@@ -282,6 +284,9 @@ function HeroDemo() {
     run();
     return () => { dead = true; ts.forEach(clearTimeout); };
   }, []);
+
+  const detailJob = selectedJobIdx !== null ? JOBS[selectedJobIdx] : JOBS[0];
+  const detailMeta = selectedJobIdx !== null ? JOB_META[selectedJobIdx] : JOB_META[0];
 
   return (
     <div className="browser" ref={browserRef}>
@@ -323,7 +328,11 @@ function HeroDemo() {
             <div style={{ fontSize: 10, color: '#666', paddingTop: 4, fontFamily: 'var(--font-mono)' }}>99+ results</div>
           </div>
           {JOBS.map((j, i) => (
-            <div key={j.id} className={`lin-job-card${i === 0 ? ' sel' : ''}${jobStates[i] === 'sent' ? ' applied' : ''}`}>
+            <div
+              key={j.id}
+              ref={el => jobCardRefs.current[i] = el}
+              className={`lin-job-card${selectedJobIdx === i ? ' sel' : ''}${sentJobs.includes(i) ? ' applied' : ''}`}
+            >
               <div className="lin-job-logo" style={{ background: j.bg }}>{j.logo}</div>
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div className="lin-job-title">{j.title}</div>
@@ -331,37 +340,37 @@ function HeroDemo() {
                 <div className="lin-job-time">{JOB_META[i].time} · {JOB_META[i].applicants}</div>
                 <div style={{ display: 'flex', gap: 4, marginTop: 4 }}>
                   <span className="lin-badge-easy">Easy Apply</span>
-                  {jobStates[i] === 'sent' && <span className="lin-badge-applied">✓ Applied</span>}
+                  {sentJobs.includes(i) && <span className="lin-badge-applied">✓ Applied</span>}
                 </div>
               </div>
             </div>
           ))}
         </div>
 
-        {/* CENTER: LinkedIn detail — first job always pre-shown */}
+        {/* CENTER: LinkedIn job detail — updates with selected job */}
         <div style={{ flex: 1, background: 'white', padding: '14px 16px', overflow: 'hidden', minWidth: 0, borderRight: '1px solid #e0dfdc' }}>
           <div style={{ display: 'flex', gap: 9, alignItems: 'center', marginBottom: 9 }}>
-            <div style={{ width: 32, height: 32, borderRadius: 6, background: '#1e3a5f', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, fontWeight: 700, flexShrink: 0 }}>N</div>
+            <div style={{ width: 32, height: 32, borderRadius: 6, background: detailJob.bg, color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, fontWeight: 700, flexShrink: 0 }}>{detailJob.logo}</div>
             <div>
-              <div style={{ fontSize: 11.5, color: '#0a66c2', fontWeight: 600 }}>Northwind</div>
+              <div style={{ fontSize: 11.5, color: '#0a66c2', fontWeight: 600 }}>{detailJob.co}</div>
               <div style={{ fontSize: 10, color: '#666' }}>Series A · 48 employees · San Francisco</div>
             </div>
           </div>
-          <h3 style={{ fontSize: 16, fontWeight: 700, color: '#1a1a1a', letterSpacing: '-0.015em', margin: '0 0 5px', lineHeight: 1.2 }}>Founding Product Engineer</h3>
+          <h3 style={{ fontSize: 16, fontWeight: 700, color: '#1a1a1a', letterSpacing: '-0.015em', margin: '0 0 5px', lineHeight: 1.2 }}>{detailJob.title}</h3>
           <div style={{ fontSize: 11, color: '#555', marginBottom: 8, display: 'flex', gap: 5, flexWrap: 'wrap', alignItems: 'center' }}>
-            <span>Remote</span>
+            <span>{detailJob.loc}</span>
             <span style={{ width: 3, height: 3, borderRadius: '50%', background: '#ccc', display: 'inline-block' }} />
-            <span>2 days ago</span>
+            <span>{detailMeta.time}</span>
             <span style={{ width: 3, height: 3, borderRadius: '50%', background: '#ccc', display: 'inline-block' }} />
-            <span>784 applicants · Promoted</span>
+            <span>{detailMeta.applicants} · Promoted</span>
           </div>
           <div style={{ display: 'flex', gap: 5, marginBottom: 10 }}>
-            <button style={{ padding: '6px 11px', borderRadius: 5, background: '#0a66c2', color: 'white', fontSize: 12, fontWeight: 600, border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 4 }}>Easy Apply</button>
+            <button style={{ padding: '6px 11px', borderRadius: 5, background: '#0a66c2', color: 'white', fontSize: 12, fontWeight: 600, border: 'none', cursor: 'pointer' }}>Easy Apply</button>
             <button style={{ padding: '6px 10px', borderRadius: 5, border: '1px solid #c8c7c4', background: 'white', color: '#333', fontSize: 12, fontWeight: 600, cursor: 'pointer' }}>Save</button>
           </div>
           <div style={{ padding: '8px 10px', background: '#f0faf5', borderRadius: 7, border: '1px solid #b8e6cc', display: 'flex', alignItems: 'flex-start', gap: 7, marginBottom: 12, fontSize: 11.5 }}>
             <span style={{ color: '#057642', fontSize: 13, flexShrink: 0 }}>✦</span>
-            <span style={{ color: '#1a1a1a' }}><strong>Top applicant</strong> — your profile matches 94% of the JD</span>
+            <span style={{ color: '#1a1a1a' }}><strong>Top applicant</strong> — your profile matches {detailJob.match}% of the JD</span>
           </div>
           <div style={{ fontSize: 12.5, fontWeight: 700, color: '#1a1a1a', marginBottom: 6 }}>About the job</div>
           {[98, 85, 72, 90, 60, 78, 68].map((w, i) => (
@@ -385,19 +394,19 @@ function HeroDemo() {
 
         {/* RIGHT: JobPilot extension panel */}
         <JPPanel
-          detecting={detecting}
-          jobStates={jobStates}
-          activeJobIdx={activeJobIdx}
-          typed={typed}
+          phase={phase}
+          activeJob={activeJob}
+          sentToday={sentToday}
+          stats={stats}
+          sendBtnRef={sendBtnRef}
           showDash={showDash}
           dashStats={dashStats}
           dashRows={dashRows}
           replyVisible={replyVisible}
-          enrollRefs={enrollRefs}
         />
       </div>
 
-      {/* Cursor sits outside the body div so it's relative to .browser */}
+      {/* Cursor */}
       <div
         className={`hero-cursor${curClick ? ' clicking' : ''}`}
         style={{ left: cur.x, top: cur.y }}
