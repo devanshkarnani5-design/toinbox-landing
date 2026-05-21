@@ -264,18 +264,20 @@ function HiwSentPanel() {
     return () => timers.forEach(clearTimeout);
   }, []);
   return (
-    <div style={{ position: 'relative', overflow: 'visible', flex: 1, display: 'flex', flexDirection: 'column' }}>
-      <div className="jp-sidebar-body">
-        <div className="jp-detect-status"><span className="ok-dot" /> Sent successfully</div>
-        <div style={{ padding: '16px 12px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10, textAlign: 'center' }}>
-          <div style={{ width: 44, height: 44, borderRadius: '50%', background: '#e6f4ea', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20 }}>✓</div>
+    <div style={{ position: 'relative', overflow: 'visible', flex: 1, display: 'flex', flexDirection: 'column', background: '#0d0d0d' }}>
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden', padding: '10px 10px 8px', gap: 8 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 7, fontSize: 10.5, fontFamily: 'var(--font-mono)', letterSpacing: '0.04em', textTransform: 'uppercase', color: '#4ade80', paddingBottom: 4 }}>
+          <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#4ade80', display: 'inline-block' }} /> Sent successfully
+        </div>
+        <div style={{ padding: '14px 10px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10, textAlign: 'center' }}>
+          <div style={{ width: 44, height: 44, borderRadius: '50%', background: 'rgba(5,118,66,0.15)', border: '1px solid rgba(5,118,66,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20 }}>✓</div>
           <div>
-            <div style={{ fontSize: 12, fontWeight: 600, color: '#1a1a1a' }}>Sent to m.v@northwind.co</div>
-            <div style={{ fontSize: 10.5, color: '#666', marginTop: 3 }}>Resume attached · delivery confirmed</div>
+            <div style={{ fontSize: 12, fontWeight: 600, color: 'rgba(255,255,255,0.85)' }}>Sent to m.v@northwind.co</div>
+            <div style={{ fontSize: 10.5, color: 'rgba(255,255,255,0.35)', marginTop: 3 }}>Resume attached · delivery confirmed</div>
           </div>
         </div>
-        <div style={{ padding: '0 10px 10px' }}>
-          <div style={{ width: '100%', padding: '10px 0', borderRadius: 8, background: 'var(--ink)', color: 'white', fontWeight: 600, fontSize: 12, border: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7, animation: 'pulseGlow 2s ease infinite' }}>
+        <div style={{ padding: '0 2px' }}>
+          <div style={{ width: '100%', padding: '9px 0', borderRadius: 8, background: 'rgba(99,102,241,0.18)', border: '1px solid rgba(99,102,241,0.3)', color: 'rgba(255,255,255,0.8)', fontWeight: 600, fontSize: 12, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7, animation: 'pulseGlow 2s ease infinite' }}>
             📊 View Dashboard →
           </div>
         </div>
@@ -285,7 +287,7 @@ function HiwSentPanel() {
         position: 'absolute', left: 80, top: 155, pointerEvents: 'none', zIndex: 99,
         transition: 'transform 0.12s ease',
         transform: clicking ? 'scale(0.74)' : 'scale(1)',
-        filter: clicking ? 'drop-shadow(0 0 8px rgba(99,102,241,1))' : 'drop-shadow(0 1px 4px rgba(0,0,0,0.4))',
+        filter: clicking ? 'drop-shadow(0 0 8px rgba(99,102,241,1))' : 'drop-shadow(0 1px 4px rgba(0,0,0,0.5))',
       }}>
         <Icon name="cursor" size={22} />
       </div>
@@ -298,38 +300,40 @@ function HiwLinkedIn({ step, typed }) {
   const jpPanel = () => {
     // Step 0: detect + enroll with animated cursor
     if (step === 0) return <HiwEnrollPanel />;
-    // Step 1: AI scanning (was step 2)
+    // Step 1: AI scanning
     if (step === 1) return (
-      <div className="jp-sidebar-body">
-        <div className="jp-detect-status"><span className="dotpulse" /> AI analyzing…</div>
-        <div style={{ padding: '8px 8px 0', display: 'flex', flexDirection: 'column', gap: 6 }}>
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden', padding: '10px 10px 8px', gap: 6, background: '#0d0d0d' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 7, fontSize: 10.5, fontFamily: 'var(--font-mono)', letterSpacing: '0.04em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', paddingBottom: 4 }}>
+          <span className="dotpulse" /> AI analyzing…
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 6, padding: '2px 0' }}>
           {[
             { k: 'Resume parsed', v: '14 signals' },
             { k: 'JD analyzed', v: '9 keywords' },
             { k: 'Founder found', v: 'm.v@northwind.co' },
           ].map(({ k, v }, i) => (
-            <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 7, padding: '7px 9px', background: '#f0faf5', border: '1px solid #b8e6cc', borderRadius: 7 }}>
-              <span style={{ fontSize: 10, color: '#057642' }}>✓</span>
-              <span style={{ fontSize: 11, flex: 1, color: '#1a1a1a' }}>{k}</span>
-              <span style={{ fontSize: 9.5, color: '#057642', fontFamily: 'var(--font-mono)', fontWeight: 600 }}>{v}</span>
+            <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 7, padding: '7px 9px', background: 'rgba(5,118,66,0.1)', border: '1px solid rgba(5,118,66,0.22)', borderRadius: 7 }}>
+              <span style={{ fontSize: 10, color: '#4ade80' }}>✓</span>
+              <span style={{ fontSize: 11, flex: 1, color: 'rgba(255,255,255,0.8)' }}>{k}</span>
+              <span style={{ fontSize: 9.5, color: '#4ade80', fontFamily: 'var(--font-mono)', fontWeight: 600 }}>{v}</span>
             </div>
           ))}
         </div>
       </div>
     );
-    // Step 2: cover letter generation (was step 3)
+    // Step 2: cover letter generation
     if (step === 2) return (
-      <div className="jp-sidebar-body">
-        <div className="jp-detect-status"><span className="dotpulse" /> Generating…</div>
-        <div style={{ flex: 1, padding: '6px 8px 0', display: 'flex', flexDirection: 'column', gap: 5 }}>
-          <div style={{ fontSize: 9, fontFamily: 'var(--font-mono)', color: '#888', textTransform: 'uppercase', letterSpacing: '0.06em' }}>To · m.v@northwind.co</div>
-          <div style={{ fontSize: 10.5, lineHeight: 1.55, color: '#333', whiteSpace: 'pre-wrap', flex: 1, overflow: 'hidden' }}>
-            {typed}<span className="caret" />
-          </div>
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden', padding: '10px 10px 8px', gap: 5, background: '#0d0d0d' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 7, fontSize: 10.5, fontFamily: 'var(--font-mono)', letterSpacing: '0.04em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', paddingBottom: 4 }}>
+          <span className="dotpulse" /> Generating…
+        </div>
+        <div style={{ fontSize: 9, fontFamily: 'var(--font-mono)', color: 'rgba(255,255,255,0.25)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>To · m.v@northwind.co</div>
+        <div style={{ fontSize: 10.5, lineHeight: 1.55, color: 'rgba(255,255,255,0.7)', whiteSpace: 'pre-wrap', flex: 1, overflow: 'hidden' }}>
+          {typed}<span className="caret" />
         </div>
       </div>
     );
-    // Step 3: sent — uses HiwSentPanel which includes animated cursor
+    // Step 3: sent
     if (step === 3) return <HiwSentPanel />;
     return null;
   };
@@ -394,25 +398,16 @@ function HiwLinkedIn({ step, typed }) {
         </div>
       </div>
 
-      {/* JP sidebar */}
-      <div style={{ width: 220, flexShrink: 0, background: step === 0 ? '#0d0d0d' : 'white', display: 'flex', flexDirection: 'column', boxShadow: '-2px 0 10px rgba(0,0,0,0.06)' }}>
-        {step !== 0 && (
-          <div style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '7px 10px', borderBottom: '1px solid #f0ede8', flexShrink: 0 }}>
-            <div style={{ width: 16, height: 16, borderRadius: 4, background: 'linear-gradient(135deg, oklch(0.65 0.21 252), oklch(0.42 0.2 270))' }} />
-            <span style={{ fontSize: 11.5, fontWeight: 700, color: '#1a1a1a' }}>JobPilot</span>
-            <span style={{ marginLeft: 'auto', fontSize: 9, padding: '2px 6px', borderRadius: 999, background: 'var(--accent-soft)', color: 'var(--accent-ink)', fontFamily: 'var(--font-mono)' }}>42 credits</span>
+      {/* JP sidebar — always dark */}
+      <div style={{ width: 220, flexShrink: 0, background: '#0d0d0d', display: 'flex', flexDirection: 'column', boxShadow: '-2px 0 12px rgba(0,0,0,0.18)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 7, padding: '9px 11px', borderBottom: '1px solid rgba(255,255,255,0.07)', flexShrink: 0 }}>
+          <div style={{ width: 15, height: 15, borderRadius: 3, background: 'linear-gradient(135deg,#6366f1,#4338ca)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <span style={{ color: 'white', fontSize: 6.5, fontWeight: 800 }}>JP</span>
           </div>
-        )}
-        {step === 0 && (
-          <div style={{ display: 'flex', alignItems: 'center', gap: 7, padding: '9px 11px', borderBottom: '1px solid rgba(255,255,255,0.07)', flexShrink: 0 }}>
-            <div style={{ width: 15, height: 15, borderRadius: 3, background: 'linear-gradient(135deg,#6366f1,#4338ca)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <span style={{ color: 'white', fontSize: 6.5, fontWeight: 800 }}>JP</span>
-            </div>
-            <span style={{ fontSize: 11.5, fontWeight: 700, color: 'white', flex: 1 }}>JobPilot</span>
-            <span style={{ fontSize: 8.5, padding: '2px 6px', borderRadius: 4, border: '1px solid rgba(255,255,255,0.13)', color: 'rgba(255,255,255,0.5)' }}>Dashboard</span>
-            <span style={{ fontSize: 14, color: 'rgba(255,255,255,0.2)', lineHeight: 1 }}>−</span>
-          </div>
-        )}
+          <span style={{ fontSize: 11.5, fontWeight: 700, color: 'white', flex: 1 }}>JobPilot</span>
+          <span style={{ fontSize: 8.5, padding: '2px 6px', borderRadius: 4, border: '1px solid rgba(255,255,255,0.13)', color: 'rgba(255,255,255,0.5)' }}>Dashboard</span>
+          <span style={{ fontSize: 14, color: 'rgba(255,255,255,0.2)', lineHeight: 1 }}>−</span>
+        </div>
         {jpPanel()}
       </div>
     </div>

@@ -24,14 +24,15 @@ function JPPanel({ phase, activeJob, sentToday, stats, sendBtnRef, showDash, das
           <span style={{ fontSize: 12.5, fontWeight: 700, color: 'white', letterSpacing: '-0.01em', flex: 1 }}>JobPilot</span>
           <span style={{ fontSize: 9.5, padding: '2px 8px', borderRadius: 5, border: '1px solid rgba(255,255,255,0.14)', color: 'rgba(255,255,255,0.6)' }}>Dashboard</span>
         </div>
-        <div className="jp-sidebar-body" style={{ background: '#0d0d0d' }}>
-          <div className="jp-dash-stats-row">
+        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden', padding: '10px 10px 8px', gap: 8, background: '#0d0d0d' }}>
+          {/* Stats row — inline styles to avoid light CSS class backgrounds */}
+          <div style={{ display: 'flex', border: '1px solid rgba(255,255,255,0.09)', borderRadius: 8, overflow: 'hidden', background: 'rgba(255,255,255,0.04)' }}>
             {[
-              { k: 'Sent', v: dashStats.sent, color: 'rgba(255,255,255,0.8)' },
+              { k: 'Sent', v: dashStats.sent, color: 'rgba(255,255,255,0.85)' },
               { k: 'Opened', v: dashStats.opened, color: '#60a5fa' },
               { k: 'Replied', v: dashStats.replied, color: '#4ade80' },
-            ].map(({ k, v, color }) => (
-              <div key={k} className="jp-dash-stat-cell">
+            ].map(({ k, v, color }, i, arr) => (
+              <div key={k} style={{ flex: 1, padding: '10px 8px', textAlign: 'center', borderRight: i < arr.length - 1 ? '1px solid rgba(255,255,255,0.09)' : 'none' }}>
                 <div style={{ fontSize: 24, fontWeight: 700, letterSpacing: '-0.04em', color }}>{v}</div>
                 <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.3)', textTransform: 'uppercase', letterSpacing: '0.05em', fontFamily: 'var(--font-mono)' }}>{k}</div>
               </div>
@@ -39,7 +40,7 @@ function JPPanel({ phase, activeJob, sentToday, stats, sendBtnRef, showDash, das
           </div>
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             {dashRows.map((row, i) => (
-              <div key={i} className={`jp-dash-app-row${row.status === 'replied' ? ' replied' : ''}`} style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
+              <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '7px 0', borderBottom: '1px solid rgba(255,255,255,0.06)', background: row.status === 'replied' ? 'rgba(5,118,66,0.08)' : 'transparent', borderRadius: row.status === 'replied' ? 6 : 0, paddingLeft: row.status === 'replied' ? 4 : 0 }}>
                 <div className="jp-job-logo-sm" style={{ background: row.job.bg, flexShrink: 0 }}>{row.job.logo}</div>
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div style={{ fontSize: 11.5, fontWeight: 600, color: 'rgba(255,255,255,0.85)' }}>{row.job.co}</div>
@@ -162,7 +163,7 @@ function HeroDemo() {
   const [activeJob, setActiveJob] = useState(null);
   const [sentJobs, setSentJobs] = useState([]);
   const [sentToday, setSentToday] = useState(0);
-  const [stats, setStats] = useState({ enrolled: 4, sent: 2, replied: 1 });
+  const [stats, setStats] = useState({ enrolled: 25, sent: 21, replied: 9 });
   const [showDash, setShowDash] = useState(false);
   const [dashStats, setDashStats] = useState({ sent: 0, opened: 0, replied: 0 });
   const [dashRows, setDashRows] = useState([]);
@@ -238,7 +239,7 @@ function HeroDemo() {
         setActiveJob(null);
         setSentJobs([]);
         setSentToday(0);
-        setStats({ enrolled: 4, sent: 2, replied: 1 });
+        setStats({ enrolled: 25, sent: 21, replied: 9 });
         setShowDash(false);
         setDashStats({ sent: 0, opened: 0, replied: 0 });
         setDashRows([]);
