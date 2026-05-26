@@ -1,8 +1,8 @@
-// JobPilot — How It Works: Continuous cinematic simulation
+// ToInbox — How It Works: Continuous cinematic simulation
 const { useState: useStateHIW, useEffect: useEffectHIW, useRef: useRefHIW } = React;
 
 const HIW_STEPS = [
-  { t: 'Click a job — JobPilot detects it instantly', s: 'Click any LinkedIn job and JobPilot immediately detects it in the panel. One button. It finds the founder\'s email, matches your resume, and is ready to send in seconds.' },
+  { t: 'Click a job — ToInbox detects it instantly', s: 'Click any LinkedIn job and ToInbox immediately detects it in the panel. One button. It finds the founder\'s email, matches your resume, and is ready to send in seconds.' },
   { t: 'AI scans resume + JD', s: 'Cross-references your experience and the job description in seconds. Identifies the right signals from your resume automatically.' },
   { t: 'Cover letter generated', s: 'Specific, human-sounding, no template smell. Cites the role, the changelog, the founder by name. Around 160 words.' },
   { t: 'Sent to founder inbox', s: 'Email + resume lands in the founder\'s personal inbox. Skips ATS entirely. No Easy Apply queue.' },
@@ -53,7 +53,7 @@ function HiwDashboard({ replyVisible }) {
       <div style={{ width: 150, flexShrink: 0, background: '#1a1a1a', display: 'flex', flexDirection: 'column', padding: '14px 10px', gap: 4 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '6px 8px', marginBottom: 10 }}>
           <div style={{ width: 20, height: 20, borderRadius: 5, background: 'linear-gradient(135deg, oklch(0.65 0.21 252), oklch(0.42 0.2 270))' }} />
-          <span style={{ fontSize: 12, fontWeight: 700, color: 'white' }}>JobPilot</span>
+          <span style={{ fontSize: 12, fontWeight: 700, color: 'white' }}>ToInbox</span>
         </div>
         {[
           { label: 'Dashboard', active: true, icon: '⊞' },
@@ -401,10 +401,8 @@ function HiwLinkedIn({ step, typed }) {
       {/* JP sidebar — always dark */}
       <div style={{ width: 220, flexShrink: 0, background: '#0d0d0d', display: 'flex', flexDirection: 'column', boxShadow: '-2px 0 12px rgba(0,0,0,0.18)' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 7, padding: '9px 11px', borderBottom: '1px solid rgba(255,255,255,0.07)', flexShrink: 0 }}>
-          <div style={{ width: 15, height: 15, borderRadius: 3, background: 'linear-gradient(135deg,#6366f1,#4338ca)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <span style={{ color: 'white', fontSize: 6.5, fontWeight: 800 }}>JP</span>
-          </div>
-          <span style={{ fontSize: 11.5, fontWeight: 700, color: 'white', flex: 1 }}>JobPilot</span>
+          <div style={{ width: 15, height: 15, borderRadius: 4, flexShrink: 0, background: 'radial-gradient(120% 120% at 20% 10%, rgba(255,255,255,0.5) 0%, transparent 40%), linear-gradient(135deg, oklch(0.65 0.21 252), oklch(0.42 0.2 270))', boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.22)' }} />
+          <span style={{ fontSize: 11.5, fontWeight: 700, color: 'white', flex: 1 }}>ToInbox</span>
           <span style={{ fontSize: 8.5, padding: '2px 6px', borderRadius: 4, border: '1px solid rgba(255,255,255,0.13)', color: 'rgba(255,255,255,0.5)' }}>Dashboard</span>
           <span style={{ fontSize: 14, color: 'rgba(255,255,255,0.2)', lineHeight: 1 }}>−</span>
         </div>
@@ -436,12 +434,10 @@ function HowitworksBrowser({ step, typed, replyVisible }) {
         <div style={{ flex: 1, height: 22, borderRadius: 5, background: isDash ? 'white' : '#f3f2ef', border: '1px solid var(--line)', display: 'flex', alignItems: 'center', padding: '0 9px', fontSize: 10, color: '#555', fontFamily: 'var(--font-mono)', gap: 5, minWidth: 0, overflow: 'hidden', marginLeft: isDash ? 12 : 0 }}>
           <Icon name="lock" size={9} />
           <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-            {isDash ? 'app.jobpilot.co/dashboard' : 'linkedin.com/jobs/search/?keywords=founding+engineer'}
+            {isDash ? 'app.toinbox.co/dashboard' : 'linkedin.com/jobs/search/?keywords=founding+engineer'}
           </span>
         </div>
-        <div style={{ width: 20, height: 20, borderRadius: 5, background: 'linear-gradient(135deg, oklch(0.65 0.21 252), oklch(0.42 0.2 270))', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-          <span style={{ color: 'white', fontSize: 7.5, fontWeight: 700 }}>JP</span>
-        </div>
+        <div style={{ width: 20, height: 20, borderRadius: 5, flexShrink: 0, background: 'radial-gradient(120% 120% at 20% 10%, rgba(255,255,255,0.5) 0%, transparent 40%), linear-gradient(135deg, oklch(0.65 0.21 252), oklch(0.42 0.2 270))', boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.22)' }} />
       </div>
 
       {isDash
@@ -559,7 +555,7 @@ function HowItWorks() {
         <div className="section-head" data-reveal>
           <span className="eyebrow"><span className="dot" />How it works</span>
           <h2 className="h-section">From LinkedIn tab to founder inbox<br />in fifteen seconds.</h2>
-          <p className="lead">JobPilot lives inside the LinkedIn workflow you already use. Watch it happen live.</p>
+          <p className="lead">ToInbox lives inside the LinkedIn workflow you already use. Watch it happen live.</p>
         </div>
 
         <div className="hiw-cinema-grid" data-reveal>

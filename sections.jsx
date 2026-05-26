@@ -1,4 +1,4 @@
-// JobPilot — Benefits, Demo, Testimonials, Pricing, Final CTA
+// ToInbox — Benefits, Demo, Testimonials, Pricing, Final CTA
 const { useEffect: useEffectS } = React;
 
 function Benefits() {
@@ -74,7 +74,7 @@ function DemoShowcase() {
               <span style={{ width: 11, height: 11, borderRadius: '50%', background: '#28c941', display: 'inline-block' }} />
             </div>
             <div style={{ flex: 1, height: 26, borderRadius: 7, background: 'var(--bg-elev)', border: '1px solid var(--line)', display: 'flex', alignItems: 'center', padding: '0 10px', gap: 7, fontSize: 12, color: 'var(--ink-4)', fontFamily: 'var(--font-mono)' }}>
-              <Icon name="lock" size={11} /> app.jobpilot.co/dashboard
+              <Icon name="lock" size={11} /> app.toinbox.co/dashboard
             </div>
           </div>
 
@@ -84,7 +84,7 @@ function DemoShowcase() {
             <div style={{ width: 192, flexShrink: 0, background: '#111', display: 'flex', flexDirection: 'column', padding: '20px 12px', gap: 4 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '4px 8px', marginBottom: 16 }}>
                 <div style={{ width: 24, height: 24, borderRadius: 6, background: 'linear-gradient(135deg, oklch(0.65 0.21 252), oklch(0.42 0.2 270))' }} />
-                <span style={{ fontSize: 14, fontWeight: 700, color: 'white', letterSpacing: '-0.02em' }}>JobPilot</span>
+                <span style={{ fontSize: 14, fontWeight: 700, color: 'white', letterSpacing: '-0.02em' }}>ToInbox</span>
               </div>
               {[
                 { icon: '⊞', label: 'Dashboard', active: true },
@@ -208,7 +208,7 @@ const INBOX_THREADS = [
     preview: 'This stood out from the 240+ applications we got…',
     tag: 'INTERVIEW →', tagColor: '#1a56db', tagBg: '#e8f0ff',
     thread: [
-      { from: 'Arjun (via JobPilot)', time: 'Mon 6:02 AM', dir: 'sent', attachment: 'resume_arjun.pdf', body: `Hey Marcus,\n\nI came across the Founding Product Engineer opening at Northwind and wanted to reach out directly — felt like the right move rather than applying through a portal.\n\nI've been building products from scratch for about three years now, mostly using TypeScript, Go, and Postgres. I joined a startup as the third engineer, and by the time I left, the product had grown from 2,000 to 80,000 monthly users. I handled everything from the database design to user-facing features to being the person who got paged at 2 AM when something broke — and fixed it.\n\nI've learned that the early decisions on a product are the ones that come back to haunt you. I try really hard to get those right — not over-engineer, but not cut corners that cost more to fix six months later either.\n\nI also noticed you just shipped v3 — the new dashboard flow is genuinely impressive. You can tell a lot of thought went into how users actually move through the product.\n\nMy resume is attached. Would love to connect if this sounds like a fit.\n\nBest,\nArjun` },
+      { from: 'Arjun (via ToInbox)', time: 'Mon 6:02 AM', dir: 'sent', attachment: 'resume_arjun.pdf', body: `Hey Marcus,\n\nI came across the Founding Product Engineer opening at Northwind and wanted to reach out directly — felt like the right move rather than applying through a portal.\n\nI've been building products from scratch for about three years now, mostly using TypeScript, Go, and Postgres. I joined a startup as the third engineer, and by the time I left, the product had grown from 2,000 to 80,000 monthly users. I handled everything from the database design to user-facing features to being the person who got paged at 2 AM when something broke — and fixed it.\n\nI've learned that the early decisions on a product are the ones that come back to haunt you. I try really hard to get those right — not over-engineer, but not cut corners that cost more to fix six months later either.\n\nI also noticed you just shipped v3 — the new dashboard flow is genuinely impressive. You can tell a lot of thought went into how users actually move through the product.\n\nMy resume is attached. Would love to connect if this sounds like a fit.\n\nBest,\nArjun` },
       { from: 'Marcus Webb', time: 'Tue 3:20 PM', dir: 'recv', body: `Arjun —\n\nThis stood out from the 240+ applications we got this week. The v3 reference — that tells me you actually read what we shipped.\n\nForwarding to Priya (Head of Eng). She'll set up a chat this week.\n\n— Marcus` },
     ],
   },
@@ -221,7 +221,7 @@ const INBOX_THREADS = [
     preview: 'Most candidates send the same Notion template…',
     tag: 'INTERVIEW SET', tagColor: '#057642', tagBg: '#e6f4ea',
     thread: [
-      { from: 'Arjun (via JobPilot)', time: 'Tue 8:15 AM', dir: 'sent', attachment: 'resume_arjun.pdf', body: `Hey Devon,\n\nI saw the Head of Growth opening at Plover and wanted to reach out personally instead of applying through a form — this role felt too relevant to let it get lost in a queue.\n\nI've spent the last few years doing growth at early-stage B2B startups where budgets were tight and results had to be real. My biggest result: I took a product from zero to 80,000 monthly active users in 18 months — entirely through content, SEO, and direct outreach, no paid ads. I also worked closely with engineering to build growth signals into the product early, so we always knew what was actually working.\n\nWhat I care most about is growth you can explain to someone who looks at revenue, not just at charts. I like building systems that keep working even after I've moved on to the next problem.\n\nI also had a look at how Plover currently talks to its users and I think there's a real opportunity you're not fully going after yet — happy to share my thinking on a call.\n\nResume attached. Looking forward to hearing from you.\n\nBest,\nArjun` },
+      { from: 'Arjun (via ToInbox)', time: 'Tue 8:15 AM', dir: 'sent', attachment: 'resume_arjun.pdf', body: `Hey Devon,\n\nI saw the Head of Growth opening at Plover and wanted to reach out personally instead of applying through a form — this role felt too relevant to let it get lost in a queue.\n\nI've spent the last few years doing growth at early-stage B2B startups where budgets were tight and results had to be real. My biggest result: I took a product from zero to 80,000 monthly active users in 18 months — entirely through content, SEO, and direct outreach, no paid ads. I also worked closely with engineering to build growth signals into the product early, so we always knew what was actually working.\n\nWhat I care most about is growth you can explain to someone who looks at revenue, not just at charts. I like building systems that keep working even after I've moved on to the next problem.\n\nI also had a look at how Plover currently talks to its users and I think there's a real opportunity you're not fully going after yet — happy to share my thinking on a call.\n\nResume attached. Looking forward to hearing from you.\n\nBest,\nArjun` },
       { from: 'Devon Reilly', time: 'Tue 11:42 AM', dir: 'recv', body: `Most candidates send the same Notion template. Yours read like a real person.\n\nCan we schedule a quick chat — I'm open Thu/Fri.\n\n— Devon` },
     ],
   },
@@ -234,7 +234,7 @@ const INBOX_THREADS = [
     preview: 'The reference to our changelog gave it away…',
     tag: 'FORWARDED TO HR', tagColor: '#b45309', tagBg: '#fff0e0',
     thread: [
-      { from: 'Arjun (via JobPilot)', time: 'Wed 9:30 AM', dir: 'sent', attachment: 'resume_arjun.pdf', body: `Hey Sana,\n\nI spotted the Backend Engineer opening at Reed Labs and wanted to apply directly — the kind of infrastructure problems you're solving are exactly what I want to be spending my time on.\n\nI've been building Go services in production for the past few years, mostly in environments where downtime actually costs money. At one point I was running services handling over 10,000 requests per second, and I had to design the system to fall back gracefully when parts of it failed — instead of everything going down at once. That kind of reliability engineering is where I feel most at home.\n\nI also went through your recent changelog — the way you're approaching the caching layer is really thoughtful. It tells me this is a team that cares about getting the internals right, not just shipping features on top of something fragile.\n\nI don't enjoy writing code that only works when everything is perfect. I want to own the 3 AM pages too — and make sure they stop happening.\n\nMy resume is attached. Would love to chat if this sounds like a match.\n\nBest,\nArjun` },
+      { from: 'Arjun (via ToInbox)', time: 'Wed 9:30 AM', dir: 'sent', attachment: 'resume_arjun.pdf', body: `Hey Sana,\n\nI spotted the Backend Engineer opening at Reed Labs and wanted to apply directly — the kind of infrastructure problems you're solving are exactly what I want to be spending my time on.\n\nI've been building Go services in production for the past few years, mostly in environments where downtime actually costs money. At one point I was running services handling over 10,000 requests per second, and I had to design the system to fall back gracefully when parts of it failed — instead of everything going down at once. That kind of reliability engineering is where I feel most at home.\n\nI also went through your recent changelog — the way you're approaching the caching layer is really thoughtful. It tells me this is a team that cares about getting the internals right, not just shipping features on top of something fragile.\n\nI don't enjoy writing code that only works when everything is perfect. I want to own the 3 AM pages too — and make sure they stop happening.\n\nMy resume is attached. Would love to chat if this sounds like a match.\n\nBest,\nArjun` },
       { from: 'Sana Iyer', time: 'Tue 2:08 PM', dir: 'recv', body: `The reference to our changelog gave it away — you actually read it. We don't see that often.\n\nForwarding this to our eng team. Calendar's open Thursday afternoon.\n\n— Sana` },
     ],
   },
@@ -247,7 +247,7 @@ const INBOX_THREADS = [
     preview: 'Short and specific — actually refreshing…',
     tag: 'CALL BOOKED', tagColor: '#057642', tagBg: '#e6f4ea',
     thread: [
-      { from: 'Arjun (via JobPilot)', time: 'Wed 9:00 AM', dir: 'sent', attachment: 'resume_arjun.pdf', body: `Hey Tanvi,\n\nI came across the Marketing Lead opening at Tempo and wanted to reach out directly — the way you're positioning the product caught my attention, and I think I can help push it further.\n\nI've spent the last few years running marketing end-to-end for early-stage startups — email, paid channels, content, and everything in between. My most concrete result: I grew a newsletter from 400 to 12,000 subscribers in eight months, which turned into a real customer acquisition channel that cost almost nothing compared to running ads.\n\nWhat makes me a bit different from most marketing hires is that I don't separate strategy from execution. I'll build the campaign, write the copy, track the numbers, and keep adjusting until it's actually working. I don't hand things off and wait — I stay in it.\n\nI had a look at how Tempo currently talks to users across different channels, and I think there are a few places where the message isn't landing as strongly as it could. I'd love to share some specific ideas on a call.\n\nMy resume is attached.\n\nBest,\nArjun` },
+      { from: 'Arjun (via ToInbox)', time: 'Wed 9:00 AM', dir: 'sent', attachment: 'resume_arjun.pdf', body: `Hey Tanvi,\n\nI came across the Marketing Lead opening at Tempo and wanted to reach out directly — the way you're positioning the product caught my attention, and I think I can help push it further.\n\nI've spent the last few years running marketing end-to-end for early-stage startups — email, paid channels, content, and everything in between. My most concrete result: I grew a newsletter from 400 to 12,000 subscribers in eight months, which turned into a real customer acquisition channel that cost almost nothing compared to running ads.\n\nWhat makes me a bit different from most marketing hires is that I don't separate strategy from execution. I'll build the campaign, write the copy, track the numbers, and keep adjusting until it's actually working. I don't hand things off and wait — I stay in it.\n\nI had a look at how Tempo currently talks to users across different channels, and I think there are a few places where the message isn't landing as strongly as it could. I'd love to share some specific ideas on a call.\n\nMy resume is attached.\n\nBest,\nArjun` },
       { from: 'Tanvi Mehta', time: 'Wed 4:15 PM', dir: 'recv', body: `Short and specific — actually refreshing.\n\nOur current marketing is all over the place. Would be good to talk. Free for a call Thursday?\n\n— Tanvi` },
     ],
   },
@@ -260,7 +260,7 @@ const INBOX_THREADS = [
     preview: 'Most cold inbound goes straight to spam…',
     tag: 'FORWARDED TO HR', tagColor: '#b45309', tagBg: '#fff0e0',
     thread: [
-      { from: 'Arjun (via JobPilot)', time: 'Thu 10:00 AM', dir: 'sent', attachment: 'portfolio_arjun.pdf', body: `Hey Theo,\n\nI saw the Founding Designer opening at Lumen AI and wanted to reach out personally — this one matched closely enough with what I actually want to work on that I didn't want it to disappear into a portal.\n\nI've spent the last few years designing for B2B products, building design systems and working side by side with engineers so that what gets built actually matches what was designed. The part I care most about is the handoff — keeping components and tokens in sync so the product doesn't quietly drift away from the designs over time.\n\nWhat drew me specifically to Lumen AI is the density problem in AI interfaces. Most AI tools look like they were designed for a feature list, not for a real person using it every day at a desk. Getting that right is genuinely hard, and it's exactly the kind of problem I want to be solving.\n\nI've also worked at a founding stage before, so I understand what it means to make design decisions fast — ship something, get it in front of real users, and iterate without losing the thread.\n\nMy portfolio and resume are attached. Would love to connect.\n\nBest,\nArjun` },
+      { from: 'Arjun (via ToInbox)', time: 'Thu 10:00 AM', dir: 'sent', attachment: 'portfolio_arjun.pdf', body: `Hey Theo,\n\nI saw the Founding Designer opening at Lumen AI and wanted to reach out personally — this one matched closely enough with what I actually want to work on that I didn't want it to disappear into a portal.\n\nI've spent the last few years designing for B2B products, building design systems and working side by side with engineers so that what gets built actually matches what was designed. The part I care most about is the handoff — keeping components and tokens in sync so the product doesn't quietly drift away from the designs over time.\n\nWhat drew me specifically to Lumen AI is the density problem in AI interfaces. Most AI tools look like they were designed for a feature list, not for a real person using it every day at a desk. Getting that right is genuinely hard, and it's exactly the kind of problem I want to be solving.\n\nI've also worked at a founding stage before, so I understand what it means to make design decisions fast — ship something, get it in front of real users, and iterate without losing the thread.\n\nMy portfolio and resume are attached. Would love to connect.\n\nBest,\nArjun` },
       { from: 'Theo Marchetti', time: 'Thu 3:51 PM', dir: 'recv', body: `Most cold inbound goes straight to spam. Yours got through because it was specific and short.\n\nSending to our hiring lead now. Expect a note from her tomorrow.\n\n— Theo` },
     ],
   },
@@ -273,7 +273,7 @@ const INBOX_THREADS = [
     preview: 'Direct, no fluff, no AI smell. Resume on point…',
     tag: 'INTERVIEW SET', tagColor: '#057642', tagBg: '#e6f4ea',
     thread: [
-      { from: 'Arjun (via JobPilot)', time: 'Fri 7:30 AM', dir: 'sent', attachment: 'resume_arjun.pdf', body: `Hey Priya,\n\nI came across the Infrastructure Engineer role at Cloudpack and wanted to apply directly — cloud infrastructure at scale is the work I've been doing for the past few years and it's what I genuinely want to keep doing.\n\nMy background is mostly Go and Kubernetes in production environments where the stakes are real. I've been on call when services go down at 3 AM and someone has to figure out why, fast — I've been that person more than once. I design systems with the assumption that things will break, not the hope that they won't. That mindset changes a lot of early decisions.\n\nThe project I'm most proud of: I led a reliability overhaul that cut incident response time by over 60%. No new features, no product announcements — just better alerting, cleaner runbooks, and smarter degraded-mode handling. It made the team's lives significantly better.\n\nI've looked at how Cloudpack handles multi-region failover and I have some specific thoughts on where the gaps might be. Happy to share on a call.\n\nMy resume is attached. Looking forward to hearing from you.\n\nBest,\nArjun` },
+      { from: 'Arjun (via ToInbox)', time: 'Fri 7:30 AM', dir: 'sent', attachment: 'resume_arjun.pdf', body: `Hey Priya,\n\nI came across the Infrastructure Engineer role at Cloudpack and wanted to apply directly — cloud infrastructure at scale is the work I've been doing for the past few years and it's what I genuinely want to keep doing.\n\nMy background is mostly Go and Kubernetes in production environments where the stakes are real. I've been on call when services go down at 3 AM and someone has to figure out why, fast — I've been that person more than once. I design systems with the assumption that things will break, not the hope that they won't. That mindset changes a lot of early decisions.\n\nThe project I'm most proud of: I led a reliability overhaul that cut incident response time by over 60%. No new features, no product announcements — just better alerting, cleaner runbooks, and smarter degraded-mode handling. It made the team's lives significantly better.\n\nI've looked at how Cloudpack handles multi-region failover and I have some specific thoughts on where the gaps might be. Happy to share on a call.\n\nMy resume is attached. Looking forward to hearing from you.\n\nBest,\nArjun` },
       { from: 'Priya Shah', time: 'Fri 10:50 AM', dir: 'recv', body: `Direct, no fluff, no AI smell. Resume on point.\n\nBooked you in with our CEO for next week — calendar invite incoming shortly.\n\n— Priya` },
     ],
   },
@@ -314,7 +314,7 @@ function Testimonials() {
         <div className="section-head" data-reveal>
           <span className="eyebrow"><span className="dot" />Real founder replies</span>
           <h2 className="h-section">Founders reply to intent.<br /><em>Here's what that looks like.</em></h2>
-          <p className="lead">These are the actual mailboxes that fill up after using JobPilot. Personal outreach generates real conversations.</p>
+          <p className="lead">These are the actual mailboxes that fill up after using ToInbox. Personal outreach generates real conversations.</p>
         </div>
 
         {/* Stats bar */}
@@ -511,7 +511,7 @@ function Pricing() {
           </div>
         </div>
         <div style={{ textAlign: 'center', color: 'var(--ink-3)', fontSize: 13, marginTop: 24 }}>
-          One job placed through JobPilot pays for the entire pack 100 times over.
+          One job placed through ToInbox pays for the entire pack 100 times over.
         </div>
       </div>
     </section>
@@ -529,7 +529,7 @@ function FinalCTA() {
           </h2>
           <p className="lead">Turn LinkedIn applications into founder conversations. Send the email a founder will actually forward.</p>
           <div style={{ display: 'flex', gap: 10, justifyContent: 'center', flexWrap: 'wrap' }}>
-            <a href="#" className="btn btn-accent">Add JobPilot to Chrome <Icon name="arrow" size={14} className="chev" /></a>
+            <a href="#" className="btn btn-accent">Add ToInbox to Chrome <Icon name="arrow" size={14} className="chev" /></a>
             <a href="#how-section" className="btn btn-ghost" style={{ color: 'rgba(255,255,255,0.8)' }}>See how it works</a>
           </div>
           <div style={{ marginTop: 20, fontSize: 12.5, color: 'rgba(255,255,255,0.5)', fontFamily: 'var(--font-mono)' }}>NO CARD REQUIRED · 5 FREE CREDITS · WORKS ON LINKEDIN</div>
@@ -545,7 +545,7 @@ function Footer() {
       <div className="wrap">
         <div className="footer-inner">
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-            <div className="brand"><span className="brand-mark" /> JobPilot</div>
+            <div className="brand"><span className="brand-mark" /> ToInbox</div>
             <div style={{ fontSize: 12.5, color: 'var(--ink-4)' }}>The Chrome extension for founder-first LinkedIn applications.</div>
           </div>
           <div className="foot-links">
@@ -555,7 +555,7 @@ function Footer() {
             <a href="#proof">Replies</a>
             <a href="#pricing">Pricing</a>
           </div>
-          <div style={{ fontSize: 12.5, color: 'var(--ink-4)', fontFamily: 'var(--font-mono)' }}>© 2026 JobPilot · v0.4</div>
+          <div style={{ fontSize: 12.5, color: 'var(--ink-4)', fontFamily: 'var(--font-mono)' }}>© 2026 ToInbox · v0.4</div>
         </div>
       </div>
     </footer>

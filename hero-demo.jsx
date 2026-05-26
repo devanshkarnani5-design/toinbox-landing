@@ -1,4 +1,4 @@
-// JobPilot — Hero demo: click job → extension detects → send application
+// ToInbox — Hero demo: click job → extension detects → send application
 const { useState, useEffect, useRef } = React;
 
 const JOBS = [
@@ -18,10 +18,8 @@ function JPPanel({ phase, activeJob, sentToday, stats, sendBtnRef, showDash, das
     return (
       <div className="jp-sidebar" style={{ background: '#0d0d0d', borderLeft: '1px solid rgba(255,255,255,0.07)' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '10px 12px', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-          <div style={{ width: 18, height: 18, borderRadius: 4, background: 'linear-gradient(135deg,#6366f1,#4338ca)', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <span style={{ color: 'white', fontSize: 7.5, fontWeight: 800 }}>JP</span>
-          </div>
-          <span style={{ fontSize: 12.5, fontWeight: 700, color: 'white', letterSpacing: '-0.01em', flex: 1 }}>JobPilot</span>
+          <div style={{ width: 18, height: 18, borderRadius: 5, flexShrink: 0, background: 'radial-gradient(120% 120% at 20% 10%, rgba(255,255,255,0.5) 0%, transparent 40%), linear-gradient(135deg, oklch(0.65 0.21 252), oklch(0.42 0.2 270))', boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.22)' }} />
+          <span style={{ fontSize: 12.5, fontWeight: 700, color: 'white', letterSpacing: '-0.01em', flex: 1 }}>ToInbox</span>
           <span style={{ fontSize: 9.5, padding: '2px 8px', borderRadius: 5, border: '1px solid rgba(255,255,255,0.14)', color: 'rgba(255,255,255,0.6)' }}>Dashboard</span>
         </div>
         <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden', padding: '10px 10px 8px', gap: 8, background: '#0d0d0d' }}>
@@ -81,10 +79,8 @@ function JPPanel({ phase, activeJob, sentToday, stats, sendBtnRef, showDash, das
     <div className="jp-sidebar" style={{ background: '#0d0d0d', borderLeft: '1px solid rgba(255,255,255,0.07)' }}>
       {/* Header */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '10px 12px', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-        <div style={{ width: 18, height: 18, borderRadius: 4, background: 'linear-gradient(135deg,#6366f1,#4338ca)', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <span style={{ color: 'white', fontSize: 7.5, fontWeight: 800 }}>JP</span>
-        </div>
-        <span style={{ fontSize: 12.5, fontWeight: 700, color: 'white', letterSpacing: '-0.01em', flex: 1 }}>JobPilot</span>
+        <div style={{ width: 18, height: 18, borderRadius: 5, flexShrink: 0, background: 'radial-gradient(120% 120% at 20% 10%, rgba(255,255,255,0.5) 0%, transparent 40%), linear-gradient(135deg, oklch(0.65 0.21 252), oklch(0.42 0.2 270))', boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.22)' }} />
+        <span style={{ fontSize: 12.5, fontWeight: 700, color: 'white', letterSpacing: '-0.01em', flex: 1 }}>ToInbox</span>
         <span style={{ fontSize: 9.5, padding: '2px 7px', borderRadius: 5, border: '1px solid rgba(255,255,255,0.14)', color: 'rgba(255,255,255,0.6)', cursor: 'pointer' }}>Dashboard</span>
         <span style={{ fontSize: 15, color: 'rgba(255,255,255,0.22)', cursor: 'pointer', lineHeight: 1, marginLeft: 2 }}>−</span>
       </div>
@@ -393,7 +389,7 @@ function HeroDemo() {
           </div>
         </div>
 
-        {/* RIGHT: JobPilot extension panel */}
+        {/* RIGHT: ToInbox extension panel */}
         <JPPanel
           phase={phase}
           activeJob={activeJob}
