@@ -474,6 +474,7 @@ function Pricing() {
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>5 personalized founder sends</div>
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Cover letter + cold email pair</div>
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Reply tracking</div>
+              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Dashboard + Analytics</div>
             </div>
             <a href="#" className="btn btn-outline" style={{ marginTop: 'auto' }}>Add to Chrome <Icon name="arrow" size={14} className="chev" /></a>
           </div>
@@ -490,6 +491,7 @@ function Pricing() {
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>50 personalized founder sends</div>
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Cover letter + cold email pair</div>
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Reply tracking</div>
+              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Dashboard + Analytics</div>
             </div>
             <a href="#" className="btn btn-accent" style={{ marginTop: 'auto', alignSelf: 'flex-start' }}>Get the pack <Icon name="arrow" size={14} className="chev" /></a>
           </div>
