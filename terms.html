@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Terms of Service — ToInbox</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #f7f6f3; --bg-elev: #ffffff; --bg-soft: #efede8;
+    --ink: #0a0a0a; --ink-2: #2a2a2a; --ink-3: #545454; --ink-4: #8a8a85;
+    --line: rgba(10,10,10,0.08); --line-2: rgba(10,10,10,0.14);
+    --accent: oklch(0.58 0.19 252); --accent-ink: oklch(0.32 0.16 252);
+    --font-sans: "Geist", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --font-mono: "Geist Mono", ui-monospace, monospace;
+    --shadow-1: 0 1px 0 rgba(10,10,10,0.04), 0 2px 6px rgba(10,10,10,0.04);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body { font-family: var(--font-sans); background: var(--bg); color: var(--ink); -webkit-font-smoothing: antialiased; line-height: 1.6; }
+  a { color: var(--accent-ink); text-decoration: none; border-bottom: 1px solid color-mix(in oklab, var(--accent) 30%, transparent); }
+  a:hover { color: var(--accent); }
+  .nav { position: sticky; top: 0; z-index: 10; background: color-mix(in oklab, var(--bg) 92%, transparent); backdrop-filter: saturate(140%) blur(10px); border-bottom: 1px solid var(--line); }
+  .nav-inner { max-width: 820px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; }
+  .brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 600; font-size: 16px; letter-spacing: -0.01em; color: var(--ink); }
+  .brand-mark { width: 24px; height: 24px; border-radius: 7px; background: radial-gradient(120% 120% at 20% 10%, #fff 0%, transparent 40%), linear-gradient(135deg, oklch(0.65 0.21 252), oklch(0.42 0.2 270)); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.25), 0 4px 14px oklch(0.7 0.21 252 / 0.35); position: relative; }
+  .brand-mark::after { content: ""; position: absolute; inset: 5px; background: radial-gradient(60% 60% at 50% 50%, #fff 0%, transparent 70%); opacity: 0.4; border-radius: 5px; }
+  .nav-links { display: flex; gap: 20px; font-size: 14px; color: var(--ink-3); }
+  .nav-links a { color: inherit; border: none; }
+  .nav-links a:hover { color: var(--ink); }
+  main { max-width: 820px; margin: 0 auto; padding: 48px 24px 80px; }
+  .eyebrow { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--bg-elev); margin-bottom: 18px; }
+  .eyebrow .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px color-mix(in oklab, var(--accent) 18%, transparent); }
+  h1 { font-weight: 500; letter-spacing: -0.035em; line-height: 1.05; font-size: clamp(36px, 5vw, 52px); margin: 0 0 12px; }
+  .lead { font-size: 16.5px; color: var(--ink-3); margin: 0 0 8px; }
+  .meta { font-family: var(--font-mono); font-size: 12px; color: var(--ink-4); letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 36px; }
+  h2 { font-weight: 600; letter-spacing: -0.022em; font-size: 22px; margin: 40px 0 14px; color: var(--ink); border-top: 1px solid var(--line); padding-top: 32px; }
+  h2:first-of-type { border-top: none; padding-top: 0; }
+  h3 { font-weight: 600; font-size: 16px; margin: 22px 0 8px; color: var(--ink-2); letter-spacing: -0.01em; }
+  p { margin: 0 0 14px; color: var(--ink-2); font-size: 15.5px; }
+  ul, ol { margin: 0 0 16px; padding-left: 22px; color: var(--ink-2); font-size: 15.5px; }
+  ul li, ol li { margin-bottom: 7px; }
+  strong { color: var(--ink); font-weight: 600; }
+  .callout { background: var(--bg-elev); border: 1px solid var(--line); border-radius: 14px; padding: 20px 22px; margin: 22px 0; box-shadow: var(--shadow-1); }
+  .callout-title { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-ink); margin-bottom: 8px; }
+  table { width: 100%; border-collapse: collapse; margin: 12px 0 22px; font-size: 14px; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; color: var(--ink-2); }
+  th { font-weight: 600; color: var(--ink); background: var(--bg-soft); font-size: 12.5px; }
+  .price-row td:first-child { font-weight: 600; color: var(--ink); white-space: nowrap; }
+  .price-amt { font-family: var(--font-mono); white-space: nowrap; color: var(--accent-ink); }
+  footer { max-width: 820px; margin: 0 auto; padding: 24px; border-top: 1px solid var(--line); color: var(--ink-4); font-size: 13px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  footer a { color: var(--ink-3); border: none; }
+  code { font-family: var(--font-mono); font-size: 13.5px; background: var(--bg-soft); padding: 1px 6px; border-radius: 4px; color: var(--ink); }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="brand" style="border:none;"><span class="brand-mark"></span> ToInbox</a>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/privacy.html">Privacy</a>
+      <a href="https://app.toinbox.app">Sign in</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <span class="eyebrow"><span class="dot"></span>Legal · terms of service</span>
+  <h1>Terms of Service</h1>
+  <p class="lead">The rules for using ToInbox. Please read carefully.</p>
+  <p class="meta">Last updated: 27 May 2026 · Effective: 27 May 2026</p>
+
+  <h2>1. Agreement</h2>
+  <p>
+    These Terms of Service ("Terms") govern your access to and use of ToInbox, including the Chrome
+    extension, the marketing website at <a href="https://toinbox.app">toinbox.app</a>, and the
+    application at <a href="https://app.toinbox.app">app.toinbox.app</a> (together, the "Service").
+    The Service is operated by <strong>TopFounder</strong>, a sole proprietorship of
+    <strong>Devansh Karnani</strong> ("we", "our", "us"), with registered address at 134 Salkia
+    School Road, Howrah, West Bengal 711106, India.
+  </p>
+  <p>
+    By creating an account or using the Service you agree to these Terms and to our
+    <a href="/privacy.html">Privacy Policy</a>. If you do not agree, do not use the Service.
+  </p>
+
+  <h2>2. Eligibility</h2>
+  <p>You may use ToInbox only if:</p>
+  <ul>
+    <li>You are at least 16 years old, or the age of digital consent in your jurisdiction (whichever is higher), and have the legal capacity to enter into a contract.</li>
+    <li>You have a LinkedIn account and a Gmail (or Google Workspace) account that you control.</li>
+    <li>You are not barred from receiving services under applicable law.</li>
+  </ul>
+
+  <h2>3. What the Service does</h2>
+  <p>
+    ToInbox helps you send personalized cold emails to founders of companies listing roles on
+    LinkedIn. When you enroll a job, the Service:
+  </p>
+  <ol>
+    <li>Looks up the company's founder via third-party databases (e.g. Apollo).</li>
+    <li>Uses an AI service to draft a personalized email based on your resume and the job description.</li>
+    <li>Sends that email <strong>from your Gmail account</strong>, with your resume attached.</li>
+    <li>Watches the same Gmail thread for replies and surfaces them on your dashboard.</li>
+  </ol>
+  <p>
+    You are always the legal sender of any email the Service sends from your Gmail account. We are
+    a tool you direct.
+  </p>
+
+  <h2>4. Acceptable use</h2>
+  <p>You agree NOT to use the Service to:</p>
+  <ul>
+    <li>Send unsolicited bulk email (spam), phishing messages, or any communication that violates anti-spam laws (including CAN-SPAM, CASL, GDPR e-Privacy, India's IT Rules, or equivalent laws in your jurisdiction).</li>
+    <li>Impersonate another person, misrepresent your identity, or use a resume that is not yours.</li>
+    <li>Target minors, vulnerable individuals, or anyone who has asked you not to contact them.</li>
+    <li>Send threatening, harassing, hateful, defamatory, sexually explicit, or otherwise unlawful content.</li>
+    <li>Attempt to scrape, reverse-engineer, decompile, or interfere with the Service or its infrastructure.</li>
+    <li>Resell, rent, sublicense, or commercialize the Service or any portion of it without our written permission.</li>
+    <li>Bypass usage limits, rate limits, or sending caps by creating multiple accounts.</li>
+    <li>Use the Service to compete with or build a substantially similar product.</li>
+  </ul>
+
+  <h2>5. LinkedIn and Gmail — third-party platforms</h2>
+  <div class="callout">
+    <div class="callout-title">Important — read this</div>
+    <p>
+      ToInbox is not affiliated with, endorsed by, or sponsored by LinkedIn (Microsoft Corporation)
+      or Google LLC. You are responsible for ensuring your use of ToInbox complies with the
+      <a href="https://www.linkedin.com/legal/user-agreement">LinkedIn User Agreement</a> and the
+      <a href="https://policies.google.com/terms">Google Terms of Service</a>. LinkedIn and Google
+      may, at their discretion, restrict, suspend, or terminate accounts that they consider to be
+      in violation of their policies. We have no control over their enforcement decisions and are
+      not liable for any restriction or loss of access to your LinkedIn or Gmail account.
+    </p>
+  </div>
+
+  <h2>6. Your account and security</h2>
+  <p>
+    You are responsible for maintaining the security of your LinkedIn and Gmail credentials, your
+    ToInbox account, and any device used to access the Service. Notify us promptly at
+    <a href="mailto:support@topfounder.io">support@topfounder.io</a> if you suspect unauthorized
+    access. We may suspend or terminate accounts that we reasonably believe have been compromised.
+  </p>
+
+  <h2>7. Your content</h2>
+  <p>
+    You retain all ownership rights to the content you provide (your resume, your profile details,
+    the emails the Service generates and sends on your behalf). By using the Service you grant us a
+    limited, non-exclusive, royalty-free, worldwide license to process that content solely for the
+    purpose of operating the Service for you. This license terminates when you delete the relevant
+    content or your account.
+  </p>
+  <p>
+    You represent that you have the right to provide the content you upload, that it is accurate,
+    and that its use by the Service will not infringe any third-party rights or violate any law.
+  </p>
+
+  <h2>8. Pricing &amp; plans</h2>
+  <p>
+    A "send" is one outbound application email generated and dispatched through the Service.
+    Replies, follow-ups within an existing thread, and failed attempts do not count against your
+    send quota.
+  </p>
+  <table>
+    <thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+    <tbody>
+      <tr class="price-row">
+        <td>Free Trial</td>
+        <td class="price-amt">₹0</td>
+        <td>5 personalized founder sends, cover letter + cold email pair, reply tracking, dashboard &amp; analytics</td>
+      </tr>
+      <tr class="price-row">
+        <td>Starter</td>
+        <td class="price-amt">₹399 / month</td>
+        <td>50 personalized founder sends, cover letter + cold email pair, reply tracking, dashboard &amp; analytics</td>
+      </tr>
+      <tr class="price-row">
+        <td>Pro</td>
+        <td class="price-amt">₹699 / month</td>
+        <td>100 personalized founder sends, cheaper per send, everything in Starter</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>
+    Paid plans renew monthly on the day of original subscription unless cancelled. Prices are in
+    Indian Rupees (INR) and inclusive of applicable indirect taxes unless stated otherwise. We may
+    change prices on at least 14 days' notice; price changes do not affect the current billing
+    cycle. Unused sends do not roll over to the next month.
+  </p>
+
+  <h3>8.1 Refunds and cancellation</h3>
+  <p>
+    You may cancel your paid plan at any time from your account; cancellation takes effect at the
+    end of the current billing period. Because the Service is delivered immediately on payment, we
+    generally do not provide refunds for partial months or unused sends. If you believe you were
+    charged in error, contact <a href="mailto:support@topfounder.io">support@topfounder.io</a>
+    within 7 days of the charge and we will review your request in good faith.
+  </p>
+
+  <h2>9. Intellectual property</h2>
+  <p>
+    The Service, including its software, design, copy, and brand, is owned by TopFounder and
+    protected by intellectual-property laws. We grant you a limited, revocable, non-exclusive,
+    non-transferable license to use the Service for your personal job-search use, subject to these
+    Terms. No other rights are granted.
+  </p>
+
+  <h2>10. Suspension and termination</h2>
+  <p>We may suspend or terminate your access to the Service, with or without notice, if:</p>
+  <ul>
+    <li>You violate these Terms or our Privacy Policy;</li>
+    <li>Your use threatens the security or integrity of the Service;</li>
+    <li>Your use creates risk or legal exposure for us, including under LinkedIn's or Google's policies;</li>
+    <li>You fail to pay applicable fees;</li>
+    <li>We are required to do so by law.</li>
+  </ul>
+  <p>
+    You may stop using the Service at any time by disconnecting your accounts and emailing
+    <a href="mailto:support@topfounder.io">support@topfounder.io</a> to request deletion. On
+    termination, sections 4, 7 (your warranties), 9, 11–14 survive.
+  </p>
+
+  <h2>11. Disclaimers — no warranty</h2>
+  <p>
+    The Service is provided <strong>"as is" and "as available"</strong> without warranties of any
+    kind, express or implied, including but not limited to merchantability, fitness for a
+    particular purpose, non-infringement, accuracy of AI-generated content, the success rate of
+    applications, or that you will receive interview calls. We do not warrant that the Service
+    will be uninterrupted, error-free, or secure, or that founder emails returned by third-party
+    lookups will be current or accurate.
+  </p>
+
+  <h2>12. Limitation of liability</h2>
+  <p>
+    To the maximum extent permitted by law, in no event shall TopFounder, its owner, or its
+    affiliates be liable for any indirect, incidental, special, consequential, exemplary, or
+    punitive damages, or any loss of profits, revenue, data, business, opportunity, goodwill, or
+    LinkedIn/Gmail account access, whether based in contract, tort, negligence, strict liability,
+    or otherwise, even if advised of the possibility of such damages.
+  </p>
+  <p>
+    Our aggregate liability arising out of or relating to the Service shall not exceed the greater
+    of (a) the amount you paid us in the twelve (12) months preceding the event giving rise to the
+    claim, or (b) ₹2,000. Some jurisdictions do not allow these limitations, in which case they
+    apply only to the extent permitted.
+  </p>
+
+  <h2>13. Indemnification</h2>
+  <p>
+    You agree to indemnify and hold harmless TopFounder, its owner, and its affiliates from any
+    claim, demand, loss, liability, or expense (including reasonable legal fees) arising out of
+    (i) your use of the Service, (ii) your content, (iii) your violation of these Terms or
+    applicable law, or (iv) your violation of any third party's rights, including LinkedIn's or
+    Google's terms.
+  </p>
+
+  <h2>14. Governing law and disputes</h2>
+  <p>
+    These Terms are governed by the laws of India, without regard to its conflict-of-laws
+    principles. Any dispute arising out of or relating to these Terms or the Service shall be
+    subject to the exclusive jurisdiction of the courts located in Kolkata, West Bengal, India.
+    Nothing in this section affects any non-waivable consumer-protection rights you may have under
+    the laws of your country of residence.
+  </p>
+
+  <h2>15. Changes to these Terms</h2>
+  <p>
+    We may update these Terms from time to time. The "Last updated" date at the top reflects the
+    latest version. Material changes will be highlighted in-app or by email where appropriate.
+    Continued use of the Service after a change constitutes acceptance of the updated Terms. If
+    you do not agree to the changes, stop using the Service.
+  </p>
+
+  <h2>16. Miscellaneous</h2>
+  <ul>
+    <li><strong>Entire agreement.</strong> These Terms, together with the Privacy Policy, are the entire agreement between you and us regarding the Service and supersede prior agreements.</li>
+    <li><strong>Severability.</strong> If any provision is found unenforceable, the remainder remains in effect.</li>
+    <li><strong>No waiver.</strong> Our failure to enforce a provision is not a waiver of our right to do so later.</li>
+    <li><strong>Assignment.</strong> You may not assign these Terms without our consent; we may assign them in connection with a sale or reorganization of our business.</li>
+    <li><strong>Notices.</strong> We may send notices to the email associated with your account; you should send notices to <a href="mailto:support@topfounder.io">support@topfounder.io</a>.</li>
+  </ul>
+
+  <h2>17. Contact</h2>
+  <p>
+    TopFounder (Devansh Karnani)<br />
+    134 Salkia School Road, Howrah, West Bengal 711106, India<br />
+    <a href="mailto:support@topfounder.io">support@topfounder.io</a>
+  </p>
+</main>
+
+<footer>
+  <span>© 2026 TopFounder · Built by Devansh Karnani</span>
+  <span><a href="/">toinbox.app</a> · <a href="/terms.html">Terms</a> · <a href="/privacy.html">Privacy</a></span>
+</footer>
+
+</body>
+</html>

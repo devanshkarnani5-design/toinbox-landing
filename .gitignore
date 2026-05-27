@@ -1,0 +1,9 @@
+.cache/
+.local/
+.replit
+replit.nix
+.agents/
+.git/
+node_modules/
+.DS_Store
+zipFile.zip

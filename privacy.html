@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Privacy Policy — ToInbox</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #f7f6f3; --bg-elev: #ffffff; --bg-soft: #efede8;
+    --ink: #0a0a0a; --ink-2: #2a2a2a; --ink-3: #545454; --ink-4: #8a8a85;
+    --line: rgba(10,10,10,0.08); --line-2: rgba(10,10,10,0.14);
+    --accent: oklch(0.58 0.19 252); --accent-ink: oklch(0.32 0.16 252);
+    --font-sans: "Geist", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --font-mono: "Geist Mono", ui-monospace, monospace;
+    --shadow-1: 0 1px 0 rgba(10,10,10,0.04), 0 2px 6px rgba(10,10,10,0.04);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body { font-family: var(--font-sans); background: var(--bg); color: var(--ink); -webkit-font-smoothing: antialiased; line-height: 1.6; }
+  a { color: var(--accent-ink); text-decoration: none; border-bottom: 1px solid color-mix(in oklab, var(--accent) 30%, transparent); }
+  a:hover { color: var(--accent); }
+  .nav { position: sticky; top: 0; z-index: 10; background: color-mix(in oklab, var(--bg) 92%, transparent); backdrop-filter: saturate(140%) blur(10px); border-bottom: 1px solid var(--line); }
+  .nav-inner { max-width: 820px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; }
+  .brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 600; font-size: 16px; letter-spacing: -0.01em; color: var(--ink); }
+  .brand-mark { width: 24px; height: 24px; border-radius: 7px; background: radial-gradient(120% 120% at 20% 10%, #fff 0%, transparent 40%), linear-gradient(135deg, oklch(0.65 0.21 252), oklch(0.42 0.2 270)); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.25), 0 4px 14px oklch(0.7 0.21 252 / 0.35); position: relative; }
+  .brand-mark::after { content: ""; position: absolute; inset: 5px; background: radial-gradient(60% 60% at 50% 50%, #fff 0%, transparent 70%); opacity: 0.4; border-radius: 5px; }
+  .nav-links { display: flex; gap: 20px; font-size: 14px; color: var(--ink-3); }
+  .nav-links a { color: inherit; border: none; }
+  .nav-links a:hover { color: var(--ink); }
+  main { max-width: 820px; margin: 0 auto; padding: 48px 24px 80px; }
+  .eyebrow { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--bg-elev); margin-bottom: 18px; }
+  .eyebrow .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px color-mix(in oklab, var(--accent) 18%, transparent); }
+  h1 { font-weight: 500; letter-spacing: -0.035em; line-height: 1.05; font-size: clamp(36px, 5vw, 52px); margin: 0 0 12px; }
+  .lead { font-size: 16.5px; color: var(--ink-3); margin: 0 0 8px; }
+  .meta { font-family: var(--font-mono); font-size: 12px; color: var(--ink-4); letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 36px; }
+  h2 { font-weight: 600; letter-spacing: -0.022em; font-size: 22px; margin: 40px 0 14px; color: var(--ink); padding-top: 8px; border-top: 1px solid var(--line); padding-top: 32px; }
+  h2:first-of-type { border-top: none; padding-top: 0; }
+  h3 { font-weight: 600; font-size: 16px; margin: 22px 0 8px; color: var(--ink-2); letter-spacing: -0.01em; }
+  p { margin: 0 0 14px; color: var(--ink-2); font-size: 15.5px; }
+  ul, ol { margin: 0 0 16px; padding-left: 22px; color: var(--ink-2); font-size: 15.5px; }
+  ul li, ol li { margin-bottom: 7px; }
+  strong { color: var(--ink); font-weight: 600; }
+  .callout { background: var(--bg-elev); border: 1px solid var(--line); border-radius: 14px; padding: 20px 22px; margin: 22px 0; box-shadow: var(--shadow-1); }
+  .callout-title { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-ink); margin-bottom: 8px; }
+  table { width: 100%; border-collapse: collapse; margin: 12px 0 22px; font-size: 14px; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; color: var(--ink-2); }
+  th { font-weight: 600; color: var(--ink); background: var(--bg-soft); font-size: 12.5px; letter-spacing: 0.01em; }
+  footer { max-width: 820px; margin: 0 auto; padding: 24px; border-top: 1px solid var(--line); color: var(--ink-4); font-size: 13px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  footer a { color: var(--ink-3); border: none; }
+  code { font-family: var(--font-mono); font-size: 13.5px; background: var(--bg-soft); padding: 1px 6px; border-radius: 4px; color: var(--ink); }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="brand" style="border:none;"><span class="brand-mark"></span> ToInbox</a>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/terms.html">Terms</a>
+      <a href="https://app.toinbox.app">Sign in</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <span class="eyebrow"><span class="dot"></span>Legal · privacy policy</span>
+  <h1>Privacy Policy</h1>
+  <p class="lead">How ToInbox collects, uses, and protects your information.</p>
+  <p class="meta">Last updated: 27 May 2026</p>
+
+  <h2>1. Who we are</h2>
+  <p>
+    ToInbox is operated by <strong>TopFounder</strong>, a sole proprietorship of
+    <strong>Devansh Karnani</strong> (the "Company", "we", "our", "us"). Our registered address is
+    134 Salkia School Road, Howrah, West Bengal 711106, India. If you have any questions about this
+    Privacy Policy or how we handle your data, contact
+    <a href="mailto:support@topfounder.io">support@topfounder.io</a>.
+  </p>
+  <p>
+    ToInbox is a Chrome extension and web application that helps job-seekers send personalized
+    cold emails to founders behind LinkedIn job listings, sent through the user's own Gmail
+    account. This policy applies to the ToInbox extension, the website at
+    <a href="https://toinbox.app">toinbox.app</a>, and the application at
+    <a href="https://app.toinbox.app">app.toinbox.app</a> (together, the "Service").
+  </p>
+
+  <h2>2. Information we collect</h2>
+
+  <h3>2.1 Information you give us through LinkedIn Sign-In</h3>
+  <p>
+    When you sign in with LinkedIn we receive, with your consent, your LinkedIn identifier, name,
+    primary email address, and profile photo URL through LinkedIn's standard OpenID Connect
+    profile. We do not request access to your LinkedIn connections, messages, posts, or activity.
+  </p>
+
+  <h3>2.2 Information you give us directly</h3>
+  <ul>
+    <li>The resume PDF you upload (we extract its text and store both the text and the file).</li>
+    <li>Optional profile details: phone, location, additional LinkedIn URL.</li>
+    <li>Daily sending limit and sending schedule preferences.</li>
+  </ul>
+
+  <h3>2.3 Information we receive from Google (Gmail)</h3>
+  <p>
+    When you connect Gmail, we request OAuth access to the following Google APIs scopes:
+  </p>
+  <table>
+    <thead><tr><th>Scope</th><th>What it allows</th><th>Why we need it</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><code>gmail.send</code></td>
+        <td>Send email on your behalf from your Gmail address.</td>
+        <td>So the application emails we generate are sent <em>from you</em>, not from us.</td>
+      </tr>
+      <tr>
+        <td><code>gmail.readonly</code></td>
+        <td>Read messages and threads in your mailbox.</td>
+        <td>To detect replies to emails we sent and surface them on your dashboard.</td>
+      </tr>
+      <tr>
+        <td><code>userinfo.email</code> / <code>userinfo.profile</code></td>
+        <td>Your Google email address, name, and profile picture.</td>
+        <td>To confirm which Gmail account is connected.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <div class="callout-title">Google API Services User Data — limited use</div>
+    <p>
+      ToInbox's use and transfer to any other app of information received from Google APIs adheres
+      to the
+      <a href="https://developers.google.com/terms/api-services-user-data-policy">Google API Services User Data Policy</a>,
+      including the Limited Use requirements. Specifically:
+    </p>
+    <ul>
+      <li>We use Gmail data <strong>only</strong> to provide the user-facing features of ToInbox (sending applications from your Gmail and detecting replies for your dashboard).</li>
+      <li>We <strong>do not</strong> use Gmail data to train, develop, or improve any generalised or third-party AI/ML models.</li>
+      <li>We <strong>do not</strong> sell or transfer Gmail data to any third party for advertising, marketing, or any unrelated purpose.</li>
+      <li>We <strong>do not</strong> allow humans to read your Gmail data, except (a) with your explicit consent, (b) when required by law, (c) for security investigations, or (d) in aggregated, anonymized form for internal operations.</li>
+    </ul>
+  </div>
+
+  <h3>2.4 Information generated through your use of the Service</h3>
+  <ul>
+    <li>LinkedIn job listings you enroll (job ID, role title, company name, company domain, job URL, job description text scraped from the public listing).</li>
+    <li>Emails we generate and send (subject, body, recipient, Gmail message and thread IDs).</li>
+    <li>Reply status (whether a reply was detected, whether it was classified as a human reply or an auto-responder/interview invite, and the text of the reply for display on your dashboard).</li>
+    <li>Basic event logs (timestamps of sends, errors, schedule decisions).</li>
+  </ul>
+
+  <h3>2.5 Information collected automatically</h3>
+  <p>
+    Like most web services, our hosting and analytics infrastructure may log IP address, user-agent
+    string, and request timestamps for security and reliability. The Service does not currently use
+    advertising cookies or third-party trackers.
+  </p>
+
+  <h2>3. How we use your information</h2>
+  <p>We use the information we collect to:</p>
+  <ul>
+    <li>Generate personalized application emails from your resume using an AI service.</li>
+    <li>Identify the right founder for each company you enroll (via Apollo.io's database).</li>
+    <li>Send those emails from your Gmail and attach your resume as a PDF.</li>
+    <li>Check for replies in your Gmail and surface them, along with reply content, on your dashboard.</li>
+    <li>Enforce your daily sending limit and sending schedule.</li>
+    <li>Operate, secure, and improve the Service (e.g. error monitoring, performance).</li>
+    <li>Communicate with you about your account and service updates.</li>
+    <li>Process payments for paid plans (when applicable).</li>
+  </ul>
+
+  <h2>4. Third parties we share information with</h2>
+  <p>
+    We do not sell your personal information. We share specific pieces of data with the following
+    third-party processors, only as needed to provide the Service:
+  </p>
+  <table>
+    <thead><tr><th>Provider</th><th>Purpose</th><th>Data shared</th></tr></thead>
+    <tbody>
+      <tr><td>Google (Gmail API)</td><td>Sending email from your account; reading replies</td><td>OAuth tokens, the email body/subject/recipient we send, requests for thread contents</td></tr>
+      <tr><td>OpenAI</td><td>Generating personalized email content from your resume + job description</td><td>Your resume text, the job description, the company name, and the founder's first name (no Gmail content, no recipient address)</td></tr>
+      <tr><td>Apollo.io</td><td>Finding the founder's contact details by company domain</td><td>Company name and domain (no personal data about you)</td></tr>
+      <tr><td>Hunter.io</td><td>Backup email-finding service</td><td>Company name and domain (no personal data about you)</td></tr>
+      <tr><td>Vercel</td><td>Hosting the website and application</td><td>Request metadata (IP, user-agent) per Vercel's standard logging</td></tr>
+      <tr><td>Railway</td><td>Hosting the application backend</td><td>Request metadata per Railway's standard logging</td></tr>
+      <tr><td>Turso (libSQL)</td><td>Application database (hosted in Mumbai region)</td><td>All structured user data described in Section 2</td></tr>
+    </tbody>
+  </table>
+  <p>
+    Each of these providers has its own privacy practices; we recommend reviewing their policies.
+    We do not share information with any party for advertising or marketing purposes.
+  </p>
+
+  <h2>5. Where we store data</h2>
+  <p>
+    The application database is hosted with Turso in the AWS Asia Pacific (Mumbai) region. Resume
+    files and email content are stored within this database. OAuth tokens are stored encrypted at
+    the database level. Our hosting providers may process request metadata in other regions.
+  </p>
+
+  <h2>6. How long we keep data</h2>
+  <ul>
+    <li><strong>Account data</strong> (profile, resume, sent email records, replies) is retained for as long as your account is active.</li>
+    <li><strong>OAuth tokens</strong> are retained while your account is active so the Service can continue to function. Revoking access in your <a href="https://myaccount.google.com/permissions">Google Account permissions</a> or <a href="https://www.linkedin.com/psettings/permitted-services">LinkedIn permitted services</a> invalidates them.</li>
+    <li><strong>Event logs</strong> are retained for up to 90 days for debugging and security purposes.</li>
+    <li>On account deletion, all personal data is removed from our active database within 30 days. Backup copies may persist for a further 60 days before being purged.</li>
+  </ul>
+
+  <h2>7. Your rights and choices</h2>
+  <ul>
+    <li><strong>Access &amp; correction:</strong> view and edit your profile and resume in the app at any time.</li>
+    <li><strong>Deletion:</strong> request account and data deletion by emailing <a href="mailto:support@topfounder.io">support@topfounder.io</a>. We respond within 30 days.</li>
+    <li><strong>Revoke Gmail access:</strong> at <a href="https://myaccount.google.com/permissions">Google Account permissions</a>. This stops all sending and reply-checking immediately.</li>
+    <li><strong>Revoke LinkedIn access:</strong> at <a href="https://www.linkedin.com/psettings/permitted-services">LinkedIn permitted services</a>.</li>
+    <li><strong>Export:</strong> request a copy of your data by emailing the address above.</li>
+    <li>Depending on your jurisdiction (e.g. GDPR, India's DPDP Act, CCPA) you may have additional rights such as objection, restriction, and portability. You may exercise these by emailing us.</li>
+  </ul>
+
+  <h2>8. Security</h2>
+  <p>
+    We protect data in transit with HTTPS/TLS and at rest through our database provider's
+    encryption. Access to production systems is restricted. OAuth tokens are stored and used only
+    by the Service. No system is perfectly secure; if we become aware of a breach affecting your
+    data we will notify you as required by applicable law.
+  </p>
+
+  <h2>9. Children</h2>
+  <p>
+    ToInbox is not directed to anyone under 16. We do not knowingly collect data from children
+    under 16. If you believe a child has provided information to us, contact us and we will delete it.
+  </p>
+
+  <h2>10. International users</h2>
+  <p>
+    The Service is offered globally. If you are located outside India, your data will be transferred
+    to and processed in India and in the regions where our subprocessors operate. By using the
+    Service you consent to that transfer.
+  </p>
+
+  <h2>11. Cookies and similar technologies</h2>
+  <p>
+    The application uses essential cookies and local-storage entries to keep you signed in and to
+    cache application data for performance. We do not use advertising or cross-site tracking
+    cookies. The marketing site at <code>toinbox.app</code> may use minimal first-party analytics
+    in the future; if added, this policy will be updated.
+  </p>
+
+  <h2>12. Third-party links and platforms</h2>
+  <p>
+    ToInbox interacts with LinkedIn (a Microsoft service) and Gmail (a Google service). It is not
+    affiliated with, endorsed by, or sponsored by either company. We are not responsible for the
+    privacy practices of LinkedIn, Google, or any other third party.
+  </p>
+
+  <h2>13. Changes to this policy</h2>
+  <p>
+    We may update this Privacy Policy as the Service evolves. The "Last updated" date at the top of
+    this page reflects the latest version. Material changes will be highlighted in-app or by email
+    where appropriate. Continued use of the Service after a change constitutes acceptance.
+  </p>
+
+  <h2>14. Contact</h2>
+  <p>
+    TopFounder (Devansh Karnani)<br />
+    134 Salkia School Road, Howrah, West Bengal 711106, India<br />
+    <a href="mailto:support@topfounder.io">support@topfounder.io</a>
+  </p>
+</main>
+
+<footer>
+  <span>© 2026 TopFounder · Built by Devansh Karnani</span>
+  <span><a href="/">toinbox.app</a> · <a href="/terms.html">Terms</a> · <a href="/privacy.html">Privacy</a></span>
+</footer>
+
+</body>
+</html>
