@@ -556,6 +556,8 @@ function Footer() {
             <a href="#product">Product</a>
             <a href="#proof">Replies</a>
             <a href="#pricing">Pricing</a>
+            <a href="/privacy.html">Privacy</a>
+            <a href="/terms.html">Terms</a>
           </div>
           <div style={{ fontSize: 12.5, color: 'var(--ink-4)', fontFamily: 'var(--font-mono)' }}>© 2026 ToInbox · v0.4</div>
         </div>
