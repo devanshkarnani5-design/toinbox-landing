@@ -2,12 +2,12 @@
 const { useState: useStateHIW, useEffect: useEffectHIW, useRef: useRefHIW } = React;
 
 const HIW_STEPS = [
-  { t: 'Click a job — ToInbox detects it instantly', s: 'Click any LinkedIn job and ToInbox immediately detects it in the panel. One button. It finds the founder\'s email, matches your resume, and is ready to send in seconds.' },
+  { t: 'Click a job — ToInbox detects it instantly', s: 'Click any LinkedIn job and ToInbox immediately detects it in the panel. One button. It finds the founder and the relevant department head, matches your resume, and is ready to send in seconds.' },
   { t: 'AI scans resume + JD', s: 'Cross-references your experience and the job description in seconds. Identifies the right signals from your resume automatically.' },
-  { t: 'Cover letter generated', s: 'Specific, human-sounding, no template smell. Cites the role, the changelog, the founder by name. Around 160 words.' },
+  { t: 'Cover letter generated', s: 'Specific, human-sounding, no template smell. Cites the role, the company's work, and the recipient by name. Around 160 words.' },
   { t: 'Sent to founder inbox', s: 'Email + resume lands in the founder\'s personal inbox. Skips ATS entirely. No Easy Apply queue.' },
   { t: 'Dashboard tracks it all', s: 'Every metric live: enrolled, sent, replied, interviews scheduled.' },
-  { t: 'Founder replies', s: 'Founders reply to intent. You land in a real conversation — two steps ahead of every other applicant.' },
+  { t: 'They reply', s: 'Founders and department heads reply to intent. You land in a real conversation — two steps ahead of every other applicant.' },
 ];
 
 const STEP_MS = [3800, 2800, 3200, 2000, 3200, 3200];
@@ -310,7 +310,7 @@ function HiwLinkedIn({ step, typed }) {
           {[
             { k: 'Resume parsed', v: '14 signals' },
             { k: 'JD analyzed', v: '9 keywords' },
-            { k: 'Founder found', v: 'm.v@northwind.co' },
+            { k: 'Contact found', v: 'm.v@northwind.co' },
           ].map(({ k, v }, i) => (
             <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 7, padding: '7px 9px', background: 'rgba(5,118,66,0.1)', border: '1px solid rgba(5,118,66,0.22)', borderRadius: 7 }}>
               <span style={{ fontSize: 10, color: '#4ade80' }}>✓</span>
@@ -554,7 +554,7 @@ function HowItWorks() {
       <div style={{ maxWidth: 1560, margin: '0 auto', padding: '0 clamp(24px, 5vw, 72px)' }}>
         <div className="section-head" data-reveal>
           <span className="eyebrow"><span className="dot" />How it works</span>
-          <h2 className="h-section">From LinkedIn tab to founder inbox<br />in fifteen seconds.</h2>
+          <h2 className="h-section">From LinkedIn tab to the right inbox<br />in fifteen seconds.</h2>
           <p className="lead">ToInbox lives inside the LinkedIn workflow you already use. Watch it happen live.</p>
         </div>
 

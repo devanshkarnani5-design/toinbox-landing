@@ -4,11 +4,11 @@ const { useEffect: useEffectS } = React;
 function Benefits() {
   const items = [
     { ico: 'panel', t: 'Lives where you already are', s: "A Chrome extension that sits inside LinkedIn. No new app to learn, no second tab to keep open." },
-    { ico: 'target', t: 'Skip Easy Apply queues', s: 'Thousands apply through LinkedIn and go unseen. Reach founder\'s mail-box directly where your application gets noticed.' },
-    { ico: 'forward', t: 'Forwarded to hiring directly', s: 'Founders often move such applications directly into interviews or forward them to HR. These applications carry an advantage and move quicker.' },
-    { ico: 'sparkle', t: 'Tailored, never templated', s: 'Every application sent to a founder is unique and personalised based on job description and your resume.' },
+    { ico: 'target', t: 'Skip Easy Apply queues', s: 'Thousands apply through LinkedIn and go unseen. Reach the founder and department head directly, where your application gets noticed.' },
+    { ico: 'forward', t: 'Forwarded to hiring directly', s: 'Founders and department heads often move such applications straight to interviews or forward them to HR. These applications carry an advantage and move quicker.' },
+    { ico: 'sparkle', t: 'Tailored, never templated', s: 'Every application — to a founder or department head — is unique and personalised based on job description and your resume.' },
     { ico: 'bolt', t: 'Fifteen-second applications', s: 'Detect → enroll → send. Personalized outreach creates stronger intent, and strong intent increases replies.' },
-    { ico: 'chart', t: 'Founders reply at multiples', s: 'Founders value candidates who show genuine interest. Personalized outreach leads to more replies and interviews.' },
+    { ico: 'chart', t: 'Decision-makers reply at multiples', s: 'Founders and department heads value candidates who show genuine interest. Personalized outreach leads to more replies and interviews.' },
   ];
   return (
     <section className="section" id="why">
@@ -171,7 +171,7 @@ function DemoShowcase() {
                   {/* Reply threads */}
                   <div style={{ background: 'var(--bg-elev)', borderRadius: 14, border: '1px solid var(--line)', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
                     <div style={{ padding: '14px 18px', borderBottom: '1px solid var(--line)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                      <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--ink)', letterSpacing: '-0.01em' }}>Founder Replies</div>
+                      <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--ink)', letterSpacing: '-0.01em' }}>Replies that matter</div>
                       <div style={{ fontSize: 11, padding: '3px 8px', borderRadius: 999, background: '#e6f4ea', color: '#057642', fontFamily: 'var(--font-mono)', fontWeight: 600 }}>6 new</div>
                     </div>
                     {REPLIES.map((r, i) => (
@@ -266,7 +266,7 @@ const INBOX_THREADS = [
   },
   {
     id: 5, avatar: 'P', bg: 'linear-gradient(135deg,#a07ad8,#5b34a1)',
-    name: 'Priya Shah', role: 'Founder · Cloudpack',
+    name: 'Priya Shah', role: 'Head of Product · Cloudpack',
     email: 'priya@cloudpack.io',
     when: 'Fri 10:50 AM', unread: false,
     subj: 'Re: One of the best applications we\'ve seen',
@@ -312,8 +312,8 @@ function Testimonials() {
     <section className="section" id="proof">
       <div className="wrap">
         <div className="section-head" data-reveal>
-          <span className="eyebrow"><span className="dot" />Real founder replies</span>
-          <h2 className="h-section">Founders reply to intent.<br /><em>Here's what that looks like.</em></h2>
+          <span className="eyebrow"><span className="dot" />Real replies from decision-makers</span>
+          <h2 className="h-section">The people who decide reply to intent.<br /><em>Here's what that looks like.</em></h2>
           <p className="lead">These are the actual mailboxes that fill up after using ToInbox. Personal outreach generates real conversations.</p>
         </div>
 
@@ -330,7 +330,7 @@ function Testimonials() {
 
         {/* Real inbox label */}
         <div style={{ textAlign: 'center' }} data-reveal>
-          <span className="inbox-real-label">Real Founder Inbox Replies</span>
+          <span className="inbox-real-label">Real Inbox Replies — Founders Real Founder Inbox Replies Hiring Leads</span>
         </div>
 
         {/* Gmail inbox mock */}
@@ -471,7 +471,7 @@ function Pricing() {
               <div className="price-sub">Try before you commit.</div>
             </div>
             <div className="price-feats">
-              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>5 personalized founder sends</div>
+              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>10 personalized sends</div>
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Cover letter + cold email pair</div>
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Reply tracking</div>
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Dashboard + Analytics</div>
@@ -488,7 +488,7 @@ function Pricing() {
               </div>
             </div>
             <div className="price-feats">
-              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>50 personalized founder sends</div>
+              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>100 personalized sends</div>
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Cover letter + cold email pair</div>
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Reply tracking</div>
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Dashboard + Analytics</div>
@@ -505,7 +505,7 @@ function Pricing() {
               <div className="price-sub">Best for active job searches.</div>
             </div>
             <div className="price-feats">
-              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>100 personalized founder sends</div>
+              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>200 personalized sends</div>
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Cheaper per send</div>
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Everything in Starter included</div>
             </div>
@@ -529,7 +529,7 @@ function FinalCTA() {
           <h2 className="h-section" style={{ marginTop: 18, maxWidth: 820, marginLeft: 'auto', marginRight: 'auto' }}>
             Your dream startup won't notice<br />another Easy Apply.
           </h2>
-          <p className="lead">Turn LinkedIn applications into founder conversations. Send the email a founder will actually forward.</p>
+          <p className="lead">Turn LinkedIn applications into real conversations. Send the email a founder or hiring lead will actually forward.</p>
           <div style={{ display: 'flex', gap: 10, justifyContent: 'center', flexWrap: 'wrap' }}>
             <a href="https://app.toinbox.app" className="btn btn-accent">Add ToInbox to Chrome <Icon name="arrow" size={14} className="chev" /></a>
             <a href="#how-section" className="btn btn-ghost" style={{ color: 'rgba(255,255,255,0.8)' }}>See how it works</a>
@@ -548,7 +548,7 @@ function Footer() {
         <div className="footer-inner">
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
             <div className="brand"><span className="brand-mark" /> ToInbox</div>
-            <div style={{ fontSize: 12.5, color: 'var(--ink-4)' }}>The Chrome extension for founder-first LinkedIn applications.</div>
+            <div style={{ fontSize: 12.5, color: 'var(--ink-4)' }}>The Chrome extension for decision-maker-first LinkedIn applications.</div>
           </div>
           <div className="foot-links">
             <a href="#why">Why</a>
