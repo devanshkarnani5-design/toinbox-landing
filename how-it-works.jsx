@@ -5,7 +5,7 @@ const HIW_STEPS = [
   { t: 'Click a job — ToInbox detects it instantly', s: 'Click any LinkedIn job and ToInbox immediately detects it in the panel. One button. It finds the founder and the relevant department head, matches your resume, and is ready to send in seconds.' },
   { t: 'AI scans resume + JD', s: 'Cross-references your experience and the job description in seconds. Identifies the right signals from your resume automatically.' },
   { t: 'Cover letter generated', s: 'Specific, human-sounding, no template smell. Cites the role, the company\'s work, and the recipient by name. Around 160 words.' },
-  { t: 'Sent to founder inbox', s: 'Email + resume lands in the founder\'s personal inbox. Skips ATS entirely. No Easy Apply queue.' },
+  { t: 'Sent to leadership inboxes', s: 'Email + resume lands in the founder\'s personal inbox. Skips ATS entirely. No Easy Apply queue.' },
   { t: 'Dashboard tracks it all', s: 'Every metric live: enrolled, sent, replied, interviews scheduled.' },
   { t: 'They reply', s: 'Founders and department heads reply to intent. You land in a real conversation — two steps ahead of every other applicant.' },
 ];
