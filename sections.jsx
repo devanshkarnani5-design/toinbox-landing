@@ -458,8 +458,8 @@ function Pricing() {
       <div className="wrap">
         <div className="section-head center" data-reveal>
           <span className="eyebrow"><span className="dot" />Pricing</span>
-          <h2 className="h-section">Pay only when you're applying.</h2>
-          <p className="lead" style={{ textAlign: 'center' }}>No subscription. No expiring credits. Buy a pack, send when it counts.</p>
+          <h2 className="h-section">Simple monthly plans, built for active job hunts.</h2>
+          <p className="lead" style={{ textAlign: 'center' }}>Pick a plan that fits your search. Cancel anytime — sends refresh each month.</p>
         </div>
         <div className="pricing-grid" style={{ gridTemplateColumns: 'repeat(3, 1fr)' }}>
           <div className="price-card" data-reveal>
@@ -474,7 +474,6 @@ function Pricing() {
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>10 personalized sends</div>
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Auto follow-up in 40 hrs</div>
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Cover letter + cold email pair</div>
-              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Reply tracking</div>
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Dashboard + Analytics</div>
             </div>
             <a href="https://app.toinbox.app" className="btn btn-outline" style={{ marginTop: 'auto' }}>Add to Chrome <Icon name="arrow" size={14} className="chev" /></a>
@@ -485,14 +484,13 @@ function Pricing() {
             <div>
               <div className="price-name">Starter</div>
               <div style={{ display: 'flex', alignItems: 'baseline', gap: 4, marginTop: 8 }}>
-                <span className="price-amt"><span className="currency">₹</span>399<span className="per">/month</span></span>
+                <span className="price-amt"><span className="currency">₹</span>499<span className="per">/month</span></span>
               </div>
             </div>
             <div className="price-feats">
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>100 personalized sends</div>
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Auto follow-up in 40 hrs</div>
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Cover letter + cold email pair</div>
-              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Reply tracking</div>
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Dashboard + Analytics</div>
             </div>
             <a href="https://app.toinbox.app" className="btn btn-accent" style={{ marginTop: 'auto', alignSelf: 'flex-start' }}>Get the pack <Icon name="arrow" size={14} className="chev" /></a>
@@ -502,7 +500,7 @@ function Pricing() {
             <div>
               <div className="price-name">Pro</div>
               <div style={{ display: 'flex', alignItems: 'baseline', gap: 4, marginTop: 8 }}>
-                <span className="price-amt"><span className="currency">₹</span>699<span className="per">/month</span></span>
+                <span className="price-amt"><span className="currency">₹</span>799<span className="per">/month</span></span>
               </div>
               <div className="price-sub">Best for active job searches.</div>
             </div>
