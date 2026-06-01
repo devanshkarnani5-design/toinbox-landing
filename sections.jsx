@@ -476,7 +476,7 @@ function Pricing() {
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Cover letter + cold email pair</div>
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Dashboard + Analytics</div>
             </div>
-            <a href="https://app.toinbox.app" className="btn btn-outline" style={{ marginTop: 'auto' }}>Add to Chrome <Icon name="arrow" size={14} className="chev" /></a>
+            <a href="https://chromewebstore.google.com/detail/pjdkipiapmjlakkkcincchjlaepgfgbg" target="_blank" rel="noreferrer" className="btn btn-outline" style={{ marginTop: 'auto' }}>Add to Chrome <Icon name="arrow" size={14} className="chev" /></a>
           </div>
 
           <div className="price-card featured" data-reveal style={{ transitionDelay: '90ms' }}>
@@ -493,7 +493,7 @@ function Pricing() {
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Cover letter + cold email pair</div>
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Dashboard + Analytics</div>
             </div>
-            <a href="https://app.toinbox.app" className="btn btn-accent" style={{ marginTop: 'auto', alignSelf: 'flex-start' }}>Get the pack <Icon name="arrow" size={14} className="chev" /></a>
+            <a href="https://chromewebstore.google.com/detail/pjdkipiapmjlakkkcincchjlaepgfgbg" target="_blank" rel="noreferrer" className="btn btn-accent" style={{ marginTop: 'auto', alignSelf: 'flex-start' }}>Get the pack <Icon name="arrow" size={14} className="chev" /></a>
           </div>
 
           <div className="price-card" data-reveal style={{ transitionDelay: '180ms' }}>
@@ -509,7 +509,7 @@ function Pricing() {
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Cheaper per send</div>
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Everything in Starter included</div>
             </div>
-            <a href="https://app.toinbox.app" className="btn btn-primary" style={{ marginTop: 'auto' }}>Go Pro <Icon name="arrow" size={14} className="chev" /></a>
+            <a href="https://chromewebstore.google.com/detail/pjdkipiapmjlakkkcincchjlaepgfgbg" target="_blank" rel="noreferrer" className="btn btn-primary" style={{ marginTop: 'auto' }}>Go Pro <Icon name="arrow" size={14} className="chev" /></a>
           </div>
         </div>
         <div style={{ textAlign: 'center', color: 'var(--ink-3)', fontSize: 13, marginTop: 24 }}>
@@ -531,7 +531,7 @@ function FinalCTA() {
           </h2>
           <p className="lead">Turn LinkedIn applications into real conversations. Send the email a founder or hiring lead will actually forward.</p>
           <div style={{ display: 'flex', gap: 10, justifyContent: 'center', flexWrap: 'wrap' }}>
-            <a href="https://app.toinbox.app" className="btn btn-accent">Add ToInbox to Chrome <Icon name="arrow" size={14} className="chev" /></a>
+            <a href="https://chromewebstore.google.com/detail/pjdkipiapmjlakkkcincchjlaepgfgbg" target="_blank" rel="noreferrer" className="btn btn-accent">Add ToInbox to Chrome <Icon name="arrow" size={14} className="chev" /></a>
             <a href="#how-section" className="btn btn-ghost" style={{ color: 'rgba(255,255,255,0.8)' }}>See how it works</a>
           </div>
           <div style={{ marginTop: 20, fontSize: 12.5, color: 'rgba(255,255,255,0.5)', fontFamily: 'var(--font-mono)' }}>NO CARD REQUIRED · 5 FREE CREDITS · WORKS ON LINKEDIN</div>
