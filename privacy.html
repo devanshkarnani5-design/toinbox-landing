@@ -166,7 +166,6 @@
     <li>Generate personalized application emails from your resume using an AI service.</li>
     <li>Identify the right founder for each company you enroll (via Apollo.io's database).</li>
     <li>Send those emails from your Gmail and attach your resume as a PDF.</li>
-    <li>Check for replies in your Gmail and surface them, along with reply content, on your dashboard.</li>
     <li>Enforce your daily sending limit and sending schedule.</li>
     <li>Operate, secure, and improve the Service (e.g. error monitoring, performance).</li>
     <li>Communicate with you about your account and service updates.</li>
@@ -181,7 +180,7 @@
   <table>
     <thead><tr><th>Provider</th><th>Purpose</th><th>Data shared</th></tr></thead>
     <tbody>
-      <tr><td>Google (Gmail API)</td><td>Sending email from your account; reading replies</td><td>OAuth tokens, the email body/subject/recipient we send, requests for thread contents</td></tr>
+      <tr><td>Google (Gmail API)</td><td>Sending email from your account</td><td>OAuth tokens, the email body/subject/recipient we send, requests for thread contents</td></tr>
       <tr><td>OpenAI</td><td>Generating personalized email content from your resume + job description</td><td>Your resume text, the job description, the company name, and the founder's first name (no Gmail content, no recipient address)</td></tr>
       <tr><td>Apollo.io</td><td>Finding the founder's contact details by company domain</td><td>Company name and domain (no personal data about you)</td></tr>
       <tr><td>Hunter.io</td><td>Backup email-finding service</td><td>Company name and domain (no personal data about you)</td></tr>
