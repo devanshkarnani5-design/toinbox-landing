@@ -70,7 +70,7 @@
   <span class="eyebrow"><span class="dot"></span>Legal · privacy policy</span>
   <h1>Privacy Policy</h1>
   <p class="lead">How ToInbox collects, uses, and protects your information.</p>
-  <p class="meta">Last updated: 27 May 2026</p>
+  <p class="meta">Last updated: 10 June 2026</p>
 
   <h2>1. Who we are</h2>
   <p>
@@ -117,11 +117,6 @@
         <td>So the application emails we generate are sent <em>from you</em>, not from us.</td>
       </tr>
       <tr>
-        <td><code>gmail.readonly</code></td>
-        <td>Read messages and threads in your mailbox.</td>
-        <td>To detect replies to emails we sent and surface them on your dashboard.</td>
-      </tr>
-      <tr>
         <td><code>userinfo.email</code> / <code>userinfo.profile</code></td>
         <td>Your Google email address, name, and profile picture.</td>
         <td>To confirm which Gmail account is connected.</td>
@@ -138,7 +133,7 @@
       including the Limited Use requirements. Specifically:
     </p>
     <ul>
-      <li>We use Gmail data <strong>only</strong> to provide the user-facing features of ToInbox (sending applications from your Gmail and detecting replies for your dashboard).</li>
+      <li>We use Gmail data <strong>only</strong> to send application emails from your Gmail on your behalf.</li>
       <li>We <strong>do not</strong> use Gmail data to train, develop, or improve any generalised or third-party AI/ML models.</li>
       <li>We <strong>do not</strong> sell or transfer Gmail data to any third party for advertising, marketing, or any unrelated purpose.</li>
       <li>We <strong>do not</strong> allow humans to read your Gmail data, except (a) with your explicit consent, (b) when required by law, (c) for security investigations, or (d) in aggregated, anonymized form for internal operations.</li>
@@ -149,7 +144,6 @@
   <ul>
     <li>LinkedIn job listings you enroll (job ID, role title, company name, company domain, job URL, job description text scraped from the public listing).</li>
     <li>Emails we generate and send (subject, body, recipient, Gmail message and thread IDs).</li>
-    <li>Reply status (whether a reply was detected, whether it was classified as a human reply or an auto-responder/interview invite, and the text of the reply for display on your dashboard).</li>
     <li>Basic event logs (timestamps of sends, errors, schedule decisions).</li>
   </ul>
 
@@ -180,7 +174,7 @@
   <table>
     <thead><tr><th>Provider</th><th>Purpose</th><th>Data shared</th></tr></thead>
     <tbody>
-      <tr><td>Google (Gmail API)</td><td>Sending email from your account</td><td>OAuth tokens, the email body/subject/recipient we send, requests for thread contents</td></tr>
+      <tr><td>Google (Gmail API)</td><td>Sending email from your account</td><td>OAuth tokens, the email body/subject/recipient we send</td></tr>
       <tr><td>OpenAI</td><td>Generating personalized email content from your resume + job description</td><td>Your resume text, the job description, the company name, and the founder's first name (no Gmail content, no recipient address)</td></tr>
       <tr><td>Apollo.io</td><td>Finding the founder's contact details by company domain</td><td>Company name and domain (no personal data about you)</td></tr>
       <tr><td>Hunter.io</td><td>Backup email-finding service</td><td>Company name and domain (no personal data about you)</td></tr>
@@ -213,7 +207,7 @@
   <ul>
     <li><strong>Access &amp; correction:</strong> view and edit your profile and resume in the app at any time.</li>
     <li><strong>Deletion:</strong> request account and data deletion by emailing <a href="mailto:support@topfounder.io">support@topfounder.io</a>. We respond within 30 days.</li>
-    <li><strong>Revoke Gmail access:</strong> at <a href="https://myaccount.google.com/permissions">Google Account permissions</a>. This stops all sending and reply-checking immediately.</li>
+    <li><strong>Revoke Gmail access:</strong> at <a href="https://myaccount.google.com/permissions">Google Account permissions</a>. This stops all sending immediately.</li>
     <li><strong>Revoke LinkedIn access:</strong> at <a href="https://www.linkedin.com/psettings/permitted-services">LinkedIn permitted services</a>.</li>
     <li><strong>Export:</strong> request a copy of your data by emailing the address above.</li>
     <li>Depending on your jurisdiction (e.g. GDPR, India's DPDP Act, CCPA) you may have additional rights such as objection, restriction, and portability. You may exercise these by emailing us.</li>
