@@ -476,7 +476,7 @@ function Pricing() {
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Cover letter + cold email pair</div>
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Dashboard + Analytics</div>
             </div>
-            <a href="https://chromewebstore.google.com/detail/pjdkipiapmjlakkkcincchjlaepgfgbg" target="_blank" rel="noreferrer" className="btn btn-outline" style={{ marginTop: 'auto' }}>Add to Chrome <Icon name="arrow" size={14} className="chev" /></a>
+            <a href="https://app.toinbox.app" className="btn btn-outline" style={{ marginTop: 'auto' }}>Sign In <Icon name="arrow" size={14} className="chev" /></a>
           </div>
 
           <div className="price-card featured" data-reveal style={{ transitionDelay: '90ms' }}>
@@ -493,7 +493,7 @@ function Pricing() {
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Cover letter + cold email pair</div>
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Dashboard + Analytics</div>
             </div>
-            <a href="https://chromewebstore.google.com/detail/pjdkipiapmjlakkkcincchjlaepgfgbg" target="_blank" rel="noreferrer" className="btn btn-accent" style={{ marginTop: 'auto', alignSelf: 'flex-start' }}>Get the pack <Icon name="arrow" size={14} className="chev" /></a>
+            <a href="https://app.toinbox.app" className="btn btn-accent" style={{ marginTop: 'auto', alignSelf: 'flex-start' }}>Sign In <Icon name="arrow" size={14} className="chev" /></a>
           </div>
 
           <div className="price-card" data-reveal style={{ transitionDelay: '180ms' }}>
