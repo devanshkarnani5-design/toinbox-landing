@@ -10,7 +10,7 @@ const HIW_STEPS = [
   { t: 'They reply', s: 'Founders and department heads reply to intent. You land in a real conversation — two steps ahead of every other applicant.' },
 ];
 
-const STEP_MS = [3800, 2800, 3200, 2000, 3200, 3200];
+const STEP_MS = [6000, 6000, 6000, 6000, 6000, 6000];
 
 const HIW_JOBS = [
   { logo: 'N', bg: '#1e3a5f', title: 'Founding Product Engineer', co: 'Northwind', match: 94, email: 'm.v@northwind.co' },
