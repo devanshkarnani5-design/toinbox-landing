@@ -25,6 +25,8 @@ const Icon = ({ name, size = 16, ...rest }) => {
     eye: <g><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z" /><circle cx="12" cy="12" r="3" /></g>,
     handshake: <g><path d="M12 11l2-2 5 5-2 2-2-2" /><path d="M14 9l-4-4-7 7 2 2 3-3" /><path d="M9 16l3 3 2-2" /></g>,
     cursor: <path d="M5 3l14 9-7 1-3 7-4-17z" fill="currentColor" stroke="white" strokeWidth="1.2" />,
+    sliders: <g><path d="M4 8h10M14 8a2 2 0 104 0 2 2 0 00-4 0zM4 16h2M6 16a2 2 0 104 0 2 2 0 00-4 0zM10 16h10" /></g>,
+    card: <g><rect x="2" y="5" width="20" height="14" rx="2" /><path d="M2 10h20" /></g>,
   };
   return <svg {...s} {...rest}>{paths[name]}</svg>;
 };
