@@ -448,7 +448,7 @@ function HowitworksBrowser({ step, typed, replyVisible }) {
   );
 }
 
-function HowItWorks() {
+function HowItWorks({ speedMultiplier = 1 }) {
   const [active, setActive] = useStateHIW(0);
   const [typed, setTyped] = useStateHIW('');
   const [visible, setVisible] = useStateHIW(true);
@@ -498,7 +498,7 @@ function HowItWorks() {
 
     const tick = () => {
       const elapsed = Date.now() - startTime;
-      if (elapsed >= STEP_MS[idx]) {
+      if (elapsed >= STEP_MS[idx] / speedMultiplier) {
         const next = (idx + 1) % HIW_STEPS.length;
         idx = next;
         startTime = Date.now();
@@ -538,7 +538,7 @@ function HowItWorks() {
 
     const tick = () => {
       const elapsed = Date.now() - startTime;
-      if (elapsed >= STEP_MS[idx]) {
+      if (elapsed >= STEP_MS[idx] / speedMultiplier) {
         const next = (idx + 1) % HIW_STEPS.length;
         idx = next;
         startTime = Date.now();
