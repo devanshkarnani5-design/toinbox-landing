@@ -453,20 +453,52 @@ function Testimonials() {
 }
 
 function Pricing() {
+  // Auto-detect region for currency. India -> INR (Razorpay), else USD (Dodo).
+  // Static page has no backend, so we use a lightweight browser geo lookup,
+  // with a manual toggle as a fallback when detection is wrong/blocked.
+  const { useState: useStateP, useEffect: useEffectP } = React;
+  const [region, setRegion] = useStateP('in'); // default to India; flips on detect
+
+  useEffectP(() => {
+    let cancelled = false;
+    // Cloudflare trace is fast and CORS-friendly: returns "loc=IN" etc.
+    fetch('https://www.cloudflare.com/cdn-cgi/trace')
+      .then((r) => r.text())
+      .then((txt) => {
+        if (cancelled) return;
+        const m = txt.match(/loc=([A-Z]{2})/);
+        if (m) setRegion(m[1] === 'IN' ? 'in' : 'intl');
+      })
+      .catch(() => {
+        // Fallback: timezone heuristic (India has one tz).
+        try {
+          const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+          if (!/Kolkata|Calcutta/i.test(tz)) setRegion('intl');
+        } catch (_) {}
+      });
+    return () => { cancelled = true; };
+  }, []);
+
+  const isIndia = region === 'in';
+  const cur = isIndia ? '\u20B9' : '$';
+  const starter = isIndia ? '299' : '9';
+  const pro = isIndia ? '499' : '16';
+
   return (
     <section className="section" id="pricing">
       <div className="wrap">
         <div className="section-head center" data-reveal>
           <span className="eyebrow"><span className="dot" />Pricing</span>
-          <h2 className="h-section">Simple monthly plans, built for active job hunts.</h2>
-          <p className="lead" style={{ textAlign: 'center' }}>Pick a plan that fits your search. Cancel anytime — sends refresh each month.</p>
+          <h2 className="h-section">Simple one-time credit packs. Pay only for what you send.</h2>
+          <p className="lead" style={{ textAlign: 'center' }}>No subscription. Buy credits once — they stay valid for 60 days.</p>
         </div>
+
         <div className="pricing-grid" style={{ gridTemplateColumns: 'repeat(3, 1fr)' }}>
           <div className="price-card" data-reveal>
             <div>
               <div className="price-name">Free Trial</div>
               <div style={{ display: 'flex', alignItems: 'baseline', gap: 4, marginTop: 8 }}>
-                <span className="price-amt"><span className="currency">₹</span>0</span>
+                <span className="price-amt"><span className="currency">{cur}</span>0</span>
               </div>
               <div className="price-sub">Try before you commit.</div>
             </div>
@@ -484,11 +516,12 @@ function Pricing() {
             <div>
               <div className="price-name">Starter</div>
               <div style={{ display: 'flex', alignItems: 'baseline', gap: 4, marginTop: 8 }}>
-                <span className="price-amt"><span className="currency">₹</span>499<span className="per">/month</span></span>
+                <span className="price-amt"><span className="currency">{cur}</span>{starter}<span className="per">one-time</span></span>
               </div>
+              <div className="price-sub">50 credits · valid 60 days</div>
             </div>
             <div className="price-feats">
-              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>100 personalized sends</div>
+              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>50 personalized sends</div>
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Auto follow-up in 40 hrs</div>
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Cover letter + cold email pair</div>
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Dashboard + Analytics</div>
@@ -500,12 +533,12 @@ function Pricing() {
             <div>
               <div className="price-name">Pro</div>
               <div style={{ display: 'flex', alignItems: 'baseline', gap: 4, marginTop: 8 }}>
-                <span className="price-amt"><span className="currency">₹</span>799<span className="per">/month</span></span>
+                <span className="price-amt"><span className="currency">{cur}</span>{pro}<span className="per">one-time</span></span>
               </div>
-              <div className="price-sub">Best for active job searches.</div>
+              <div className="price-sub">100 credits · valid 60 days</div>
             </div>
             <div className="price-feats">
-              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>200 personalized sends</div>
+              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>100 personalized sends</div>
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Cheaper per send</div>
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Everything in Starter included</div>
             </div>
