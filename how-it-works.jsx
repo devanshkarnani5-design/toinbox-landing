@@ -594,7 +594,7 @@ function HowItWorks({ speedMultiplier = 1 }) {
 }
 
 
-function HeroBrowser({ speedMultiplier = 2.5 }) {
+function HeroBrowser({ speedMultiplier = 1 }) {
   const [active, setActive] = useStateHIW(0);
   const [typed, setTyped] = useStateHIW('');
   const [visible, setVisible] = useStateHIW(true);
