@@ -651,7 +651,9 @@ function HeroBrowser({ speedMultiplier = 1 }) {
 
   return (
     <div style={{ opacity: visible ? 1 : 0, transition: 'opacity 0.18s ease' }}>
-      <HowitworksBrowser step={active} typed={typed} replyVisible={active === 5} />
+      <div style={{ height: 620 }} className="hiw-browser-col">
+        <HowitworksBrowser step={active} typed={typed} replyVisible={active === 5} />
+      </div>
     </div>
   );
 }
