@@ -593,4 +593,68 @@ function HowItWorks({ speedMultiplier = 1 }) {
   );
 }
 
+
+function HeroBrowser({ speedMultiplier = 2.5 }) {
+  const [active, setActive] = useStateHIW(0);
+  const [typed, setTyped] = useStateHIW('');
+  const [visible, setVisible] = useStateHIW(true);
+  const tickRef = useRefHIW(null);
+  const typeRef = useRefHIW(null);
+  const activeRef = useRefHIW(0);
+
+  const transitionTo = (idx) => {
+    setVisible(false);
+    setTimeout(() => {
+      setActive(idx);
+      activeRef.current = idx;
+      setTyped('');
+      setVisible(true);
+    }, 180);
+  };
+
+  useEffectHIW(() => {
+    let idx = 0;
+    activeRef.current = 0;
+    setActive(0); setVisible(true);
+    let startTime = Date.now();
+    const tick = () => {
+      const elapsed = Date.now() - startTime;
+      if (elapsed >= STEP_MS[idx] / speedMultiplier) {
+        const next = (idx + 1) % HIW_STEPS.length;
+        idx = next;
+        startTime = Date.now();
+        transitionTo(next);
+      }
+      tickRef.current = requestAnimationFrame(tick);
+    };
+    tickRef.current = requestAnimationFrame(tick);
+    return () => { cancelAnimationFrame(tickRef.current); clearTimeout(typeRef.current); };
+  }, []);
+
+  useEffectHIW(() => {
+    if (active === 2) {
+      setTyped('');
+      let i = 0;
+      const type = () => {
+        if (i <= FULL_LETTER.length) {
+          setTyped(FULL_LETTER.slice(0, i));
+          i += 8;
+          typeRef.current = setTimeout(type, 10);
+        }
+      };
+      typeRef.current = setTimeout(type, 100);
+    } else {
+      clearTimeout(typeRef.current);
+    }
+    return () => clearTimeout(typeRef.current);
+  }, [active]);
+
+  return (
+    <div style={{ opacity: visible ? 1 : 0, transition: 'opacity 0.18s ease' }}>
+      <HowitworksBrowser step={active} typed={typed} replyVisible={active === 5} />
+    </div>
+  );
+}
+window.HeroBrowser = HeroBrowser;
+
 window.HowItWorks = HowItWorks;
