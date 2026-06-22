@@ -2,6 +2,7 @@
 const { useState: useStateHIW, useEffect: useEffectHIW, useRef: useRefHIW } = React;
 
 const HIW_STEPS = [
+  { t: 'Sign in & add the Chrome extension', s: 'Sign in at toinbox.app, then add ToInbox to Chrome in one click. It installs right inside LinkedIn — no setup, no account juggling. Ready in under a minute.' },
   { t: 'Click a job — ToInbox detects it instantly', s: 'Click any LinkedIn job and ToInbox immediately detects it in the panel. One button. It finds the founder and the relevant department head, matches your resume, and is ready to send in seconds.' },
   { t: 'AI scans resume + JD', s: 'Cross-references your experience and the job description in seconds. Identifies the right signals from your resume automatically.' },
   { t: 'Cover letter generated', s: 'Specific, human-sounding, no template smell. Cites the role, the company\'s work, and the recipient by name. Around 160 words.' },
@@ -10,7 +11,7 @@ const HIW_STEPS = [
   { t: 'They reply', s: 'Founders and department heads reply to intent. You land in a real conversation — two steps ahead of every other applicant.' },
 ];
 
-const STEP_MS = [6000, 6000, 6000, 6000, 6000, 6000];
+const STEP_MS = [5000, 6000, 6000, 6000, 6000, 6000, 6000];
 
 const HIW_JOBS = [
   { logo: 'N', bg: '#1e3a5f', title: 'Founding Product Engineer', co: 'Northwind', match: 94, email: 'm.v@northwind.co' },
@@ -136,6 +137,89 @@ function HiwDashboard({ replyVisible }) {
             </div>
           </div>
         )}
+      </div>
+    </div>
+  );
+}
+
+// ── Step 0 (NEW): Sign in & add the Chrome extension ──
+function HiwSignInPanel() {
+  const [phase, setPhase] = useStateHIW('store'); // 'store' | 'adding' | 'added'
+  const [clicking, setClicking] = useStateHIW(false);
+
+  useEffectHIW(() => {
+    let timers = [];
+    const after = (ms, fn) => { const t = setTimeout(fn, ms); timers.push(t); };
+    const loop = () => {
+      setPhase('store'); setClicking(false);
+      after(1100, () => setClicking(true));
+      after(1280, () => { setClicking(false); setPhase('adding'); });
+      after(2600, () => setPhase('added'));
+      after(4400, loop);
+    };
+    loop();
+    return () => timers.forEach(clearTimeout);
+  }, []);
+
+  return (
+    <div style={{ position: 'relative', overflow: 'hidden', flex: 1, display: 'flex', flexDirection: 'column', background: '#f3f2ef' }}>
+      {/* Chrome Web Store header strip */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '10px 14px', background: 'white', borderBottom: '1px solid #e0dfdc', flexShrink: 0 }}>
+        <div style={{ width: 26, height: 26, borderRadius: 6, flexShrink: 0, background: 'radial-gradient(120% 120% at 20% 10%, rgba(255,255,255,0.5) 0%, transparent 40%), linear-gradient(135deg, oklch(0.65 0.21 252), oklch(0.42 0.2 270))', boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.22)' }} />
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <div style={{ fontSize: 12, fontWeight: 700, color: '#1a1a1a', lineHeight: 1.2 }}>ToInbox — Apply through founders</div>
+          <div style={{ fontSize: 9.5, color: '#666', marginTop: 1 }}>chrome web store · ★★★★★ 4.9</div>
+        </div>
+      </div>
+
+      {/* Body: store listing card */}
+      <div style={{ flex: 1, padding: '16px 16px', display: 'flex', flexDirection: 'column', gap: 12, minHeight: 0 }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 10 }}>
+          <div style={{ fontSize: 11, color: '#666', lineHeight: 1.5, flex: 1 }}>
+            Adds a panel inside LinkedIn that finds the founder and mails your application straight to their inbox.
+          </div>
+          {/* Add to Chrome button changes by phase */}
+          {phase === 'store' && (
+            <div style={{ padding: '8px 14px', borderRadius: 8, background: '#2563eb', color: 'white', fontSize: 11.5, fontWeight: 600, whiteSpace: 'nowrap' }}>
+              Add to Chrome
+            </div>
+          )}
+          {phase === 'adding' && (
+            <div style={{ padding: '8px 14px', borderRadius: 8, background: '#1d4ed8', color: 'rgba(255,255,255,0.75)', fontSize: 11.5, fontWeight: 600, whiteSpace: 'nowrap', display: 'flex', alignItems: 'center', gap: 6 }}>
+              <span style={{ width: 9, height: 9, borderRadius: '50%', border: '1.6px solid rgba(255,255,255,0.35)', borderTopColor: 'white', animation: 'spin 0.8s linear infinite', display: 'inline-block' }} />
+              Adding…
+            </div>
+          )}
+          {phase === 'added' && (
+            <div style={{ padding: '8px 14px', borderRadius: 8, background: '#e6f4ea', border: '1px solid #b8e6cc', color: '#057642', fontSize: 11.5, fontWeight: 700, whiteSpace: 'nowrap' }}>
+              ✓ Added to Chrome
+            </div>
+          )}
+        </div>
+
+        {/* Sign-in checklist */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 7, marginTop: 2 }}>
+          {[
+            { k: 'Sign in with Google', done: true },
+            { k: 'Add to Chrome from the Web Store', done: phase !== 'store' },
+            { k: 'Ready inside LinkedIn in under a minute', done: phase === 'added' },
+          ].map(({ k, done }, i) => (
+            <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 9, padding: '8px 11px', background: 'white', border: '1px solid #e8e7e4', borderRadius: 8 }}>
+              <span style={{ width: 18, height: 18, borderRadius: 5, flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, background: done ? '#e6f4ea' : '#f0ede8', color: done ? '#057642' : '#bbb' }}>{done ? '✓' : '○'}</span>
+              <span style={{ fontSize: 11.5, color: done ? '#1a1a1a' : '#888', fontWeight: done ? 500 : 400 }}>{k}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Cursor over the Add-to-Chrome button area */}
+      <div style={{
+        position: 'absolute', left: 250, top: 96, pointerEvents: 'none', zIndex: 99,
+        transition: 'transform 0.12s ease',
+        transform: clicking ? 'scale(0.74)' : 'scale(1)',
+        filter: clicking ? 'drop-shadow(0 0 8px rgba(37,99,235,0.95))' : 'drop-shadow(0 1px 4px rgba(0,0,0,0.4))',
+      }}>
+        <Icon name="cursor" size={20} />
       </div>
     </div>
   );
@@ -298,10 +382,12 @@ function HiwSentPanel() {
 // ── 3-col LinkedIn browser body ──
 function HiwLinkedIn({ step, typed }) {
   const jpPanel = () => {
-    // Step 0: detect + enroll with animated cursor
-    if (step === 0) return <HiwEnrollPanel />;
-    // Step 1: AI scanning
-    if (step === 1) return (
+    // Step 0: sign in & add extension
+    if (step === 0) return <HiwSignInPanel />;
+    // Step 1: detect + enroll with animated cursor
+    if (step === 1) return <HiwEnrollPanel />;
+    // Step 2: AI scanning
+    if (step === 2) return (
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden', padding: '10px 10px 8px', gap: 6, background: '#0d0d0d' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 7, fontSize: 10.5, fontFamily: 'var(--font-mono)', letterSpacing: '0.04em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', paddingBottom: 4 }}>
           <span className="dotpulse" /> AI analyzing…
@@ -321,8 +407,8 @@ function HiwLinkedIn({ step, typed }) {
         </div>
       </div>
     );
-    // Step 2: cover letter generation
-    if (step === 2) return (
+    // Step 3: cover letter generation
+    if (step === 3) return (
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden', padding: '10px 10px 8px', gap: 5, background: '#0d0d0d' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 7, fontSize: 10.5, fontFamily: 'var(--font-mono)', letterSpacing: '0.04em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', paddingBottom: 4 }}>
           <span className="dotpulse" /> Generating…
@@ -333,8 +419,8 @@ function HiwLinkedIn({ step, typed }) {
         </div>
       </div>
     );
-    // Step 3: sent
-    if (step === 3) return <HiwSentPanel />;
+    // Step 4: sent
+    if (step === 4) return <HiwSentPanel />;
     return null;
   };
 
@@ -351,7 +437,7 @@ function HiwLinkedIn({ step, typed }) {
               <div style={{ fontSize: 8.5, color: '#666', marginTop: 2 }}>{j.co} · {i === 0 ? '2d · 784' : i === 1 ? '1w · 142' : '5d · 61'}</div>
               <div style={{ display: 'flex', gap: 3, marginTop: 3, flexWrap: 'wrap' }}>
                 <span style={{ fontSize: 8, padding: '1px 4px', borderRadius: 999, background: '#e8f3ff', color: '#0a66c2', border: '1px solid #b6d4f7' }}>Easy Apply</span>
-                {step >= 3 && i === 0 && <span style={{ fontSize: 8, padding: '1px 4px', borderRadius: 999, background: '#e6f4ea', color: '#057642', border: '1px solid #b8e6cc' }}>✓ Applied</span>}
+                {step >= 4 && i === 0 && <span style={{ fontSize: 8, padding: '1px 4px', borderRadius: 999, background: '#e6f4ea', color: '#057642', border: '1px solid #b8e6cc' }}>✓ Applied</span>}
               </div>
             </div>
           </div>
@@ -413,7 +499,7 @@ function HiwLinkedIn({ step, typed }) {
 }
 
 function HowitworksBrowser({ step, typed, replyVisible }) {
-  const isDash = step >= 4;
+  const isDash = step >= 5;
   return (
     <div className="hiw-browser">
       {/* Chrome bar */}
@@ -441,7 +527,7 @@ function HowitworksBrowser({ step, typed, replyVisible }) {
       </div>
 
       {isDash
-        ? <HiwDashboard replyVisible={step === 5} />
+        ? <HiwDashboard replyVisible={step === 6} />
         : <HiwLinkedIn step={step} typed={typed} />
       }
     </div>
@@ -511,7 +597,7 @@ function HowItWorks({ speedMultiplier = 1 }) {
 
   // Typing effect for step 2 (cover letter)
   useEffectHIW(() => {
-    if (active === 2) {
+    if (active === 3) {
       setTyped('');
       let i = 0;
       const type = () => {
@@ -585,7 +671,7 @@ function HowItWorks({ speedMultiplier = 1 }) {
 
           {/* Continuous browser */}
           <div className="hiw-browser-col" style={{ opacity: visible ? 1 : 0, transition: 'opacity 0.18s ease' }}>
-            <HowitworksBrowser step={active} typed={typed} replyVisible={active === 5} />
+            <HowitworksBrowser step={active} typed={typed} replyVisible={active === 6} />
           </div>
         </div>
       </div>
@@ -632,7 +718,7 @@ function HeroBrowser({ speedMultiplier = 1 }) {
   }, []);
 
   useEffectHIW(() => {
-    if (active === 2) {
+    if (active === 3) {
       setTyped('');
       let i = 0;
       const type = () => {
@@ -652,7 +738,7 @@ function HeroBrowser({ speedMultiplier = 1 }) {
   return (
     <div style={{ opacity: visible ? 1 : 0, transition: 'opacity 0.18s ease' }}>
       <div style={{ height: 620 }} className="hiw-browser-col">
-        <HowitworksBrowser step={active} typed={typed} replyVisible={active === 5} />
+        <HowitworksBrowser step={active} typed={typed} replyVisible={active === 6} />
       </div>
     </div>
   );
