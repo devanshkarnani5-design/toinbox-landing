@@ -576,29 +576,11 @@ function HiwInstallScene({ debugPhase } = {}) {
                 {phase === 'added' ? <><Icon name="check" size={15} /> Added to Chrome</> : 'Add to Chrome'}
               </div>
             </div>
-            {/* screenshot strip — CSS-drawn placeholders (no image files needed) */}
+            {/* screenshot strip — real Chrome Web Store screenshots */}
             <div style={{ display: 'flex', gap: 12, padding: '4px 30px 20px' }}>
-              {[
-                { label: 'Inside LinkedIn', accent: true },
-                { label: 'Founder found', accent: false },
-                { label: 'Dashboard', accent: false },
-              ].map((shot, i) => (
-                <div key={i} style={{ flex: 1, height: 150, borderRadius: 10, border: '1px solid #eceae6', overflow: 'hidden', background: '#0d0d0d', position: 'relative', display: 'flex', flexDirection: 'column' }}>
-                  {/* mini window top bar */}
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 4, padding: '7px 9px', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-                    <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#ff6058' }} />
-                    <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#ffbe2e' }} />
-                    <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#28c941' }} />
-                  </div>
-                  {/* faux content rows */}
-                  <div style={{ flex: 1, padding: '12px 11px', display: 'flex', flexDirection: 'column', gap: 7 }}>
-                    <div style={{ width: 30, height: 30, borderRadius: 8, background: shot.accent ? 'linear-gradient(135deg, oklch(0.65 0.21 252), oklch(0.42 0.2 270))' : 'rgba(255,255,255,0.1)' }} />
-                    <div style={{ height: 7, width: '78%', borderRadius: 3, background: 'rgba(255,255,255,0.16)' }} />
-                    <div style={{ height: 7, width: '54%', borderRadius: 3, background: 'rgba(255,255,255,0.1)' }} />
-                    <div style={{ marginTop: 'auto', height: 22, borderRadius: 6, background: shot.accent ? 'rgba(37,99,235,0.9)' : 'rgba(255,255,255,0.08)' }} />
-                  </div>
-                  {/* label */}
-                  <div style={{ position: 'absolute', bottom: 8, left: 11, fontSize: 9, fontFamily: 'var(--font-mono)', letterSpacing: '0.06em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)' }}>{shot.label}</div>
+              {['assets/store-shot-1.jpg', 'assets/store-shot-3.jpg', 'assets/store-shot-4.jpg'].map((src, i) => (
+                <div key={i} style={{ flex: 1, height: 150, borderRadius: 10, border: '1px solid #eceae6', overflow: 'hidden', background: '#f6f5f3' }}>
+                  <img src={src} alt={`ToInbox screenshot ${i + 1}`} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top left', display: 'block' }} />
                 </div>
               ))}
             </div>
