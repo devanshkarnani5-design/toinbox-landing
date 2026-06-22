@@ -142,7 +142,7 @@ function HiwDashboard({ replyVisible }) {
   );
 }
 
-// ── Step 0 (NEW): Sign in & add the Chrome extension ──
+// ── Step 0 (NEW): Sign in & add the Chrome extension — FULL SCREEN store page ──
 function HiwSignInPanel() {
   const [phase, setPhase] = useStateHIW('store'); // 'store' | 'adding' | 'added'
   const [clicking, setClicking] = useStateHIW(false);
@@ -152,74 +152,81 @@ function HiwSignInPanel() {
     const after = (ms, fn) => { const t = setTimeout(fn, ms); timers.push(t); };
     const loop = () => {
       setPhase('store'); setClicking(false);
-      after(1100, () => setClicking(true));
-      after(1280, () => { setClicking(false); setPhase('adding'); });
-      after(2600, () => setPhase('added'));
-      after(4400, loop);
+      after(1200, () => setClicking(true));
+      after(1380, () => { setClicking(false); setPhase('adding'); });
+      after(2700, () => setPhase('added'));
+      after(4600, loop);
     };
     loop();
     return () => timers.forEach(clearTimeout);
   }, []);
 
+  const btn =
+    phase === 'store'
+      ? { bg: '#2563eb', color: 'white', label: 'Add to Chrome', spin: false }
+      : phase === 'adding'
+        ? { bg: '#1d4ed8', color: 'rgba(255,255,255,0.8)', label: 'Adding…', spin: true }
+        : { bg: '#e6f4ea', color: '#057642', label: '✓ Added to Chrome', spin: false, border: '1px solid #b8e6cc' };
+
   return (
-    <div style={{ position: 'relative', overflow: 'hidden', flex: 1, display: 'flex', flexDirection: 'column', background: '#f3f2ef' }}>
-      {/* Chrome Web Store header strip */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '10px 14px', background: 'white', borderBottom: '1px solid #e0dfdc', flexShrink: 0 }}>
-        <div style={{ width: 26, height: 26, borderRadius: 6, flexShrink: 0, background: 'radial-gradient(120% 120% at 20% 10%, rgba(255,255,255,0.5) 0%, transparent 40%), linear-gradient(135deg, oklch(0.65 0.21 252), oklch(0.42 0.2 270))', boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.22)' }} />
-        <div style={{ flex: 1, minWidth: 0 }}>
-          <div style={{ fontSize: 12, fontWeight: 700, color: '#1a1a1a', lineHeight: 1.2 }}>ToInbox — Apply through founders</div>
-          <div style={{ fontSize: 9.5, color: '#666', marginTop: 1 }}>chrome web store · ★★★★★ 4.9</div>
+    <div style={{ position: 'relative', overflow: 'hidden', flex: 1, display: 'flex', flexDirection: 'column', background: '#f7f6f3' }}>
+      {/* Web Store top bar */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 9, padding: '10px 18px', background: 'white', borderBottom: '1px solid #e8e7e4', flexShrink: 0 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+          <div style={{ width: 16, height: 16, borderRadius: '50%', background: 'conic-gradient(#ea4335 0 25%, #fbbc04 0 50%, #34a853 0 75%, #4285f4 0)' }} />
+          <span style={{ fontSize: 12, fontWeight: 600, color: '#5f6368' }}>chrome web store</span>
         </div>
       </div>
 
-      {/* Body: store listing card */}
-      <div style={{ flex: 1, padding: '16px 16px', display: 'flex', flexDirection: 'column', gap: 12, minHeight: 0 }}>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 10 }}>
-          <div style={{ fontSize: 11, color: '#666', lineHeight: 1.5, flex: 1 }}>
-            Adds a panel inside LinkedIn that finds the founder and mails your application straight to their inbox.
+      {/* Listing hero */}
+      <div style={{ flex: 1, padding: '22px 30px', display: 'flex', flexDirection: 'column', gap: 18, minHeight: 0, maxWidth: 760, width: '100%', margin: '0 auto' }}>
+        <div style={{ display: 'flex', gap: 18, alignItems: 'flex-start' }}>
+          {/* Big app icon */}
+          <div style={{ width: 76, height: 76, borderRadius: 18, flexShrink: 0, background: 'radial-gradient(120% 120% at 20% 10%, rgba(255,255,255,0.5) 0%, transparent 40%), linear-gradient(135deg, oklch(0.65 0.21 252), oklch(0.42 0.2 270))', boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.22), 0 4px 16px rgba(37,99,235,0.25)' }} />
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <div style={{ fontSize: 22, fontWeight: 700, color: '#202124', letterSpacing: '-0.02em', lineHeight: 1.15 }}>ToInbox — Apply through founders</div>
+            <div style={{ fontSize: 12.5, color: '#5f6368', marginTop: 5 }}>toinbox.app · Productivity</div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 7, fontSize: 12, color: '#5f6368' }}>
+              <span style={{ color: '#fbbc04', letterSpacing: 1 }}>★★★★★</span>
+              <span>4.9 (1,200+)</span>
+              <span style={{ width: 3, height: 3, borderRadius: '50%', background: '#bbb' }} />
+              <span>4,200+ users</span>
+            </div>
           </div>
-          {/* Add to Chrome button changes by phase */}
-          {phase === 'store' && (
-            <div style={{ padding: '8px 14px', borderRadius: 8, background: '#2563eb', color: 'white', fontSize: 11.5, fontWeight: 600, whiteSpace: 'nowrap' }}>
-              Add to Chrome
-            </div>
-          )}
-          {phase === 'adding' && (
-            <div style={{ padding: '8px 14px', borderRadius: 8, background: '#1d4ed8', color: 'rgba(255,255,255,0.75)', fontSize: 11.5, fontWeight: 600, whiteSpace: 'nowrap', display: 'flex', alignItems: 'center', gap: 6 }}>
-              <span style={{ width: 9, height: 9, borderRadius: '50%', border: '1.6px solid rgba(255,255,255,0.35)', borderTopColor: 'white', animation: 'spin 0.8s linear infinite', display: 'inline-block' }} />
-              Adding…
-            </div>
-          )}
-          {phase === 'added' && (
-            <div style={{ padding: '8px 14px', borderRadius: 8, background: '#e6f4ea', border: '1px solid #b8e6cc', color: '#057642', fontSize: 11.5, fontWeight: 700, whiteSpace: 'nowrap' }}>
-              ✓ Added to Chrome
-            </div>
-          )}
+          {/* Add to Chrome button */}
+          <div style={{ padding: '11px 22px', borderRadius: 999, background: btn.bg, color: btn.color, fontSize: 14, fontWeight: 600, whiteSpace: 'nowrap', border: btn.border || 'none', display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0 }}>
+            {btn.spin && <span style={{ width: 12, height: 12, borderRadius: '50%', border: '2px solid rgba(255,255,255,0.35)', borderTopColor: 'white', animation: 'spin 0.8s linear infinite', display: 'inline-block' }} />}
+            {btn.label}
+          </div>
         </div>
 
-        {/* Sign-in checklist */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 7, marginTop: 2 }}>
+        <div style={{ fontSize: 14, color: '#3c4043', lineHeight: 1.6, maxWidth: 620 }}>
+          Adds a panel inside LinkedIn that finds the founder and the right department head behind any job, then mails your application straight to their inbox — no portals, no Easy Apply queues.
+        </div>
+
+        {/* Sign-in / setup checklist */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 9, marginTop: 2 }}>
           {[
-            { k: 'Sign in with Google', done: true },
-            { k: 'Add to Chrome from the Web Store', done: phase !== 'store' },
+            { k: 'Sign in with Google at toinbox.app', done: true },
+            { k: 'Add ToInbox to Chrome from the Web Store', done: phase !== 'store' },
             { k: 'Ready inside LinkedIn in under a minute', done: phase === 'added' },
           ].map(({ k, done }, i) => (
-            <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 9, padding: '8px 11px', background: 'white', border: '1px solid #e8e7e4', borderRadius: 8 }}>
-              <span style={{ width: 18, height: 18, borderRadius: 5, flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, background: done ? '#e6f4ea' : '#f0ede8', color: done ? '#057642' : '#bbb' }}>{done ? '✓' : '○'}</span>
-              <span style={{ fontSize: 11.5, color: done ? '#1a1a1a' : '#888', fontWeight: done ? 500 : 400 }}>{k}</span>
+            <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 11, padding: '11px 14px', background: 'white', border: '1px solid #e8e7e4', borderRadius: 10 }}>
+              <span style={{ width: 22, height: 22, borderRadius: 7, flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, background: done ? '#e6f4ea' : '#f0ede8', color: done ? '#057642' : '#bbb' }}>{done ? '✓' : '○'}</span>
+              <span style={{ fontSize: 13.5, color: done ? '#202124' : '#9aa0a6', fontWeight: done ? 500 : 400 }}>{k}</span>
             </div>
           ))}
         </div>
       </div>
 
-      {/* Cursor over the Add-to-Chrome button area */}
+      {/* Cursor over the Add-to-Chrome button (top-right of the listing) */}
       <div style={{
-        position: 'absolute', left: 250, top: 96, pointerEvents: 'none', zIndex: 99,
+        position: 'absolute', right: 70, top: 78, pointerEvents: 'none', zIndex: 99,
         transition: 'transform 0.12s ease',
         transform: clicking ? 'scale(0.74)' : 'scale(1)',
         filter: clicking ? 'drop-shadow(0 0 8px rgba(37,99,235,0.95))' : 'drop-shadow(0 1px 4px rgba(0,0,0,0.4))',
       }}>
-        <Icon name="cursor" size={20} />
+        <Icon name="cursor" size={22} />
       </div>
     </div>
   );
@@ -500,6 +507,7 @@ function HiwLinkedIn({ step, typed }) {
 
 function HowitworksBrowser({ step, typed, replyVisible }) {
   const isDash = step >= 5;
+  const isSignIn = step === 0;
   return (
     <div className="hiw-browser">
       {/* Chrome bar */}
@@ -509,7 +517,7 @@ function HowitworksBrowser({ step, typed, replyVisible }) {
           <span style={{ width: 10, height: 10, borderRadius: '50%', background: '#ffbe2e', display: 'inline-block' }} />
           <span style={{ width: 10, height: 10, borderRadius: '50%', background: '#28c941', display: 'inline-block' }} />
         </div>
-        {!isDash && (
+        {!isDash && !isSignIn && (
           <div style={{ display: 'flex', gap: 3, marginLeft: 10 }}>
             <div style={{ fontSize: 10, padding: '2px 9px', borderRadius: 5, background: 'white', border: '1px solid var(--line)', color: '#555', display: 'flex', alignItems: 'center', gap: 4 }}>
               <span style={{ width: 10, height: 10, borderRadius: 2, background: '#0a66c2', display: 'inline-block' }} />LinkedIn
@@ -517,18 +525,22 @@ function HowitworksBrowser({ step, typed, replyVisible }) {
             <div style={{ fontSize: 10, padding: '2px 9px', borderRadius: 5, color: '#888' }}>Gmail</div>
           </div>
         )}
-        <div style={{ flex: 1, height: 22, borderRadius: 5, background: isDash ? 'white' : '#f3f2ef', border: '1px solid var(--line)', display: 'flex', alignItems: 'center', padding: '0 9px', fontSize: 10, color: '#555', fontFamily: 'var(--font-mono)', gap: 5, minWidth: 0, overflow: 'hidden', marginLeft: isDash ? 12 : 0 }}>
+        <div style={{ flex: 1, height: 22, borderRadius: 5, background: (isDash || isSignIn) ? 'white' : '#f3f2ef', border: '1px solid var(--line)', display: 'flex', alignItems: 'center', padding: '0 9px', fontSize: 10, color: '#555', fontFamily: 'var(--font-mono)', gap: 5, minWidth: 0, overflow: 'hidden', marginLeft: (isDash || isSignIn) ? 12 : 0 }}>
           <Icon name="lock" size={9} />
           <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-            {isDash ? 'app.toinbox.co/dashboard' : 'linkedin.com/jobs/search/?keywords=founding+engineer'}
+            {isSignIn
+              ? 'chromewebstore.google.com/detail/toinbox'
+              : isDash ? 'app.toinbox.co/dashboard' : 'linkedin.com/jobs/search/?keywords=founding+engineer'}
           </span>
         </div>
         <div style={{ width: 20, height: 20, borderRadius: 5, flexShrink: 0, background: 'radial-gradient(120% 120% at 20% 10%, rgba(255,255,255,0.5) 0%, transparent 40%), linear-gradient(135deg, oklch(0.65 0.21 252), oklch(0.42 0.2 270))', boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.22)' }} />
       </div>
 
-      {isDash
-        ? <HiwDashboard replyVisible={step === 6} />
-        : <HiwLinkedIn step={step} typed={typed} />
+      {isSignIn
+        ? <HiwSignInPanel />
+        : isDash
+          ? <HiwDashboard replyVisible={step === 6} />
+          : <HiwLinkedIn step={step} typed={typed} />
       }
     </div>
   );
