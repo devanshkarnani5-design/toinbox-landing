@@ -3,15 +3,14 @@ const { useState: useStateHIW, useEffect: useEffectHIW, useRef: useRefHIW } = Re
 
 const HIW_STEPS = [
   { t: 'Sign in & add the Chrome extension', s: 'Sign in at toinbox.app, then add ToInbox to Chrome in one click. It installs right inside LinkedIn — no setup, no account juggling. You are ready in under a minute.' },
-  { t: 'Click a job — ToInbox detects it instantly', s: 'Click any LinkedIn job and ToInbox immediately detects it in the panel. One button. It finds the founder and the relevant department head, matches your resume, and is ready to send in seconds.' },
-  { t: 'AI scans resume + JD', s: 'Cross-references your experience and the job description in seconds. Identifies the right signals from your resume automatically.' },
-  { t: 'Cover letter generated', s: 'Specific, human-sounding, no template smell. Cites the role, the company\'s work, and the recipient by name. Around 160 words.' },
+  { t: 'Open LinkedIn & Click on any Job', s: 'Click any LinkedIn job and ToInbox immediately detects it in the panel. One button. It finds the founder and the relevant department head, matches your resume, and is ready to send in seconds.' },
+  { t: 'AI writes your application', s: 'ToInbox reads your resume and the JD, then drafts a specific, human-sounding cover letter — naming the role, the company, and the recipient.' },
   { t: 'Sent to leadership inboxes', s: 'Email + resume lands in the founder\'s personal inbox. Skips ATS entirely. No Easy Apply queue.' },
-  { t: 'Dashboard tracks it all', s: 'Every metric live: enrolled, sent, replied, interviews scheduled.' },
+  { t: 'Dashboard tracks it all', s: 'Track every metric: enrolled, sent, replied.' },
   { t: 'They reply', s: 'Founders and department heads reply to intent. You land in a real conversation — two steps ahead of every other applicant.' },
 ];
 
-const STEP_MS = [9000, 6000, 6000, 6000, 6000, 6000, 6000];
+const STEP_MS = [9000, 6000, 6000, 6000, 6000, 6000];
 
 const HIW_JOBS = [
   { logo: 'N', bg: '#1e3a5f', title: 'Founding Product Engineer', co: 'Northwind', match: 94, email: 'm.v@northwind.co' },
@@ -305,7 +304,7 @@ function HiwLinkedIn({ step, typed }) {
     if (step === 2) return (
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden', padding: '10px 10px 8px', gap: 6, background: '#0d0d0d' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 7, fontSize: 10.5, fontFamily: 'var(--font-mono)', letterSpacing: '0.04em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', paddingBottom: 4 }}>
-          <span className="dotpulse" /> AI analyzing…
+          <span className="dotpulse" /> AI writing…
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 6, padding: '2px 0' }}>
           {[
@@ -320,22 +319,14 @@ function HiwLinkedIn({ step, typed }) {
             </div>
           ))}
         </div>
-      </div>
-    );
-    // Step 3: cover letter generation
-    if (step === 3) return (
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden', padding: '10px 10px 8px', gap: 5, background: '#0d0d0d' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 7, fontSize: 10.5, fontFamily: 'var(--font-mono)', letterSpacing: '0.04em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', paddingBottom: 4 }}>
-          <span className="dotpulse" /> Generating…
-        </div>
-        <div style={{ fontSize: 9, fontFamily: 'var(--font-mono)', color: 'rgba(255,255,255,0.25)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>To · m.v@northwind.co</div>
-        <div style={{ fontSize: 10.5, lineHeight: 1.55, color: 'rgba(255,255,255,0.7)', whiteSpace: 'pre-wrap', flex: 1, overflow: 'hidden' }}>
+        <div style={{ fontSize: 9, fontFamily: 'var(--font-mono)', color: 'rgba(255,255,255,0.25)', textTransform: 'uppercase', letterSpacing: '0.06em', marginTop: 4 }}>Writing · To m.v@northwind.co</div>
+        <div style={{ fontSize: 10.5, lineHeight: 1.5, color: 'rgba(255,255,255,0.7)', whiteSpace: 'pre-wrap', flex: 1, overflow: 'hidden' }}>
           {typed}<span className="caret" />
         </div>
       </div>
     );
-    // Step 4: sent
-    if (step === 4) return <HiwSentPanel />;
+    // Step 3: sent
+    if (step === 3) return <HiwSentPanel />;
     return null;
   };
 
@@ -352,7 +343,7 @@ function HiwLinkedIn({ step, typed }) {
               <div style={{ fontSize: 8.5, color: '#666', marginTop: 2 }}>{j.co} · {i === 0 ? '2d · 784' : i === 1 ? '1w · 142' : '5d · 61'}</div>
               <div style={{ display: 'flex', gap: 3, marginTop: 3, flexWrap: 'wrap' }}>
                 <span style={{ fontSize: 8, padding: '1px 4px', borderRadius: 999, background: '#e8f3ff', color: '#0a66c2', border: '1px solid #b6d4f7' }}>Easy Apply</span>
-                {step >= 4 && i === 0 && <span style={{ fontSize: 8, padding: '1px 4px', borderRadius: 999, background: '#e6f4ea', color: '#057642', border: '1px solid #b8e6cc' }}>✓ Applied</span>}
+                {step >= 3 && i === 0 && <span style={{ fontSize: 8, padding: '1px 4px', borderRadius: 999, background: '#e6f4ea', color: '#057642', border: '1px solid #b8e6cc' }}>✓ Applied</span>}
               </div>
             </div>
           </div>
@@ -576,11 +567,26 @@ function HiwInstallScene({ debugPhase } = {}) {
                 {phase === 'added' ? <><Icon name="check" size={15} /> Added to Chrome</> : 'Add to Chrome'}
               </div>
             </div>
-            {/* screenshot strip — real Chrome Web Store screenshots */}
+            {/* screenshot strip — CSS-drawn placeholders (no image files needed) */}
             <div style={{ display: 'flex', gap: 12, padding: '4px 30px 20px' }}>
-              {['assets/store-shot-1.jpg', 'assets/store-shot-3.jpg', 'assets/store-shot-4.jpg'].map((src, i) => (
-                <div key={i} style={{ flex: 1, height: 150, borderRadius: 10, border: '1px solid #eceae6', overflow: 'hidden', background: '#f6f5f3' }}>
-                  <img src={src} alt={`ToInbox screenshot ${i + 1}`} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top left', display: 'block' }} />
+              {[
+                { label: 'Inside LinkedIn', accent: true },
+                { label: 'Founder found', accent: false },
+                { label: 'Dashboard', accent: false },
+              ].map((shot, i) => (
+                <div key={i} style={{ flex: 1, height: 150, borderRadius: 10, border: '1px solid #eceae6', overflow: 'hidden', background: '#0d0d0d', position: 'relative', display: 'flex', flexDirection: 'column' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 4, padding: '7px 9px', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+                    <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#ff6058' }} />
+                    <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#ffbe2e' }} />
+                    <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#28c941' }} />
+                  </div>
+                  <div style={{ flex: 1, padding: '12px 11px', display: 'flex', flexDirection: 'column', gap: 7 }}>
+                    <div style={{ width: 30, height: 30, borderRadius: 8, background: shot.accent ? 'linear-gradient(135deg, oklch(0.65 0.21 252), oklch(0.42 0.2 270))' : 'rgba(255,255,255,0.1)' }} />
+                    <div style={{ height: 7, width: '78%', borderRadius: 3, background: 'rgba(255,255,255,0.16)' }} />
+                    <div style={{ height: 7, width: '54%', borderRadius: 3, background: 'rgba(255,255,255,0.1)' }} />
+                    <div style={{ marginTop: 'auto', height: 22, borderRadius: 6, background: shot.accent ? 'rgba(37,99,235,0.9)' : 'rgba(255,255,255,0.08)' }} />
+                  </div>
+                  <div style={{ position: 'absolute', bottom: 8, left: 11, fontSize: 9, fontFamily: 'var(--font-mono)', letterSpacing: '0.06em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)' }}>{shot.label}</div>
                 </div>
               ))}
             </div>
@@ -626,7 +632,7 @@ function HiwInstallScene({ debugPhase } = {}) {
 
 function HowitworksBrowser({ step, typed, replyVisible }) {
   if (step === 0) return <HiwInstallScene />;
-  const isDash = step >= 5;
+  const isDash = step >= 4;
   return (
     <div className="hiw-browser">
       {/* Chrome bar */}
@@ -654,7 +660,7 @@ function HowitworksBrowser({ step, typed, replyVisible }) {
       </div>
 
       {isDash
-        ? <HiwDashboard replyVisible={step === 6} />
+        ? <HiwDashboard replyVisible={step === 5} />
         : <HiwLinkedIn step={step} typed={typed} />
       }
     </div>
@@ -724,7 +730,7 @@ function HowItWorks({ speedMultiplier = 1 }) {
 
   // Typing effect for step 2 (cover letter)
   useEffectHIW(() => {
-    if (active === 3) {
+    if (active === 2) {
       setTyped('');
       let i = 0;
       const type = () => {
@@ -798,7 +804,7 @@ function HowItWorks({ speedMultiplier = 1 }) {
 
           {/* Continuous browser */}
           <div className="hiw-browser-col" style={{ opacity: visible ? 1 : 0, transition: 'opacity 0.18s ease' }}>
-            <HowitworksBrowser step={active} typed={typed} replyVisible={active === 6} />
+            <HowitworksBrowser step={active} typed={typed} replyVisible={active === 5} />
           </div>
         </div>
       </div>
@@ -846,7 +852,7 @@ function HeroBrowser({ speedMultiplier = 1 }) {
   }, []);
 
   useEffectHIW(() => {
-    if (active === 3) {
+    if (active === 2) {
       setTyped('');
       let i = 0;
       const type = () => {
@@ -866,7 +872,7 @@ function HeroBrowser({ speedMultiplier = 1 }) {
   return (
     <div style={{ opacity: visible ? 1 : 0, transition: 'opacity 0.18s ease' }}>
       <div style={{ height: 620 }} className="hiw-browser-col">
-        <HowitworksBrowser step={active} typed={typed} replyVisible={active === 6} />
+        <HowitworksBrowser step={active} typed={typed} replyVisible={active === 5} />
       </div>
     </div>
   );
