@@ -2,7 +2,7 @@
 const { useState: useStateHIW, useEffect: useEffectHIW, useRef: useRefHIW } = React;
 
 const HIW_STEPS = [
-  { t: 'Sign in & add the Chrome extension', s: 'Sign in at toinbox.app, then add ToInbox to Chrome in one click. It installs right inside LinkedIn — no setup, no account juggling. Ready in under a minute.' },
+  { t: 'Sign in & add the Chrome extension', s: 'Sign in at toinbox.app, then add ToInbox to Chrome in one click. It installs right inside LinkedIn — no setup, no account juggling. You are ready in under a minute.' },
   { t: 'Click a job — ToInbox detects it instantly', s: 'Click any LinkedIn job and ToInbox immediately detects it in the panel. One button. It finds the founder and the relevant department head, matches your resume, and is ready to send in seconds.' },
   { t: 'AI scans resume + JD', s: 'Cross-references your experience and the job description in seconds. Identifies the right signals from your resume automatically.' },
   { t: 'Cover letter generated', s: 'Specific, human-sounding, no template smell. Cites the role, the company\'s work, and the recipient by name. Around 160 words.' },
@@ -11,7 +11,7 @@ const HIW_STEPS = [
   { t: 'They reply', s: 'Founders and department heads reply to intent. You land in a real conversation — two steps ahead of every other applicant.' },
 ];
 
-const STEP_MS = [5000, 6000, 6000, 6000, 6000, 6000, 6000];
+const STEP_MS = [9000, 6000, 6000, 6000, 6000, 6000, 6000];
 
 const HIW_JOBS = [
   { logo: 'N', bg: '#1e3a5f', title: 'Founding Product Engineer', co: 'Northwind', match: 94, email: 'm.v@northwind.co' },
@@ -137,96 +137,6 @@ function HiwDashboard({ replyVisible }) {
             </div>
           </div>
         )}
-      </div>
-    </div>
-  );
-}
-
-// ── Step 0 (NEW): Sign in & add the Chrome extension — FULL SCREEN store page ──
-function HiwSignInPanel() {
-  const [phase, setPhase] = useStateHIW('store'); // 'store' | 'adding' | 'added'
-  const [clicking, setClicking] = useStateHIW(false);
-
-  useEffectHIW(() => {
-    let timers = [];
-    const after = (ms, fn) => { const t = setTimeout(fn, ms); timers.push(t); };
-    const loop = () => {
-      setPhase('store'); setClicking(false);
-      after(1200, () => setClicking(true));
-      after(1380, () => { setClicking(false); setPhase('adding'); });
-      after(2700, () => setPhase('added'));
-      after(4600, loop);
-    };
-    loop();
-    return () => timers.forEach(clearTimeout);
-  }, []);
-
-  const btn =
-    phase === 'store'
-      ? { bg: '#2563eb', color: 'white', label: 'Add to Chrome', spin: false }
-      : phase === 'adding'
-        ? { bg: '#1d4ed8', color: 'rgba(255,255,255,0.8)', label: 'Adding…', spin: true }
-        : { bg: '#e6f4ea', color: '#057642', label: '✓ Added to Chrome', spin: false, border: '1px solid #b8e6cc' };
-
-  return (
-    <div style={{ position: 'relative', overflow: 'hidden', flex: 1, display: 'flex', flexDirection: 'column', background: '#f7f6f3' }}>
-      {/* Web Store top bar */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 9, padding: '10px 18px', background: 'white', borderBottom: '1px solid #e8e7e4', flexShrink: 0 }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-          <div style={{ width: 16, height: 16, borderRadius: '50%', background: 'conic-gradient(#ea4335 0 25%, #fbbc04 0 50%, #34a853 0 75%, #4285f4 0)' }} />
-          <span style={{ fontSize: 12, fontWeight: 600, color: '#5f6368' }}>chrome web store</span>
-        </div>
-      </div>
-
-      {/* Listing hero */}
-      <div style={{ flex: 1, padding: '22px 30px', display: 'flex', flexDirection: 'column', gap: 18, minHeight: 0, maxWidth: 760, width: '100%', margin: '0 auto' }}>
-        <div style={{ display: 'flex', gap: 18, alignItems: 'flex-start' }}>
-          {/* Big app icon */}
-          <div style={{ width: 76, height: 76, borderRadius: 18, flexShrink: 0, background: 'radial-gradient(120% 120% at 20% 10%, rgba(255,255,255,0.5) 0%, transparent 40%), linear-gradient(135deg, oklch(0.65 0.21 252), oklch(0.42 0.2 270))', boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.22), 0 4px 16px rgba(37,99,235,0.25)' }} />
-          <div style={{ flex: 1, minWidth: 0 }}>
-            <div style={{ fontSize: 22, fontWeight: 700, color: '#202124', letterSpacing: '-0.02em', lineHeight: 1.15 }}>ToInbox — Apply through founders</div>
-            <div style={{ fontSize: 12.5, color: '#5f6368', marginTop: 5 }}>toinbox.app · Productivity</div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 7, fontSize: 12, color: '#5f6368' }}>
-              <span style={{ color: '#fbbc04', letterSpacing: 1 }}>★★★★★</span>
-              <span>4.9 (1,200+)</span>
-              <span style={{ width: 3, height: 3, borderRadius: '50%', background: '#bbb' }} />
-              <span>4,200+ users</span>
-            </div>
-          </div>
-          {/* Add to Chrome button */}
-          <div style={{ padding: '11px 22px', borderRadius: 999, background: btn.bg, color: btn.color, fontSize: 14, fontWeight: 600, whiteSpace: 'nowrap', border: btn.border || 'none', display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0 }}>
-            {btn.spin && <span style={{ width: 12, height: 12, borderRadius: '50%', border: '2px solid rgba(255,255,255,0.35)', borderTopColor: 'white', animation: 'spin 0.8s linear infinite', display: 'inline-block' }} />}
-            {btn.label}
-          </div>
-        </div>
-
-        <div style={{ fontSize: 14, color: '#3c4043', lineHeight: 1.6, maxWidth: 620 }}>
-          Adds a panel inside LinkedIn that finds the founder and the right department head behind any job, then mails your application straight to their inbox — no portals, no Easy Apply queues.
-        </div>
-
-        {/* Sign-in / setup checklist */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 9, marginTop: 2 }}>
-          {[
-            { k: 'Sign in with Google at toinbox.app', done: true },
-            { k: 'Add ToInbox to Chrome from the Web Store', done: phase !== 'store' },
-            { k: 'Ready inside LinkedIn in under a minute', done: phase === 'added' },
-          ].map(({ k, done }, i) => (
-            <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 11, padding: '11px 14px', background: 'white', border: '1px solid #e8e7e4', borderRadius: 10 }}>
-              <span style={{ width: 22, height: 22, borderRadius: 7, flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, background: done ? '#e6f4ea' : '#f0ede8', color: done ? '#057642' : '#bbb' }}>{done ? '✓' : '○'}</span>
-              <span style={{ fontSize: 13.5, color: done ? '#202124' : '#9aa0a6', fontWeight: done ? 500 : 400 }}>{k}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Cursor over the Add-to-Chrome button (top-right of the listing) */}
-      <div style={{
-        position: 'absolute', right: 70, top: 78, pointerEvents: 'none', zIndex: 99,
-        transition: 'transform 0.12s ease',
-        transform: clicking ? 'scale(0.74)' : 'scale(1)',
-        filter: clicking ? 'drop-shadow(0 0 8px rgba(37,99,235,0.95))' : 'drop-shadow(0 1px 4px rgba(0,0,0,0.4))',
-      }}>
-        <Icon name="cursor" size={22} />
       </div>
     </div>
   );
@@ -389,8 +299,6 @@ function HiwSentPanel() {
 // ── 3-col LinkedIn browser body ──
 function HiwLinkedIn({ step, typed }) {
   const jpPanel = () => {
-    // Step 0: sign in & add extension
-    if (step === 0) return <HiwSignInPanel />;
     // Step 1: detect + enroll with animated cursor
     if (step === 1) return <HiwEnrollPanel />;
     // Step 2: AI scanning
@@ -505,9 +413,38 @@ function HiwLinkedIn({ step, typed }) {
   );
 }
 
-function HowitworksBrowser({ step, typed, replyVisible }) {
-  const isDash = step >= 5;
-  const isSignIn = step === 0;
+// ── Step 0: Sign in at toinbox.app → add the Chrome extension ──
+function HiwInstallScene({ debugPhase } = {}) {
+  // phases: 'site' | 'signing' | 'signedin' | 'store' | 'adding' | 'added'
+  const [phase, setPhase] = useStateHIW(debugPhase || 'site');
+  const [curX, setCurX] = useStateHIW('46%');
+  const [curY, setCurY] = useStateHIW(330);
+  const [clicking, setClicking] = useStateHIW(false);
+
+  useEffectHIW(() => {
+    if (debugPhase) return;
+    let timers = [];
+    const after = (ms, fn) => { timers.push(setTimeout(fn, ms)); };
+    const loop = () => {
+      setPhase('site'); setClicking(false); setCurX('46%'); setCurY(320);
+      after(700,  () => { setCurX('87%'); setCurY(18); });
+      after(1500, () => { setClicking(true); });
+      after(1660, () => { setClicking(false); setPhase('signing'); });
+      after(2750, () => setPhase('signedin'));
+      after(3750, () => { setPhase('store'); setCurX('50%'); setCurY(240); });
+      after(4550, () => { setCurX('80%'); setCurY(96); });
+      after(5350, () => setClicking(true));
+      after(5510, () => { setClicking(false); setPhase('adding'); });
+      after(6450, () => setPhase('added'));
+      after(8950, loop);
+    };
+    loop();
+    return () => timers.forEach(clearTimeout);
+  }, []);
+
+  const onStore = phase === 'store' || phase === 'adding' || phase === 'added';
+  const logoGrad = 'radial-gradient(120% 120% at 20% 10%, rgba(255,255,255,0.5) 0%, transparent 40%), linear-gradient(135deg, oklch(0.65 0.21 252), oklch(0.42 0.2 270))';
+
   return (
     <div className="hiw-browser">
       {/* Chrome bar */}
@@ -517,7 +454,207 @@ function HowitworksBrowser({ step, typed, replyVisible }) {
           <span style={{ width: 10, height: 10, borderRadius: '50%', background: '#ffbe2e', display: 'inline-block' }} />
           <span style={{ width: 10, height: 10, borderRadius: '50%', background: '#28c941', display: 'inline-block' }} />
         </div>
-        {!isDash && !isSignIn && (
+        <div style={{ flex: 1, height: 22, borderRadius: 5, background: '#f3f2ef', border: '1px solid var(--line)', display: 'flex', alignItems: 'center', padding: '0 9px', fontSize: 10, color: '#555', fontFamily: 'var(--font-mono)', gap: 5, minWidth: 0, overflow: 'hidden', marginLeft: 10 }}>
+          <Icon name="lock" size={9} />
+          <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+            {onStore ? 'chromewebstore.google.com/detail/toinbox' : 'toinbox.app'}
+          </span>
+        </div>
+        {/* Pinned extension icon appears once added */}
+        <div style={{ width: 20, height: 20, borderRadius: 5, flexShrink: 0, background: phase === 'added' ? logoGrad : '#eceae6', boxShadow: phase === 'added' ? 'inset 0 0 0 1px rgba(255,255,255,0.22), 0 0 0 2px rgba(37,99,235,0.25)' : 'inset 0 0 0 1px var(--line)', transition: 'background 0.3s ease, box-shadow 0.3s ease' }} />
+      </div>
+
+      {/* Body */}
+      <div style={{ position: 'relative', flex: 1, minHeight: 0, overflow: 'hidden', background: '#fbfbfa' }}>
+        {!onStore && (
+          /* ── toinbox.app site ── */
+          <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column' }}>
+            {/* nav */}
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '14px 22px', borderBottom: '1px solid #f0ede8' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                <div style={{ width: 22, height: 22, borderRadius: 7, background: logoGrad, boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.22)' }} />
+                <span style={{ fontSize: 15, fontWeight: 700, color: '#1a1a1a', letterSpacing: '-0.01em' }}>ToInbox</span>
+              </div>
+              <div style={{ display: 'flex', gap: 20, fontSize: 12.5, color: '#555' }}>
+                <span>Why</span><span>How it works</span><span>Product</span><span>Pricing</span>
+              </div>
+              <div style={{
+                display: 'flex', alignItems: 'center', gap: 7, padding: '8px 15px', borderRadius: 999,
+                background: '#111', color: 'white', fontSize: 12.5, fontWeight: 600,
+                transition: 'transform 0.15s ease, box-shadow 0.15s ease',
+                transform: (phase !== 'site') ? 'scale(0.97)' : 'scale(1)',
+                boxShadow: (phase !== 'site') ? '0 0 0 3px rgba(37,99,235,0.25)' : '0 2px 8px rgba(0,0,0,0.18)',
+              }}>
+                Sign In <Icon name="arrow" size={13} />
+              </div>
+            </div>
+            {/* hero */}
+            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '0 40px', maxWidth: 560 }}>
+              <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7, alignSelf: 'flex-start', fontSize: 10.5, fontFamily: 'var(--font-mono)', letterSpacing: '0.08em', textTransform: 'uppercase', color: '#666', padding: '5px 11px', borderRadius: 999, border: '1px solid #e6e3dd', background: 'white' }}>
+                <span style={{ width: 7, height: 7, borderRadius: '50%', background: '#2563eb' }} /> Chrome extension · works inside LinkedIn
+              </span>
+              <div style={{ fontSize: 34, fontWeight: 700, color: '#1a1a1a', letterSpacing: '-0.03em', lineHeight: 1.08, marginTop: 16 }}>
+                Apply through founders,<br />not portals.
+              </div>
+              <div style={{ fontSize: 13.5, color: '#555', lineHeight: 1.55, marginTop: 14, maxWidth: 420 }}>
+                Sign in, add the extension, and ToInbox sends your application straight to the people who decide.
+              </div>
+              <div style={{ display: 'flex', gap: 10, marginTop: 22 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 7, padding: '10px 18px', borderRadius: 999, background: '#2563eb', color: 'white', fontSize: 13, fontWeight: 600 }}>
+                  Sign In <Icon name="arrow" size={14} />
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 7, padding: '10px 16px', borderRadius: 999, border: '1px solid #e6e3dd', color: '#444', fontSize: 13, fontWeight: 600 }}>
+                  <Icon name="play" size={11} /> How it works
+                </div>
+              </div>
+            </div>
+
+            {/* sign-in card overlay */}
+            {(phase === 'signing' || phase === 'signedin') && (
+              <div style={{ position: 'absolute', inset: 0, background: 'rgba(20,20,22,0.32)', backdropFilter: 'blur(2px)', display: 'flex', alignItems: 'center', justifyContent: 'center', animation: 'fadeSlideIn 0.25s ease' }}>
+                <div style={{ width: 300, background: 'white', borderRadius: 16, padding: '26px 26px 22px', boxShadow: '0 24px 60px rgba(0,0,0,0.28)', display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: 4 }}>
+                  <div style={{ width: 38, height: 38, borderRadius: 11, background: logoGrad, boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.22)' }} />
+                  <div style={{ fontSize: 16, fontWeight: 700, color: '#1a1a1a', marginTop: 12, letterSpacing: '-0.01em' }}>Sign in to ToInbox</div>
+                  {phase === 'signing' ? (
+                    <>
+                      <div style={{ fontSize: 12, color: '#777', marginTop: 3 }}>Continue with your Google account</div>
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 9, width: '100%', marginTop: 16, padding: '11px 0', borderRadius: 10, border: '1px solid #e3e0db', background: 'white', fontSize: 13, fontWeight: 600, color: '#333' }}>
+                        <span style={{ width: 14, height: 14, borderRadius: '50%', border: '2px solid #d6d3cd', borderTopColor: '#2563eb', animation: 'spin 0.7s linear infinite', display: 'inline-block' }} />
+                        Signing in…
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div style={{ width: 46, height: 46, borderRadius: '50%', background: '#e6f4ea', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#057642', marginTop: 14, animation: 'fadeSlideIn 0.3s ease' }}>
+                        <Icon name="check" size={24} />
+                      </div>
+                      <div style={{ fontSize: 13.5, fontWeight: 600, color: '#1a1a1a', marginTop: 12 }}>Signed in as Arjun</div>
+                      <div style={{ fontSize: 11.5, color: '#777', marginTop: 2 }}>arjun.sharma@gmail.com</div>
+                    </>
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+
+        {onStore && (
+          /* ── Chrome Web Store ── */
+          <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', background: '#fff' }}>
+            {/* store top bar */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: 9, padding: '11px 22px', borderBottom: '1px solid #eceae6' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 13, color: '#3c4043' }}>
+                <span style={{ width: 16, height: 16, borderRadius: '50%', background: 'conic-gradient(#ea4335,#fbbc04,#34a853,#4285f4,#ea4335)' }} />
+                <span style={{ fontWeight: 500 }}>chrome web store</span>
+              </div>
+            </div>
+            {/* product */}
+            <div style={{ display: 'flex', gap: 18, padding: '24px 30px 18px', alignItems: 'center' }}>
+              <div style={{ width: 64, height: 64, borderRadius: 16, background: logoGrad, boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.22)', flexShrink: 0 }} />
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{ fontSize: 19, fontWeight: 700, color: '#202124', letterSpacing: '-0.01em', lineHeight: 1.25 }}>ToInbox — Send your job application directly to leadership mailboxes.</div>
+                <div style={{ fontSize: 12.5, color: '#5f6368', marginTop: 4, display: 'flex', alignItems: 'center', gap: 6 }}>
+                  <span style={{ color: '#1a73e8' }}>toinbox.app</span><span>·</span><span>Productivity</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginTop: 6, fontSize: 12, color: '#5f6368' }}>
+                  <span style={{ color: '#f9ab00', letterSpacing: 1 }}>★★★★★</span>
+                  <span style={{ fontWeight: 600, color: '#202124' }}>4.9</span>
+                  <span>(1,284)</span><span>·</span><span>40,000+ users</span>
+                </div>
+              </div>
+              {/* Add to Chrome button */}
+              <div style={{
+                flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+                padding: '11px 22px', borderRadius: 999, fontSize: 14, fontWeight: 600,
+                background: phase === 'added' ? '#e6f4ea' : '#1a73e8',
+                color: phase === 'added' ? '#137333' : 'white',
+                border: phase === 'added' ? '1px solid #b8e6cc' : 'none',
+                transition: 'transform 0.15s ease, box-shadow 0.15s ease',
+                boxShadow: phase === 'adding' ? '0 0 0 3px rgba(26,115,232,0.3)' : 'none',
+                transform: phase === 'adding' ? 'scale(0.97)' : 'scale(1)',
+              }}>
+                {phase === 'added' ? <><Icon name="check" size={15} /> Added to Chrome</> : 'Add to Chrome'}
+              </div>
+            </div>
+            {/* screenshot strip — CSS-drawn placeholders (no image files needed) */}
+            <div style={{ display: 'flex', gap: 12, padding: '4px 30px 20px' }}>
+              {[
+                { label: 'Inside LinkedIn', accent: true },
+                { label: 'Founder found', accent: false },
+                { label: 'Dashboard', accent: false },
+              ].map((shot, i) => (
+                <div key={i} style={{ flex: 1, height: 150, borderRadius: 10, border: '1px solid #eceae6', overflow: 'hidden', background: '#0d0d0d', position: 'relative', display: 'flex', flexDirection: 'column' }}>
+                  {/* mini window top bar */}
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 4, padding: '7px 9px', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+                    <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#ff6058' }} />
+                    <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#ffbe2e' }} />
+                    <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#28c941' }} />
+                  </div>
+                  {/* faux content rows */}
+                  <div style={{ flex: 1, padding: '12px 11px', display: 'flex', flexDirection: 'column', gap: 7 }}>
+                    <div style={{ width: 30, height: 30, borderRadius: 8, background: shot.accent ? 'linear-gradient(135deg, oklch(0.65 0.21 252), oklch(0.42 0.2 270))' : 'rgba(255,255,255,0.1)' }} />
+                    <div style={{ height: 7, width: '78%', borderRadius: 3, background: 'rgba(255,255,255,0.16)' }} />
+                    <div style={{ height: 7, width: '54%', borderRadius: 3, background: 'rgba(255,255,255,0.1)' }} />
+                    <div style={{ marginTop: 'auto', height: 22, borderRadius: 6, background: shot.accent ? 'rgba(37,99,235,0.9)' : 'rgba(255,255,255,0.08)' }} />
+                  </div>
+                  {/* label */}
+                  <div style={{ position: 'absolute', bottom: 8, left: 11, fontSize: 9, fontFamily: 'var(--font-mono)', letterSpacing: '0.06em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)' }}>{shot.label}</div>
+                </div>
+              ))}
+            </div>
+
+            {/* add-confirm dialog */}
+            {phase === 'adding' && (
+              <div style={{ position: 'absolute', top: 8, left: 22, width: 320, background: 'white', borderRadius: 12, border: '1px solid #e3e0db', boxShadow: '0 18px 44px rgba(0,0,0,0.22)', padding: '16px 18px', animation: 'fadeSlideIn 0.22s ease' }}>
+                <div style={{ fontSize: 14.5, fontWeight: 600, color: '#202124' }}>Add “ToInbox — Send your job application directly to leadership mailboxes”?</div>
+                <div style={{ fontSize: 12, color: '#5f6368', marginTop: 8, lineHeight: 1.5 }}>It can read and change your data on linkedin.com and mail.google.com</div>
+                <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 8, marginTop: 14 }}>
+                  <div style={{ fontSize: 13, fontWeight: 600, color: '#1a73e8', padding: '7px 12px' }}>Cancel</div>
+                  <div style={{ fontSize: 13, fontWeight: 600, color: 'white', background: '#1a73e8', padding: '7px 14px', borderRadius: 8 }}>Add extension</div>
+                </div>
+              </div>
+            )}
+
+            {/* added toast */}
+            {phase === 'added' && (
+              <div style={{ position: 'absolute', top: 10, right: 16, width: 250, background: 'white', borderRadius: 12, border: '1px solid #e3e0db', boxShadow: '0 14px 36px rgba(0,0,0,0.2)', padding: '13px 14px', display: 'flex', gap: 10, alignItems: 'center', animation: 'fadeSlideIn 0.3s ease' }}>
+                <div style={{ width: 30, height: 30, borderRadius: 8, background: logoGrad, boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.22)', flexShrink: 0 }} />
+                <div style={{ flex: 1 }}>
+                  <div style={{ fontSize: 12.5, fontWeight: 600, color: '#202124' }}>ToInbox added to Chrome</div>
+                  <div style={{ fontSize: 11, color: '#5f6368', marginTop: 2 }}>Pinned to your toolbar — open LinkedIn</div>
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Cursor */}
+        <div style={{
+          position: 'absolute', left: curX, top: curY, pointerEvents: 'none', zIndex: 120,
+          transition: 'left 0.5s cubic-bezier(0.22,1,0.36,1), top 0.5s cubic-bezier(0.22,1,0.36,1), transform 0.1s ease',
+          transform: clicking ? 'scale(0.74)' : 'scale(1)',
+          filter: clicking ? 'drop-shadow(0 0 7px rgba(37,99,235,0.9))' : 'drop-shadow(0 1px 3px rgba(0,0,0,0.35))',
+        }}>
+          <Icon name="cursor" size={20} />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function HowitworksBrowser({ step, typed, replyVisible }) {
+  if (step === 0) return <HiwInstallScene />;
+  const isDash = step >= 5;
+  return (
+    <div className="hiw-browser">
+      {/* Chrome bar */}
+      <div className="hiw-browser-chrome">
+        <div style={{ display: 'flex', gap: 5, flexShrink: 0 }}>
+          <span style={{ width: 10, height: 10, borderRadius: '50%', background: '#ff6058', display: 'inline-block' }} />
+          <span style={{ width: 10, height: 10, borderRadius: '50%', background: '#ffbe2e', display: 'inline-block' }} />
+          <span style={{ width: 10, height: 10, borderRadius: '50%', background: '#28c941', display: 'inline-block' }} />
+        </div>
+        {!isDash && (
           <div style={{ display: 'flex', gap: 3, marginLeft: 10 }}>
             <div style={{ fontSize: 10, padding: '2px 9px', borderRadius: 5, background: 'white', border: '1px solid var(--line)', color: '#555', display: 'flex', alignItems: 'center', gap: 4 }}>
               <span style={{ width: 10, height: 10, borderRadius: 2, background: '#0a66c2', display: 'inline-block' }} />LinkedIn
@@ -525,22 +662,18 @@ function HowitworksBrowser({ step, typed, replyVisible }) {
             <div style={{ fontSize: 10, padding: '2px 9px', borderRadius: 5, color: '#888' }}>Gmail</div>
           </div>
         )}
-        <div style={{ flex: 1, height: 22, borderRadius: 5, background: (isDash || isSignIn) ? 'white' : '#f3f2ef', border: '1px solid var(--line)', display: 'flex', alignItems: 'center', padding: '0 9px', fontSize: 10, color: '#555', fontFamily: 'var(--font-mono)', gap: 5, minWidth: 0, overflow: 'hidden', marginLeft: (isDash || isSignIn) ? 12 : 0 }}>
+        <div style={{ flex: 1, height: 22, borderRadius: 5, background: isDash ? 'white' : '#f3f2ef', border: '1px solid var(--line)', display: 'flex', alignItems: 'center', padding: '0 9px', fontSize: 10, color: '#555', fontFamily: 'var(--font-mono)', gap: 5, minWidth: 0, overflow: 'hidden', marginLeft: isDash ? 12 : 0 }}>
           <Icon name="lock" size={9} />
           <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-            {isSignIn
-              ? 'chromewebstore.google.com/detail/toinbox'
-              : isDash ? 'app.toinbox.co/dashboard' : 'linkedin.com/jobs/search/?keywords=founding+engineer'}
+            {isDash ? 'app.toinbox.co/dashboard' : 'linkedin.com/jobs/search/?keywords=founding+engineer'}
           </span>
         </div>
         <div style={{ width: 20, height: 20, borderRadius: 5, flexShrink: 0, background: 'radial-gradient(120% 120% at 20% 10%, rgba(255,255,255,0.5) 0%, transparent 40%), linear-gradient(135deg, oklch(0.65 0.21 252), oklch(0.42 0.2 270))', boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.22)' }} />
       </div>
 
-      {isSignIn
-        ? <HiwSignInPanel />
-        : isDash
-          ? <HiwDashboard replyVisible={step === 6} />
-          : <HiwLinkedIn step={step} typed={typed} />
+      {isDash
+        ? <HiwDashboard replyVisible={step === 6} />
+        : <HiwLinkedIn step={step} typed={typed} />
       }
     </div>
   );
@@ -711,14 +844,15 @@ function HeroBrowser({ speedMultiplier = 1 }) {
   };
 
   useEffectHIW(() => {
-    let idx = 0;
-    activeRef.current = 0;
-    setActive(0); setVisible(true);
+    let idx = 1;
+    activeRef.current = 1;
+    setActive(1); setVisible(true);
     let startTime = Date.now();
     const tick = () => {
       const elapsed = Date.now() - startTime;
       if (elapsed >= STEP_MS[idx] / speedMultiplier) {
-        const next = (idx + 1) % HIW_STEPS.length;
+        let next = (idx + 1) % HIW_STEPS.length;
+        if (next === 0) next = 1;
         idx = next;
         startTime = Date.now();
         transitionTo(next);
@@ -756,5 +890,6 @@ function HeroBrowser({ speedMultiplier = 1 }) {
   );
 }
 window.HeroBrowser = HeroBrowser;
+window.HiwInstallScene = HiwInstallScene;
 
 window.HowItWorks = HowItWorks;
