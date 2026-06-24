@@ -82,7 +82,7 @@
   </p>
   <p>
     ToInbox is a Chrome extension and web application that helps job-seekers send personalized
-    cold emails to founders behind LinkedIn job listings, sent through the user's own Gmail
+    job application emails to founders behind LinkedIn job listings, sent through the user's own Gmail
     account. This policy applies to the ToInbox extension, the website at
     <a href="https://toinbox.app">toinbox.app</a>, and the application at
     <a href="https://app.toinbox.app">app.toinbox.app</a> (together, the "Service").
@@ -157,8 +157,8 @@
   <h2>3. How we use your information</h2>
   <p>We use the information we collect to:</p>
   <ul>
-    <li>Generate personalized application emails from your resume using an AI service.</li>
-    <li>Identify the right founder for each company you enroll (via Apollo.io's database).</li>
+    <li>Generate personalized job application emails from your resume for your review using an AI service.</li>
+    <li>Identify the relevant hiring contact at each company you enroll (via Apollo.io's database).</li>
     <li>Send those emails from your Gmail and attach your resume as a PDF.</li>
     <li>Enforce your daily sending limit and sending schedule.</li>
     <li>Operate, secure, and improve the Service (e.g. error monitoring, performance).</li>
@@ -175,8 +175,8 @@
     <thead><tr><th>Provider</th><th>Purpose</th><th>Data shared</th></tr></thead>
     <tbody>
       <tr><td>Google (Gmail API)</td><td>Sending email from your account</td><td>OAuth tokens, the email body/subject/recipient we send</td></tr>
-      <tr><td>OpenAI</td><td>Generating personalized email content from your resume + job description</td><td>Your resume text, the job description, the company name, and the founder's first name (no Gmail content, no recipient address)</td></tr>
-      <tr><td>Apollo.io</td><td>Finding the founder's contact details by company domain</td><td>Company name and domain (no personal data about you)</td></tr>
+      <tr><td>OpenAI</td><td>Generating personalized email content from your resume + job description</td><td>Your resume text, the job description, the company name, and the hiring contact's first name (no Gmail content, no recipient address)</td></tr>
+      <tr><td>Apollo.io</td><td>Finding the relevant hiring contact at the company by domain</td><td>Company name and domain (no personal data about you)</td></tr>
       <tr><td>Hunter.io</td><td>Backup email-finding service</td><td>Company name and domain (no personal data about you)</td></tr>
       <tr><td>Vercel</td><td>Hosting the website and application</td><td>Request metadata (IP, user-agent) per Vercel's standard logging</td></tr>
       <tr><td>Railway</td><td>Hosting the application backend</td><td>Request metadata per Railway's standard logging</td></tr>
