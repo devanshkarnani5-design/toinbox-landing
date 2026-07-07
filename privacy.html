@@ -70,7 +70,7 @@
   <span class="eyebrow"><span class="dot"></span>Legal · privacy policy</span>
   <h1>Privacy Policy</h1>
   <p class="lead">How ToInbox collects, uses, and protects your information.</p>
-  <p class="meta">Last updated: 10 June 2026</p>
+  <p class="meta">Last updated: 7 July 2026</p>
 
   <h2>1. Who we are</h2>
   <p>
@@ -82,7 +82,7 @@
   </p>
   <p>
     ToInbox is a Chrome extension and web application that helps job-seekers send personalized
-    job application emails to founders behind LinkedIn job listings, sent through the user's own Gmail
+    job application emails to the relevant hiring contact (such as a founder or department head) at companies with LinkedIn job listings, sent through the user's own Gmail
     account. This policy applies to the ToInbox extension, the website at
     <a href="https://toinbox.app">toinbox.app</a>, and the application at
     <a href="https://app.toinbox.app">app.toinbox.app</a> (together, the "Service").
@@ -112,12 +112,12 @@
     <thead><tr><th>Scope</th><th>What it allows</th><th>Why we need it</th></tr></thead>
     <tbody>
       <tr>
-        <td><code>gmail.send</code></td>
+        <td><code>https://www.googleapis.com/auth/gmail.send</code></td>
         <td>Send email on your behalf from your Gmail address.</td>
         <td>So the application emails we generate are sent <em>from you</em>, not from us.</td>
       </tr>
       <tr>
-        <td><code>userinfo.email</code> / <code>userinfo.profile</code></td>
+        <td><code>https://www.googleapis.com/auth/userinfo.email</code> / <code>https://www.googleapis.com/auth/userinfo.profile</code></td>
         <td>Your Google email address, name, and profile picture.</td>
         <td>To confirm which Gmail account is connected.</td>
       </tr>
@@ -161,7 +161,7 @@
     <li>Identify the relevant hiring contact at each company you enroll (via Apollo.io's database).</li>
     <li>Send those emails from your Gmail and attach your resume as a PDF.</li>
     <li>Enforce your daily sending limit and sending schedule.</li>
-    <li>Operate, secure, and improve the Service (e.g. error monitoring, performance).</li>
+    <li>Operate, secure, and improve the Service (e.g. error monitoring, performance). We never use Gmail data — including the content of emails sent on your behalf — for Service improvement, analytics, or AI/ML model training.</li>
     <li>Communicate with you about your account and service updates.</li>
     <li>Process payments for paid plans (when applicable).</li>
   </ul>
