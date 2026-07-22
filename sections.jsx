@@ -5,10 +5,10 @@ function Benefits() {
   const items = [
     { ico: 'panel', t: 'Lives where you already are', s: "A Chrome extension that sits inside LinkedIn. No new app to learn, no second tab to keep open." },
     { ico: 'target', t: 'Skip Easy Apply queues', s: 'Thousands apply through LinkedIn and go unseen. Reach the key decision-maker and department head directly, where your application gets noticed.' },
-    { ico: 'forward', t: 'Forwarded to hiring directly', s: 'Key decision-makers and department heads often move such applications straight to interviews or forward them to HR. These applications carry an advantage and move quicker.' },
+    { ico: 'forward', t: 'Forwarded to hiring directly', s: 'Leadership often move such applications straight to interviews or forward them to HR. These applications carry an advantage and move quicker.' },
     { ico: 'sparkle', t: 'Tailored, never templated', s: 'Every application — to a key decision-maker or department head — is unique and personalised based on job description and your resume.' },
     { ico: 'bolt', t: 'Fifteen-second applications', s: 'Detect → enroll → send. Personalized outreach creates stronger intent, and strong intent increases replies.' },
-    { ico: 'chart', t: 'Decision-makers reply at multiples', s: 'Key decision-makers and department heads value candidates who show genuine interest. Personalized outreach leads to more replies and interviews.' },
+    { ico: 'chart', t: 'Decision-makers reply at multiples', s: 'Leadership value candidates who show genuine interest. Personalized outreach leads to more replies and interviews.' },
   ];
   return (
     <section className="section" id="why">
