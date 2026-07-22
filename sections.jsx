@@ -4,11 +4,11 @@ const { useEffect: useEffectS } = React;
 function Benefits() {
   const items = [
     { ico: 'panel', t: 'Lives where you already are', s: "A Chrome extension that sits inside LinkedIn. No new app to learn, no second tab to keep open." },
-    { ico: 'target', t: 'Skip Easy Apply queues', s: 'Thousands apply through LinkedIn and go unseen. Reach the founder and department head directly, where your application gets noticed.' },
-    { ico: 'forward', t: 'Forwarded to hiring directly', s: 'Founders and department heads often move such applications straight to interviews or forward them to HR. These applications carry an advantage and move quicker.' },
-    { ico: 'sparkle', t: 'Tailored, never templated', s: 'Every application — to a founder or department head — is unique and personalised based on job description and your resume.' },
+    { ico: 'target', t: 'Skip Easy Apply queues', s: 'Thousands apply through LinkedIn and go unseen. Reach the key decision-maker and department head directly, where your application gets noticed.' },
+    { ico: 'forward', t: 'Forwarded to hiring directly', s: 'Key decision-makers and department heads often move such applications straight to interviews or forward them to HR. These applications carry an advantage and move quicker.' },
+    { ico: 'sparkle', t: 'Tailored, never templated', s: 'Every application — to a key decision-maker or department head — is unique and personalised based on job description and your resume.' },
     { ico: 'bolt', t: 'Fifteen-second applications', s: 'Detect → enroll → send. Personalized outreach creates stronger intent, and strong intent increases replies.' },
-    { ico: 'chart', t: 'Decision-makers reply at multiples', s: 'Founders and department heads value candidates who show genuine interest. Personalized outreach leads to more replies and interviews.' },
+    { ico: 'chart', t: 'Decision-makers reply at multiples', s: 'Key decision-makers and department heads value candidates who show genuine interest. Personalized outreach leads to more replies and interviews.' },
   ];
   return (
     <section className="section" id="why">
@@ -562,7 +562,7 @@ function FinalCTA() {
           <h2 className="h-section" style={{ marginTop: 18, maxWidth: 820, marginLeft: 'auto', marginRight: 'auto' }}>
             Your dream startup won't notice<br />another Easy Apply.
           </h2>
-          <p className="lead">Turn LinkedIn applications into real conversations. Send the email a founder or hiring lead will actually forward.</p>
+          <p className="lead">Turn LinkedIn applications into real conversations. Send the email a key decision-maker or hiring lead will actually forward.</p>
           <div style={{ display: 'flex', gap: 10, justifyContent: 'center', flexWrap: 'wrap' }}>
             <a href="https://app.toinbox.app" className="btn btn-accent">Sign In <Icon name="arrow" size={14} className="chev" /></a>
             <a href="#how-section" className="btn btn-ghost" style={{ color: 'rgba(255,255,255,0.8)' }}>See how it works</a>
