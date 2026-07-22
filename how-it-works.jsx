@@ -5,7 +5,7 @@ const HIW_STEPS = [
   { t: 'Sign in & add the Chrome extension', s: 'Sign in at toinbox.app, then add ToInbox to Chrome in one click. It installs right inside LinkedIn — no setup, no account juggling. You are ready in under a minute.' },
   { t: 'Open LinkedIn & Click on any Job', s: 'Click any LinkedIn job and ToInbox immediately detects it in the panel. One button. It finds the founder and the relevant department head, matches your resume, and is ready to send in seconds.' },
   { t: 'AI writes your application', s: 'ToInbox reads your resume and the JD, then drafts a specific, human-sounding cover letter — naming the role, the company, and the recipient.' },
-  { t: 'Sent to leadership inboxes', s: 'Email + resume lands in the founder\'s personal inbox. Skips ATS entirely. No Easy Apply queue.' },
+  { t: 'Sent to leadership inboxes', s: 'Your personalised job application + resume lands on relevant leadership inboxes of that company.' },
   { t: 'Dashboard tracks it all', s: 'Track every metric: enrolled, sent, replied.' },
   { t: 'They reply', s: 'Founders and department heads reply to intent. You land in a real conversation — two steps ahead of every other applicant.' },
 ];
