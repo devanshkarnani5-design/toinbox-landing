@@ -25,8 +25,20 @@ const Icon = ({ name, size = 16, ...rest }) => {
     eye: <g><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z" /><circle cx="12" cy="12" r="3" /></g>,
     handshake: <g><path d="M12 11l2-2 5 5-2 2-2-2" /><path d="M14 9l-4-4-7 7 2 2 3-3" /><path d="M9 16l3 3 2-2" /></g>,
     cursor: <path d="M5 3l14 9-7 1-3 7-4-17z" fill="currentColor" stroke="white" strokeWidth="1.2" />,
-    sliders: <g><path d="M4 8h10M14 8a2 2 0 104 0 2 2 0 00-4 0zM4 16h2M6 16a2 2 0 104 0 2 2 0 00-4 0zM10 16h10" /></g>,
-    card: <g><rect x="2" y="5" width="20" height="14" rx="2" /><path d="M2 10h20" /></g>,
+    gear: <g><circle cx="12" cy="12" r="3.2" /><path d="M12 2.5v3M12 18.5v3M4.2 7l2.6 1.5M17.2 15.5l2.6 1.5M4.2 17l2.6-1.5M17.2 8.5l2.6-1.5" /></g>,
+    card: <g><rect x="2.5" y="5" width="19" height="14" rx="2.5" /><path d="M2.5 9.5h19" /></g>,
+    clock: <g><circle cx="12" cy="12" r="9" /><path d="M12 7.5V12l3 2" /></g>,
+    plus: <path d="M12 5v14M5 12h14" />,
+    x: <path d="M6 6l12 12M18 6L6 18" />,
+    logout: <g><path d="M15 4h3a2 2 0 012 2v12a2 2 0 01-2 2h-3" /><path d="M10 12h10m-4-4l4 4-4 4" /></g>,
+    refresh: <g><path d="M3.5 8a9 9 0 0114.5-2.5L21 8M20.5 16A9 9 0 016 18.5L3 16" /><path d="M21 4v4h-4M3 20v-4h4" /></g>,
+    info: <g><circle cx="12" cy="12" r="9" /><path d="M12 11v5M12 8h.01" /></g>,
+    dot: <circle cx="12" cy="12" r="4" fill="currentColor" stroke="none" />,
+    zap: <path d="M13 3L4 14h7l-1 7 9-11h-7l1-7z" />,
+    calendar: <g><rect x="3.5" y="5" width="17" height="16" rx="2" /><path d="M3.5 10h17M8 3v4M16 3v4" /></g>,
+    sliders: <g><path d="M4 8h10M18 8h2M4 16h2M10 16h10" /><circle cx="16" cy="8" r="2.2" /><circle cx="8" cy="16" r="2.2" /></g>,
+    grid: <g><rect x="3.5" y="3.5" width="7" height="7" rx="1.5" /><rect x="13.5" y="3.5" width="7" height="7" rx="1.5" /><rect x="3.5" y="13.5" width="7" height="7" rx="1.5" /><rect x="13.5" y="13.5" width="7" height="7" rx="1.5" /></g>,
+    layout: <g><rect x="3.5" y="4" width="17" height="16" rx="2" /><path d="M3.5 9h17M9 9v11" /></g>,
   };
   return <svg {...s} {...rest}>{paths[name]}</svg>;
 };
