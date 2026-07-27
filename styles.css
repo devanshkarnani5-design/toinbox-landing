@@ -2794,3 +2794,6 @@ h1, h2, h3, h4 { margin: 0; letter-spacing: -0.02em; font-weight: 500; }
   .sd-dash { grid-template-columns: 1fr; }
   .sd-dash-side { display: none; }
 }
+
+/* nudge hero demo slightly right for balance */
+.hero-grid .sd-browser { transform: translateX(40px); }
