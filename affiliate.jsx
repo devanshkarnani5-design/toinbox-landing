@@ -21,7 +21,7 @@ const SUPPORT_EMAIL = 'affiliates@toinbox.app'; // CHANGE to your real inbox
  *   AVATARS       — swap the placeholder portraits for real photos/illustrations
  * ───────────────────────────────────────────────────────────────────────────*/
 
-const SIGNUP_URL = '/affiliate-onboarding.html'; // TODO: real OAuth kickoff once backend exists
+const SIGNUP_URL = '/affiliate-apply';
 const PAYOUT_DAY = 'the 1st of every month'; // CHANGE if different
 const PACK_PRICE = 24; // top credit-pack price — update if pricing changes
 const HERO_SALES = 21; // illustrative sales count shown in the hero chip

@@ -3,6 +3,14 @@
     {
       "source": "/affiliates",
       "destination": "/affiliates.html"
+    },
+    {
+      "source": "/affiliate-apply",
+      "destination": "/affiliate-apply.html"
+    },
+    {
+      "source": "/affiliate-dashboard",
+      "destination": "/affiliate-dashboard.html"
     }
   ]
 }
