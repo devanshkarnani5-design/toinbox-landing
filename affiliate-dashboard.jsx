@@ -1,7 +1,7 @@
 // affiliate-dashboard.jsx — ToInbox affiliate dashboard
 // Wired to app.toinbox.app/api/affiliate/stats. Handles pending/active/rejected.
 const AFF_API = "https://app.toinbox.app";
-const SIGNIN_URL = "https://app.toinbox.app";
+const SIGNIN_URL = "https://app.toinbox.app/api/auth/linkedin?return=" + encodeURIComponent("https://www.toinbox.app/affiliate-dashboard");
 const APPLY_URL = "/affiliate-apply";
 
 const affTokens = {
@@ -51,18 +51,31 @@ function AffiliateDashboard() {
   const [data, setData] = useState(null);
 
   const load = useCallback(async () => {
+    const url = new URL(window.location.href);
+    const justReturned = url.searchParams.has("token");
+    if (justReturned) {
+      url.searchParams.delete("token");
+      window.history.replaceState({}, "", url.pathname + (url.search || ""));
+    }
     setState("loading");
     try {
       const r = await fetch(`${AFF_API}/api/affiliate/stats`, { credentials: "include", headers: { Accept: "application/json" } });
-      if (r.status === 401 || r.status === 403) return setState("signin");
-      if (r.status === 404) return setState("none");
+      if (r.status === 401 || r.status === 403) {
+        if (justReturned) return setState("signin");
+        window.location.href = SIGNIN_URL;
+        return;
+      }
+      if (r.status === 404) { window.location.href = APPLY_URL; return; } // not an affiliate -> apply
       if (!r.ok) throw new Error();
       const j = await r.json();
       setData(j);
       if (j.status === "pending") return setState("pending");
       if (j.status === "rejected") return setState("rejected");
       return setState("ready");
-    } catch { setState("error"); }
+    } catch {
+      if (justReturned) return setState("signin");
+      window.location.href = SIGNIN_URL;
+    }
   }, []);
   useEffect(() => { load(); }, [load]);
 

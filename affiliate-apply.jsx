@@ -1,7 +1,7 @@
 // affiliate-apply.jsx — ToInbox affiliate application (approval-gated)
 // Wired to app.toinbox.app/api/affiliate/*. Uses the existing jp_session cookie.
 const AFF_API = "https://app.toinbox.app";
-const SIGNIN_URL = "https://app.toinbox.app"; // your normal login
+const SIGNIN_URL = "https://app.toinbox.app/api/auth/linkedin?return=" + encodeURIComponent("https://www.toinbox.app/affiliate-apply");
 const DASH_URL = "/affiliate-dashboard";
 
 const affTokens = {
@@ -50,18 +50,30 @@ function AffiliateApply() {
   const [errMsg, setErrMsg] = useState("");
 
   useEffect(() => {
+    const url = new URL(window.location.href);
+    const justReturned = url.searchParams.has("token"); // came back from LinkedIn login
+    if (justReturned) {
+      url.searchParams.delete("token");
+      window.history.replaceState({}, "", url.pathname + (url.search || ""));
+    }
     (async () => {
       try {
         const r = await fetch(`${AFF_API}/api/affiliate/me`, { credentials: "include", headers: { Accept: "application/json" } });
-        if (r.status === 401 || r.status === 403) return setState("signin");
+        if (r.status === 401 || r.status === 403) {
+          if (justReturned) return setState("signin"); // logged in but still unauth -> show gate, don't loop
+          window.location.href = SIGNIN_URL;           // not logged in -> go straight to LinkedIn
+          return;
+        }
         if (!r.ok) throw new Error();
         const j = await r.json();
         setMe(j);
         if (!j.onboarded) return setState("form");
-        if (j.status === "active") return setState("active");
-        if (j.status === "rejected") return setState("rejected");
-        return setState("pending");
-      } catch { setState("signin"); }
+        window.location.href = DASH_URL;               // already applied/approved -> dashboard
+        return;
+      } catch {
+        if (justReturned) return setState("signin");
+        window.location.href = SIGNIN_URL;
+      }
     })();
   }, []);
 
