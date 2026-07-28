@@ -4,6 +4,12 @@ const AFF_API = "https://app.toinbox.app";
 const SIGNIN_URL = "https://app.toinbox.app/api/auth/linkedin?return=" + encodeURIComponent("https://www.toinbox.app/affiliate-apply");
 const DASH_URL = "/affiliate-dashboard";
 
+// Auth token — same mechanism as the app dashboard (localStorage + Bearer header).
+const TOKEN_KEY = "jp_token";
+function affGetToken() { try { return localStorage.getItem(TOKEN_KEY) || ""; } catch (e) { return ""; } }
+function affSetToken(t) { try { if (t) localStorage.setItem(TOKEN_KEY, t); } catch (e) {} }
+function affAuthHeaders() { const t = affGetToken(); return t ? { Authorization: "Bearer " + t } : {}; }
+
 const affTokens = {
   "--bg": "#f7f6f3", "--bg-elev": "#ffffff", "--bg-soft": "#efede8",
   "--ink": "#0a0a0a", "--ink-2": "#2a2a2a", "--ink-3": "#545454", "--ink-4": "#8a8a85",
@@ -51,27 +57,32 @@ function AffiliateApply() {
 
   useEffect(() => {
     const url = new URL(window.location.href);
-    const justReturned = url.searchParams.has("token"); // came back from LinkedIn login
-    if (justReturned) {
+    const tok = url.searchParams.get("token");
+    if (tok) {
+      affSetToken(tok);                    // just came back from LinkedIn login
       url.searchParams.delete("token");
       window.history.replaceState({}, "", url.pathname + (url.search || ""));
     }
+    const haveToken = !!affGetToken();
     (async () => {
       try {
-        const r = await fetch(`${AFF_API}/api/affiliate/me`, { credentials: "include", headers: { Accept: "application/json" } });
+        const r = await fetch(`${AFF_API}/api/affiliate/me`, {
+          credentials: "include",
+          headers: { Accept: "application/json", ...affAuthHeaders() },
+        });
         if (r.status === 401 || r.status === 403) {
-          if (justReturned) return setState("signin"); // logged in but still unauth -> show gate, don't loop
-          window.location.href = SIGNIN_URL;           // not logged in -> go straight to LinkedIn
+          if (haveToken) return setState("signin"); // token present but rejected -> gate, no loop
+          window.location.href = SIGNIN_URL;         // no token -> sign in
           return;
         }
         if (!r.ok) throw new Error();
         const j = await r.json();
         setMe(j);
         if (!j.onboarded) return setState("form");
-        window.location.href = DASH_URL;               // already applied/approved -> dashboard
+        window.location.href = DASH_URL;
         return;
       } catch {
-        if (justReturned) return setState("signin");
+        if (haveToken) return setState("signin");
         window.location.href = SIGNIN_URL;
       }
     })();
@@ -95,7 +106,7 @@ function AffiliateApply() {
     try {
       const r = await fetch(`${AFF_API}/api/affiliate/onboard`, {
         method: "POST", credentials: "include",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", ...affAuthHeaders() },
         body: JSON.stringify({ linkedin: form.linkedin.trim(), payoutMethod: "PayPal", payoutEmail: form.payoutEmail.trim(), about: form.about.trim() }),
       });
       if (r.status === 401) return setState("signin");
