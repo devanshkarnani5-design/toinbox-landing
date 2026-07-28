@@ -589,6 +589,7 @@ function Footer() {
             <a href="#product">Product</a>
             <a href="#proof">Replies</a>
             <a href="#pricing">Pricing</a>
+            <a href="/affiliates.html">Affiliates</a>
             <a href="/privacy.html">Privacy</a>
             <a href="/terms.html">Terms</a>
           </div>
