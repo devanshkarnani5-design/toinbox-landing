@@ -1,7 +1,7 @@
 // affiliate-dashboard.jsx — ToInbox affiliate dashboard
 // Wired to app.toinbox.app/api/affiliate/stats. Handles pending/active/rejected.
 const AFF_API = "https://app.toinbox.app";
-const SIGNIN_URL = "https://app.toinbox.app";
+const SIGNIN_URL = "https://app.toinbox.app/api/auth/linkedin?return=" + encodeURIComponent("https://www.toinbox.app/affiliate-dashboard");
 const APPLY_URL = "/affiliate-apply";
 
 const affTokens = {
