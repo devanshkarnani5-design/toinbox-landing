@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/affiliates",
+      "destination": "/affiliates.html"
+    }
+  ]
+}
