@@ -1,7 +1,7 @@
 // affiliate-apply.jsx — ToInbox affiliate application (approval-gated)
 // Wired to app.toinbox.app/api/affiliate/*. Uses the existing jp_session cookie.
 const AFF_API = "https://app.toinbox.app";
-const SIGNIN_URL = "https://app.toinbox.app/api/auth/linkedin?return=" + encodeURIComponent("https://www.toinbox.app/affiliate-apply");
+const SIGNIN_URL = "https://app.toinbox.app"; // your normal login
 const DASH_URL = "/affiliate-dashboard";
 
 const affTokens = {
@@ -58,8 +58,9 @@ function AffiliateApply() {
         const j = await r.json();
         setMe(j);
         if (!j.onboarded) return setState("form");
-        window.location.href = DASH_URL;
-        return;
+        if (j.status === "active") return setState("active");
+        if (j.status === "rejected") return setState("rejected");
+        return setState("pending");
       } catch { setState("signin"); }
     })();
   }, []);
