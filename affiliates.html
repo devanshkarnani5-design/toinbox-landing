@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="apple-touch-icon" href="/favicon.png" />
+  <link rel="canonical" href="https://toinbox.app/affiliates.html" />
+  <meta name="theme-color" content="#0a0a0a" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ToInbox Affiliate Program — Earn 25% helping job seekers</title>
+  <meta name="description" content="Share your ToInbox code, your audience gets 10% off every credit pack, and you keep 25% of every sale. Open to coaches, creators, communities and past users — no audience minimum." />
+  <meta property="og:title" content="ToInbox Affiliate Program — Earn 25%" />
+  <meta property="og:description" content="Share your code, your audience saves 10%, you keep 25% of every sale. Open to everyone, no audience minimum." />
+  <meta property="og:url" content="https://toinbox.app/affiliates.html" />
+  <meta property="og:image" content="https://toinbox.app/og-image.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind (in-browser JIT, no build step — same idea as the Babel script below).
+       The affiliate component is styled entirely with Tailwind utility classes. -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    html, body { margin: 0; background: #f7f6f3; }
+    body { font-family: 'Geist', ui-sans-serif, system-ui, -apple-system, sans-serif; }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
+
+  <script type="text/babel" src="affiliate.jsx?v=1"></script>
+
+  <script type="text/babel">
+    ReactDOM.createRoot(document.getElementById('app')).render(<AffiliatesPage />);
+  </script>
+</body>
+</html>
