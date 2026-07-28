@@ -2283,7 +2283,7 @@ h1, h2, h3, h4 { margin: 0; letter-spacing: -0.02em; font-weight: 500; }
    SUCCESS-PAGE WALKTHROUGH DEMO (success-demo.jsx)
    =================================================================== */
 .sd-browser {
-  width: 100%; max-width: 780px;
+  width: 100%; max-width: 880px;
   border-radius: 14px; overflow: hidden;
   border: 1px solid var(--line-2);
   background: #fff;
@@ -2307,7 +2307,7 @@ h1, h2, h3, h4 { margin: 0; letter-spacing: -0.02em; font-weight: 500; }
 
 .sd-stage {
   position: relative;
-  min-height: clamp(400px, 60vh, 540px);
+  min-height: clamp(440px, 62vh, 620px);
   background: #f3f2ef;
   overflow: hidden;
 }
@@ -2795,5 +2795,3 @@ h1, h2, h3, h4 { margin: 0; letter-spacing: -0.02em; font-weight: 500; }
   .sd-dash-side { display: none; }
 }
 
-/* nudge hero demo slightly right for balance */
-.hero-grid .sd-browser { transform: translateX(40px); }
