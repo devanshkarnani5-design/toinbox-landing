@@ -228,6 +228,13 @@ function PDDashboard({ fit, dashStats, rowStatus, rowRef }) {
 // ============ SCENE 3 — Application Details (dedicated page) ============
 function PDDetails({ fit, dashStats, delivered, replied, backRef, gmailRef }) {
   const done = delivered || replied;
+  // Slight zoom + highlight on entry so the viewer clearly registers WHICH
+  // application this is and WHO it was sent to, before it settles to normal.
+  const [emphasize, setEmphasize] = usePD(true);
+  useEffectPD(() => {
+    const t = setTimeout(() => setEmphasize(false), 2200);
+    return () => clearTimeout(t);
+  }, []);
   return (
     <PDScaled fit={fit} cls="sd-dash pd-dashfill">
       <PDSidebar dashStats={dashStats} />
@@ -235,14 +242,14 @@ function PDDetails({ fit, dashStats, delivered, replied, backRef, gmailRef }) {
         <div className="pd-det-top">
           <button ref={backRef} className="pd-det-back"><Icon name="arrow" size={17} style={{ transform: 'rotate(180deg)' }} /></button>
           <span className="sd-li-cardlogo" style={{ background: '#6d54c7', width: 48, height: 48, borderRadius: 13, fontSize: 20 }}>e</span>
-          <div className="pd-det-title"><div className="tn">{ROLE}</div><div className="ts">{CO} · Bengaluru · Applied just now</div></div>
+          <div className={`pd-det-title${emphasize ? ' pd-emph' : ''}`}><div className="tn">{ROLE}</div><div className="ts">{CO} · Bengaluru · Applied just now</div></div>
           <PDPill status={replied ? 'replied' : 'delivered'} />
           <button ref={gmailRef} className="pd-viewgmail"><Icon name="mail" size={16} />View in Gmail</button>
         </div>
 
         <div className="pd-det-grid2">
           <div className="pd-det-left">
-            <div className="pd-card">
+            <div className={`pd-card${emphasize ? ' pd-emph' : ''}`}>
               <div className="pd-card-h">Recipients</div>
               {PD_RECIPS.map((r, i) => (
                 <div key={i} className="pd-recip2">
@@ -316,6 +323,13 @@ const PD_INBOX = [
   { from: 'Figma', subj: 'Someone commented on your file', snip: 'Aarav left a comment on “Onboarding v3” — take a look.', date: 'Jun 07' },
 ];
 
+const PD_NEW_REPLIES = [
+  { from: 'Priya Nair', co: CO, role: ROLE, snip: 'We\u2019d like to schedule an interview…', time: '9:41 AM' },
+  { from: 'Karan Bhatt', co: 'Wishlink', role: 'Program Manager', snip: 'Interview scheduled \u2014 Thursday 3:00 PM \u2705', time: '9:38 AM' },
+  { from: 'Neha Kapoor', co: 'Porter', role: 'Program Manager', snip: 'Can we hop on a call this week?', time: '9:22 AM' },
+  { from: 'Aditya Rao', co: 'Reed Labs', role: 'Backend Engineer', snip: 'Loved your background \u2014 let\u2019s chat!', time: 'Yesterday' },
+];
+
 function PDGmail({ fit, view, threadRef, scrollRef }) {
   return (
     <PDScaled fit={fit} cls="pd-ga">
@@ -356,12 +370,14 @@ function PDGmail({ fit, view, threadRef, scrollRef }) {
 
           {view === 'inbox' && (
             <div className="pd-ga-list">
-              <div ref={threadRef} className="pd-ga-row unread new">
-                <span className="pd-ga-star"><Icon name="star" size={15} /></span>
-                <span className="pd-ga-rfrom">Priya Nair</span>
-                <span className="pd-ga-rsubj"><b>Re: Application for {ROLE} opening at {CO}.</b> <span className="snip">— We'd like to schedule an interview…</span></span>
-                <span className="pd-ga-rdate">9:41 AM</span>
-              </div>
+              {PD_NEW_REPLIES.map((r, i) => (
+                <div key={'reply-' + i} ref={i === 0 ? threadRef : undefined} className="pd-ga-row unread new">
+                  <span className="pd-ga-star"><Icon name="star" size={15} /></span>
+                  <span className="pd-ga-rfrom">{r.from}</span>
+                  <span className="pd-ga-rsubj"><b>Re: Application for {r.role} opening at {r.co}.</b> <span className="snip">— {r.snip}</span></span>
+                  <span className="pd-ga-rdate">{r.time}</span>
+                </div>
+              ))}
               {PD_INBOX.map((m, i) => (
                 <div key={i} className="pd-ga-row">
                   <span className="pd-ga-star"><Icon name="star" size={15} /></span>
@@ -553,7 +569,7 @@ function ProductDemo() {
         setScene('details'); setUrl('app.toinbox.app/applications/esper-spm');
         setDelivered(true); setReplied(false);
         setCaption(PD_CAPTIONS.details);
-        await wait(2600); if (dead) return;
+        await wait(4500); if (dead) return;
 
         // ---- Recruiter reply: Gmail-style notification only (not in platform) ----
         setToast(true); setDashStats(s => ({ ...s, replied: 10 }));
@@ -567,7 +583,7 @@ function ProductDemo() {
         await moveRef(gmailRef); await wait(1100); if (dead) return;
         await tap();
         setScene('gmail'); setGmailView('inbox'); setUrl('mail.google.com/mail/u/4/#inbox');
-        await wait(2400); if (dead) return;
+        await wait(3200); if (dead) return;
         await moveRef(threadRef); await wait(1200); if (dead) return;
         await tap(); setGmailView('thread'); setUrl('mail.google.com/mail/u/4/#inbox/thread-esper');
         setCaption(PD_CAPTIONS.thread);
