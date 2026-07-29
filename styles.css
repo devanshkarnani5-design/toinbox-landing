@@ -2801,21 +2801,14 @@ h1, h2, h3, h4 { margin: 0; letter-spacing: -0.02em; font-weight: 500; }
 }
 
 
-/* Product demo — PDDetails zoom+highlight on entry.
-   Append this to styles.css. Uses existing tokens; no dark-theme/other changes. */
 
-.pd-det-title,
-.pd-card {
-  transition: transform .45s cubic-bezier(0.22,1,0.36,1), box-shadow .45s ease;
-}
 
-.pd-det-title.pd-emph,
-.pd-card.pd-emph {
-  transform: scale(1.035);
-  box-shadow:
-    0 0 0 3px color-mix(in oklab, var(--accent) 35%, transparent),
-    0 14px 30px -14px rgba(10,10,10,0.28);
-  position: relative;
-  z-index: 3;
-  border-radius: 10px;
+/* Product demo — cinematic camera zoom on the details page (two moments:
+   recipients, then the sent email). No highlight, just a smooth zoom. */
+.pd-det-zoomwrap {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  transition: transform .7s cubic-bezier(0.22,1,0.36,1);
+  will-change: transform;
 }
