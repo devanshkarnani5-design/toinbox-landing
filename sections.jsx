@@ -562,7 +562,7 @@ function FinalCTA() {
           <h2 className="h-section" style={{ marginTop: 18, maxWidth: 820, marginLeft: 'auto', marginRight: 'auto' }}>
             Your dream startup won't notice<br />another Easy Apply.
           </h2>
-          <p className="lead">Send personalised job applications to hiring managers and decision-makers behind any LinkedIn job in just one click.<br />Show genuine intent, get noticed, land more interviews, and secure your dream job.</p>
+          <p className="lead oneline"><span>Send personalised job applications to leadership and dept heads behind any LinkedIn job in just one click.</span><span>Show genuine intent, get noticed, land more interviews, and secure your dream job.</span></p>
           <div style={{ display: 'flex', gap: 10, justifyContent: 'center', flexWrap: 'wrap' }}>
             <a href="https://app.toinbox.app" className="btn btn-accent">Sign In <Icon name="arrow" size={14} className="chev" /></a>
             <a href="#how-section" className="btn btn-ghost" style={{ color: 'rgba(255,255,255,0.8)' }}>See how it works</a>

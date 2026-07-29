@@ -939,6 +939,11 @@ h1, h2, h3, h4 { margin: 0; letter-spacing: -0.02em; font-weight: 500; }
 }
 .final-cta h2 { color: white; }
 .final-cta .lead { color: rgba(255,255,255,0.65); margin: 18px auto 30px; }
+.final-cta .lead.oneline { max-width: 900px; font-size: 15px; }
+.final-cta .lead.oneline span { white-space: nowrap; display: block; }
+@media (max-width: 680px) {
+  .final-cta .lead.oneline span { white-space: normal; }
+}
 
 /* footer */
 .footer { padding: 56px 0 64px; color: var(--ink-3); font-size: 13px; }
