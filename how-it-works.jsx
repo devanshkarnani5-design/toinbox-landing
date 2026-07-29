@@ -48,7 +48,7 @@ function HiwDashboard({ replyVisible }) {
     sent: { bg: '#f0ede8', color: '#666' },
   };
   return (
-    <div style={{ display: 'flex', flex: 1, minHeight: 0, background: '#f7f6f3' }}>
+    <div style={{ display: 'flex', flex: 1, minHeight: 0, background: '#f6f7f9' }}>
       {/* Left nav */}
       <div style={{ width: 150, flexShrink: 0, background: '#1a1a1a', display: 'flex', flexDirection: 'column', padding: '14px 10px', gap: 4 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '6px 8px', marginBottom: 10 }}>

@@ -42,9 +42,9 @@ const AVATARS = [
 ];
 
 const affTokens = {
-  '--bg': '#f7f6f3', '--bg-elev': '#ffffff', '--bg-soft': '#efede8',
-  '--ink': '#0a0a0a', '--ink-2': '#2a2a2a', '--ink-3': '#545454', '--ink-4': '#8a8a85',
-  '--line': 'rgba(10,10,10,0.08)', '--line-2': 'rgba(10,10,10,0.14)',
+  '--bg': '#f6f7f9', '--bg-elev': '#ffffff', '--bg-soft': '#eceef2',
+  '--ink': '#0a0a0a', '--ink-2': '#2a2a2a', '--ink-3': '#52525b', '--ink-4': '#8a8a94',
+  '--line': 'rgba(10,12,20,0.08)', '--line-2': 'rgba(10,12,20,0.14)',
   '--accent': 'oklch(0.58 0.19 252)', '--accent-2': 'oklch(0.42 0.2 270)',
   '--accent-soft': 'oklch(0.94 0.04 252)', '--accent-ink': 'oklch(0.32 0.16 252)',
   '--accent-glow': 'oklch(0.7 0.21 252 / 0.35)',
