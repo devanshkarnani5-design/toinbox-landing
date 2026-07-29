@@ -800,9 +800,9 @@ function HowItWorks({ speedMultiplier = 1 }) {
             ))}
           </div>
 
-          {/* Continuous browser — the full product demo, running its own cycle */}
-          <div className="hiw-browser-col">
-            <ProductDemo />
+          {/* Continuous browser */}
+          <div className="hiw-browser-col" style={{ opacity: visible ? 1 : 0, transition: 'opacity 0.18s ease' }}>
+            <HowitworksBrowser step={active} typed={typed} replyVisible={active === 4} />
           </div>
         </div>
       </div>
