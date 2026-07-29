@@ -667,103 +667,39 @@ function HowitworksBrowser({ step, typed, replyVisible }) {
 
 function HowItWorks({ speedMultiplier = 1 }) {
   const [active, setActive] = useStateHIW(0);
-  const [typed, setTyped] = useStateHIW('');
-  const [visible, setVisible] = useStateHIW(true);
-
-  // Inject smooth CSS keyframe for progress bar — avoids rAF/setState jank
-  useEffectHIW(() => {
-    const s = document.createElement('style');
-    s.id = 'hiw-bar-kf';
-    s.textContent = '@keyframes hiwBarFill { from { width:0% } to { width:100% } }';
-    document.head.appendChild(s);
-    return () => { const el = document.getElementById('hiw-bar-kf'); if (el) el.remove(); };
-  }, []);
-  const tickRef = useRefHIW(null);
-  const typeRef = useRefHIW(null);
+  const [started, setStarted] = useStateHIW(false);
   const startedRef = useRefHIW(false);
-  const activeRef = useRefHIW(0);
 
+  // Only mount the (autonomous, self-timed) demo once this section actually
+  // scrolls into view — same behavior as before, just gating the mount
+  // instead of a separate "start()" call.
   useEffectHIW(() => {
     const el = document.getElementById('how-section');
     if (!el) return;
     const io = new IntersectionObserver((entries) => {
       entries.forEach((e) => {
-        if (e.isIntersecting && !startedRef.current) { startedRef.current = true; start(); }
+        if (e.isIntersecting && !startedRef.current) { startedRef.current = true; setStarted(true); }
       });
     }, { threshold: 0.12 });
     io.observe(el);
-    const fb = setTimeout(() => { if (!startedRef.current) { startedRef.current = true; start(); } }, 1800);
+    const fb = setTimeout(() => { if (!startedRef.current) { startedRef.current = true; setStarted(true); } }, 1800);
     return () => { io.disconnect(); clearTimeout(fb); };
   }, []);
 
-  const transitionTo = (idx) => {
-    setVisible(false);
-    setTimeout(() => {
-      setActive(idx);
-      activeRef.current = idx;
-      setTyped('');
-      setVisible(true);
-    }, 180);
+  // The demo now runs its own real timing and reports back which phase it's
+  // in — this maps that phase to which of the 5 listed steps to highlight,
+  // so the list is genuinely synced to what's playing, not an independent
+  // guessed timer.
+  const PHASE_TO_STEP = {
+    install: 0,
+    open: 1, enroll: 1, enrolled: 1,
+    processing: 2, sent: 2,
+    open_det: 3, details: 3,
+    replied: 4, gmail: 4, thread: 4,
   };
-
-  const start = () => {
-    let idx = 0;
-    activeRef.current = 0;
-    setActive(0); setVisible(true);
-    let startTime = Date.now();
-    cancelAnimationFrame(tickRef.current);
-
-    const tick = () => {
-      const elapsed = Date.now() - startTime;
-      if (elapsed >= STEP_MS[idx] / speedMultiplier) {
-        const next = (idx + 1) % HIW_STEPS.length;
-        idx = next;
-        startTime = Date.now();
-        transitionTo(next);
-      }
-      tickRef.current = requestAnimationFrame(tick);
-    };
-    tickRef.current = requestAnimationFrame(tick);
-  };
-
-  // Typing effect for step 2 (cover letter)
-  useEffectHIW(() => {
-    if (active === 2) {
-      setTyped('');
-      let i = 0;
-      const type = () => {
-        if (i <= FULL_LETTER.length) {
-          setTyped(FULL_LETTER.slice(0, i));
-          i += 5;
-          typeRef.current = setTimeout(type, 16);
-        }
-      };
-      typeRef.current = setTimeout(type, 200);
-    } else {
-      clearTimeout(typeRef.current);
-    }
-    return () => clearTimeout(typeRef.current);
-  }, [active]);
-
-  useEffectHIW(() => () => { cancelAnimationFrame(tickRef.current); clearTimeout(typeRef.current); }, []);
-
-  const jumpTo = (i) => {
-    cancelAnimationFrame(tickRef.current);
-    transitionTo(i);
-    let idx = i;
-    let startTime = Date.now();
-
-    const tick = () => {
-      const elapsed = Date.now() - startTime;
-      if (elapsed >= STEP_MS[idx] / speedMultiplier) {
-        const next = (idx + 1) % HIW_STEPS.length;
-        idx = next;
-        startTime = Date.now();
-        transitionTo(next);
-      }
-      tickRef.current = requestAnimationFrame(tick);
-    };
-    tickRef.current = requestAnimationFrame(tick);
+  const handlePhase = (key) => {
+    const idx = PHASE_TO_STEP[key];
+    if (idx !== undefined) setActive(idx);
   };
 
   return (
@@ -776,13 +712,12 @@ function HowItWorks({ speedMultiplier = 1 }) {
         </div>
 
         <div className="hiw-cinema-grid" data-reveal>
-          {/* Step list */}
+          {/* Step list — synced live to the demo on the right, not a separate timer */}
           <div className="hiw-steps-col">
             {HIW_STEPS.map((st, i) => (
               <div
                 key={i}
                 className={`hiw-step-row ${i === active ? 'active' : ''} ${i < active ? 'done' : ''}`}
-                onClick={() => jumpTo(i)}
               >
                 <div className="hiw-step-num">
                   {i < active ? <Icon name="check" size={11} /> : String(i + 1).padStart(2, '0')}
@@ -791,18 +726,13 @@ function HowItWorks({ speedMultiplier = 1 }) {
                   <div className="hiw-step-title">{st.t}</div>
                   {i === active && <div className="hiw-step-sub">{st.s}</div>}
                 </div>
-                {i === active && (
-                  <div className="hiw-step-bar">
-                    <span key={active} style={{ animation: `hiwBarFill ${STEP_MS[active]}ms linear forwards` }} />
-                  </div>
-                )}
               </div>
             ))}
           </div>
 
           {/* Continuous browser — isolated HIW-only demo copy, doesn't touch the hero's file */}
           <div className="hiw-browser-col">
-            <HiwProductDemo />
+            {started && <HiwProductDemo onPhase={handlePhase} />}
           </div>
         </div>
       </div>

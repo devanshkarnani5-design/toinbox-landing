@@ -54,9 +54,9 @@ function PDResumeThumb() {
 }
 
 // scaled canvas that exactly fills the stage
-function PDScaled({ fit, cls, children }) {
+function PDScaled({ fit, cls, children, zoomStyle }) {
   return (
-    <div className="pd-fit">
+    <div className="pd-fit" style={zoomStyle}>
       <div className={`pd-canvas ${cls || ''}`} style={{ width: fit.w, height: fit.h, transform: `scale(${fit.s})` }}>{children}</div>
     </div>
   );
@@ -232,9 +232,10 @@ function PDDetails({ fit, dashStats, delivered, replied, backRef, gmailRef }) {
 
   // Cinematic camera zoom — two moments, like a modern SaaS product demo:
   // 1) zoom into Recipients (who it was sent to), 2) zoom into the sent
-  // email itself (that it was actually sent). Measured live via refs so it
-  // works regardless of the outer fit-scale factor.
-  const wrapRef = useRefPD(null);
+  // email itself (that it was actually sent). Applied to the SAME .pd-fit
+  // wrapper PDScaled already renders (composes with the base fit-scale on
+  // .pd-canvas) — no extra wrapping element, so the sidebar/main grid
+  // layout is never disturbed.
   const recipRef = useRefPD(null);
   const sentMsgRef = useRefPD(null);
   const [zoomStyle, setZoomStyle] = usePD({ transform: 'scale(1)', transformOrigin: '50% 50%' });
@@ -245,9 +246,10 @@ function PDDetails({ fit, dashStats, delivered, replied, backRef, gmailRef }) {
     const wait = ms => new Promise(r => { const t = setTimeout(r, ms); ts.push(t); });
 
     const zoomTo = (targetRef, scale) => {
-      const wrap = wrapRef.current, el = targetRef.current;
-      if (!wrap || !el) return;
-      const wb = wrap.getBoundingClientRect();
+      const el = targetRef.current;
+      const fitEl = el && el.closest('.pd-fit');
+      if (!fitEl || !el) return;
+      const wb = fitEl.getBoundingClientRect();
       const eb = el.getBoundingClientRect();
       const ox = ((eb.left + eb.width / 2) - wb.left) / wb.width * 100;
       const oy = ((eb.top + eb.height / 2) - wb.top) / wb.height * 100;
@@ -257,11 +259,11 @@ function PDDetails({ fit, dashStats, delivered, replied, backRef, gmailRef }) {
 
     const run = async () => {
       await wait(700); if (dead) return;
-      zoomTo(recipRef, 1.6);                 // moment 1 — recipients
+      zoomTo(recipRef, 1.5);                  // moment 1 — recipients
       await wait(2100); if (dead) return;
       zoomOut();
       await wait(550); if (dead) return;
-      zoomTo(sentMsgRef, 1.55);               // moment 2 — the sent email
+      zoomTo(sentMsgRef, 1.45);                // moment 2 — the sent email
       await wait(2100); if (dead) return;
       zoomOut();
     };
@@ -270,8 +272,7 @@ function PDDetails({ fit, dashStats, delivered, replied, backRef, gmailRef }) {
   }, []);
 
   return (
-    <PDScaled fit={fit} cls="sd-dash pd-dashfill">
-      <div ref={wrapRef} className="pd-det-zoomwrap" style={zoomStyle}>
+    <PDScaled fit={fit} cls="sd-dash pd-dashfill" zoomStyle={zoomStyle}>
       <PDSidebar dashStats={dashStats} />
       <div className="sd-dash-main pd-det-main">
         <div className="pd-det-top">
@@ -344,7 +345,6 @@ function PDDetails({ fit, dashStats, delivered, replied, backRef, gmailRef }) {
           </div>
         </div>
       </div>
-      </div>
     </PDScaled>
   );
 }
@@ -360,10 +360,10 @@ const PD_INBOX = [
 ];
 
 const PD_NEW_REPLIES = [
-  { from: 'Priya Nair', co: CO, role: ROLE, snip: 'We\u2019d like to schedule an interview…', time: '9:41 AM' },
-  { from: 'Karan Bhatt', co: 'Wishlink', role: 'Program Manager', snip: 'Interview scheduled \u2014 Thursday 3:00 PM \u2705', time: '9:38 AM' },
-  { from: 'Neha Kapoor', co: 'Porter', role: 'Program Manager', snip: 'Can we hop on a call this week?', time: '9:22 AM' },
-  { from: 'Aditya Rao', co: 'Reed Labs', role: 'Backend Engineer', snip: 'Loved your background \u2014 let\u2019s chat!', time: 'Yesterday' },
+  { from: 'Priya Nair', co: CO, role: ROLE, snip: 'We\u2019d like to schedule an interview \u2014 are you free tomorrow?', time: '9:41 AM' },
+  { from: 'Karan Bhatt', co: 'Wishlink', role: 'Program Manager', snip: 'Interview scheduled for Thursday at 3:00 PM \u2705', time: '9:38 AM' },
+  { from: 'Neha Kapoor', co: 'Porter', role: 'Program Manager', snip: 'Let\u2019s connect \u2014 interview scheduled for Friday, 2:00 PM', time: '9:22 AM' },
+  { from: 'Aditya Rao', co: 'Reed Labs', role: 'Backend Engineer', snip: 'Forwarded to the hiring panel \u2014 interview being scheduled now', time: 'Yesterday' },
 ];
 
 function PDGmail({ fit, view, threadRef, scrollRef }) {
@@ -500,8 +500,8 @@ const PD_CAPTIONS = {
 
 const LOGICAL_W = { dashboard: 1240, details: 1240, gmail: 1320 };
 
-function ProductDemo() {
-  const [scene, setScene] = usePD('linkedin');   // linkedin | dashboard | details | gmail
+function ProductDemo({ onPhase } = {}) {
+  const [scene, setScene] = usePD('install');   // install | linkedin | dashboard | details | gmail
   const [url, setUrl] = usePD('linkedin.com/jobs/search-results/?keywords=program+manager');
   const [caption, setCaption] = usePD(PD_CAPTIONS.open);
   const [panelOpen, setPanelOpen] = usePD(false);
@@ -570,9 +570,15 @@ function ProductDemo() {
 
     const run = async () => {
       while (!dead) {
+        // ---- NEW first beat: sign in + add the Chrome extension ----
+        setScene('install'); setUrl('toinbox.app');
+        onPhase && onPhase('install');
+        await wait(9200); if (dead) return;
+
         // ---- reset ----
         setScene('linkedin'); setUrl('linkedin.com/jobs/search-results/?keywords=program+manager');
-        setCaption(PD_CAPTIONS.open); setPanelOpen(false); setEnrollState('idle');
+        setCaption(PD_CAPTIONS.open); onPhase && onPhase('open');
+        setPanelOpen(false); setEnrollState('idle');
         setStats({ enrolled: 23, sent: 22, replied: 9 }); setCredits(0);
         setDashStats({ enrolled: 24, sent: 22, replied: 9 });
         setRowStatus('processing'); setDelivered(false); setReplied(false);
@@ -582,47 +588,47 @@ function ProductDemo() {
         // ---- Step 2 (reused): open panel + enroll ----
         await moveRef(bubbleRef); await wait(1200); if (dead) return;
         await tap(); setPanelOpen(true); await wait(1200); if (dead) return;
-        setCaption(PD_CAPTIONS.enroll);
+        setCaption(PD_CAPTIONS.enroll); onPhase && onPhase('enroll');
         await moveRef(sendRef); await wait(1100); if (dead) return;
         await tap(); setEnrollState('enrolling'); await wait(1500); if (dead) return;
         setEnrollState('enrolled'); setCredits(1); setStats(s => ({ ...s, enrolled: 24 }));
-        setCaption(PD_CAPTIONS.enrolled); await wait(1700); if (dead) return;
+        setCaption(PD_CAPTIONS.enrolled); onPhase && onPhase('enrolled'); await wait(1700); if (dead) return;
 
         // ---- Dashboard: Processing → Sent ----
         await moveRef(dashRef); await wait(1000); if (dead) return;
         await tap();
         setScene('dashboard'); setUrl('app.toinbox.app');
-        setRowStatus('processing'); setCaption(PD_CAPTIONS.processing);
+        setRowStatus('processing'); setCaption(PD_CAPTIONS.processing); onPhase && onPhase('processing');
         await wait(3900); if (dead) return;
         setRowStatus('sent'); setDashStats(s => ({ ...s, sent: 23 }));
-        setCaption(PD_CAPTIONS.sent);
+        setCaption(PD_CAPTIONS.sent); onPhase && onPhase('sent');
         await wait(3700); if (dead) return;
 
         // ---- Open Application Details page ----
-        setCaption(PD_CAPTIONS.open_det);
+        setCaption(PD_CAPTIONS.open_det); onPhase && onPhase('open_det');
         await moveRef(rowRef); await wait(1100); if (dead) return;
         await tap();
         setScene('details'); setUrl('app.toinbox.app/applications/esper-spm');
         setDelivered(true); setReplied(false);
-        setCaption(PD_CAPTIONS.details);
+        setCaption(PD_CAPTIONS.details); onPhase && onPhase('details');
         await wait(6000); if (dead) return;
 
         // ---- Recruiter reply: Gmail-style notification only (not in platform) ----
         setToast(true); setDashStats(s => ({ ...s, replied: 10 }));
-        setCaption(PD_CAPTIONS.replied);
+        setCaption(PD_CAPTIONS.replied); onPhase && onPhase('replied');
         await wait(3200); if (dead) return;
         setToast(false);
         await wait(900); if (dead) return;
 
         // ---- View in Gmail ----
-        setCaption(PD_CAPTIONS.gmail);
+        setCaption(PD_CAPTIONS.gmail); onPhase && onPhase('gmail');
         await moveRef(gmailRef); await wait(1100); if (dead) return;
         await tap();
         setScene('gmail'); setGmailView('inbox'); setUrl('mail.google.com/mail/u/4/#inbox');
         await wait(3200); if (dead) return;
         await moveRef(threadRef); await wait(1200); if (dead) return;
         await tap(); setGmailView('thread'); setUrl('mail.google.com/mail/u/4/#inbox/thread-esper');
-        setCaption(PD_CAPTIONS.thread);
+        setCaption(PD_CAPTIONS.thread); onPhase && onPhase('thread');
         await wait(2800); if (dead) return;
         await tweenScroll(gmScrollRef.current, 9999, 2600); if (dead) return;
         await wait(2600); if (dead) return;
@@ -631,6 +637,11 @@ function ProductDemo() {
     run();
     return () => { dead = true; ts.forEach(clearTimeout); };
   }, []);
+
+  // Sign-in + add-to-Chrome is its own self-contained browser frame (matching
+  // the old system) — return it directly rather than nesting it inside this
+  // component's own persistent chrome bar, which would double up the window UI.
+  if (scene === 'install') return <HiwInstallScene />;
 
   return (
     <div className="browser sd-browser">
