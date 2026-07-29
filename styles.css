@@ -2799,15 +2799,6 @@ h1, h2, h3, h4 { margin: 0; letter-spacing: -0.02em; font-weight: 500; }
   .sd-dash { grid-template-columns: 1fr; }
   .sd-dash-side { display: none; }
 }
-
-
-
-
-/* Product demo — cinematic camera zoom on the details page (two moments:
-   recipients, then the sent email). No highlight, just a smooth zoom. */
-.pd-det-zoomwrap {
-  width: 100%;
-  height: 100%;
   display: flex;
   transition: transform .7s cubic-bezier(0.22,1,0.36,1);
   will-change: transform;

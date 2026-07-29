@@ -228,49 +228,8 @@ function PDDashboard({ fit, dashStats, rowStatus, rowRef }) {
 // ============ SCENE 3 — Application Details (dedicated page) ============
 function PDDetails({ fit, dashStats, delivered, replied, backRef, gmailRef }) {
   const done = delivered || replied;
-
-  // Cinematic camera zoom — two moments, like a modern SaaS product demo:
-  // 1) zoom into Recipients (who it was sent to), 2) zoom into the sent
-  // email itself (that it was actually sent). Measured live via refs so it
-  // works regardless of the outer fit-scale factor.
-  const wrapRef = useRefPD(null);
-  const recipRef = useRefPD(null);
-  const sentMsgRef = useRefPD(null);
-  const [zoomStyle, setZoomStyle] = usePD({ transform: 'scale(1)', transformOrigin: '50% 50%' });
-
-  useEffectPD(() => {
-    let dead = false;
-    const ts = [];
-    const wait = ms => new Promise(r => { const t = setTimeout(r, ms); ts.push(t); });
-
-    const zoomTo = (targetRef, scale) => {
-      const wrap = wrapRef.current, el = targetRef.current;
-      if (!wrap || !el) return;
-      const wb = wrap.getBoundingClientRect();
-      const eb = el.getBoundingClientRect();
-      const ox = ((eb.left + eb.width / 2) - wb.left) / wb.width * 100;
-      const oy = ((eb.top + eb.height / 2) - wb.top) / wb.height * 100;
-      if (!dead) setZoomStyle({ transform: `scale(${scale})`, transformOrigin: `${ox}% ${oy}%` });
-    };
-    const zoomOut = () => { if (!dead) setZoomStyle({ transform: 'scale(1)', transformOrigin: '50% 50%' }); };
-
-    const run = async () => {
-      await wait(700); if (dead) return;
-      zoomTo(recipRef, 1.6);                 // moment 1 — recipients
-      await wait(2100); if (dead) return;
-      zoomOut();
-      await wait(550); if (dead) return;
-      zoomTo(sentMsgRef, 1.55);               // moment 2 — the sent email
-      await wait(2100); if (dead) return;
-      zoomOut();
-    };
-    run();
-    return () => { dead = true; ts.forEach(clearTimeout); };
-  }, []);
-
   return (
     <PDScaled fit={fit} cls="sd-dash pd-dashfill">
-      <div ref={wrapRef} className="pd-det-zoomwrap" style={zoomStyle}>
       <PDSidebar dashStats={dashStats} />
       <div className="sd-dash-main pd-det-main">
         <div className="pd-det-top">
@@ -283,7 +242,7 @@ function PDDetails({ fit, dashStats, delivered, replied, backRef, gmailRef }) {
 
         <div className="pd-det-grid2">
           <div className="pd-det-left">
-            <div className="pd-card" ref={recipRef}>
+            <div className="pd-card">
               <div className="pd-card-h">Recipients</div>
               {PD_RECIPS.map((r, i) => (
                 <div key={i} className="pd-recip2">
@@ -320,7 +279,7 @@ function PDDetails({ fit, dashStats, delivered, replied, backRef, gmailRef }) {
           <div className="pd-det-right">
             <div className="pd-card-h">Conversation</div>
             <div className="pd-convo">
-              <div className="pd-msg" ref={sentMsgRef}>
+              <div className="pd-msg">
                 <div className="pd-msg-hd">
                   <span className="pd-msg-ava" style={{ background: 'var(--accent)' }}>DK</span>
                   <div className="pd-msg-who"><b>{APPLICANT.name}</b><span>to Priya Nair, Arjun Mehta</span></div>
@@ -343,7 +302,6 @@ function PDDetails({ fit, dashStats, delivered, replied, backRef, gmailRef }) {
           </div>
         </div>
       </div>
-      </div>
     </PDScaled>
   );
 }
@@ -356,13 +314,6 @@ const PD_INBOX = [
   { from: 'Esper Careers', subj: 'Thanks for applying', snip: 'We\u2019ve received your application for Senior Program Manager.', date: 'Jun 09' },
   { from: 'Notion', subj: 'Your weekly digest', snip: '3 pages updated, 2 comments — here\u2019s what happened this week.', date: 'Jun 08' },
   { from: 'Figma', subj: 'Someone commented on your file', snip: 'Aarav left a comment on “Onboarding v3” — take a look.', date: 'Jun 07' },
-];
-
-const PD_NEW_REPLIES = [
-  { from: 'Priya Nair', co: CO, role: ROLE, snip: 'We\u2019d like to schedule an interview…', time: '9:41 AM' },
-  { from: 'Karan Bhatt', co: 'Wishlink', role: 'Program Manager', snip: 'Interview scheduled \u2014 Thursday 3:00 PM \u2705', time: '9:38 AM' },
-  { from: 'Neha Kapoor', co: 'Porter', role: 'Program Manager', snip: 'Can we hop on a call this week?', time: '9:22 AM' },
-  { from: 'Aditya Rao', co: 'Reed Labs', role: 'Backend Engineer', snip: 'Loved your background \u2014 let\u2019s chat!', time: 'Yesterday' },
 ];
 
 function PDGmail({ fit, view, threadRef, scrollRef }) {
@@ -405,14 +356,12 @@ function PDGmail({ fit, view, threadRef, scrollRef }) {
 
           {view === 'inbox' && (
             <div className="pd-ga-list">
-              {PD_NEW_REPLIES.map((r, i) => (
-                <div key={'reply-' + i} ref={i === 0 ? threadRef : undefined} className="pd-ga-row unread new">
-                  <span className="pd-ga-star"><Icon name="star" size={15} /></span>
-                  <span className="pd-ga-rfrom">{r.from}</span>
-                  <span className="pd-ga-rsubj"><b>Re: Application for {r.role} opening at {r.co}.</b> <span className="snip">— {r.snip}</span></span>
-                  <span className="pd-ga-rdate">{r.time}</span>
-                </div>
-              ))}
+              <div ref={threadRef} className="pd-ga-row unread new">
+                <span className="pd-ga-star"><Icon name="star" size={15} /></span>
+                <span className="pd-ga-rfrom">Priya Nair</span>
+                <span className="pd-ga-rsubj"><b>Re: Application for {ROLE} opening at {CO}.</b> <span className="snip">— We'd like to schedule an interview…</span></span>
+                <span className="pd-ga-rdate">9:41 AM</span>
+              </div>
               {PD_INBOX.map((m, i) => (
                 <div key={i} className="pd-ga-row">
                   <span className="pd-ga-star"><Icon name="star" size={15} /></span>
@@ -604,7 +553,7 @@ function ProductDemo() {
         setScene('details'); setUrl('app.toinbox.app/applications/esper-spm');
         setDelivered(true); setReplied(false);
         setCaption(PD_CAPTIONS.details);
-        await wait(6000); if (dead) return;
+        await wait(2600); if (dead) return;
 
         // ---- Recruiter reply: Gmail-style notification only (not in platform) ----
         setToast(true); setDashStats(s => ({ ...s, replied: 10 }));
@@ -618,7 +567,7 @@ function ProductDemo() {
         await moveRef(gmailRef); await wait(1100); if (dead) return;
         await tap();
         setScene('gmail'); setGmailView('inbox'); setUrl('mail.google.com/mail/u/4/#inbox');
-        await wait(3200); if (dead) return;
+        await wait(2400); if (dead) return;
         await moveRef(threadRef); await wait(1200); if (dead) return;
         await tap(); setGmailView('thread'); setUrl('mail.google.com/mail/u/4/#inbox/thread-esper');
         setCaption(PD_CAPTIONS.thread);
