@@ -54,9 +54,9 @@ function PDResumeThumb() {
 }
 
 // scaled canvas that exactly fills the stage
-function PDScaled({ fit, cls, children, zoomStyle }) {
+function PDScaled({ fit, cls, children }) {
   return (
-    <div className="pd-fit" style={zoomStyle}>
+    <div className="pd-fit">
       <div className={`pd-canvas ${cls || ''}`} style={{ width: fit.w, height: fit.h, transform: `scale(${fit.s})` }}>{children}</div>
     </div>
   );
@@ -229,50 +229,8 @@ function PDDashboard({ fit, dashStats, rowStatus, rowRef }) {
 // ============ SCENE 3 — Application Details (dedicated page) ============
 function PDDetails({ fit, dashStats, delivered, replied, backRef, gmailRef }) {
   const done = delivered || replied;
-
-  // Cinematic camera zoom — two moments, like a modern SaaS product demo:
-  // 1) zoom into Recipients (who it was sent to), 2) zoom into the sent
-  // email itself (that it was actually sent). Applied to the SAME .pd-fit
-  // wrapper PDScaled already renders (composes with the base fit-scale on
-  // .pd-canvas) — no extra wrapping element, so the sidebar/main grid
-  // layout is never disturbed.
-  const recipRef = useRefPD(null);
-  const sentMsgRef = useRefPD(null);
-  const [zoomStyle, setZoomStyle] = usePD({ transform: 'scale(1)', transformOrigin: '50% 50%' });
-
-  useEffectPD(() => {
-    let dead = false;
-    const ts = [];
-    const wait = ms => new Promise(r => { const t = setTimeout(r, ms); ts.push(t); });
-
-    const zoomTo = (targetRef, scale) => {
-      const el = targetRef.current;
-      const fitEl = el && el.closest('.pd-fit');
-      if (!fitEl || !el) return;
-      const wb = fitEl.getBoundingClientRect();
-      const eb = el.getBoundingClientRect();
-      const ox = ((eb.left + eb.width / 2) - wb.left) / wb.width * 100;
-      const oy = ((eb.top + eb.height / 2) - wb.top) / wb.height * 100;
-      if (!dead) setZoomStyle({ transform: `scale(${scale})`, transformOrigin: `${ox}% ${oy}%` });
-    };
-    const zoomOut = () => { if (!dead) setZoomStyle({ transform: 'scale(1)', transformOrigin: '50% 50%' }); };
-
-    const run = async () => {
-      await wait(700); if (dead) return;
-      zoomTo(recipRef, 1.5);                  // moment 1 — recipients
-      await wait(2100); if (dead) return;
-      zoomOut();
-      await wait(550); if (dead) return;
-      zoomTo(sentMsgRef, 1.45);                // moment 2 — the sent email
-      await wait(2100); if (dead) return;
-      zoomOut();
-    };
-    run();
-    return () => { dead = true; ts.forEach(clearTimeout); };
-  }, []);
-
   return (
-    <PDScaled fit={fit} cls="sd-dash pd-dashfill" zoomStyle={zoomStyle}>
+    <PDScaled fit={fit} cls="sd-dash pd-dashfill">
       <PDSidebar dashStats={dashStats} />
       <div className="sd-dash-main pd-det-main">
         <div className="pd-det-top">
@@ -285,7 +243,7 @@ function PDDetails({ fit, dashStats, delivered, replied, backRef, gmailRef }) {
 
         <div className="pd-det-grid2">
           <div className="pd-det-left">
-            <div className="pd-card" ref={recipRef}>
+            <div className="pd-card">
               <div className="pd-card-h">Recipients</div>
               {PD_RECIPS.map((r, i) => (
                 <div key={i} className="pd-recip2">
@@ -322,7 +280,7 @@ function PDDetails({ fit, dashStats, delivered, replied, backRef, gmailRef }) {
           <div className="pd-det-right">
             <div className="pd-card-h">Conversation</div>
             <div className="pd-convo">
-              <div className="pd-msg" ref={sentMsgRef}>
+              <div className="pd-msg">
                 <div className="pd-msg-hd">
                   <span className="pd-msg-ava" style={{ background: 'var(--accent)' }}>DK</span>
                   <div className="pd-msg-who"><b>{APPLICANT.name}</b><span>to Priya Nair, Arjun Mehta</span></div>
@@ -410,7 +368,7 @@ function PDGmail({ fit, view, threadRef, scrollRef }) {
                 <div key={'reply-' + i} ref={i === 0 ? threadRef : undefined} className="pd-ga-row unread new">
                   <span className="pd-ga-star"><Icon name="star" size={15} /></span>
                   <span className="pd-ga-rfrom">{r.from}</span>
-                  <span className="pd-ga-rsubj"><b>Re: Application for {r.role} opening at {r.co}.</b> <span className="snip">— {r.snip}</span></span>
+                  <span className="pd-ga-rsubj">Re: Application for {r.role} opening at {r.co}. <span className="snip"><b>— {r.snip}</b></span></span>
                   <span className="pd-ga-rdate">{r.time}</span>
                 </div>
               ))}
@@ -486,24 +444,25 @@ function PDGmail({ fit, view, threadRef, scrollRef }) {
 
 // ============ MAIN ============
 const PD_CAPTIONS = {
-  open: ['1', 'Open a job on LinkedIn, then open the ToInbox panel'],
-  enroll: ['1', 'Enroll the role — ToInbox emails from your Gmail'],
-  enrolled: ['1', 'Enrolled — your application is on its way'],
-  processing: ['2', 'AI is personalizing & processing your application based on your resume & JD'],
-  sent: ['2', 'Finding & sending it to key decision-makers & relevant dept heads behind your job'],
-  open_det: ['3', 'Open the application to see the full details'],
-  details: ['3', 'Recipients, the email & your resume — on one page'],
-  replied: ['4', 'Recruiter replied — interview requested for tomorrow'],
+  install: ['1', 'Sign in and download the Chrome extension'],
+  open: ['2', 'Open a job on LinkedIn, then open the ToInbox panel'],
+  enroll: ['2', 'Enroll the role — ToInbox emails from your Gmail'],
+  enrolled: ['2', 'Enrolled — your application is on its way'],
+  processing: ['3', 'AI is personalizing & processing your application based on your resume & JD'],
+  sent: ['3', 'Finding & sending it to key decision-makers & relevant dept heads behind your job'],
+  open_det: ['4', 'Open the application to see the full details'],
+  details: ['4', 'Recipients, the email & your resume — on one page'],
+  replied: ['5', 'Recruiter replied — interview requested for tomorrow'],
   gmail: ['5', 'Open it in Gmail'],
   thread: ['5', 'The full thread — your email, resume & the reply'],
 };
 
 const LOGICAL_W = { dashboard: 1240, details: 1240, gmail: 1320 };
 
-function ProductDemo({ onPhase } = {}) {
+function ProductDemo({ onPhase, jumpToRef } = {}) {
   const [scene, setScene] = usePD('install');   // install | linkedin | dashboard | details | gmail
-  const [url, setUrl] = usePD('linkedin.com/jobs/search-results/?keywords=program+manager');
-  const [caption, setCaption] = usePD(PD_CAPTIONS.open);
+  const [url, setUrl] = usePD('toinbox.app');
+  const [caption, setCaption] = usePD(PD_CAPTIONS.install);
   const [panelOpen, setPanelOpen] = usePD(false);
   const [enrollState, setEnrollState] = usePD('idle');
   const [stats, setStats] = usePD({ enrolled: 23, sent: 22, replied: 9 });
@@ -553,7 +512,24 @@ function ProductDemo({ onPhase } = {}) {
   useEffectPD(() => {
     let dead = false;
     const ts = [];
-    const wait = ms => new Promise(r => { const t = setTimeout(r, ms); ts.push(t); });
+    let pendingWaits = [];
+    // Abortable wait: a jump immediately resolves any currently-pending wait
+    // instead of letting it run out its natural duration, so clicking a step
+    // takes effect right away rather than after however long the CURRENT
+    // step's in-flight timer happens to have left.
+    const wait = ms => new Promise(resolve => {
+      const entry = { resolve, t: null };
+      entry.t = setTimeout(() => {
+        pendingWaits = pendingWaits.filter(w => w !== entry);
+        resolve();
+      }, ms);
+      ts.push(entry.t);
+      pendingWaits.push(entry);
+    });
+    const abortPendingWaits = () => {
+      pendingWaits.forEach(w => { clearTimeout(w.t); w.resolve(); });
+      pendingWaits = [];
+    };
     const moveRef = async (ref, dx, dy) => { await wait(90); if (!dead) moveTo(ref.current, dx, dy); };
     const tap = async () => { setClick(true); await wait(180); setClick(false); };
     const tweenScroll = (el, to, ms) => new Promise(res => {
@@ -568,79 +544,122 @@ function ProductDemo({ onPhase } = {}) {
       requestAnimationFrame(step);
     });
 
-    const run = async () => {
+    // Broken into 5 independent, resumable steps (rather than one continuous
+    // script) so a click on the step list can jump straight to any of them.
+    // Each step sets ALL the state its own scene needs from scratch (not
+    // relying on a previous step having run), so jumping in cold works too.
+    const genRef = { current: 0 };
+    const stepRef = { current: 0 };
+    const stale = (myGen) => dead || myGen !== genRef.current;
+
+    async function playInstall(myGen) {
+      setScene('install'); setUrl('toinbox.app'); setCaption(PD_CAPTIONS.install);
+      onPhase && onPhase('install');
+      await wait(9200); if (stale(myGen)) return;
+    }
+
+    async function playOpenLinkedin(myGen) {
+      setScene('linkedin'); setUrl('linkedin.com/jobs/search-results/?keywords=program+manager');
+      setCaption(PD_CAPTIONS.open); onPhase && onPhase('open');
+      setPanelOpen(false); setEnrollState('idle');
+      setStats({ enrolled: 23, sent: 22, replied: 9 }); setCredits(0);
+      setToast(false); setCur({ x: 360, y: 80 });
+      await wait(1400); if (stale(myGen)) return;
+      await moveRef(bubbleRef); await wait(1200); if (stale(myGen)) return;
+      await tap(); setPanelOpen(true); await wait(1200); if (stale(myGen)) return;
+      setCaption(PD_CAPTIONS.enroll); onPhase && onPhase('enroll');
+      await moveRef(sendRef); await wait(1100); if (stale(myGen)) return;
+      await tap(); setEnrollState('enrolling'); await wait(1500); if (stale(myGen)) return;
+      setEnrollState('enrolled'); setCredits(1); setStats(s => ({ ...s, enrolled: 24 }));
+      setCaption(PD_CAPTIONS.enrolled); onPhase && onPhase('enrolled');
+      await wait(1700); if (stale(myGen)) return;
+    }
+
+    async function playFindingDrafting(myGen) {
+      setDashStats({ enrolled: 24, sent: 22, replied: 9 });
+      setRowStatus('processing'); setDelivered(false); setReplied(false);
+      await moveRef(dashRef); await wait(1000); if (stale(myGen)) return;
+      await tap();
+      setScene('dashboard'); setUrl('app.toinbox.app');
+      setRowStatus('processing'); setCaption(PD_CAPTIONS.processing); onPhase && onPhase('processing');
+      await wait(3900); if (stale(myGen)) return;
+      setRowStatus('sent'); setDashStats(s => ({ ...s, sent: 23 }));
+      setCaption(PD_CAPTIONS.sent); onPhase && onPhase('sent');
+      await wait(3700); if (stale(myGen)) return;
+    }
+
+    async function playSendsApplication(myGen) {
+      setDashStats({ enrolled: 24, sent: 23, replied: 9 });
+      setCaption(PD_CAPTIONS.open_det); onPhase && onPhase('open_det');
+      await moveRef(rowRef); await wait(1100); if (stale(myGen)) return;
+      await tap();
+      setScene('details'); setUrl('app.toinbox.app/applications/esper-spm');
+      setDelivered(true); setReplied(false);
+      setCaption(PD_CAPTIONS.details); onPhase && onPhase('details');
+      await wait(4200); if (stale(myGen)) return;
+    }
+
+    async function playGetNoticed(myGen) {
+      // Set the SAME complete details-page background this step overlays a
+      // toast on top of — guarantees a correct scene immediately even when
+      // jumped to cold, not just when reached naturally after step 4.
+      setScene('details'); setUrl('app.toinbox.app/applications/esper-spm');
+      setDelivered(true); setReplied(false);
+      setDashStats({ enrolled: 24, sent: 23, replied: 9 });
+      setToast(true);
+      setCaption(PD_CAPTIONS.replied); onPhase && onPhase('replied');
+      await wait(3200); if (stale(myGen)) return;
+      setDashStats(s => ({ ...s, replied: 10 }));
+      setToast(false);
+      await wait(900); if (stale(myGen)) return;
+      setCaption(PD_CAPTIONS.gmail); onPhase && onPhase('gmail');
+      await moveRef(gmailRef); await wait(1100); if (stale(myGen)) return;
+      await tap();
+      setScene('gmail'); setGmailView('inbox'); setUrl('mail.google.com/mail/u/4/#inbox');
+      await wait(3200); if (stale(myGen)) return;
+      await moveRef(threadRef); await wait(1200); if (stale(myGen)) return;
+      await tap(); setGmailView('thread'); setUrl('mail.google.com/mail/u/4/#inbox/thread-esper');
+      setCaption(PD_CAPTIONS.thread); onPhase && onPhase('thread');
+      await wait(2800); if (stale(myGen)) return;
+      await tweenScroll(gmScrollRef.current, 9999, 2600); if (stale(myGen)) return;
+      await wait(2600); if (stale(myGen)) return;
+    }
+
+    const stepFns = [playInstall, playOpenLinkedin, playFindingDrafting, playSendsApplication, playGetNoticed];
+
+    const runLoop = async () => {
       while (!dead) {
-        // ---- NEW first beat: sign in + add the Chrome extension ----
-        setScene('install'); setUrl('toinbox.app');
-        onPhase && onPhase('install');
-        await wait(9200); if (dead) return;
-
-        // ---- reset ----
-        setScene('linkedin'); setUrl('linkedin.com/jobs/search-results/?keywords=program+manager');
-        setCaption(PD_CAPTIONS.open); onPhase && onPhase('open');
-        setPanelOpen(false); setEnrollState('idle');
-        setStats({ enrolled: 23, sent: 22, replied: 9 }); setCredits(0);
-        setDashStats({ enrolled: 24, sent: 22, replied: 9 });
-        setRowStatus('processing'); setDelivered(false); setReplied(false);
-        setToast(false); setGmailView('inbox'); setCur({ x: 360, y: 80 });
-        await wait(1400); if (dead) return;
-
-        // ---- Step 2 (reused): open panel + enroll ----
-        await moveRef(bubbleRef); await wait(1200); if (dead) return;
-        await tap(); setPanelOpen(true); await wait(1200); if (dead) return;
-        setCaption(PD_CAPTIONS.enroll); onPhase && onPhase('enroll');
-        await moveRef(sendRef); await wait(1100); if (dead) return;
-        await tap(); setEnrollState('enrolling'); await wait(1500); if (dead) return;
-        setEnrollState('enrolled'); setCredits(1); setStats(s => ({ ...s, enrolled: 24 }));
-        setCaption(PD_CAPTIONS.enrolled); onPhase && onPhase('enrolled'); await wait(1700); if (dead) return;
-
-        // ---- Dashboard: Processing → Sent ----
-        await moveRef(dashRef); await wait(1000); if (dead) return;
-        await tap();
-        setScene('dashboard'); setUrl('app.toinbox.app');
-        setRowStatus('processing'); setCaption(PD_CAPTIONS.processing); onPhase && onPhase('processing');
-        await wait(3900); if (dead) return;
-        setRowStatus('sent'); setDashStats(s => ({ ...s, sent: 23 }));
-        setCaption(PD_CAPTIONS.sent); onPhase && onPhase('sent');
-        await wait(3700); if (dead) return;
-
-        // ---- Open Application Details page ----
-        setCaption(PD_CAPTIONS.open_det); onPhase && onPhase('open_det');
-        await moveRef(rowRef); await wait(1100); if (dead) return;
-        await tap();
-        setScene('details'); setUrl('app.toinbox.app/applications/esper-spm');
-        setDelivered(true); setReplied(false);
-        setCaption(PD_CAPTIONS.details); onPhase && onPhase('details');
-        await wait(6000); if (dead) return;
-
-        // ---- Recruiter reply: Gmail-style notification only (not in platform) ----
-        setToast(true); setDashStats(s => ({ ...s, replied: 10 }));
-        setCaption(PD_CAPTIONS.replied); onPhase && onPhase('replied');
-        await wait(3200); if (dead) return;
-        setToast(false);
-        await wait(900); if (dead) return;
-
-        // ---- View in Gmail ----
-        setCaption(PD_CAPTIONS.gmail); onPhase && onPhase('gmail');
-        await moveRef(gmailRef); await wait(1100); if (dead) return;
-        await tap();
-        setScene('gmail'); setGmailView('inbox'); setUrl('mail.google.com/mail/u/4/#inbox');
-        await wait(3200); if (dead) return;
-        await moveRef(threadRef); await wait(1200); if (dead) return;
-        await tap(); setGmailView('thread'); setUrl('mail.google.com/mail/u/4/#inbox/thread-esper');
-        setCaption(PD_CAPTIONS.thread); onPhase && onPhase('thread');
-        await wait(2800); if (dead) return;
-        await tweenScroll(gmScrollRef.current, 9999, 2600); if (dead) return;
-        await wait(2600); if (dead) return;
+        const myGen = genRef.current;
+        const i = stepRef.current;
+        await stepFns[i](myGen);
+        if (dead) return;
+        if (genRef.current === myGen) {
+          stepRef.current = (i + 1) % stepFns.length;
+        }
       }
     };
-    run();
-    return () => { dead = true; ts.forEach(clearTimeout); };
+    runLoop();
+
+    if (jumpToRef) {
+      jumpToRef.current = (i) => {
+        if (i < 0 || i >= stepFns.length) return;
+        stepRef.current = i;
+        genRef.current += 1;
+        abortPendingWaits();
+      };
+    }
+
+    return () => {
+      dead = true;
+      genRef.current += 1;
+      ts.forEach(clearTimeout);
+      if (jumpToRef) jumpToRef.current = null;
+    };
   }, []);
 
-  // Sign-in + add-to-Chrome is its own self-contained browser frame (matching
-  // the old system) — return it directly rather than nesting it inside this
-  // component's own persistent chrome bar, which would double up the window UI.
+  // Sign-in + add-to-Chrome is its own self-contained browser frame — return
+  // it directly rather than nesting it inside this component's own chrome
+  // bar, which would double up the window UI.
   if (scene === 'install') return <HiwInstallScene />;
 
   return (
@@ -672,8 +691,8 @@ function ProductDemo({ onPhase } = {}) {
           </div>
         )}
 
-        <div className="sd-caption">
-          <span className="sd-caption-num">{caption[0]}</span>
+        <div className="sd-caption hiw-pd-caption">
+          <span className="sd-caption-num hiw-pd-caption-num">{caption[0]}</span>
           {caption[1]}
         </div>
 

@@ -2070,6 +2070,12 @@ h1, h2, h3, h4 { margin: 0; letter-spacing: -0.02em; font-weight: 500; }
 /* How it works browser */
 .hiw-browser-col {
   min-height: 520px;
+  height: 520px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  color: var(--ink);
 }
 .hiw-browser {
   border-radius: 14px;

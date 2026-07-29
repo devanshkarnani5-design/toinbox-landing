@@ -669,10 +669,9 @@ function HowItWorks({ speedMultiplier = 1 }) {
   const [active, setActive] = useStateHIW(0);
   const [started, setStarted] = useStateHIW(false);
   const startedRef = useRefHIW(false);
+  const jumpToRef = useRefHIW(null);
 
-  // Only mount the (autonomous, self-timed) demo once this section actually
-  // scrolls into view — same behavior as before, just gating the mount
-  // instead of a separate "start()" call.
+  // Only mount the (self-timed) demo once this section scrolls into view.
   useEffectHIW(() => {
     const el = document.getElementById('how-section');
     if (!el) return;
@@ -686,10 +685,8 @@ function HowItWorks({ speedMultiplier = 1 }) {
     return () => { io.disconnect(); clearTimeout(fb); };
   }, []);
 
-  // The demo now runs its own real timing and reports back which phase it's
-  // in — this maps that phase to which of the 5 listed steps to highlight,
-  // so the list is genuinely synced to what's playing, not an independent
-  // guessed timer.
+  // Maps the demo's own reported phase to which of the 5 listed steps to
+  // highlight — keeps the list genuinely synced to what's playing.
   const PHASE_TO_STEP = {
     install: 0,
     open: 1, enroll: 1, enrolled: 1,
@@ -702,6 +699,12 @@ function HowItWorks({ speedMultiplier = 1 }) {
     if (idx !== undefined) setActive(idx);
   };
 
+  // Clicking a step jumps the demo straight there.
+  const handleStepClick = (i) => {
+    setActive(i);
+    if (jumpToRef.current) jumpToRef.current(i);
+  };
+
   return (
     <div className="how" id="how-section">
       <div style={{ maxWidth: 1560, margin: '0 auto', padding: '0 clamp(24px, 5vw, 72px)' }}>
@@ -712,12 +715,14 @@ function HowItWorks({ speedMultiplier = 1 }) {
         </div>
 
         <div className="hiw-cinema-grid" data-reveal>
-          {/* Step list — synced live to the demo on the right, not a separate timer */}
+          {/* Step list — click any step to jump the demo there */}
           <div className="hiw-steps-col">
             {HIW_STEPS.map((st, i) => (
               <div
                 key={i}
                 className={`hiw-step-row ${i === active ? 'active' : ''} ${i < active ? 'done' : ''}`}
+                onClick={() => handleStepClick(i)}
+                style={{ cursor: 'pointer' }}
               >
                 <div className="hiw-step-num">
                   {i < active ? <Icon name="check" size={11} /> : String(i + 1).padStart(2, '0')}
@@ -732,7 +737,7 @@ function HowItWorks({ speedMultiplier = 1 }) {
 
           {/* Continuous browser — isolated HIW-only demo copy, doesn't touch the hero's file */}
           <div className="hiw-browser-col">
-            {started && <HiwProductDemo onPhase={handlePhase} />}
+            {started && <HiwProductDemo onPhase={handlePhase} jumpToRef={jumpToRef} />}
           </div>
         </div>
       </div>
