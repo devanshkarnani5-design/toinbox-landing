@@ -2,15 +2,14 @@
 const { useState: useStateHIW, useEffect: useEffectHIW, useRef: useRefHIW } = React;
 
 const HIW_STEPS = [
-  { t: 'Sign in & add the Chrome extension', s: 'Sign in at toinbox.app, then add ToInbox to Chrome in one click. It installs right inside LinkedIn — no setup, no account juggling. You are ready in under a minute.' },
-  { t: 'Open LinkedIn & Click on any Job', s: 'Click any LinkedIn job and ToInbox immediately detects it in the panel. One button. It finds the key decision-maker and the relevant department head, matches your resume, and is ready to send in seconds.' },
-  { t: 'AI writes your application', s: 'ToInbox reads your resume and the JD, then drafts a specific, human-sounding cover letter — naming the role, the company, and the recipient.' },
-  { t: 'Sent to leadership inboxes', s: 'Your personalised job application + resume lands on relevant leadership inboxes of that company.' },
-  { t: 'Dashboard tracks it all', s: 'Track every metric: enrolled, sent, replied.' },
-  { t: 'They reply', s: 'Key decision-makers and department heads reply to intent. You land in a real conversation — two steps ahead of every other applicant.' },
+  { t: 'Sign in & add the Chrome extension', s: 'Sign in to ToInbox and download its Chrome extension.' },
+  { t: 'Open LinkedIn', s: 'Click on any LinkedIn job you want to apply, ToInbox immediately detects it in the panel. Click on Send Application in the panel — it enrolls that job & starts processing.' },
+  { t: 'Finding & Drafting', s: 'ToInbox is finding the relevant hiring managers, department heads, and leadership behind the job, then drafts a personalised application using your resume and the job description.' },
+  { t: 'Sends you application', s: 'Your personalised application and resume are sent directly from your Gmail to the relevant hiring contacts mails behind that job.' },
+  { t: 'Get noticed land more interviews', s: 'Your application reaches the right people, stands out, shows genuine intent, and helps you get more replies and interview calls.' },
 ];
 
-const STEP_MS = [9000, 6000, 6000, 3000, 3000, 6000];
+const STEP_MS = [9000, 6000, 6000, 3000, 7000];
 
 const HIW_JOBS = [
   { logo: 'N', bg: '#1e3a5f', title: 'Founding Product Engineer', co: 'Northwind', match: 94, email: 'm.v@northwind.co' },
@@ -616,6 +615,20 @@ function HiwInstallScene({ debugPhase } = {}) {
 }
 
 function HowitworksBrowser({ step, typed, replyVisible }) {
+  // The reply thread should feel like it "arrives" partway through the final
+  // step rather than being visible from frame one. This local timer flips it
+  // true ~2.5s into the dashboard step, independent of the outer step index.
+  // Declared BEFORE the early return below so hook order stays consistent
+  // across every render (React's Rules of Hooks — an early return can't come
+  // before a hook that's sometimes/sometimes-not reached).
+  const [replyIn, setReplyIn] = useStateHIW(false);
+  useEffectHIW(() => {
+    if (step !== 4) { setReplyIn(false); return; }
+    setReplyIn(false);
+    const t = setTimeout(() => setReplyIn(true), 2500);
+    return () => clearTimeout(t);
+  }, [step]);
+
   if (step === 0) return <HiwInstallScene />;
   const isDash = step >= 4;
   return (
@@ -645,7 +658,7 @@ function HowitworksBrowser({ step, typed, replyVisible }) {
       </div>
 
       {isDash
-        ? <HiwDashboard replyVisible={step === 5} />
+        ? <HiwDashboard replyVisible={replyIn} />
         : <HiwLinkedIn step={step} typed={typed} />
       }
     </div>
@@ -789,7 +802,7 @@ function HowItWorks({ speedMultiplier = 1 }) {
 
           {/* Continuous browser */}
           <div className="hiw-browser-col" style={{ opacity: visible ? 1 : 0, transition: 'opacity 0.18s ease' }}>
-            <HowitworksBrowser step={active} typed={typed} replyVisible={active === 5} />
+            <HowitworksBrowser step={active} typed={typed} replyVisible={active === 4} />
           </div>
         </div>
       </div>
@@ -857,7 +870,7 @@ function HeroBrowser({ speedMultiplier = 1 }) {
   return (
     <div style={{ opacity: visible ? 1 : 0, transition: 'opacity 0.18s ease' }}>
       <div style={{ height: 620 }} className="hiw-browser-col">
-        <HowitworksBrowser step={active} typed={typed} replyVisible={active === 5} />
+        <HowitworksBrowser step={active} typed={typed} replyVisible={active === 4} />
       </div>
     </div>
   );
