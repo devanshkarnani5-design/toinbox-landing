@@ -52,31 +52,13 @@ const ML_BENEFITS = [
 ];
 
 const ML_HIW_STEPS = [
-  { t: 'Sign in & add the Chrome extension', s: 'Install ToInbox in your laptop/desktop from Chrome Web Store.' },
-  { t: 'Open a job, click Enroll', s: 'One click on any LinkedIn job starts the process.' },
+  { t: 'Sign in & add the Chrome extension', s: 'Complete Sign In & Install ToInbox in your laptop/desktop from Chrome Web Store.' },
+  { t: 'Open LinkedIn, click on a job', s: 'Open any LinkedIn job you want to apply & click Send Application in the ToInbox panel. It instantly enrolls the job and starts processing.' },
   { t: 'ToInbox finds contacts, drafts your application.', s: 'It finds the relevant dept. head and leaders behind that job and drafts a personalized mail using your resume and the job description.' },
   { t: 'Sent from your Gmail', s: 'Personalized cover letter + resume delivered straight to their mailboxes.' },
   { t: 'Get noticed, land more interviews', s: 'Genuine intent gets seen — and gets replies.' },
 ];
 
-const ML_STATS = [
-  { k: 'Enrolled', v: 18, color: 'var(--ink-2)' },
-  { k: 'Sent', v: 14, color: 'var(--ink-2)' },
-  { k: 'Replied', v: 6, color: '#057642' },
-  { k: 'Interviews', v: 4, color: '#1a56db' },
-];
-const ML_APPS = [
-  { logo: 'N', bg: '#1e3a5f', co: 'Northwind', role: 'Founding Product Engineer', status: 'replied', label: 'Replied ✓' },
-  { logo: 'L', bg: '#3730a3', co: 'Lumen AI', role: 'Head of Growth', status: 'interview', label: 'Interview Set' },
-  { logo: 'R', bg: '#7c2d12', co: 'Reed Labs', role: 'Backend Engineer', status: 'fwd', label: 'Fwd to HR' },
-  { logo: 'C', bg: '#374151', co: 'Cloudpack', role: 'Infrastructure Engineer', status: 'sent', label: 'Sent' },
-];
-const ML_STATUS_STYLE = {
-  replied: { bg: '#e6f4ea', color: '#057642' },
-  interview: { bg: '#e8f0ff', color: '#1a56db' },
-  fwd: { bg: '#fff0e0', color: '#b45309' },
-  sent: { bg: '#f0ede8', color: '#666' },
-};
 
 // ---------- nav ----------
 
@@ -257,7 +239,7 @@ function MLStepVisual({ step }) {
           <span className="ml-sv-panel-logo" style={{ width: 16, height: 16 }} />
           <span className="ml-sv-enroll-label">ToInbox panel</span>
           <button className="ml-sv-enroll-btn ml-sv-annotated">
-            Enroll
+            Send Application
             <span className="ml-sv-ring" />
           </button>
         </div>
@@ -372,33 +354,55 @@ function MLHowItWorks() {
 // ---------- product showcase (native mobile cards) ----------
 
 function MLProduct() {
+  const rows = [
+    { logo: 'E', bg: '#6d54c7', co: 'Esper', role: 'Senior Program Ma…', status: 'Sent', statusBg: '#e8f0ff', statusColor: '#1a56db' },
+    { logo: 'W', bg: '#e5a52e', co: 'Wishlink', role: 'Program Manager', status: 'Sent', statusBg: '#e8f0ff', statusColor: '#1a56db' },
+    { logo: 'P', bg: '#374151', co: 'Porter', role: 'Program Manager', status: 'Replied', statusBg: '#e6f4ea', statusColor: '#057642' },
+  ];
   return (
     <section className="ml-section" id="product">
       <MLReveal>
         <span className="ml-eyebrow"><span className="ml-dot" />Inside the extension</span>
-        <h2 className="ml-h2">Track every application, reply, and interview.</h2>
-        <p className="ml-lead">Your complete outreach dashboard — who opened it, who replied, who's booking interviews.</p>
+        <h2 className="ml-h2">Track every application — enrolled, sent, replied.</h2>
+        <p className="ml-lead">Your complete outreach dashboard: jobs you enrolled, mails sent, replies you got.</p>
       </MLReveal>
       <MLReveal style={{ transitionDelay: '80ms' }}>
-        <div className="ml-stat-grid">
-          {ML_STATS.map((s) => (
-            <div className="ml-stat-card" key={s.k}>
-              <div className="ml-stat-num" style={{ color: s.color }}>{s.v}</div>
-              <div className="ml-stat-lbl">{s.k}</div>
-            </div>
-          ))}
-        </div>
-        <div className="ml-app-list">
-          {ML_APPS.map((a, i) => (
-            <div className="ml-app-row" key={i}>
-              <div className="ml-app-logo" style={{ background: a.bg }}>{a.logo}</div>
-              <div className="ml-app-info">
-                <div className="ml-app-co">{a.co}</div>
-                <div className="ml-app-role">{a.role}</div>
+        <div className="ml-dash-mock">
+          <div className="ml-dash-mock-side">
+            <div className="ml-dash-mock-brand"><span className="ml-dash-mock-logo" />ToInbox</div>
+            <div className="ml-dash-mock-nav ml-dash-mock-nav-active"><Icon name="layout" size={11} /> Dashboard</div>
+            <div className="ml-dash-mock-nav"><Icon name="sliders" size={11} /> Settings</div>
+            <div className="ml-dash-mock-nav"><Icon name="card" size={11} /> Billing</div>
+          </div>
+          <div className="ml-dash-mock-main">
+            <div className="ml-dash-mock-title">Applications</div>
+            <div className="ml-dash-mock-stats">
+              <div className="ml-dash-mock-stat ml-dash-mock-stat-lead">
+                <div className="ml-dash-mock-statlbl"><Icon name="inbox" size={10} />ENROLLED</div>
+                <div className="ml-dash-mock-statnum">24</div>
               </div>
-              <span className="ml-app-status" style={ML_STATUS_STYLE[a.status]}>{a.label}</span>
+              <div className="ml-dash-mock-stat">
+                <div className="ml-dash-mock-statlbl"><Icon name="forward" size={10} />SENT</div>
+                <div className="ml-dash-mock-statnum">23</div>
+              </div>
+              <div className="ml-dash-mock-stat">
+                <div className="ml-dash-mock-statlbl"><Icon name="mail" size={10} />REPLIED</div>
+                <div className="ml-dash-mock-statnum">9</div>
+              </div>
             </div>
-          ))}
+            <div className="ml-dash-mock-table">
+              {rows.map((r, i) => (
+                <div className="ml-dash-mock-row" key={i}>
+                  <span className="ml-dash-mock-rowlogo" style={{ background: r.bg }}>{r.logo}</span>
+                  <div className="ml-dash-mock-rowinfo">
+                    <div className="ml-dash-mock-rowco">{r.co}</div>
+                    <div className="ml-dash-mock-rowrole">{r.role}</div>
+                  </div>
+                  <span className="ml-dash-mock-rowstatus" style={{ background: r.statusBg, color: r.statusColor }}>{r.status}</span>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </MLReveal>
     </section>
@@ -408,20 +412,46 @@ function MLProduct() {
 // ---------- pricing (featured plan first) ----------
 
 function MLPricing() {
+  const [isIndia, setIsIndia] = useStateML(true);
+  useEffectML(() => {
+    try {
+      const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+      setIsIndia(tz.includes('Calcutta') || tz.includes('Kolkata') || tz === 'Asia/Kolkata');
+    } catch (e) { /* keep default */ }
+  }, []);
+  const cur = isIndia ? '₹' : '$';
+  const starterAmt = isIndia ? 299 : 14;
+  const proAmt = isIndia ? 499 : 24;
+
   return (
     <section className="ml-section" id="pricing">
       <MLReveal>
         <span className="ml-eyebrow"><span className="ml-dot" />Pricing</span>
-        <h2 className="ml-h2">Simple monthly plans, built for active job hunts.</h2>
-        <p className="ml-lead">Pick a plan that fits your search. Cancel anytime.</p>
+        <h2 className="ml-h2">Simple one-time credit packs. Pay only for what you send.</h2>
+        <p className="ml-lead">No subscription. Buy credits once — they stay valid for 60 days.</p>
       </MLReveal>
       <div className="ml-price-stack">
         <MLReveal style={{ transitionDelay: '60ms' }}>
+          <div className="ml-price-card">
+            <div>
+              <div className="ml-price-name">Free Trial</div>
+              <div className="ml-price-amt"><span className="ml-currency">{cur}</span>0</div>
+              <div className="ml-price-sub">Try before you commit.</div>
+            </div>
+            <div className="ml-price-feats">
+              {['10 personalized sends', 'Auto follow-up in 40 hrs', 'Cover letter + cold email pair', 'Dashboard + Analytics'].map((f) => (
+                <div className="ml-price-feat" key={f}><span className="ml-price-check"><Icon name="check" size={10} /></span>{f}</div>
+              ))}
+            </div>
+            <a href="https://app.toinbox.app" className="ml-btn ml-btn-ghost">Sign In <Icon name="arrow" size={14} /></a>
+          </div>
+        </MLReveal>
+        <MLReveal style={{ transitionDelay: '120ms' }}>
           <div className="ml-price-card ml-featured">
             <div className="ml-price-tag">BEST VALUE</div>
             <div>
               <div className="ml-price-name">Starter</div>
-              <div className="ml-price-amt"><span className="ml-currency">₹</span>499<span className="ml-per">/month</span></div>
+              <div className="ml-price-amt"><span className="ml-currency">{cur}</span>{starterAmt}</div>
             </div>
             <div className="ml-price-feats">
               {['100 personalized sends', 'Auto follow-up in 40 hrs', 'Cover letter + cold email pair', 'Dashboard + Analytics'].map((f) => (
@@ -431,11 +461,11 @@ function MLPricing() {
             <a href="https://app.toinbox.app" className="ml-btn ml-btn-accent">Sign In <Icon name="arrow" size={14} /></a>
           </div>
         </MLReveal>
-        <MLReveal style={{ transitionDelay: '120ms' }}>
+        <MLReveal style={{ transitionDelay: '180ms' }}>
           <div className="ml-price-card">
             <div>
               <div className="ml-price-name">Pro</div>
-              <div className="ml-price-amt"><span className="ml-currency">₹</span>799<span className="ml-per">/month</span></div>
+              <div className="ml-price-amt"><span className="ml-currency">{cur}</span>{proAmt}</div>
               <div className="ml-price-sub">Best for active job searches.</div>
             </div>
             <div className="ml-price-feats">
@@ -444,21 +474,6 @@ function MLPricing() {
               ))}
             </div>
             <a href="https://app.toinbox.app" className="ml-btn ml-btn-primary">Sign In <Icon name="arrow" size={14} /></a>
-          </div>
-        </MLReveal>
-        <MLReveal style={{ transitionDelay: '180ms' }}>
-          <div className="ml-price-card">
-            <div>
-              <div className="ml-price-name">Free Trial</div>
-              <div className="ml-price-amt"><span className="ml-currency">₹</span>0</div>
-              <div className="ml-price-sub">Try before you commit.</div>
-            </div>
-            <div className="ml-price-feats">
-              {['10 personalized sends', 'Auto follow-up in 40 hrs', 'Cover letter + cold email pair', 'Dashboard + Analytics'].map((f) => (
-                <div className="ml-price-feat" key={f}><span className="ml-price-check"><Icon name="check" size={10} /></span>{f}</div>
-              ))}
-            </div>
-            <a href="https://app.toinbox.app" className="ml-btn ml-btn-ghost">Sign In <Icon name="arrow" size={14} /></a>
           </div>
         </MLReveal>
       </div>
@@ -477,7 +492,7 @@ function MLFinalCTA() {
             <span className="ml-dot" />One last thing
           </span>
           <h2 className="ml-h2">Your dream startup won't notice another Easy Apply.</h2>
-          <p className="ml-lead">Turn LinkedIn applications into real conversations — the email a founder will actually forward.</p>
+          <p className="ml-lead">Send personalised job applications — show intent, get noticed, land more interviews, and secure your dream job.</p>
           <div className="ml-hero-cta">
             <a href="https://app.toinbox.app" className="ml-btn ml-btn-accent">Sign In <Icon name="arrow" size={15} /></a>
             <a href="#how-section" className="ml-btn ml-btn-ghost" style={{ color: 'rgba(255,255,255,0.8)', borderColor: 'rgba(255,255,255,0.2)' }}>See how it works</a>
