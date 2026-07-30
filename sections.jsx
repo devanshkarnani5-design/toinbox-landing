@@ -4,11 +4,11 @@ const { useEffect: useEffectS } = React;
 function Benefits() {
   const items = [
     { ico: 'panel', t: 'Lives where you already are', s: "A Chrome extension that sits inside LinkedIn. No new app to learn, no second tab to keep open." },
-    { ico: 'target', t: 'Skip Easy Apply queues', s: 'Thousands apply through LinkedIn and go unseen. Reach the key decision-maker and department head directly, where your application gets noticed.' },
-    { ico: 'forward', t: 'Forwarded to hiring directly', s: 'Leadership often move such applications straight to interviews or forward them to HR. These applications carry an advantage and move quicker.' },
-    { ico: 'sparkle', t: 'Tailored, never templated', s: 'Every application — to a key decision-maker or department head — is unique and personalised based on job description and your resume.' },
+    { ico: 'target', t: 'Skip Easy Apply queues', s: 'Thousands apply through LinkedIn and go unseen. Reach the founder and department head directly, where your application gets noticed.' },
+    { ico: 'forward', t: 'Forwarded to hiring directly', s: 'Founders and department heads often move such applications straight to interviews or forward them to HR. These applications carry an advantage and move quicker.' },
+    { ico: 'sparkle', t: 'Tailored, never templated', s: 'Every application — to a founder or department head — is unique and personalised based on job description and your resume.' },
     { ico: 'bolt', t: 'Fifteen-second applications', s: 'Detect → enroll → send. Personalized outreach creates stronger intent, and strong intent increases replies.' },
-    { ico: 'chart', t: 'Decision-makers reply at multiples', s: 'Leadership value candidates who show genuine interest. Personalized outreach leads to more replies and interviews.' },
+    { ico: 'chart', t: 'Decision-makers reply at multiples', s: 'Founders and department heads value candidates who show genuine interest. Personalized outreach leads to more replies and interviews.' },
   ];
   return (
     <section className="section" id="why">
@@ -32,6 +32,22 @@ function Benefits() {
 }
 
 function DemoShowcase() {
+  const { useState: useStateD, useEffect: useEffectD, useRef: useRefD } = React;
+  const dashWrapRef = useRefD(null);
+  const [dashFit, setDashFit] = useStateD(1);
+  useEffectD(() => {
+    const measure = () => {
+      const el = dashWrapRef.current; if (!el) return;
+      const r = el.getBoundingClientRect();
+      if (!r.width) return;
+      setDashFit(Math.min(1, r.width / 1260));
+    };
+    measure();
+    const id = setTimeout(measure, 120);
+    window.addEventListener('resize', measure);
+    return () => { clearTimeout(id); window.removeEventListener('resize', measure); };
+  }, []);
+
   const DASH_APPS = [
     { logo: 'N', bg: '#1e3a5f',  co: 'Northwind',    role: 'Founding Product Engineer',  sent: 'Mon 6:02 AM',  opened: 'Mon 6:48 AM',  status: 'replied',   label: 'Replied ✓' },
     { logo: 'L', bg: '#3730a3',  co: 'Lumen AI',     role: 'Head of Growth',              sent: 'Mon 8:15 AM',  opened: 'Mon 9:00 AM',  status: 'interview', label: 'Interview Set' },
@@ -64,8 +80,11 @@ function DemoShowcase() {
           <p className="lead">Your complete outreach dashboard: who opened it, who replied, who's booking interviews — all live.</p>
         </div>
 
-        {/* Full dashboard browser mock */}
-        <div className="dash-browser" data-reveal>
+        {/* Full dashboard browser mock — scaled as one unit to fit any
+            screen width, since its internal layout uses fixed pixel values
+            throughout and isn't designed to reflow at mobile widths. */}
+        <div ref={dashWrapRef} style={{ width: '100%', height: 620 * dashFit, overflow: 'hidden' }} data-reveal>
+        <div className="dash-browser" style={{ width: 1260, transform: `scale(${dashFit})`, transformOrigin: 'top left' }}>
           {/* Chrome bar */}
           <div className="dash-browser-chrome">
             <div style={{ display: 'flex', gap: 5 }}>
@@ -192,6 +211,7 @@ function DemoShowcase() {
               </div>
             </div>
           </div>
+        </div>
         </div>
       </div>
     </section>
@@ -453,52 +473,20 @@ function Testimonials() {
 }
 
 function Pricing() {
-  // Auto-detect region for currency. India -> INR (Razorpay), else USD (Dodo).
-  // Static page has no backend, so we use a lightweight browser geo lookup,
-  // with a manual toggle as a fallback when detection is wrong/blocked.
-  const { useState: useStateP, useEffect: useEffectP } = React;
-  const [region, setRegion] = useStateP('in'); // default to India; flips on detect
-
-  useEffectP(() => {
-    let cancelled = false;
-    // Cloudflare trace is fast and CORS-friendly: returns "loc=IN" etc.
-    fetch('https://www.cloudflare.com/cdn-cgi/trace')
-      .then((r) => r.text())
-      .then((txt) => {
-        if (cancelled) return;
-        const m = txt.match(/loc=([A-Z]{2})/);
-        if (m) setRegion(m[1] === 'IN' ? 'in' : 'intl');
-      })
-      .catch(() => {
-        // Fallback: timezone heuristic (India has one tz).
-        try {
-          const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
-          if (!/Kolkata|Calcutta/i.test(tz)) setRegion('intl');
-        } catch (_) {}
-      });
-    return () => { cancelled = true; };
-  }, []);
-
-  const isIndia = region === 'in';
-  const cur = isIndia ? '\u20B9' : '$';
-  const starter = isIndia ? '299' : '14';
-  const pro = isIndia ? '499' : '24';
-
   return (
     <section className="section" id="pricing">
       <div className="wrap">
         <div className="section-head center" data-reveal>
           <span className="eyebrow"><span className="dot" />Pricing</span>
-          <h2 className="h-section">Simple one-time credit packs. Pay only for what you send.</h2>
-          <p className="lead" style={{ textAlign: 'center' }}>No subscription. Buy credits once — they stay valid for 60 days.</p>
+          <h2 className="h-section">Simple monthly plans, built for active job hunts.</h2>
+          <p className="lead" style={{ textAlign: 'center' }}>Pick a plan that fits your search. Cancel anytime — sends refresh each month.</p>
         </div>
-
         <div className="pricing-grid" style={{ gridTemplateColumns: 'repeat(3, 1fr)' }}>
           <div className="price-card" data-reveal>
             <div>
               <div className="price-name">Free Trial</div>
               <div style={{ display: 'flex', alignItems: 'baseline', gap: 4, marginTop: 8 }}>
-                <span className="price-amt"><span className="currency">{cur}</span>0</span>
+                <span className="price-amt"><span className="currency">₹</span>0</span>
               </div>
               <div className="price-sub">Try before you commit.</div>
             </div>
@@ -516,12 +504,11 @@ function Pricing() {
             <div>
               <div className="price-name">Starter</div>
               <div style={{ display: 'flex', alignItems: 'baseline', gap: 4, marginTop: 8 }}>
-                <span className="price-amt"><span className="currency">{cur}</span>{starter}<span className="per">one-time</span></span>
+                <span className="price-amt"><span className="currency">₹</span>499<span className="per">/month</span></span>
               </div>
-              <div className="price-sub">50 credits · valid 60 days</div>
             </div>
             <div className="price-feats">
-              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>50 personalized sends</div>
+              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>100 personalized sends</div>
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Auto follow-up in 40 hrs</div>
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Cover letter + cold email pair</div>
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Dashboard + Analytics</div>
@@ -533,12 +520,12 @@ function Pricing() {
             <div>
               <div className="price-name">Pro</div>
               <div style={{ display: 'flex', alignItems: 'baseline', gap: 4, marginTop: 8 }}>
-                <span className="price-amt"><span className="currency">{cur}</span>{pro}<span className="per">one-time</span></span>
+                <span className="price-amt"><span className="currency">₹</span>799<span className="per">/month</span></span>
               </div>
-              <div className="price-sub">100 credits · valid 60 days</div>
+              <div className="price-sub">Best for active job searches.</div>
             </div>
             <div className="price-feats">
-              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>100 personalized sends</div>
+              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>200 personalized sends</div>
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Cheaper per send</div>
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Everything in Starter included</div>
             </div>
@@ -562,12 +549,12 @@ function FinalCTA() {
           <h2 className="h-section" style={{ marginTop: 18, maxWidth: 820, marginLeft: 'auto', marginRight: 'auto' }}>
             Your dream startup won't notice<br />another Easy Apply.
           </h2>
-          <p className="lead oneline"><span>Send personalised job applications to leadership and dept heads behind any LinkedIn job in just one click.</span><span>Show genuine intent, get noticed, land more interviews, and secure your dream job.</span></p>
+          <p className="lead">Turn LinkedIn applications into real conversations. Send the email a founder or hiring lead will actually forward.</p>
           <div style={{ display: 'flex', gap: 10, justifyContent: 'center', flexWrap: 'wrap' }}>
             <a href="https://app.toinbox.app" className="btn btn-accent">Sign In <Icon name="arrow" size={14} className="chev" /></a>
             <a href="#how-section" className="btn btn-ghost" style={{ color: 'rgba(255,255,255,0.8)' }}>See how it works</a>
           </div>
-          <div style={{ marginTop: 36, fontSize: 12.5, color: 'rgba(255,255,255,0.5)', fontFamily: 'var(--font-mono)' }}>NO CARD REQUIRED · 10 FREE CREDITS · WORKS ON LINKEDIN</div>
+          <div style={{ marginTop: 20, fontSize: 12.5, color: 'rgba(255,255,255,0.5)', fontFamily: 'var(--font-mono)' }}>NO CARD REQUIRED · 5 FREE CREDITS · WORKS ON LINKEDIN</div>
         </div>
       </div>
     </section>
@@ -589,7 +576,6 @@ function Footer() {
             <a href="#product">Product</a>
             <a href="#proof">Replies</a>
             <a href="#pricing">Pricing</a>
-            <a href="/affiliates">Affiliates</a>
             <a href="/privacy.html">Privacy</a>
             <a href="/terms.html">Terms</a>
           </div>
