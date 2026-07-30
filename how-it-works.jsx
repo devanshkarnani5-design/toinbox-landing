@@ -5,7 +5,7 @@ const HIW_STEPS = [
   { t: 'Sign in & add the Chrome extension', s: 'Sign in to ToInbox and download its Chrome extension.' },
   { t: 'Open LinkedIn', s: 'Click on any LinkedIn job you want to apply, ToInbox immediately detects it in the panel. Click on Send Application in the panel — it enrolls that job & starts processing.' },
   { t: 'Finding & Drafting', s: 'ToInbox is finding the relevant hiring managers, department heads, and leadership behind the job, then drafts a personalised application using your resume and the job description.' },
-  { t: 'Sends you application', s: 'Your personalised application and resume are sent directly from your Gmail to the relevant hiring contacts mails behind that job.' },
+  { t: 'Send your application', s: 'Your personalised application and resume are sent directly from your Gmail to the relevant hiring contacts mails behind that job.' },
   { t: 'Get noticed land more interviews', s: 'Your application reaches the right people, stands out, shows genuine intent, and helps you get more replies and interview calls.' },
 ];
 
