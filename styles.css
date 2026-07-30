@@ -2515,7 +2515,7 @@ h1, h2, h3, h4 { margin: 0; letter-spacing: -0.02em; font-weight: 500; }
   display: grid; grid-template-columns: 256px 1fr; background: var(--bg);
 }
 .sd-dash-side { border-right: 1px solid var(--line); background: var(--bg-elev); padding: 26px 18px; display: flex; flex-direction: column; gap: 26px; min-width: 0; }
-.sd-dash-brand { display: flex; align-items: center; gap: 12px; font-size: 21px; font-weight: 600; padding: 2px 8px; letter-spacing: -0.01em; }
+.sd-dash-brand { display: flex; align-items: center; gap: 12px; font-size: 21px; font-weight: 600; padding: 2px 8px; letter-spacing: -0.01em; color: var(--ink); }
 .sd-dash-brand img { width: 34px; height: 34px; border-radius: 10px; }
 .sd-dash-menu-lbl { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; color: var(--ink-4); padding: 0 12px; }
 .sd-dash-nav { display: flex; flex-direction: column; gap: 5px; }
@@ -2544,7 +2544,7 @@ h1, h2, h3, h4 { margin: 0; letter-spacing: -0.02em; font-weight: 500; }
 .sd-dash-statlbl { display: flex; align-items: center; gap: 9px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; color: var(--ink-4); }
 .sd-dash-staticon { width: 28px; height: 28px; border-radius: 8px; display: inline-flex; align-items: center; justify-content: center; background: var(--bg-soft); color: var(--ink-3); border: 1px solid var(--line); }
 .sd-dash-stat.lead .sd-dash-staticon { background: var(--accent-soft); color: var(--accent-ink); border-color: transparent; }
-.sd-dash-statnum { font-size: 42px; font-weight: 600; letter-spacing: -0.03em; line-height: 1; margin: 14px 0 8px; }
+.sd-dash-statnum { font-size: 42px; font-weight: 600; letter-spacing: -0.03em; line-height: 1; margin: 14px 0 8px; color: var(--ink); }
 .sd-dash-statcap { font-size: 14px; color: var(--ink-4); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
 /* dashboard content: applications list + email detail */
@@ -2659,7 +2659,7 @@ h1, h2, h3, h4 { margin: 0; letter-spacing: -0.02em; font-weight: 500; }
 .pd-det-top { display: flex; align-items: center; gap: 15px; }
 .pd-det-back { width: 38px; height: 38px; border-radius: 11px; border: 1px solid var(--line); color: var(--ink-3); display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .pd-det-title { flex: 1; min-width: 0; }
-.pd-det-title .tn { font-size: 23px; font-weight: 600; letter-spacing: -0.02em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pd-det-title .tn { font-size: 23px; font-weight: 600; letter-spacing: -0.02em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--ink); }
 .pd-det-title .ts { font-size: 14px; color: var(--ink-4); margin-top: 2px; }
 .pd-viewgmail { display: inline-flex; align-items: center; gap: 8px; padding: 11px 18px; border-radius: 12px; background: var(--ink); color: var(--bg-elev); font-size: 15px; font-weight: 500; white-space: nowrap; box-shadow: var(--shadow-1); transition: transform 160ms ease; }
 .pd-viewgmail:hover { transform: translateY(-1px); }
@@ -2835,6 +2835,10 @@ h1, h2, h3, h4 { margin: 0; letter-spacing: -0.02em; font-weight: 500; }
   flex-direction: column;
   min-height: 520px;
   width: 100%;
+}
+.browser.hiw-pd-frame {
+  border-radius: 14px;
+  overflow: hidden;
 }
 
 /* Smaller caption for the isolated how-it-works demo only — does not
