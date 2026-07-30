@@ -617,8 +617,12 @@ function ProductDemo({ step = 0 } = {}) {
   // shadow, no artificial width cap) that every other scene below also uses.
   if (scene === 'install') {
     return (
-      <div className="hiw-pd-frame">
+      <div className="hiw-pd-frame" style={{ position: 'relative' }}>
         <HiwInstallScene />
+        <div className="sd-caption hiw-pd-caption">
+          <span className="sd-caption-num hiw-pd-caption-num">{caption[0]}</span>
+          {caption[1]}
+        </div>
       </div>
     );
   }
