@@ -31,7 +31,7 @@
   border-bottom: 1px solid var(--line);
 }
 .ml-brand { display: flex; align-items: center; gap: 9px; font-size: 17px; font-weight: 600; letter-spacing: -0.01em; }
-.ml-brand-mark { width: 24px; height: 24px; border-radius: 7px; background: linear-gradient(135deg, var(--accent), var(--accent-2)); flex-shrink: 0; }
+.ml-brand-mark { width: 26px; height: 26px; border-radius: 8px; background: url('/favicon.png') center/cover no-repeat; flex-shrink: 0; }
 .ml-menu-btn {
   width: 40px; height: 40px; border-radius: 10px; border: 1px solid var(--line-2);
   background: var(--bg-elev); display: flex; align-items: center; justify-content: center;
@@ -81,7 +81,60 @@
 /* ---------- hero ---------- */
 .ml-hero { padding-top: 40px; }
 .ml-hero-cta { display: flex; flex-direction: column; gap: 10px; margin-top: 26px; }
-.ml-hero-demo { margin-top: 32px; border-radius: 18px; overflow: hidden; }
+
+/* ---------- hero visual — composed static "snapshot", not a live demo ---------- */
+.ml-hv { position: relative; margin-top: 44px; padding: 8px 14px 30px; }
+.ml-hv-glow {
+  position: absolute; top: -30px; left: 50%; transform: translateX(-50%);
+  width: 320px; height: 220px; border-radius: 50%;
+  background: radial-gradient(50% 50% at 50% 50%, color-mix(in oklab, var(--accent) 38%, transparent), transparent 70%);
+  filter: blur(10px); z-index: 0; pointer-events: none;
+}
+.ml-hv-main {
+  position: relative; z-index: 1;
+  background: var(--bg-elev); border: 1px solid var(--line-2); border-radius: 18px;
+  box-shadow: 0 30px 60px -24px rgba(10,10,10,0.22);
+  padding: 20px 20px 18px;
+}
+.ml-hv-main-top { display: flex; align-items: center; gap: 11px; }
+.ml-hv-avatar {
+  width: 34px; height: 34px; border-radius: 50%; flex-shrink: 0;
+  background: linear-gradient(135deg, #6d54c7, #4a3a8c); color: white;
+  display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px;
+}
+.ml-hv-who { flex: 1; min-width: 0; }
+.ml-hv-name { font-size: 14px; font-weight: 600; letter-spacing: -0.01em; }
+.ml-hv-role { font-size: 11.5px; color: var(--ink-4); margin-top: 1px; }
+.ml-hv-badge {
+  display: flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 600;
+  padding: 5px 10px; border-radius: 999px; background: #e6f4ea; color: #057642; flex-shrink: 0;
+}
+.ml-hv-dot { width: 5px; height: 5px; border-radius: 50%; background: #057642; }
+.ml-hv-main-body { display: flex; flex-direction: column; gap: 8px; margin-top: 16px; }
+.ml-hv-line { height: 8px; border-radius: 4px; background: var(--bg-soft); }
+.ml-hv-attach {
+  display: flex; align-items: center; gap: 8px; margin-top: 16px; padding-top: 14px;
+  border-top: 1px solid var(--line); font-size: 12.5px; color: var(--ink-3); font-weight: 500;
+}
+.ml-hv-pdf {
+  display: inline-flex; align-items: center; justify-content: center; font-family: var(--font-mono);
+  font-size: 9px; font-weight: 700; color: #fff; background: #d93025; border-radius: 4px; padding: 3px 5px;
+}
+.ml-hv-float {
+  position: absolute; z-index: 2; background: var(--bg-elev); border: 1px solid var(--line-2);
+  border-radius: 14px; box-shadow: 0 18px 40px -16px rgba(10,10,10,0.28);
+  padding: 12px 14px; display: flex; align-items: center; gap: 10px;
+}
+.ml-hv-float-1 { top: -14px; left: 6px; flex-direction: column; align-items: flex-start; gap: 2px; transform: rotate(-4deg); }
+.ml-hv-float-num { font-size: 22px; font-weight: 700; letter-spacing: -0.02em; line-height: 1; color: var(--ink); }
+.ml-hv-float-lbl { font-size: 10.5px; color: var(--ink-4); font-family: var(--font-mono); }
+.ml-hv-float-2 { bottom: 6px; right: 4px; transform: rotate(3deg); max-width: 66%; }
+.ml-hv-float-ico {
+  width: 26px; height: 26px; border-radius: 8px; flex-shrink: 0; background: var(--accent-soft); color: var(--accent-ink);
+  display: flex; align-items: center; justify-content: center;
+}
+.ml-hv-float-title { font-size: 12.5px; font-weight: 600; }
+.ml-hv-float-sub { font-size: 11px; color: var(--ink-4); margin-top: 1px; }
 
 /* ---------- benefits — horizontal snap carousel, premium mobile pattern ---------- */
 .ml-bcarousel {
@@ -105,27 +158,70 @@
 .ml-bdot { width: 6px; height: 6px; border-radius: 50%; background: var(--line-2); transition: background .2s ease, width .2s ease; }
 .ml-bdot.ml-active { background: var(--accent); width: 18px; border-radius: 4px; }
 
-/* ---------- how it works — pill steps + demo below ---------- */
-.ml-hiw-wrap { background: var(--ink); border-radius: 22px; padding: 28px 20px 24px; margin: 0 20px; }
-.ml-hiw-wrap .ml-eyebrow { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.14); color: rgba(255,255,255,0.75); }
-.ml-hiw-wrap .ml-eyebrow .ml-dot { background: var(--accent); }
-.ml-hiw-wrap .ml-h2 { color: #f5f5f4; }
-.ml-hiw-wrap .ml-lead { color: rgba(245,245,244,0.62); }
-.ml-step-pills { display: flex; gap: 8px; overflow-x: auto; margin: 20px 0 16px; padding-bottom: 4px; -webkit-overflow-scrolling: touch; }
-.ml-step-pills::-webkit-scrollbar { display: none; }
-.ml-step-pill {
-  flex: 0 0 auto; display: flex; align-items: center; gap: 7px;
-  padding: 9px 14px; border-radius: 999px; font-size: 13px; font-weight: 600;
-  background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.5); border: 1px solid rgba(255,255,255,0.08);
-  white-space: nowrap;
+/* ---------- how it works — static step-card carousel (same pattern as benefits) ---------- */
+.ml-hiw-carousel {
+  display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory;
+  padding: 4px 20px 8px; margin: 20px -20px 0;
+  -webkit-overflow-scrolling: touch;
 }
-.ml-step-pill.ml-active { background: var(--accent); color: white; border-color: var(--accent); }
-.ml-step-pill-num {
-  width: 18px; height: 18px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
-  font-size: 10px; font-family: var(--font-mono); background: rgba(255,255,255,0.12);
+.ml-hiw-carousel::-webkit-scrollbar { display: none; }
+.ml-sv-card {
+  scroll-snap-align: start; flex: 0 0 80%; max-width: 320px; position: relative;
+  background: var(--bg-elev); border: 1px solid var(--line); border-radius: 18px;
+  padding: 18px 20px 20px; display: flex; flex-direction: column; gap: 8px;
 }
-.ml-step-pill.ml-active .ml-step-pill-num { background: rgba(255,255,255,0.25); }
-.ml-hiw-demo { border-radius: 14px; overflow: hidden; }
+.ml-sv-num { font-size: 11px; font-family: var(--font-mono); color: var(--ink-4); letter-spacing: 0.06em; margin-top: 4px; }
+.ml-sv-card h3 { font-size: 16px; font-weight: 600; letter-spacing: -0.01em; margin: 0; }
+.ml-sv-card p { font-size: 13.5px; line-height: 1.5; color: var(--ink-3); margin: 0; }
+
+/* mini mockup frame shared by all 5 step visuals */
+.ml-sv-frame {
+  height: 140px; border-radius: 12px; background: #f3f2ef; border: 1px solid var(--line);
+  overflow: hidden; display: flex; flex-direction: column;
+}
+.ml-sv-center { align-items: center; justify-content: center; gap: 10px; padding: 0 16px; }
+.ml-sv-dots { display: flex; gap: 4px; padding: 8px 10px; background: linear-gradient(180deg,#fafaf9,#f3f2ee); border-bottom: 1px solid var(--line); }
+.ml-sv-dots span { width: 7px; height: 7px; border-radius: 50%; background: #e2dfd8; }
+.ml-sv-dots span:nth-child(1) { background: #ff6058; }
+.ml-sv-dots span:nth-child(2) { background: #ffbe2e; }
+.ml-sv-dots span:nth-child(3) { background: #28c941; }
+
+/* step 1 — chrome web store */
+.ml-sv-store { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; background: #fff; }
+.ml-sv-store-icon { width: 34px; height: 34px; border-radius: 9px; background: linear-gradient(135deg, var(--accent), var(--accent-2)); }
+.ml-sv-store-name { font-size: 13px; font-weight: 700; }
+.ml-sv-store-sub { font-size: 10.5px; color: var(--ink-4); margin-top: -4px; }
+.ml-sv-store-btn { margin-top: 4px; font-size: 11px; font-weight: 600; color: white; background: var(--accent); padding: 6px 14px; border-radius: 8px; }
+
+/* step 2 — linkedin job */
+.ml-sv-li { flex: 1; background: #fff; padding: 10px 12px; display: flex; flex-direction: column; gap: 8px; }
+.ml-sv-li-search { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--ink-3); background: var(--bg-soft); border-radius: 7px; padding: 6px 9px; }
+.ml-sv-li-job { display: flex; align-items: center; gap: 8px; background: var(--accent-soft); border-radius: 8px; padding: 8px 9px; }
+.ml-sv-li-job-logo { width: 26px; height: 26px; border-radius: 6px; background: #1e3a5f; color: white; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.ml-sv-li-job-title { font-size: 11.5px; font-weight: 600; line-height: 1.3; }
+.ml-sv-li-job-co { font-size: 10px; color: var(--ink-4); margin-top: 1px; }
+
+/* step 3 — processing */
+.ml-sv-spinner { width: 22px; height: 22px; border-radius: 50%; border: 2.5px solid var(--line-2); border-top-color: var(--accent); animation: mlSpin .8s linear infinite; }
+@keyframes mlSpin { to { transform: rotate(360deg); } }
+.ml-sv-processing-text { font-size: 12.5px; font-weight: 500; color: var(--ink-2); text-align: center; }
+.ml-sv-processing-bar { width: 100%; max-width: 160px; height: 5px; border-radius: 3px; background: var(--line-2); overflow: hidden; }
+.ml-sv-processing-bar span { display: block; height: 100%; width: 55%; background: var(--accent); border-radius: 3px; animation: mlProcess 1.6s ease-in-out infinite; }
+@keyframes mlProcess { 0%,100% { width: 30%; } 50% { width: 75%; } }
+
+/* step 4 — sent */
+.ml-sv-send-row { display: flex; align-items: center; }
+.ml-sv-avatar-sm { width: 30px; height: 30px; border-radius: 50%; color: white; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; border: 2px solid #f3f2ef; }
+.ml-sv-avatar-sm2 { margin-left: -10px; }
+.ml-sv-send-label { font-size: 11.5px; color: var(--ink-3); margin-left: 8px; }
+.ml-sv-send-status { display: flex; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 600; color: #057642; background: #e6f4ea; padding: 6px 12px; border-radius: 999px; }
+
+/* step 5 — reply */
+.ml-sv-reply { flex: 1; background: #fff; padding: 12px 14px; display: flex; flex-direction: column; gap: 8px; justify-content: center; }
+.ml-sv-reply-head { display: flex; align-items: center; gap: 8px; }
+.ml-sv-reply-name { font-size: 12.5px; font-weight: 600; flex: 1; }
+.ml-sv-reply-tag { font-size: 10px; font-weight: 700; color: #1a56db; background: #e8f0ff; padding: 3px 8px; border-radius: 999px; }
+.ml-sv-reply-text { font-size: 12px; line-height: 1.5; color: var(--ink-3); font-style: italic; }
 
 /* ---------- product showcase — native mobile cards, not a shrunk browser mockup ---------- */
 .ml-stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }

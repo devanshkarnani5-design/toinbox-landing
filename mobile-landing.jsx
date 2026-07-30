@@ -1,9 +1,10 @@
 // ToInbox — Mobile Landing Page (isolated from the desktop build)
-// Reuses: window.Icon, window.ProductDemo, window.HiwProductDemo — the
-// real, working components — and the same brand CSS variables from
-// styles.css's :root. Everything else here (markup, mobile-only styles,
-// content layout) is self-contained under mobile-landing.jsx/.css and
-// never touches sections.jsx, how-it-works.jsx, or styles.css.
+// Reuses: window.Icon and the same brand CSS variables from styles.css's
+// :root. The hero and how-it-works sections use composed static visuals
+// (not the live ProductDemo/HiwProductDemo demos) per the mobile design
+// brief. Everything here is self-contained under mobile-landing.jsx/.css
+// and never touches sections.jsx, how-it-works.jsx, product-demo*.jsx, or
+// styles.css.
 const { useState: useStateML, useEffect: useEffectML, useRef: useRefML } = React;
 
 function useIsMobile(breakpoint = 430) {
@@ -58,7 +59,6 @@ const ML_HIW_STEPS = [
   { t: 'Send your application', s: 'Your personalised application is sent directly from your Gmail.' },
   { t: 'Get noticed, land more interviews', s: 'Your application stands out and gets real replies.' },
 ];
-const ML_HIW_STEP_MS = [9500, 8000, 6000, 6000, 13000];
 
 const ML_STATS = [
   { k: 'Enrolled', v: 18, color: 'var(--ink-2)' },
@@ -118,6 +118,44 @@ function MLNav() {
 
 // ---------- hero ----------
 
+function MLHeroVisual() {
+  return (
+    <div className="ml-hv">
+      <div className="ml-hv-glow" />
+      <div className="ml-hv-main">
+        <div className="ml-hv-main-top">
+          <span className="ml-hv-avatar">P</span>
+          <div className="ml-hv-who">
+            <div className="ml-hv-name">Priya Nair</div>
+            <div className="ml-hv-role">Hiring Manager · Esper</div>
+          </div>
+          <span className="ml-hv-badge"><span className="ml-hv-dot" />Delivered</span>
+        </div>
+        <div className="ml-hv-main-body">
+          <div className="ml-hv-line" style={{ width: '92%' }} />
+          <div className="ml-hv-line" style={{ width: '78%' }} />
+          <div className="ml-hv-line" style={{ width: '85%' }} />
+          <div className="ml-hv-line" style={{ width: '60%' }} />
+        </div>
+        <div className="ml-hv-attach">
+          <span className="ml-hv-pdf">PDF</span> Resume_Tailored.pdf
+        </div>
+      </div>
+      <div className="ml-hv-float ml-hv-float-1">
+        <div className="ml-hv-float-num">24</div>
+        <div className="ml-hv-float-lbl">Enrolled</div>
+      </div>
+      <div className="ml-hv-float ml-hv-float-2">
+        <span className="ml-hv-float-ico"><Icon name="mail" size={13} /></span>
+        <div>
+          <div className="ml-hv-float-title">New reply</div>
+          <div className="ml-hv-float-sub">Interview requested</div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function MLHero() {
   return (
     <section className="ml-section ml-hero">
@@ -135,7 +173,7 @@ function MLHero() {
         </div>
       </MLReveal>
       <MLReveal style={{ transitionDelay: '120ms' }}>
-        <div className="ml-hero-demo"><ProductDemo /></div>
+        <MLHeroVisual />
       </MLReveal>
     </section>
   );
@@ -175,62 +213,99 @@ function MLBenefits() {
 
 // ---------- how it works (same self-contained jumpTo/tick pattern as the desktop file) ----------
 
-function MLHowItWorks() {
-  const [active, setActive] = useStateML(0);
-  const [started, setStarted] = useStateML(false);
-  const startedRef = useRefML(false);
-  const tickRef = useRefML(null);
-  const sectionRef = useRefML(null);
-
-  const jumpTo = (i) => {
-    cancelAnimationFrame(tickRef.current);
-    setActive(i);
-    let idx = i;
-    let startTime = Date.now();
-    const tick = () => {
-      const elapsed = Date.now() - startTime;
-      if (elapsed >= ML_HIW_STEP_MS[idx]) {
-        idx = (idx + 1) % ML_HIW_STEPS.length;
-        startTime = Date.now();
-        setActive(idx);
-      }
-      tickRef.current = requestAnimationFrame(tick);
-    };
-    tickRef.current = requestAnimationFrame(tick);
-  };
-
-  useEffectML(() => {
-    const el = sectionRef.current;
-    if (!el) return;
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((e) => {
-        if (e.isIntersecting && !startedRef.current) { startedRef.current = true; setStarted(true); jumpTo(0); }
-      });
-    }, { threshold: 0.12 });
-    io.observe(el);
-    const fb = setTimeout(() => { if (!startedRef.current) { startedRef.current = true; setStarted(true); jumpTo(0); } }, 1800);
-    return () => { io.disconnect(); clearTimeout(fb); cancelAnimationFrame(tickRef.current); };
-  }, []);
-
+function MLStepVisual({ step }) {
+  if (step === 0) {
+    return (
+      <div className="ml-sv-frame">
+        <div className="ml-sv-dots"><span /><span /><span /></div>
+        <div className="ml-sv-store">
+          <div className="ml-sv-store-icon" />
+          <div className="ml-sv-store-name">ToInbox</div>
+          <div className="ml-sv-store-sub">Chrome Web Store</div>
+          <div className="ml-sv-store-btn">Add to Chrome</div>
+        </div>
+      </div>
+    );
+  }
+  if (step === 1) {
+    return (
+      <div className="ml-sv-frame">
+        <div className="ml-sv-dots"><span /><span /><span /></div>
+        <div className="ml-sv-li">
+          <div className="ml-sv-li-search"><Icon name="search" size={12} /> Program Manager</div>
+          <div className="ml-sv-li-job">
+            <div className="ml-sv-li-job-logo">E</div>
+            <div>
+              <div className="ml-sv-li-job-title">Senior Program Manager</div>
+              <div className="ml-sv-li-job-co">Esper · Bengaluru</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+  if (step === 2) {
+    return (
+      <div className="ml-sv-frame ml-sv-center">
+        <div className="ml-sv-spinner" />
+        <div className="ml-sv-processing-text">Personalizing your application…</div>
+        <div className="ml-sv-processing-bar"><span /></div>
+      </div>
+    );
+  }
+  if (step === 3) {
+    return (
+      <div className="ml-sv-frame ml-sv-center">
+        <div className="ml-sv-send-row">
+          <span className="ml-sv-avatar-sm" style={{ background: '#6d54c7' }}>P</span>
+          <span className="ml-sv-avatar-sm ml-sv-avatar-sm2" style={{ background: '#374151' }}>A</span>
+          <span className="ml-sv-send-label">2 recipients</span>
+        </div>
+        <div className="ml-sv-send-status"><Icon name="check" size={12} /> Sent from your Gmail</div>
+      </div>
+    );
+  }
   return (
-    <section className="ml-section" id="how-section" ref={sectionRef}>
+    <div className="ml-sv-frame">
+      <div className="ml-sv-reply">
+        <div className="ml-sv-reply-head">
+          <span className="ml-sv-avatar-sm" style={{ background: '#6d54c7' }}>P</span>
+          <div className="ml-sv-reply-name">Priya Nair</div>
+          <span className="ml-sv-reply-tag">Interview</span>
+        </div>
+        <div className="ml-sv-reply-text">"We'd like to schedule an interview — are you free tomorrow?"</div>
+      </div>
+    </div>
+  );
+}
+
+function MLHowItWorks() {
+  const scrollRef = useRefML(null);
+  const [active, setActive] = useStateML(0);
+  const onScroll = () => {
+    const el = scrollRef.current; if (!el) return;
+    const cardW = el.firstElementChild ? el.firstElementChild.getBoundingClientRect().width + 14 : 1;
+    setActive(Math.round(el.scrollLeft / cardW));
+  };
+  return (
+    <section className="ml-section" id="how-section">
       <MLReveal>
         <span className="ml-eyebrow"><span className="ml-dot" />How it works</span>
         <h2 className="ml-h2">From LinkedIn tab to the right inbox in fifteen seconds.</h2>
       </MLReveal>
       <MLReveal style={{ transitionDelay: '100ms' }}>
-        <div className="ml-hiw-wrap">
-          <div className="ml-step-pills">
-            {ML_HIW_STEPS.map((st, i) => (
-              <button key={i} className={`ml-step-pill ${i === active ? 'ml-active' : ''}`} onClick={() => jumpTo(i)}>
-                <span className="ml-step-pill-num">{i < active ? <Icon name="check" size={10} /> : i + 1}</span>
-                {st.t}
-              </button>
-            ))}
-          </div>
-          <div className="ml-hiw-demo">
-            {started && <HiwProductDemo step={active} />}
-          </div>
+        <div className="ml-hiw-carousel" ref={scrollRef} onScroll={onScroll}>
+          {ML_HIW_STEPS.map((st, i) => (
+            <div className="ml-sv-card" key={i}>
+              <MLStepVisual step={i} />
+              <div className="ml-sv-num">{String(i + 1).padStart(2, '0')}</div>
+              <h3>{st.t}</h3>
+              <p>{st.s}</p>
+            </div>
+          ))}
+        </div>
+        <div className="ml-bdots">
+          {ML_HIW_STEPS.map((_, i) => <span key={i} className={`ml-bdot ${i === active ? 'ml-active' : ''}`} />)}
         </div>
       </MLReveal>
     </section>
