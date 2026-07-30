@@ -694,13 +694,20 @@ function HowItWorks({ speedMultiplier = 1 }) {
     open_det: 3, details: 3,
     replied: 4, gmail: 4, thread: 4,
   };
+  // Guards against a race: right after a manual click, a signal from the
+  // step that was JUST interrupted can still land a moment later. Ignoring
+  // phase reports for a brief window after a click means the click always
+  // wins, instead of occasionally being overwritten by a stale report.
+  const lastClickRef = useRefHIW(0);
   const handlePhase = (key) => {
+    if (Date.now() - lastClickRef.current < 400) return;
     const idx = PHASE_TO_STEP[key];
     if (idx !== undefined) setActive(idx);
   };
 
   // Clicking a step jumps the demo straight there.
   const handleStepClick = (i) => {
+    lastClickRef.current = Date.now();
     setActive(i);
     if (jumpToRef.current) jumpToRef.current(i);
   };
