@@ -44,19 +44,18 @@ function MLReveal({ children, style }) {
 // ---------- content (mirrors the real copy from sections.jsx / index.html) ----------
 
 const ML_BENEFITS = [
-  { ico: 'panel', t: 'Lives where you already are', s: "A Chrome extension that sits inside LinkedIn. No new app to learn, no second tab to keep open." },
-  { ico: 'target', t: 'Skip Easy Apply queues', s: 'Reach the founder and department head directly, where your application actually gets noticed.' },
-  { ico: 'forward', t: 'Forwarded to hiring directly', s: 'These applications carry an advantage — founders often move them straight to interviews.' },
+  { ico: 'panel', t: 'Lives where you already are', s: "A Chrome extension that works in LinkedIn. Just download it from chrome web store in laptop/desktop that's it." },
+  { ico: 'target', t: 'Skip Easy Apply queues', s: 'Thousands apply through LinkedIn and go unseen. Reach the key decision-maker and department head directly.' },
   { ico: 'sparkle', t: 'Tailored, never templated', s: 'Every application is unique, personalised to the job description and your resume.' },
   { ico: 'bolt', t: 'Fifteen-second applications', s: 'Detect → enroll → send. Personalized outreach creates stronger intent.' },
   { ico: 'chart', t: 'Decision-makers reply at multiples', s: 'Personalized outreach leads to more replies and interviews than a portal application.' },
 ];
 
 const ML_HIW_STEPS = [
-  { t: 'Sign in & add the Chrome extension', s: 'Install ToInbox — it lives right inside LinkedIn.' },
+  { t: 'Sign in & add the Chrome extension', s: 'Install ToInbox in your laptop/desktop from Chrome Web Store.' },
   { t: 'Open a job, click Enroll', s: 'One click on any LinkedIn job starts the process.' },
-  { t: 'Finds contacts, drafts your application', s: 'Hiring managers found, application personalised to your resume + this job.' },
-  { t: 'Sent from your Gmail', s: 'Application and resume delivered straight to their inbox.' },
+  { t: 'ToInbox finds contacts, drafts your application.', s: 'It finds the relevant dept. head and leaders behind that job and drafts a personalized mail using your resume and the job description.' },
+  { t: 'Sent from your Gmail', s: 'Personalized cover letter + resume delivered straight to their mailboxes.' },
   { t: 'Get noticed, land more interviews', s: 'Genuine intent gets seen — and gets replies.' },
 ];
 
@@ -165,7 +164,7 @@ function MLHero() {
           Tired of applying on LinkedIn? Send your application directly to leadership.
         </h1>
         <p className="ml-lead">
-          ToInbox finds the key decision-makers behind any LinkedIn job and sends your personalised application straight to their inbox — get noticed, get replies.
+          ToInbox finds the key decision-makers and relevant department heads behind any LinkedIn job and sends your personalised job application straight to their mail boxes — get noticed, get replies.
         </p>
         <div className="ml-hero-cta">
           <a href="https://app.toinbox.app" className="ml-btn ml-btn-accent">Sign In <Icon name="arrow" size={16} /></a>
@@ -228,7 +227,6 @@ function MLStepVisual({ step }) {
           <div className="ml-sv-cws-icon" />
           <div className="ml-sv-cws-name">ToInbox</div>
           <div className="ml-sv-cws-sub">Works inside LinkedIn</div>
-          <div className="ml-sv-cws-stars"><Icon name="star" size={10} /><Icon name="star" size={10} /><Icon name="star" size={10} /><Icon name="star" size={10} /><Icon name="star" size={10} /><span>4.9</span></div>
           <div className="ml-sv-cws-btn ml-sv-annotated">
             <Icon name="check" size={12} /> Added to Chrome
             <span className="ml-sv-ring" />
