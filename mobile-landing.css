@@ -174,11 +174,15 @@
 .ml-sv-card h3 { font-size: 16px; font-weight: 600; letter-spacing: -0.01em; margin: 0; }
 .ml-sv-card p { font-size: 13.5px; line-height: 1.5; color: var(--ink-3); margin: 0; }
 
-/* mini mockup frame shared by all 5 step visuals */
+/* mini mockup frame shared by all step visuals */
 .ml-sv-frame {
   height: 140px; border-radius: 12px; background: #f3f2ef; border: 1px solid var(--line);
   overflow: hidden; display: flex; flex-direction: column;
 }
+.ml-sv-tall { height: 170px; }
+@keyframes mlSpin { to { transform: rotate(360deg); } }
+.ml-sv-avatar-sm { width: 30px; height: 30px; border-radius: 50%; color: white; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; border: 2px solid #f3f2ef; }
+.ml-sv-avatar-sm2 { margin-left: -10px; }
 .ml-sv-center { align-items: center; justify-content: center; gap: 10px; padding: 0 16px; }
 .ml-sv-dots { display: flex; gap: 4px; padding: 8px 10px; background: linear-gradient(180deg,#fafaf9,#f3f2ee); border-bottom: 1px solid var(--line); }
 .ml-sv-dots span { width: 7px; height: 7px; border-radius: 50%; background: #e2dfd8; }
@@ -186,42 +190,76 @@
 .ml-sv-dots span:nth-child(2) { background: #ffbe2e; }
 .ml-sv-dots span:nth-child(3) { background: #28c941; }
 
-/* step 1 — chrome web store */
-.ml-sv-store { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; background: #fff; }
-.ml-sv-store-icon { width: 34px; height: 34px; border-radius: 9px; background: linear-gradient(135deg, var(--accent), var(--accent-2)); }
-.ml-sv-store-name { font-size: 13px; font-weight: 700; }
-.ml-sv-store-sub { font-size: 10.5px; color: var(--ink-4); margin-top: -4px; }
-.ml-sv-store-btn { margin-top: 4px; font-size: 11px; font-weight: 600; color: white; background: var(--accent); padding: 6px 14px; border-radius: 8px; }
+/* shared: pulsing ring annotation on a key element */
+.ml-sv-annotated { position: relative; }
+.ml-sv-ring {
+  position: absolute; inset: -3px; border-radius: 12px; border: 2px solid var(--accent);
+  animation: mlRingPulse 1.8s ease-out infinite; pointer-events: none;
+}
+@keyframes mlRingPulse { 0% { opacity: .9; transform: scale(1); } 100% { opacity: 0; transform: scale(1.04); } }
 
-/* step 2 — linkedin job */
-.ml-sv-li { flex: 1; background: #fff; padding: 10px 12px; display: flex; flex-direction: column; gap: 8px; }
-.ml-sv-li-search { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--ink-3); background: var(--bg-soft); border-radius: 7px; padding: 6px 9px; }
-.ml-sv-li-job { display: flex; align-items: center; gap: 8px; background: var(--accent-soft); border-radius: 8px; padding: 8px 9px; }
-.ml-sv-li-job-logo { width: 26px; height: 26px; border-radius: 6px; background: #1e3a5f; color: white; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-.ml-sv-li-job-title { font-size: 11.5px; font-weight: 600; line-height: 1.3; }
-.ml-sv-li-job-co { font-size: 10px; color: var(--ink-4); margin-top: 1px; }
+/* step 0 — LinkedIn job list */
+.ml-sv-li-top { display: flex; align-items: center; gap: 8px; padding: 8px 10px; background: #fff; border-bottom: 1px solid var(--line); }
+.ml-sv-li-logo { width: 20px; height: 20px; border-radius: 4px; background: #0a66c2; color: white; font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+.ml-sv-li-search { display: flex; align-items: center; gap: 5px; font-size: 10.5px; color: var(--ink-3); background: var(--bg-soft); border-radius: 6px; padding: 5px 8px; flex: 1; }
+.ml-sv-li-chips { display: flex; gap: 5px; padding: 6px 10px; background: #fff; border-bottom: 1px solid var(--line); }
+.ml-sv-li-chip { font-size: 9.5px; color: var(--ink-3); background: var(--bg-soft); border-radius: 999px; padding: 3px 8px; }
+.ml-sv-li-card { display: flex; align-items: center; gap: 9px; background: #fff; padding: 9px 10px; margin: 8px 10px 0; border-radius: 9px; border: 1px solid var(--line); }
+.ml-sv-li-card.ml-sv-dim { opacity: 0.45; margin-top: 6px; }
+.ml-sv-li-cardlogo { width: 26px; height: 26px; border-radius: 6px; background: #6d54c7; color: white; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.ml-sv-li-cardtext { min-width: 0; }
+.ml-sv-li-cardtitle { font-size: 11.5px; font-weight: 600; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ml-sv-li-cardco { font-size: 10px; color: var(--ink-4); margin-top: 1px; }
 
-/* step 3 — processing */
-.ml-sv-spinner { width: 22px; height: 22px; border-radius: 50%; border: 2.5px solid var(--line-2); border-top-color: var(--accent); animation: mlSpin .8s linear infinite; }
-@keyframes mlSpin { to { transform: rotate(360deg); } }
-.ml-sv-processing-text { font-size: 12.5px; font-weight: 500; color: var(--ink-2); text-align: center; }
-.ml-sv-processing-bar { width: 100%; max-width: 160px; height: 5px; border-radius: 3px; background: var(--line-2); overflow: hidden; }
-.ml-sv-processing-bar span { display: block; height: 100%; width: 55%; background: var(--accent); border-radius: 3px; animation: mlProcess 1.6s ease-in-out infinite; }
-@keyframes mlProcess { 0%,100% { width: 30%; } 50% { width: 75%; } }
+/* step 1 — detection: arrow + pulsing pin */
+.ml-sv-arrow { position: absolute; right: 8px; top: 42px; width: 110px; height: 40px; }
+.ml-sv-pin-wrap { position: absolute; right: 14px; bottom: 14px; }
+.ml-sv-pin-pulse {
+  position: absolute; inset: -6px; border-radius: 999px; background: color-mix(in oklab, var(--accent) 40%, transparent);
+  animation: mlPinPulse 1.5s ease-out infinite;
+}
+@keyframes mlPinPulse { 0% { opacity: .7; transform: scale(0.8); } 100% { opacity: 0; transform: scale(1.6); } }
+.ml-sv-pin { position: relative; display: flex; align-items: center; gap: 5px; background: var(--ink); color: white; font-size: 10.5px; font-weight: 600; padding: 6px 10px; border-radius: 999px; box-shadow: 0 8px 18px -6px rgba(0,0,0,0.4); }
+.ml-sv-pin-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
 
-/* step 4 — sent */
-.ml-sv-send-row { display: flex; align-items: center; }
-.ml-sv-avatar-sm { width: 30px; height: 30px; border-radius: 50%; color: white; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; border: 2px solid #f3f2ef; }
-.ml-sv-avatar-sm2 { margin-left: -10px; }
-.ml-sv-send-label { font-size: 11.5px; color: var(--ink-3); margin-left: 8px; }
-.ml-sv-send-status { display: flex; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 600; color: #057642; background: #e6f4ea; padding: 6px 12px; border-radius: 999px; }
+/* shared panel chrome — steps 2, 3 */
+.ml-sv-panel-head { display: flex; align-items: center; gap: 7px; font-size: 11.5px; font-weight: 700; padding: 9px 12px; background: #fff; border-bottom: 1px solid var(--line); }
+.ml-sv-panel-logo { width: 18px; height: 18px; border-radius: 5px; background: linear-gradient(135deg, var(--accent), var(--accent-2)); }
+.ml-sv-panel-job { display: flex; align-items: center; gap: 8px; font-size: 10.5px; color: var(--ink-3); padding: 7px 12px; background: var(--accent-soft); }
 
-/* step 5 — reply */
-.ml-sv-reply { flex: 1; background: #fff; padding: 12px 14px; display: flex; flex-direction: column; gap: 8px; justify-content: center; }
-.ml-sv-reply-head { display: flex; align-items: center; gap: 8px; }
-.ml-sv-reply-name { font-size: 12.5px; font-weight: 600; flex: 1; }
-.ml-sv-reply-tag { font-size: 10px; font-weight: 700; color: #1a56db; background: #e8f0ff; padding: 3px 8px; border-radius: 999px; }
-.ml-sv-reply-text { font-size: 12px; line-height: 1.5; color: var(--ink-3); font-style: italic; }
+/* step 2 — finding hiring managers */
+.ml-sv-find-list { display: flex; flex-direction: column; gap: 6px; padding: 8px 12px; background: #fff; flex: 1; }
+.ml-sv-find-row { display: flex; align-items: center; gap: 8px; }
+.ml-sv-find-check { width: 17px; height: 17px; border-radius: 50%; background: #e6f4ea; color: #057642; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.ml-sv-find-name { font-size: 11px; font-weight: 600; }
+.ml-sv-find-role { font-size: 9.5px; color: var(--ink-4); }
+.ml-sv-dimtext { color: var(--ink-4); font-weight: 400; }
+.ml-sv-find-spin { width: 15px; height: 15px; border-radius: 50%; border: 2px solid var(--line-2); border-top-color: var(--accent); flex-shrink: 0; animation: mlSpin .8s linear infinite; }
+
+/* step 3 — drafting */
+.ml-sv-ai-badge { margin-left: auto; display: flex; align-items: center; gap: 4px; font-size: 9.5px; font-weight: 700; color: var(--accent-ink); background: var(--accent-soft); padding: 3px 7px; border-radius: 999px; }
+.ml-sv-draft { background: #fff; padding: 9px 12px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+.ml-sv-draft-to { font-size: 9.5px; color: var(--ink-4); }
+.ml-sv-draft-subj { font-size: 11px; font-weight: 600; }
+.ml-sv-draft-line { height: 6px; border-radius: 3px; background: var(--bg-soft); }
+.ml-sv-draft-line.ml-sv-typing { background: var(--accent-soft); animation: mlTypeFade 1.2s ease-in-out infinite; }
+@keyframes mlTypeFade { 0%,100% { opacity: 1; } 50% { opacity: .4; } }
+.ml-sv-personalizing { font-size: 10px; color: var(--accent-ink); background: var(--accent-soft); padding: 6px 12px; font-weight: 600; }
+
+/* step 4 — review */
+.ml-sv-review { background: #fff; padding: 12px 14px; flex: 1; position: relative; }
+.ml-sv-review-row { display: flex; align-items: center; }
+.ml-sv-avatar-xs { width: 22px; height: 22px; font-size: 10px; border: 2px solid #fff; }
+.ml-sv-review-names { font-size: 10.5px; color: var(--ink-3); margin-left: 8px; }
+.ml-sv-review-attach { display: flex; align-items: center; gap: 7px; margin-top: 8px; font-size: 10.5px; color: var(--ink-3); font-weight: 500; }
+.ml-sv-eye-badge { position: absolute; top: 10px; right: 12px; width: 24px; height: 24px; border-radius: 50%; background: var(--accent-soft); color: var(--accent-ink); display: flex; align-items: center; justify-content: center; }
+
+/* step 5 — sent confirmation */
+.ml-sv-sent-check { width: 34px; height: 34px; border-radius: 50%; background: #e6f4ea; color: #057642; display: flex; align-items: center; justify-content: center; }
+.ml-sv-sent-title { font-size: 13px; font-weight: 700; color: #057642; }
+.ml-sv-sent-row { display: flex; align-items: center; gap: 8px; font-size: 11.5px; font-weight: 500; }
+.ml-sv-sent-tick { color: #057642; margin-left: 4px; }
+.ml-sv-sent-gmail { font-size: 10px; color: var(--ink-4); margin-top: 2px; }
 
 /* ---------- product showcase — native mobile cards, not a shrunk browser mockup ---------- */
 .ml-stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }

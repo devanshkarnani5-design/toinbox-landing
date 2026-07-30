@@ -53,11 +53,12 @@ const ML_BENEFITS = [
 ];
 
 const ML_HIW_STEPS = [
-  { t: 'Sign in & add the Chrome extension', s: 'Sign in to ToInbox and download its Chrome extension.' },
-  { t: 'Open LinkedIn', s: 'Click any job — ToInbox detects it and opens its panel automatically.' },
-  { t: 'Finding & Drafting', s: 'ToInbox finds the hiring contacts and drafts a personalised application.' },
-  { t: 'Send your application', s: 'Your personalised application is sent directly from your Gmail.' },
-  { t: 'Get noticed, land more interviews', s: 'Your application stands out and gets real replies.' },
+  { t: 'Open a LinkedIn job', s: 'Browse LinkedIn as you normally would.' },
+  { t: 'ToInbox detects it', s: 'The moment you open a job, ToInbox recognizes it automatically.' },
+  { t: 'Finds the hiring managers', s: 'It identifies the real decision-makers behind the listing.' },
+  { t: 'Drafts your application', s: 'A personalised application is written for this exact role.' },
+  { t: 'You review it', s: 'See exactly who it goes to and what it says before anything sends.' },
+  { t: 'Sent from your Gmail', s: 'Delivered straight to their inbox — not a portal.' },
 ];
 
 const ML_STATS = [
@@ -214,67 +215,146 @@ function MLBenefits() {
 // ---------- how it works (same self-contained jumpTo/tick pattern as the desktop file) ----------
 
 function MLStepVisual({ step }) {
+  // Step 0 — Open a LinkedIn job: real LinkedIn chrome, filters, and a
+  // selected job card, so it reads instantly as "this is LinkedIn."
   if (step === 0) {
     return (
-      <div className="ml-sv-frame">
-        <div className="ml-sv-dots"><span /><span /><span /></div>
-        <div className="ml-sv-store">
-          <div className="ml-sv-store-icon" />
-          <div className="ml-sv-store-name">ToInbox</div>
-          <div className="ml-sv-store-sub">Chrome Web Store</div>
-          <div className="ml-sv-store-btn">Add to Chrome</div>
+      <div className="ml-sv-frame ml-sv-tall">
+        <div className="ml-sv-li-top">
+          <span className="ml-sv-li-logo">in</span>
+          <div className="ml-sv-li-search"><Icon name="search" size={10} />Program Manager</div>
         </div>
-      </div>
-    );
-  }
-  if (step === 1) {
-    return (
-      <div className="ml-sv-frame">
-        <div className="ml-sv-dots"><span /><span /><span /></div>
-        <div className="ml-sv-li">
-          <div className="ml-sv-li-search"><Icon name="search" size={12} /> Program Manager</div>
-          <div className="ml-sv-li-job">
-            <div className="ml-sv-li-job-logo">E</div>
-            <div>
-              <div className="ml-sv-li-job-title">Senior Program Manager</div>
-              <div className="ml-sv-li-job-co">Esper · Bengaluru</div>
-            </div>
+        <div className="ml-sv-li-chips">
+          {['Jobs', 'Date posted', 'Remote'].map(c => <span key={c} className="ml-sv-li-chip">{c}</span>)}
+        </div>
+        <div className="ml-sv-li-card ml-sv-annotated">
+          <span className="ml-sv-li-cardlogo">E</span>
+          <div className="ml-sv-li-cardtext">
+            <div className="ml-sv-li-cardtitle">Senior Program Manager</div>
+            <div className="ml-sv-li-cardco">Esper · Bengaluru</div>
+          </div>
+          <span className="ml-sv-ring" />
+        </div>
+        <div className="ml-sv-li-card ml-sv-dim">
+          <span className="ml-sv-li-cardlogo" style={{ background: '#7c2d12' }}>R</span>
+          <div className="ml-sv-li-cardtext">
+            <div className="ml-sv-li-cardtitle">Backend Engineer</div>
+            <div className="ml-sv-li-cardco">Reed Labs · Remote</div>
           </div>
         </div>
       </div>
     );
   }
+
+  // Step 1 — ToInbox detects it: same page, ToInbox pin appears with a
+  // pulse + a curved arrow connecting the job to the detection itself.
+  if (step === 1) {
+    return (
+      <div className="ml-sv-frame ml-sv-tall" style={{ position: 'relative' }}>
+        <div className="ml-sv-li-top">
+          <span className="ml-sv-li-logo">in</span>
+          <div className="ml-sv-li-search"><Icon name="search" size={10} />Program Manager</div>
+        </div>
+        <div className="ml-sv-li-card" style={{ margin: '10px 10px 0' }}>
+          <span className="ml-sv-li-cardlogo">E</span>
+          <div className="ml-sv-li-cardtext">
+            <div className="ml-sv-li-cardtitle">Senior Program Manager</div>
+            <div className="ml-sv-li-cardco">Esper · Bengaluru</div>
+          </div>
+        </div>
+        <svg className="ml-sv-arrow" viewBox="0 0 240 70" fill="none">
+          <path d="M60 14 C 120 14, 150 50, 195 52" stroke="var(--accent)" strokeWidth="2" strokeDasharray="4 4" strokeLinecap="round" />
+          <path d="M187 46 L197 52 L189 60" stroke="var(--accent)" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+        <div className="ml-sv-pin-wrap">
+          <span className="ml-sv-pin-pulse" />
+          <div className="ml-sv-pin"><span className="ml-sv-pin-dot" />ToInbox</div>
+        </div>
+      </div>
+    );
+  }
+
+  // Step 2 — Finds the hiring managers: the real panel chrome, with names
+  // resolving one by one, checkmarks landing as they're found.
   if (step === 2) {
     return (
-      <div className="ml-sv-frame ml-sv-center">
-        <div className="ml-sv-spinner" />
-        <div className="ml-sv-processing-text">Personalizing your application…</div>
-        <div className="ml-sv-processing-bar"><span /></div>
+      <div className="ml-sv-frame ml-sv-tall">
+        <div className="ml-sv-panel-head">
+          <span className="ml-sv-panel-logo" />ToInbox
+        </div>
+        <div className="ml-sv-panel-job">
+          <span className="ml-sv-li-cardlogo" style={{ width: 22, height: 22, fontSize: 10 }}>E</span>
+          Senior Program Manager · Esper
+        </div>
+        <div className="ml-sv-find-list">
+          <div className="ml-sv-find-row ml-sv-find-done">
+            <span className="ml-sv-find-check"><Icon name="check" size={9} /></span>
+            <div><div className="ml-sv-find-name">Priya Nair</div><div className="ml-sv-find-role">Hiring Manager</div></div>
+          </div>
+          <div className="ml-sv-find-row ml-sv-find-done">
+            <span className="ml-sv-find-check"><Icon name="check" size={9} /></span>
+            <div><div className="ml-sv-find-name">Arjun Mehta</div><div className="ml-sv-find-role">Head of Technology</div></div>
+          </div>
+          <div className="ml-sv-find-row">
+            <span className="ml-sv-find-spin" />
+            <div><div className="ml-sv-find-name ml-sv-dimtext">Searching more contacts…</div></div>
+          </div>
+        </div>
       </div>
     );
   }
+
+  // Step 3 — Drafts your application: AI-personalized email being written,
+  // referencing the actual role, with a visible "typing" line.
   if (step === 3) {
     return (
-      <div className="ml-sv-frame ml-sv-center">
-        <div className="ml-sv-send-row">
-          <span className="ml-sv-avatar-sm" style={{ background: '#6d54c7' }}>P</span>
-          <span className="ml-sv-avatar-sm ml-sv-avatar-sm2" style={{ background: '#374151' }}>A</span>
-          <span className="ml-sv-send-label">2 recipients</span>
+      <div className="ml-sv-frame ml-sv-tall">
+        <div className="ml-sv-panel-head">
+          <span className="ml-sv-panel-logo" />ToInbox
+          <span className="ml-sv-ai-badge"><Icon name="sparkle" size={9} /> AI</span>
         </div>
-        <div className="ml-sv-send-status"><Icon name="check" size={12} /> Sent from your Gmail</div>
+        <div className="ml-sv-draft">
+          <div className="ml-sv-draft-to">To: Priya Nair, Arjun Mehta</div>
+          <div className="ml-sv-draft-subj">Application for Senior Program Manager</div>
+          <div className="ml-sv-draft-line" style={{ width: '94%' }} />
+          <div className="ml-sv-draft-line" style={{ width: '88%' }} />
+          <div className="ml-sv-draft-line ml-sv-typing" style={{ width: '52%' }} />
+        </div>
+        <div className="ml-sv-personalizing">Personalizing for Esper's job description…</div>
       </div>
     );
   }
-  return (
-    <div className="ml-sv-frame">
-      <div className="ml-sv-reply">
-        <div className="ml-sv-reply-head">
-          <span className="ml-sv-avatar-sm" style={{ background: '#6d54c7' }}>P</span>
-          <div className="ml-sv-reply-name">Priya Nair</div>
-          <span className="ml-sv-reply-tag">Interview</span>
+
+  // Step 4 — You review it: the complete drafted card, highlighted with a
+  // review ring so it's clear nothing sends without this step.
+  if (step === 4) {
+    return (
+      <div className="ml-sv-frame ml-sv-tall">
+        <div className="ml-sv-review ml-sv-annotated">
+          <div className="ml-sv-review-row">
+            <span className="ml-sv-avatar-sm ml-sv-avatar-xs" style={{ background: '#6d54c7' }}>P</span>
+            <span className="ml-sv-avatar-sm ml-sv-avatar-xs ml-sv-avatar-sm2" style={{ background: '#374151' }}>A</span>
+            <span className="ml-sv-review-names">Priya Nair, Arjun Mehta</span>
+          </div>
+          <div className="ml-sv-draft-subj" style={{ marginTop: 8 }}>Application for Senior Program Manager</div>
+          <div className="ml-sv-draft-line" style={{ width: '90%' }} />
+          <div className="ml-sv-draft-line" style={{ width: '70%' }} />
+          <div className="ml-sv-review-attach"><span className="ml-hv-pdf">PDF</span> Resume_Tailored.pdf</div>
+          <span className="ml-sv-eye-badge"><Icon name="eye" size={11} /></span>
         </div>
-        <div className="ml-sv-reply-text">"We'd like to schedule an interview — are you free tomorrow?"</div>
       </div>
+    );
+  }
+
+  // Step 5 — Sent from your Gmail: delivered confirmation, both recipients
+  // checked off.
+  return (
+    <div className="ml-sv-frame ml-sv-tall ml-sv-center">
+      <div className="ml-sv-sent-check"><Icon name="check" size={18} /></div>
+      <div className="ml-sv-sent-title">Delivered</div>
+      <div className="ml-sv-sent-row"><span className="ml-sv-avatar-sm ml-sv-avatar-xs" style={{ background: '#6d54c7' }}>P</span>Priya Nair<Icon name="check" size={11} className="ml-sv-sent-tick" /></div>
+      <div className="ml-sv-sent-row"><span className="ml-sv-avatar-sm ml-sv-avatar-xs" style={{ background: '#374151' }}>A</span>Arjun Mehta<Icon name="check" size={11} className="ml-sv-sent-tick" /></div>
+      <div className="ml-sv-sent-gmail">Sent from your Gmail</div>
     </div>
   );
 }
