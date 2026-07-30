@@ -2836,3 +2836,16 @@ h1, h2, h3, h4 { margin: 0; letter-spacing: -0.02em; font-weight: 500; }
   min-height: 520px;
   width: 100%;
 }
+
+/* Smaller caption for the isolated how-it-works demo only — does not
+   affect the hero's shared .sd-caption/.sd-caption-num styling. */
+.hiw-pd-caption {
+  padding: 8px 16px 8px 8px;
+  gap: 7px;
+  font-size: 13px;
+}
+.hiw-pd-caption-num {
+  width: 22px;
+  height: 22px;
+  font-size: 11px;
+}
