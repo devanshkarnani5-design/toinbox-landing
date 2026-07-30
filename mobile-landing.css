@@ -1,0 +1,172 @@
+/* ============================================================
+   MOBILE LANDING — fully isolated from styles.css.
+   Every rule is scoped under .ml-* so nothing here can ever
+   collide with or override the existing desktop stylesheet.
+   Brand tokens (--accent, --ink, --bg, --font-sans, etc.) are
+   REUSED from styles.css's :root — this is intentional reuse of
+   the single source of truth for brand consistency, not a
+   duplication of desktop layout code.
+   ============================================================ */
+
+.ml-root {
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--ink);
+  overflow-x: hidden;
+  width: 100%;
+}
+.ml-root * { box-sizing: border-box; }
+
+/* ---------- reveal-on-scroll (self-contained, mirrors desktop's data-reveal) ---------- */
+.ml-reveal { opacity: 0; transform: translateY(14px); transition: opacity .5s ease, transform .5s ease; }
+.ml-reveal.ml-in { opacity: 1; transform: none; }
+
+/* ---------- nav ---------- */
+.ml-nav {
+  position: sticky; top: 0; z-index: 40;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px;
+  background: rgba(246,247,249,0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+}
+.ml-brand { display: flex; align-items: center; gap: 9px; font-size: 17px; font-weight: 600; letter-spacing: -0.01em; }
+.ml-brand-mark { width: 24px; height: 24px; border-radius: 7px; background: linear-gradient(135deg, var(--accent), var(--accent-2)); flex-shrink: 0; }
+.ml-menu-btn {
+  width: 40px; height: 40px; border-radius: 10px; border: 1px solid var(--line-2);
+  background: var(--bg-elev); display: flex; align-items: center; justify-content: center;
+  color: var(--ink); flex-shrink: 0;
+}
+.ml-menu-overlay {
+  position: fixed; inset: 0; z-index: 50; background: rgba(10,10,10,0.4); backdrop-filter: blur(2px);
+  opacity: 0; pointer-events: none; transition: opacity .25s ease;
+}
+.ml-menu-overlay.ml-open { opacity: 1; pointer-events: auto; }
+.ml-menu-sheet {
+  position: fixed; top: 0; right: 0; bottom: 0; z-index: 51; width: min(84vw, 340px);
+  background: var(--bg-elev); box-shadow: -20px 0 60px -20px rgba(0,0,0,0.35);
+  padding: 20px; display: flex; flex-direction: column; gap: 4px;
+  transform: translateX(100%); transition: transform .3s cubic-bezier(.22,1,.36,1);
+}
+.ml-menu-sheet.ml-open { transform: none; }
+.ml-menu-close { align-self: flex-end; width: 36px; height: 36px; border-radius: 9px; border: 1px solid var(--line-2); background: var(--bg); display: flex; align-items: center; justify-content: center; margin-bottom: 12px; }
+.ml-menu-link { padding: 15px 6px; font-size: 17px; font-weight: 500; color: var(--ink); border-bottom: 1px solid var(--line); }
+.ml-menu-cta { margin-top: 16px; }
+
+/* ---------- generic section rhythm ---------- */
+.ml-section { padding: 56px 20px; }
+.ml-section + .ml-section { padding-top: 0; }
+.ml-eyebrow {
+  display: inline-flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 600;
+  letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent-ink);
+  background: var(--accent-soft); border: 1px solid color-mix(in oklab, var(--accent) 24%, transparent);
+  padding: 6px 12px; border-radius: 999px;
+}
+.ml-eyebrow .ml-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+.ml-h1 { font-size: 34px; line-height: 1.12; letter-spacing: -0.02em; font-weight: 600; margin: 16px 0 0; }
+.ml-h2 { font-size: 26px; line-height: 1.18; letter-spacing: -0.02em; font-weight: 600; margin: 14px 0 0; }
+.ml-lead { font-size: 16px; line-height: 1.55; color: var(--ink-3); margin: 12px 0 0; }
+
+/* ---------- buttons — touch-friendly, min 48px tall ---------- */
+.ml-btn {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  width: 100%; min-height: 52px; border-radius: 14px;
+  font-size: 16px; font-weight: 600; letter-spacing: -0.01em;
+  text-decoration: none; border: none; cursor: pointer;
+}
+.ml-btn-primary { background: var(--ink); color: var(--bg-elev); }
+.ml-btn-accent { background: var(--accent); color: white; }
+.ml-btn-ghost { background: transparent; color: var(--ink-3); border: 1px solid var(--line-2); }
+
+/* ---------- hero ---------- */
+.ml-hero { padding-top: 40px; }
+.ml-hero-cta { display: flex; flex-direction: column; gap: 10px; margin-top: 26px; }
+.ml-hero-demo { margin-top: 32px; border-radius: 18px; overflow: hidden; }
+
+/* ---------- benefits — horizontal snap carousel, premium mobile pattern ---------- */
+.ml-bcarousel {
+  display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory;
+  padding: 4px 20px 8px; margin: 24px -20px 0;
+  -webkit-overflow-scrolling: touch;
+}
+.ml-bcarousel::-webkit-scrollbar { display: none; }
+.ml-bcard {
+  scroll-snap-align: start; flex: 0 0 78%; max-width: 320px;
+  background: var(--bg-elev); border: 1px solid var(--line); border-radius: 18px;
+  padding: 22px; display: flex; flex-direction: column; gap: 10px;
+}
+.ml-bcard-ico {
+  width: 40px; height: 40px; border-radius: 11px; background: var(--accent-soft); color: var(--accent-ink);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.ml-bcard h3 { font-size: 16.5px; font-weight: 600; letter-spacing: -0.01em; margin: 0; }
+.ml-bcard p { font-size: 14px; line-height: 1.5; color: var(--ink-3); margin: 0; }
+.ml-bdots { display: flex; gap: 6px; justify-content: center; margin-top: 14px; }
+.ml-bdot { width: 6px; height: 6px; border-radius: 50%; background: var(--line-2); transition: background .2s ease, width .2s ease; }
+.ml-bdot.ml-active { background: var(--accent); width: 18px; border-radius: 4px; }
+
+/* ---------- how it works — pill steps + demo below ---------- */
+.ml-hiw-wrap { background: var(--ink); border-radius: 22px; padding: 28px 20px 24px; margin: 0 20px; }
+.ml-hiw-wrap .ml-eyebrow { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.14); color: rgba(255,255,255,0.75); }
+.ml-hiw-wrap .ml-eyebrow .ml-dot { background: var(--accent); }
+.ml-hiw-wrap .ml-h2 { color: #f5f5f4; }
+.ml-hiw-wrap .ml-lead { color: rgba(245,245,244,0.62); }
+.ml-step-pills { display: flex; gap: 8px; overflow-x: auto; margin: 20px 0 16px; padding-bottom: 4px; -webkit-overflow-scrolling: touch; }
+.ml-step-pills::-webkit-scrollbar { display: none; }
+.ml-step-pill {
+  flex: 0 0 auto; display: flex; align-items: center; gap: 7px;
+  padding: 9px 14px; border-radius: 999px; font-size: 13px; font-weight: 600;
+  background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.5); border: 1px solid rgba(255,255,255,0.08);
+  white-space: nowrap;
+}
+.ml-step-pill.ml-active { background: var(--accent); color: white; border-color: var(--accent); }
+.ml-step-pill-num {
+  width: 18px; height: 18px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+  font-size: 10px; font-family: var(--font-mono); background: rgba(255,255,255,0.12);
+}
+.ml-step-pill.ml-active .ml-step-pill-num { background: rgba(255,255,255,0.25); }
+.ml-hiw-demo { border-radius: 14px; overflow: hidden; }
+
+/* ---------- product showcase — native mobile cards, not a shrunk browser mockup ---------- */
+.ml-stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
+.ml-stat-card { background: var(--bg-elev); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; }
+.ml-stat-num { font-size: 26px; font-weight: 600; letter-spacing: -0.02em; line-height: 1; }
+.ml-stat-lbl { font-size: 11.5px; color: var(--ink-4); margin-top: 5px; }
+.ml-app-list { display: flex; flex-direction: column; gap: 8px; margin-top: 14px; }
+.ml-app-row { display: flex; align-items: center; gap: 12px; background: var(--bg-elev); border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; }
+.ml-app-logo { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 12px; flex-shrink: 0; }
+.ml-app-info { flex: 1; min-width: 0; }
+.ml-app-co { font-size: 14px; font-weight: 600; }
+.ml-app-role { font-size: 12.5px; color: var(--ink-3); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ml-app-status { font-size: 11px; font-weight: 600; padding: 4px 9px; border-radius: 999px; font-family: var(--font-mono); white-space: nowrap; flex-shrink: 0; }
+
+/* ---------- pricing — featured plan first ---------- */
+.ml-price-stack { display: flex; flex-direction: column; gap: 14px; margin-top: 24px; }
+.ml-price-card { background: var(--bg-elev); border: 1px solid var(--line); border-radius: 18px; padding: 24px; display: flex; flex-direction: column; gap: 16px; position: relative; }
+.ml-price-card.ml-featured { background: var(--ink); color: #fafafa; border-color: var(--ink); }
+.ml-price-card.ml-featured .ml-price-sub,
+.ml-price-card.ml-featured .ml-price-name { color: rgba(255,255,255,0.65); }
+.ml-price-tag { position: absolute; top: 18px; right: 18px; font-size: 11px; padding: 4px 10px; border-radius: 999px; background: var(--accent); color: white; font-family: var(--font-mono); font-weight: 600; }
+.ml-price-name { font-size: 13px; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.07em; color: var(--ink-3); }
+.ml-price-amt { font-size: 42px; font-weight: 500; letter-spacing: -0.03em; line-height: 1; margin-top: 6px; }
+.ml-price-amt .ml-currency { font-size: 19px; vertical-align: 16px; margin-right: 2px; opacity: 0.7; }
+.ml-price-amt .ml-per { font-size: 13px; opacity: 0.6; margin-left: 6px; font-weight: 400; }
+.ml-price-sub { font-size: 13.5px; color: var(--ink-3); margin-top: 2px; }
+.ml-price-feats { display: flex; flex-direction: column; gap: 9px; }
+.ml-price-feat { display: flex; gap: 9px; font-size: 14px; align-items: flex-start; }
+.ml-price-check { width: 17px; height: 17px; border-radius: 50%; flex: 0 0 auto; background: var(--accent-soft); color: var(--accent-ink); display: flex; align-items: center; justify-content: center; margin-top: 1px; }
+.ml-price-card.ml-featured .ml-price-check { background: rgba(255,255,255,0.15); color: white; }
+
+/* ---------- final CTA ---------- */
+.ml-final { background: var(--ink); border-radius: 24px; padding: 40px 24px; margin: 0 20px; text-align: center; }
+.ml-final .ml-h2 { color: #fafafa; }
+.ml-final .ml-lead { color: rgba(245,245,244,0.62); }
+.ml-final .ml-hero-cta { margin-top: 24px; }
+.ml-final-note { font-size: 11.5px; color: rgba(245,245,244,0.45); font-family: var(--font-mono); margin-top: 18px; }
+
+/* ---------- footer ---------- */
+.ml-foot { padding: 40px 20px 32px; }
+.ml-foot-desc { font-size: 13px; color: var(--ink-4); margin-top: 8px; }
+.ml-foot-links { display: flex; flex-wrap: wrap; gap: 14px 20px; margin-top: 22px; }
+.ml-foot-links a { font-size: 13.5px; color: var(--ink-3); text-decoration: none; }
+.ml-foot-copy { font-size: 12px; color: var(--ink-4); font-family: var(--font-mono); margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--line); }
