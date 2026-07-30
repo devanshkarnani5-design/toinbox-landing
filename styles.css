@@ -2818,3 +2818,21 @@ h1, h2, h3, h4 { margin: 0; letter-spacing: -0.02em; font-weight: 500; }
   transition: transform .7s cubic-bezier(0.22,1,0.36,1);
   will-change: transform;
 }
+
+/* HIW-only product demo frame — matches the ORIGINAL .hiw-browser dimensions
+   exactly (same border, radius, shadow, min-height, no artificial width cap)
+   so every scene (including the install/sign-in step) sits in the same
+   frame the old how-it-works demo always used. Scoped under its own name
+   so the shared .hiw-browser class (still used by the untouched hero-side
+   HeroBrowser/HowitworksBrowser system) is never touched. */
+.hiw-pd-frame {
+  border-radius: 14px;
+  border: 1px solid var(--line-2);
+  box-shadow: var(--shadow-3);
+  overflow: hidden;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  min-height: 520px;
+  width: 100%;
+}
