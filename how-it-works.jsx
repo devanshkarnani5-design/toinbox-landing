@@ -10,6 +10,12 @@ const HIW_STEPS = [
 ];
 
 const STEP_MS = [9000, 6000, 6000, 3000, 7000];
+// Durations for the NEW isolated how-it-works demo (product-demo-hiw.jsx) —
+// separate from STEP_MS above, which is only used by the untouched hero-side
+// HeroBrowser. Each value gives enough time for that step's own internal
+// animation (cursor moves, taps, waits) to fully play out before the parent
+// auto-advances to the next one.
+const HIW_STEP_MS = [9500, 8000, 6000, 6000, 13000];
 
 const HIW_JOBS = [
   { logo: 'N', bg: '#1e3a5f', title: 'Founding Product Engineer', co: 'Northwind', match: 94, email: 'm.v@northwind.co' },
@@ -669,48 +675,44 @@ function HowItWorks({ speedMultiplier = 1 }) {
   const [active, setActive] = useStateHIW(0);
   const [started, setStarted] = useStateHIW(false);
   const startedRef = useRefHIW(false);
-  const jumpToRef = useRefHIW(null);
+  const tickRef = useRefHIW(null);
 
-  // Only mount the (self-timed) demo once this section scrolls into view.
+  // Same self-contained restart pattern as the ORIGINAL how-it-works demo:
+  // jumpTo cancels whatever timer is currently running and starts a fresh
+  // one from the given step. Used identically whether the step change came
+  // from the auto-advance timer or a click — there's only one code path,
+  // so there's nothing to get out of sync.
+  const jumpTo = (i) => {
+    cancelAnimationFrame(tickRef.current);
+    setActive(i);
+    let idx = i;
+    let startTime = Date.now();
+    const tick = () => {
+      const elapsed = Date.now() - startTime;
+      if (elapsed >= HIW_STEP_MS[idx] / speedMultiplier) {
+        idx = (idx + 1) % HIW_STEPS.length;
+        startTime = Date.now();
+        setActive(idx);
+      }
+      tickRef.current = requestAnimationFrame(tick);
+    };
+    tickRef.current = requestAnimationFrame(tick);
+  };
+
+  // Only start the (now parent-driven) timer once this section scrolls
+  // into view.
   useEffectHIW(() => {
     const el = document.getElementById('how-section');
     if (!el) return;
     const io = new IntersectionObserver((entries) => {
       entries.forEach((e) => {
-        if (e.isIntersecting && !startedRef.current) { startedRef.current = true; setStarted(true); }
+        if (e.isIntersecting && !startedRef.current) { startedRef.current = true; setStarted(true); jumpTo(0); }
       });
     }, { threshold: 0.12 });
     io.observe(el);
-    const fb = setTimeout(() => { if (!startedRef.current) { startedRef.current = true; setStarted(true); } }, 1800);
-    return () => { io.disconnect(); clearTimeout(fb); };
+    const fb = setTimeout(() => { if (!startedRef.current) { startedRef.current = true; setStarted(true); jumpTo(0); } }, 1800);
+    return () => { io.disconnect(); clearTimeout(fb); cancelAnimationFrame(tickRef.current); };
   }, []);
-
-  // Maps the demo's own reported phase to which of the 5 listed steps to
-  // highlight — keeps the list genuinely synced to what's playing.
-  const PHASE_TO_STEP = {
-    install: 0,
-    open: 1, enroll: 1, enrolled: 1,
-    processing: 2, sent: 2,
-    open_det: 3, details: 3,
-    replied: 4, gmail: 4, thread: 4,
-  };
-  // Guards against a race: right after a manual click, a signal from the
-  // step that was JUST interrupted can still land a moment later. Ignoring
-  // phase reports for a brief window after a click means the click always
-  // wins, instead of occasionally being overwritten by a stale report.
-  const lastClickRef = useRefHIW(0);
-  const handlePhase = (key) => {
-    if (Date.now() - lastClickRef.current < 400) return;
-    const idx = PHASE_TO_STEP[key];
-    if (idx !== undefined) setActive(idx);
-  };
-
-  // Clicking a step jumps the demo straight there.
-  const handleStepClick = (i) => {
-    lastClickRef.current = Date.now();
-    setActive(i);
-    if (jumpToRef.current) jumpToRef.current(i);
-  };
 
   return (
     <div className="how" id="how-section">
@@ -728,7 +730,7 @@ function HowItWorks({ speedMultiplier = 1 }) {
               <div
                 key={i}
                 className={`hiw-step-row ${i === active ? 'active' : ''} ${i < active ? 'done' : ''}`}
-                onClick={() => handleStepClick(i)}
+                onClick={() => jumpTo(i)}
                 style={{ cursor: 'pointer' }}
               >
                 <div className="hiw-step-num">
@@ -742,9 +744,9 @@ function HowItWorks({ speedMultiplier = 1 }) {
             ))}
           </div>
 
-          {/* Continuous browser — isolated HIW-only demo copy, doesn't touch the hero's file */}
+          {/* Continuous browser — isolated HIW-only demo copy, doesn't touch the hero's file. Purely driven by `step`: this parent owns the timing, the child just reacts. */}
           <div className="hiw-browser-col">
-            {started && <HiwProductDemo onPhase={handlePhase} jumpToRef={jumpToRef} />}
+            {started && <HiwProductDemo step={active} />}
           </div>
         </div>
       </div>
