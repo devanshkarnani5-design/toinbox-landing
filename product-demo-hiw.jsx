@@ -502,6 +502,27 @@ function ProductDemo({ onPhase, jumpToRef } = {}) {
     return () => { clearTimeout(id); window.removeEventListener('resize', fitFn); };
   }, [scene]);
 
+  // The install scene renders OUTSIDE the shared .sd-stage (to avoid a
+  // double chrome-bar — see the early return below), so it never went
+  // through the normal fit-to-container measurement every other scene gets.
+  // It needs its OWN copy of that same scale-to-fit logic, using the same
+  // 1240 logical width convention as the rest of the demo.
+  const [installFit, setInstallFit] = usePD(0.62);
+  const installWrapRef = useRefPD(null);
+  useEffectPD(() => {
+    if (scene !== 'install') return;
+    const measure = () => {
+      const el = installWrapRef.current; if (!el) return;
+      const r = el.getBoundingClientRect();
+      if (!r.width) return;
+      setInstallFit(r.width / 1240);
+    };
+    measure();
+    const id = setTimeout(measure, 120);
+    window.addEventListener('resize', measure);
+    return () => { clearTimeout(id); window.removeEventListener('resize', measure); };
+  }, [scene]);
+
   const moveTo = (el, dx = 0, dy = 0) => {
     if (!el || !stageRef.current) return;
     const br = stageRef.current.getBoundingClientRect();
@@ -660,7 +681,19 @@ function ProductDemo({ onPhase, jumpToRef } = {}) {
   // Sign-in + add-to-Chrome is its own self-contained browser frame — return
   // it directly rather than nesting it inside this component's own chrome
   // bar, which would double up the window UI.
-  if (scene === 'install') return <HiwInstallScene />;
+  if (scene === 'install') {
+    const naturalH = 780; // matches the logical canvas height used elsewhere in this file
+    return (
+      <div
+        ref={installWrapRef}
+        style={{ width: '100%', height: naturalH * installFit, overflow: 'hidden' }}
+      >
+        <div style={{ width: 1240, height: naturalH, transform: `scale(${installFit})`, transformOrigin: 'top left' }}>
+          <HiwInstallScene />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="browser sd-browser">
