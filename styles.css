@@ -1984,7 +1984,7 @@ h1, h2, h3, h4 { margin: 0; letter-spacing: -0.02em; font-weight: 500; }
   grid-template-columns: 300px 1fr;
   gap: 48px;
   align-items: flex-start;
-  margin-top: 56px;
+  margin-top: 20px;
 }
 @media (max-width: 900px) { .hiw-cinema-grid { grid-template-columns: 1fr; } }
 
