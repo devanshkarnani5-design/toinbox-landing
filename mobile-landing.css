@@ -254,45 +254,47 @@
 .ml-sv-review-attach { display: flex; align-items: center; gap: 7px; margin-top: 8px; font-size: 10.5px; color: var(--ink-3); font-weight: 500; }
 .ml-sv-eye-badge { position: absolute; top: 10px; right: 12px; width: 24px; height: 24px; border-radius: 50%; background: var(--accent-soft); color: var(--accent-ink); display: flex; align-items: center; justify-content: center; }
 
-/* step 0 (new) — sign in + install */
-.ml-sv-signin { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; background: #fff; padding: 0 20px; }
-.ml-sv-signin-icon { width: 32px; height: 32px; border-radius: 9px; background: linear-gradient(135deg, var(--accent), var(--accent-2)); }
-.ml-sv-signin-title { font-size: 12.5px; font-weight: 700; }
-.ml-sv-signin-google { display: flex; align-items: center; gap: 7px; font-size: 10.5px; font-weight: 600; color: var(--ink-2); background: var(--bg-elev); border: 1px solid var(--line-2); border-radius: 8px; padding: 7px 14px; box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
-.ml-sv-g-icon { width: 14px; height: 14px; border-radius: 50%; background: conic-gradient(#4285F4 0 25%, #34A853 25% 50%, #FBBC05 50% 75%, #EA4335 75% 100%); flex-shrink: 0; }
-.ml-sv-signin-divider { font-size: 9.5px; color: var(--ink-4); margin: 1px 0; }
-.ml-sv-store-btn { display: flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; color: white; background: var(--accent); padding: 7px 14px; border-radius: 8px; }
+/* step 0 — chrome web store install */
+.ml-sv-cws-top { display: flex; align-items: center; gap: 5px; padding: 7px 10px; background: linear-gradient(180deg,#fafaf9,#f3f2ee); border-bottom: 1px solid var(--line); }
+.ml-sv-cws-dot { width: 7px; height: 7px; border-radius: 50%; background: #e2dfd8; }
+.ml-sv-cws-dot:nth-child(1) { background: #ff6058; }
+.ml-sv-cws-dot:nth-child(2) { background: #ffbe2e; }
+.ml-sv-cws-dot:nth-child(3) { background: #28c941; }
+.ml-sv-cws-url { font-size: 9.5px; color: var(--ink-4); margin-left: 6px; font-family: var(--font-mono); }
+.ml-sv-cws-body { flex: 1; background: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; padding: 8px; }
+.ml-sv-cws-icon { width: 32px; height: 32px; border-radius: 9px; background: linear-gradient(135deg, var(--accent), var(--accent-2)); }
+.ml-sv-cws-name { font-size: 13px; font-weight: 700; margin-top: 2px; }
+.ml-sv-cws-sub { font-size: 10px; color: var(--ink-4); margin-top: -3px; }
+.ml-sv-cws-stars { display: flex; align-items: center; gap: 2px; color: #ffbe2e; margin-top: 1px; }
+.ml-sv-cws-stars span { font-size: 10px; color: var(--ink-4); margin-left: 4px; font-family: var(--font-mono); }
+.ml-sv-cws-btn { margin-top: 5px; display: flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; color: white; background: #057642; padding: 7px 14px; border-radius: 8px; }
 
-/* step 1 (new) — Send Application button, clearly the click moment */
-.ml-sv-sendbtn-row { display: flex; justify-content: center; padding: 6px 0 10px; position: relative; }
-.ml-sv-sendbtn { display: flex; align-items: center; gap: 7px; font-size: 11.5px; font-weight: 600; color: white; background: var(--accent); padding: 9px 18px; border-radius: 999px; box-shadow: 0 8px 18px -8px color-mix(in oklab, var(--accent) 60%, transparent); }
+/* step 1 — enroll button highlighted */
+.ml-sv-enroll-panel { display: flex; align-items: center; gap: 8px; background: var(--ink); padding: 9px 12px; margin-top: auto; }
+.ml-sv-enroll-label { font-size: 10.5px; color: rgba(255,255,255,0.55); flex: 1; }
+.ml-sv-enroll-btn { position: relative; font-size: 11px; font-weight: 600; color: white; background: var(--accent); padding: 6px 16px; border-radius: 8px; border: none; }
 
-/* step 2 (new) — combined find + draft, more compact each */
-.ml-sv-find-compact { padding: 8px 12px 4px; gap: 5px; flex: 0 0 auto; }
+/* step 2 — compact found-contacts list above the draft */
+.ml-sv-find-compact { padding: 8px 12px 6px; gap: 5px; }
 .ml-sv-find-compact .ml-sv-find-name { font-size: 10.5px; }
-.ml-sv-draft-compact { padding: 6px 12px 9px; gap: 5px; border-top: 1px solid var(--line); }
 
-/* steps 3 & 4 — gmail chrome */
-.ml-sv-gmail-top { display: flex; align-items: center; gap: 6px; font-size: 10.5px; font-weight: 700; padding: 8px 10px; background: #fff; border-bottom: 1px solid var(--line); }
-.ml-sv-gmail-icon { width: 14px; height: 14px; border-radius: 3px; background: linear-gradient(135deg,#ea4335,#fbbc05,#34a853,#4285f4); flex-shrink: 0; }
-.ml-sv-sending-bar { display: flex; align-items: center; gap: 6px; font-size: 10px; font-weight: 600; color: #057642; background: #e6f4ea; padding: 6px 12px; }
+/* step 3 — delivered tag + gmail tag */
+.ml-sv-delivered-tag { margin-left: auto; display: flex; align-items: center; gap: 4px; font-size: 9.5px; font-weight: 700; color: #057642; background: #e6f4ea; padding: 3px 8px; border-radius: 999px; }
+.ml-sv-gmail-tag { font-size: 10px; color: var(--ink-4); margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--line); }
 
-/* step 4 (new) — reply / success state */
-.ml-sv-reply2 { background: #fff; padding: 10px 12px; flex: 1; position: relative; }
-.ml-sv-reply2-head { display: flex; align-items: center; gap: 8px; }
-.ml-sv-reply2-name { font-size: 11.5px; font-weight: 600; }
-.ml-sv-reply2-sub { font-size: 9.5px; color: var(--ink-4); margin-top: 1px; }
-.ml-sv-reply2-text { font-size: 10.5px; line-height: 1.45; color: var(--ink-3); font-style: italic; margin-top: 7px; }
-.ml-sv-interview-badge { display: inline-block; margin-top: 7px; font-size: 9.5px; font-weight: 700; color: #057642; background: #e6f4ea; padding: 3px 9px; border-radius: 999px; }
-.ml-sv-success-stats { display: flex; gap: 14px; padding: 8px 12px; background: var(--bg-soft); border-top: 1px solid var(--line); font-size: 10.5px; color: var(--ink-3); }
-.ml-sv-success-stat b { color: var(--ink); font-size: 12px; }
-
-/* step 5 — sent confirmation */
-.ml-sv-sent-check { width: 34px; height: 34px; border-radius: 50%; background: #e6f4ea; color: #057642; display: flex; align-items: center; justify-content: center; }
-.ml-sv-sent-title { font-size: 13px; font-weight: 700; color: #057642; }
-.ml-sv-sent-row { display: flex; align-items: center; gap: 8px; font-size: 11.5px; font-weight: 500; }
-.ml-sv-sent-tick { color: #057642; margin-left: 4px; }
-.ml-sv-sent-gmail { font-size: 10px; color: var(--ink-4); margin-top: 2px; }
+/* step 4 — outcome: reply notification + reply-rate comparison */
+.ml-sv-outcome { flex: 1; display: flex; flex-direction: column; background: #fff; }
+.ml-sv-outcome-notif { display: flex; align-items: center; gap: 9px; padding: 10px 12px; border-bottom: 1px solid var(--line); }
+.ml-sv-outcome-ico { width: 26px; height: 26px; border-radius: 8px; background: var(--accent-soft); color: var(--accent-ink); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.ml-sv-outcome-title { font-size: 11px; font-weight: 600; }
+.ml-sv-outcome-sub { font-size: 10px; color: var(--ink-4); margin-top: 1px; font-style: italic; }
+.ml-sv-outcome-tag { margin-left: auto; font-size: 9.5px; font-weight: 700; color: #1a56db; background: #e8f0ff; padding: 3px 8px; border-radius: 999px; white-space: nowrap; }
+.ml-sv-outcome-bars { flex: 1; display: flex; align-items: flex-end; justify-content: center; gap: 20px; padding: 10px 12px 6px; position: relative; }
+.ml-sv-outcome-barcol { display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 52px; gap: 5px; }
+.ml-sv-outcome-bar { width: 26px; border-radius: 5px 5px 0 0; background: var(--line-2); }
+.ml-sv-outcome-barlead { background: var(--accent); }
+.ml-sv-outcome-barcol label { font-size: 9px; color: var(--ink-4); }
+.ml-sv-outcome-caption { position: absolute; top: 6px; right: 12px; font-size: 9px; color: var(--ink-4); font-family: var(--font-mono); }
 
 /* ---------- product showcase — native mobile cards, not a shrunk browser mockup ---------- */
 .ml-stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }

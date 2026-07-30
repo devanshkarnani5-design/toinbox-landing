@@ -53,11 +53,11 @@ const ML_BENEFITS = [
 ];
 
 const ML_HIW_STEPS = [
-  { t: 'Sign in & add the Chrome extension', s: 'Install it inside LinkedIn with one click.' },
-  { t: 'Open any LinkedIn job', s: 'Tap Send Application — right where you already are.' },
-  { t: 'ToInbox finds & drafts', s: 'Finds the hiring managers and writes a personalised application from your resume and the job.' },
-  { t: 'Sends your application', s: 'The email and resume go out from your own Gmail.' },
-  { t: 'Get noticed, land more interviews', s: 'Replies and interview invitations start coming in.' },
+  { t: 'Sign in & add the Chrome extension', s: 'Install ToInbox — it lives right inside LinkedIn.' },
+  { t: 'Open a job, click Enroll', s: 'One click on any LinkedIn job starts the process.' },
+  { t: 'Finds contacts, drafts your application', s: 'Hiring managers found, application personalised to your resume + this job.' },
+  { t: 'Sent from your Gmail', s: 'Application and resume delivered straight to their inbox.' },
+  { t: 'Get noticed, land more interviews', s: 'Genuine intent gets seen — and gets replies.' },
 ];
 
 const ML_STATS = [
@@ -214,25 +214,33 @@ function MLBenefits() {
 // ---------- how it works (same self-contained jumpTo/tick pattern as the desktop file) ----------
 
 function MLStepVisual({ step }) {
-  // Step 0 — Sign in & add the Chrome extension: sign-in card + install
-  // action, so it reads instantly as "this is the setup step."
+  // Step 0 — Sign in & install the Chrome extension: a real Chrome Web
+  // Store listing, ending on an "Added" confirmation so it reads as
+  // "installed", not just "browsing a store page."
   if (step === 0) {
     return (
       <div className="ml-sv-frame ml-sv-tall">
-        <div className="ml-sv-dots"><span /><span /><span /></div>
-        <div className="ml-sv-signin">
-          <div className="ml-sv-signin-icon" />
-          <div className="ml-sv-signin-title">Sign in to ToInbox</div>
-          <div className="ml-sv-signin-google"><span className="ml-sv-g-icon">G</span>Continue with Google</div>
-          <div className="ml-sv-signin-divider">then</div>
-          <div className="ml-sv-store-btn"><Icon name="download" size={11} /> Add to Chrome</div>
+        <div className="ml-sv-cws-top">
+          <span className="ml-sv-cws-dot" /><span className="ml-sv-cws-dot" /><span className="ml-sv-cws-dot" />
+          <span className="ml-sv-cws-url">chromewebstore.google.com</span>
+        </div>
+        <div className="ml-sv-cws-body">
+          <div className="ml-sv-cws-icon" />
+          <div className="ml-sv-cws-name">ToInbox</div>
+          <div className="ml-sv-cws-sub">Works inside LinkedIn</div>
+          <div className="ml-sv-cws-stars"><Icon name="star" size={10} /><Icon name="star" size={10} /><Icon name="star" size={10} /><Icon name="star" size={10} /><Icon name="star" size={10} /><span>4.9</span></div>
+          <div className="ml-sv-cws-btn ml-sv-annotated">
+            <Icon name="check" size={12} /> Added to Chrome
+            <span className="ml-sv-ring" />
+          </div>
         </div>
       </div>
     );
   }
 
-  // Step 1 — Open any LinkedIn job: real LinkedIn chrome, job selected, and
-  // a clearly visible "Send Application" action — the exact click moment.
+  // Step 1 — Open a job, click Enroll: real LinkedIn chrome + the actual
+  // ToInbox panel, with the Enroll button itself highlighted, since that
+  // click is the one action this whole step is about.
   if (step === 1) {
     return (
       <div className="ml-sv-frame ml-sv-tall">
@@ -240,23 +248,27 @@ function MLStepVisual({ step }) {
           <span className="ml-sv-li-logo">in</span>
           <div className="ml-sv-li-search"><Icon name="search" size={10} />Program Manager</div>
         </div>
-        <div className="ml-sv-li-card" style={{ margin: '10px 10px 8px' }}>
+        <div className="ml-sv-li-card" style={{ margin: '8px 10px 0' }}>
           <span className="ml-sv-li-cardlogo">E</span>
           <div className="ml-sv-li-cardtext">
             <div className="ml-sv-li-cardtitle">Senior Program Manager</div>
             <div className="ml-sv-li-cardco">Esper · Bengaluru</div>
           </div>
         </div>
-        <div className="ml-sv-sendbtn-row ml-sv-annotated">
-          <div className="ml-sv-sendbtn"><span className="ml-sv-panel-logo" style={{ width: 14, height: 14 }} />Send Application</div>
-          <span className="ml-sv-ring" style={{ borderRadius: 999 }} />
+        <div className="ml-sv-enroll-panel">
+          <span className="ml-sv-panel-logo" style={{ width: 16, height: 16 }} />
+          <span className="ml-sv-enroll-label">ToInbox panel</span>
+          <button className="ml-sv-enroll-btn ml-sv-annotated">
+            Enroll
+            <span className="ml-sv-ring" />
+          </button>
         </div>
       </div>
     );
   }
 
-  // Step 2 — ToInbox finds & drafts: combined into one card — names
-  // resolving, then the personalized draft taking shape underneath.
+  // Step 2 — Finds contacts, drafts your application: combines both real
+  // actions this step covers — resolved names AND a visible draft forming.
   if (step === 2) {
     return (
       <div className="ml-sv-frame ml-sv-tall">
@@ -266,60 +278,61 @@ function MLStepVisual({ step }) {
         </div>
         <div className="ml-sv-find-list ml-sv-find-compact">
           <div className="ml-sv-find-row ml-sv-find-done">
-            <span className="ml-sv-find-check"><Icon name="check" size={8} /></span>
-            <div className="ml-sv-find-name">Priya Nair · Hiring Manager</div>
+            <span className="ml-sv-find-check"><Icon name="check" size={9} /></span>
+            <div className="ml-sv-find-name">Priya Nair <span className="ml-sv-dimtext">· Hiring Manager</span></div>
           </div>
           <div className="ml-sv-find-row ml-sv-find-done">
-            <span className="ml-sv-find-check"><Icon name="check" size={8} /></span>
-            <div className="ml-sv-find-name">Arjun Mehta · Head of Tech</div>
+            <span className="ml-sv-find-check"><Icon name="check" size={9} /></span>
+            <div className="ml-sv-find-name">Arjun Mehta <span className="ml-sv-dimtext">· Head of Tech</span></div>
           </div>
         </div>
-        <div className="ml-sv-draft ml-sv-draft-compact">
+        <div className="ml-sv-draft" style={{ borderTop: '1px solid var(--line)', paddingTop: 8 }}>
           <div className="ml-sv-draft-subj">Application for Senior Program Manager</div>
-          <div className="ml-sv-draft-line" style={{ width: '92%' }} />
-          <div className="ml-sv-draft-line ml-sv-typing" style={{ width: '58%' }} />
+          <div className="ml-sv-draft-line" style={{ width: '90%' }} />
+          <div className="ml-sv-draft-line ml-sv-typing" style={{ width: '55%' }} />
         </div>
       </div>
     );
   }
 
-  // Step 3 — Sends your application: the email + resume, explicitly framed
-  // as going out from the user's own Gmail.
+  // Step 3 — Sent from your Gmail: application AND resume, delivered.
   if (step === 3) {
     return (
       <div className="ml-sv-frame ml-sv-tall">
-        <div className="ml-sv-gmail-top"><span className="ml-sv-gmail-icon" /> Gmail</div>
         <div className="ml-sv-review">
           <div className="ml-sv-review-row">
             <span className="ml-sv-avatar-sm ml-sv-avatar-xs" style={{ background: '#6d54c7' }}>P</span>
             <span className="ml-sv-avatar-sm ml-sv-avatar-xs ml-sv-avatar-sm2" style={{ background: '#374151' }}>A</span>
             <span className="ml-sv-review-names">Priya Nair, Arjun Mehta</span>
+            <span className="ml-sv-delivered-tag"><Icon name="check" size={9} /> Delivered</span>
           </div>
           <div className="ml-sv-draft-subj" style={{ marginTop: 8 }}>Application for Senior Program Manager</div>
           <div className="ml-sv-draft-line" style={{ width: '85%' }} />
-          <div className="ml-sv-review-attach"><span className="ml-hv-pdf">PDF</span> Resume_Tailored.pdf</div>
+          <div className="ml-sv-review-attach"><span className="ml-hv-pdf">PDF</span> Resume_Tailored.pdf <Icon name="check" size={10} style={{ color: '#057642', marginLeft: 'auto' }} /></div>
+          <div className="ml-sv-gmail-tag">Sent from your Gmail</div>
         </div>
-        <div className="ml-sv-sending-bar"><Icon name="check" size={11} /> Sent from devansh@gmail.com</div>
       </div>
     );
   }
 
-  // Step 4 — Get noticed, land more interviews: a real success state —
-  // reply arriving, interview requested.
+  // Step 4 — Get noticed, land more interviews: the payoff. A real reply
+  // notification plus a visibility indicator, not another mechanical step.
   return (
     <div className="ml-sv-frame ml-sv-tall">
-      <div className="ml-sv-gmail-top"><span className="ml-sv-gmail-icon" /> Gmail</div>
-      <div className="ml-sv-reply2 ml-sv-annotated">
-        <div className="ml-sv-reply2-head">
-          <span className="ml-sv-avatar-sm ml-sv-avatar-xs" style={{ background: '#6d54c7' }}>P</span>
-          <div className="ml-sv-reply2-who"><div className="ml-sv-reply2-name">Priya Nair</div><div className="ml-sv-reply2-sub">Re: Application for Senior Program Manager</div></div>
+      <div className="ml-sv-outcome">
+        <div className="ml-sv-outcome-notif">
+          <span className="ml-sv-outcome-ico"><Icon name="mail" size={13} /></span>
+          <div>
+            <div className="ml-sv-outcome-title">New reply · Priya Nair</div>
+            <div className="ml-sv-outcome-sub">"We'd like to schedule an interview…"</div>
+          </div>
+          <span className="ml-sv-outcome-tag">Interview</span>
         </div>
-        <div className="ml-sv-reply2-text">"We'd like to schedule an interview — are you free tomorrow at 11 AM?"</div>
-        <span className="ml-sv-interview-badge">Interview requested</span>
-      </div>
-      <div className="ml-sv-success-stats">
-        <div className="ml-sv-success-stat"><b>6</b> replies</div>
-        <div className="ml-sv-success-stat"><b>2</b> interviews</div>
+        <div className="ml-sv-outcome-bars">
+          <div className="ml-sv-outcome-barcol"><span className="ml-sv-outcome-bar" style={{ height: '35%' }} /><label>Portal</label></div>
+          <div className="ml-sv-outcome-barcol"><span className="ml-sv-outcome-bar ml-sv-outcome-barlead" style={{ height: '85%' }} /><label>ToInbox</label></div>
+          <div className="ml-sv-outcome-caption">Reply rate</div>
+        </div>
       </div>
     </div>
   );
