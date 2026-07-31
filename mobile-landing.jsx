@@ -550,9 +550,6 @@ function MLSignInGate({ onClose }) {
           <span className="ml-signgate-particle ml-signgate-p1" />
           <span className="ml-signgate-particle ml-signgate-p2" />
           <span className="ml-signgate-particle ml-signgate-p3" />
-          <div className="ml-signgate-phone-ghost">
-            <div className="ml-signgate-phone-cam" />
-          </div>
           <div className="ml-signgate-float ml-signgate-float-1">
             <span className="ml-signgate-float-tick"><Icon name="check" size={9} /></span>
             Delivered

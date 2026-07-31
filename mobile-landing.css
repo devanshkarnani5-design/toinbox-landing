@@ -390,18 +390,6 @@
 .ml-signgate-p2 { width: 4px; height: 4px; top: 68%; left: 20%; animation-delay: 1.4s; opacity: 0.25; }
 .ml-signgate-p3 { width: 4px; height: 4px; top: 22%; right: 16%; animation-delay: 2.6s; opacity: 0.3; }
 @keyframes mlParticleFloat { 0%,100% { transform: translateY(0); opacity: 0.3; } 50% { transform: translateY(-8px); opacity: 0.55; } }
-.ml-signgate-phone-ghost {
-  position: absolute; right: 2px; bottom: 6px; z-index: 0;
-  width: 44px; height: 76px;
-  background: linear-gradient(160deg, var(--bg-soft), var(--line-2));
-  border-radius: 13px; border: 2px solid var(--line-2);
-  opacity: 0.35; filter: grayscale(0.65);
-  transform: rotate(7deg);
-}
-.ml-signgate-phone-cam {
-  position: absolute; top: 7px; left: 50%; transform: translateX(-50%);
-  width: 5px; height: 5px; border-radius: 50%; background: var(--ink-4);
-}
 .ml-signgate-float {
   position: absolute; z-index: 3; display: flex; align-items: center; gap: 5px;
   background: var(--bg-elev); border: 1px solid var(--line-2); border-radius: 999px;
