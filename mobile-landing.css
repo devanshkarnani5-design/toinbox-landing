@@ -372,37 +372,58 @@
 }
 @keyframes mlGateUp { from { opacity: 0; transform: translateY(18px) scale(0.97); } to { opacity: 1; transform: none; } }
 
-.ml-signgate-illo { position: relative; height: 148px; display: flex; align-items: center; justify-content: center; margin-bottom: 8px; }
-.ml-signgate-glow {
-  position: absolute; width: 220px; height: 160px; border-radius: 50%;
-  background: radial-gradient(50% 50% at 50% 50%, color-mix(in oklab, var(--accent) 35%, transparent), transparent 70%);
-  filter: blur(8px);
+.ml-signgate-illo { position: relative; height: 168px; display: flex; align-items: center; justify-content: center; margin-bottom: 8px; }
+.ml-signgate-glow-1 {
+  position: absolute; width: 240px; height: 170px; border-radius: 50%;
+  top: -14px; left: 16%;
+  background: radial-gradient(50% 50% at 50% 50%, color-mix(in oklab, var(--accent) 40%, transparent), transparent 70%);
+  filter: blur(14px);
 }
-.ml-signgate-laptop { position: relative; z-index: 1; }
+.ml-signgate-glow-2 {
+  position: absolute; width: 160px; height: 140px; border-radius: 50%;
+  bottom: -18px; right: 12%;
+  background: radial-gradient(50% 50% at 50% 50%, color-mix(in oklab, var(--accent-2) 32%, transparent), transparent 70%);
+  filter: blur(16px);
+}
+.ml-signgate-phone-ghost {
+  position: absolute; right: 6px; bottom: 0; z-index: 0;
+  width: 46px; height: 80px;
+  background: linear-gradient(160deg, var(--bg-soft), var(--line-2));
+  border-radius: 13px; border: 2px solid var(--line-2);
+  opacity: 0.38; filter: grayscale(0.65);
+  transform: rotate(7deg);
+}
+.ml-signgate-phone-cam {
+  position: absolute; top: 7px; left: 50%; transform: translateX(-50%);
+  width: 5px; height: 5px; border-radius: 50%; background: var(--ink-4);
+}
+.ml-signgate-laptop { position: relative; z-index: 1; transform: perspective(700px) rotateX(4deg); }
 .ml-signgate-screen {
-  width: 168px; height: 108px; background: var(--bg-elev);
+  width: 172px; height: 112px;
+  background: linear-gradient(160deg, var(--bg-elev), var(--bg-soft));
   border: 3px solid var(--ink); border-bottom: none;
-  border-radius: 10px 10px 0 0; overflow: hidden;
-  box-shadow: 0 14px 30px -14px rgba(10,10,10,0.3);
+  border-radius: 12px 12px 2px 2px; overflow: hidden;
+  box-shadow: 0 22px 44px -18px rgba(10,10,10,0.38), inset 0 1px 0 rgba(255,255,255,0.5);
 }
-.ml-signgate-chrome { display: flex; align-items: center; gap: 4px; padding: 6px 8px; background: #f1f0ec; border-bottom: 1px solid var(--line); }
+.ml-signgate-chrome { display: flex; align-items: center; gap: 4px; padding: 6px 8px; background: linear-gradient(180deg,#fafaf9,#f1f0ec); border-bottom: 1px solid var(--line); }
 .ml-signgate-dot { width: 5px; height: 5px; border-radius: 50%; background: #d8d5cf; }
 .ml-signgate-url { font-size: 7px; color: var(--ink-4); margin-left: 4px; font-family: var(--font-mono); }
-.ml-signgate-ext { display: flex; align-items: center; gap: 6px; padding: 14px 10px; font-size: 12px; font-weight: 700; }
-.ml-signgate-ext-icon { width: 18px; height: 18px; border-radius: 5px; background: linear-gradient(135deg, var(--accent), var(--accent-2)); flex-shrink: 0; }
+.ml-signgate-page { padding: 9px 10px 8px; display: flex; flex-direction: column; gap: 6px; }
+.ml-signgate-line { height: 5px; border-radius: 3px; background: var(--bg-soft); }
+.ml-signgate-panel {
+  margin-top: 3px; display: flex; align-items: center; gap: 6px;
+  background: var(--ink); border-radius: 8px; padding: 6px 8px;
+  box-shadow: 0 8px 16px -8px rgba(10,10,10,0.45);
+}
+.ml-signgate-panel-icon { width: 14px; height: 14px; border-radius: 4px; background: linear-gradient(135deg, var(--accent), var(--accent-2)); flex-shrink: 0; }
+.ml-signgate-panel-label { font-size: 10px; font-weight: 700; color: #fff; flex: 1; }
+.ml-signgate-panel-dot { width: 5px; height: 5px; border-radius: 50%; background: #4ade80; box-shadow: 0 0 0 2px rgba(74,222,128,0.25); }
+.ml-signgate-hinge { width: 176px; height: 4px; margin: 0 auto; background: linear-gradient(90deg, var(--ink-3), var(--ink), var(--ink-3)); border-radius: 2px; }
 .ml-signgate-base {
-  width: 190px; height: 9px; margin: 0 auto;
+  width: 196px; height: 8px; margin: 0 auto;
   background: linear-gradient(180deg, var(--ink-3), var(--ink));
   border-radius: 0 0 6px 6px;
-  clip-path: polygon(4% 0, 96% 0, 100% 100%, 0% 100%);
+  clip-path: polygon(3% 0, 97% 0, 100% 100%, 0% 100%);
+  box-shadow: 0 8px 18px -10px rgba(10,10,10,0.4);
 }
-.ml-signgate-phone {
-  position: absolute; bottom: 4px; right: 18px; z-index: 2;
-  width: 34px; height: 34px; display: flex; align-items: center; justify-content: center;
-  opacity: 0.55;
-}
-.ml-signgate-phone-body {
-  width: 20px; height: 32px; border: 2.5px solid var(--ink-4); border-radius: 5px; background: var(--bg-elev);
-}
-.ml-signgate-slash { position: absolute; width: 40px; height: 40px; color: var(--ink-4); }
 .ml-signgate-text { font-size: 16px; line-height: 1.5; font-weight: 500; color: var(--ink); margin: 20px 0 24px; }

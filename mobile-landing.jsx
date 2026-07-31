@@ -545,25 +545,29 @@ function MLSignInGate({ onClose }) {
     <div className="ml-signgate-overlay" onClick={onClose}>
       <div className="ml-signgate-card" onClick={(e) => e.stopPropagation()}>
         <div className="ml-signgate-illo">
-          <div className="ml-signgate-glow" />
+          <div className="ml-signgate-glow ml-signgate-glow-1" />
+          <div className="ml-signgate-glow ml-signgate-glow-2" />
+          <div className="ml-signgate-phone-ghost">
+            <div className="ml-signgate-phone-cam" />
+          </div>
           <div className="ml-signgate-laptop">
             <div className="ml-signgate-screen">
               <div className="ml-signgate-chrome">
                 <span className="ml-signgate-dot" /><span className="ml-signgate-dot" /><span className="ml-signgate-dot" />
                 <span className="ml-signgate-url">linkedin.com</span>
               </div>
-              <div className="ml-signgate-ext">
-                <span className="ml-signgate-ext-icon" />
-                <span>ToInbox</span>
+              <div className="ml-signgate-page">
+                <div className="ml-signgate-line" style={{ width: '68%' }} />
+                <div className="ml-signgate-line" style={{ width: '46%' }} />
+                <div className="ml-signgate-panel">
+                  <span className="ml-signgate-panel-icon" />
+                  <span className="ml-signgate-panel-label">ToInbox</span>
+                  <span className="ml-signgate-panel-dot" />
+                </div>
               </div>
             </div>
+            <div className="ml-signgate-hinge" />
             <div className="ml-signgate-base" />
-          </div>
-          <div className="ml-signgate-phone">
-            <div className="ml-signgate-phone-body" />
-            <svg className="ml-signgate-slash" viewBox="0 0 40 40" fill="none">
-              <line x1="7" y1="7" x2="33" y2="33" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
-            </svg>
           </div>
         </div>
         <p className="ml-signgate-text">ToInbox is a Chrome extension that works on laptop/desktop. Please sign in from there.</p>
