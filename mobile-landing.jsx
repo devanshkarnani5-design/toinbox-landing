@@ -412,13 +412,26 @@ function MLProduct() {
 // ---------- pricing (featured plan first) ----------
 
 function MLPricing() {
-  const [isIndia, setIsIndia] = useStateML(true);
+  // Exact mirror of the desktop Pricing() detection in sections.jsx.
+  const [region, setRegion] = useStateML('in'); // default to India; flips on detect
   useEffectML(() => {
-    try {
-      const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
-      setIsIndia(tz.includes('Calcutta') || tz.includes('Kolkata') || tz === 'Asia/Kolkata');
-    } catch (e) { /* keep default */ }
+    let cancelled = false;
+    fetch('https://www.cloudflare.com/cdn-cgi/trace')
+      .then((r) => r.text())
+      .then((txt) => {
+        if (cancelled) return;
+        const m = txt.match(/loc=([A-Z]{2})/);
+        if (m) setRegion(m[1] === 'IN' ? 'in' : 'intl');
+      })
+      .catch(() => {
+        try {
+          const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+          if (!/Kolkata|Calcutta/i.test(tz)) setRegion('intl');
+        } catch (_) {}
+      });
+    return () => { cancelled = true; };
   }, []);
+  const isIndia = region === 'in';
   const cur = isIndia ? '₹' : '$';
   const starterAmt = isIndia ? 299 : 14;
   const proAmt = isIndia ? 499 : 24;
