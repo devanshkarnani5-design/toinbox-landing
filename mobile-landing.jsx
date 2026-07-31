@@ -558,6 +558,10 @@ function MLSignInGate({ onClose }) {
             <span className="ml-signgate-float-live" />
             Live
           </div>
+          <div className="ml-signgate-float ml-signgate-float-3">
+            <span className="ml-signgate-float-cal"><Icon name="calendar" size={9} /></span>
+            Interview scheduled
+          </div>
           <div className="ml-signgate-laptop">
             <div className="ml-signgate-screen">
               <div className="ml-signgate-sweep" />
