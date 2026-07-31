@@ -547,22 +547,60 @@ function MLSignInGate({ onClose }) {
         <div className="ml-signgate-illo">
           <div className="ml-signgate-glow ml-signgate-glow-1" />
           <div className="ml-signgate-glow ml-signgate-glow-2" />
+          <span className="ml-signgate-particle ml-signgate-p1" />
+          <span className="ml-signgate-particle ml-signgate-p2" />
+          <span className="ml-signgate-particle ml-signgate-p3" />
           <div className="ml-signgate-phone-ghost">
             <div className="ml-signgate-phone-cam" />
           </div>
+          <div className="ml-signgate-float ml-signgate-float-1">
+            <span className="ml-signgate-float-tick"><Icon name="check" size={9} /></span>
+            Delivered
+          </div>
+          <div className="ml-signgate-float ml-signgate-float-2">
+            <span className="ml-signgate-float-live" />
+            Live
+          </div>
           <div className="ml-signgate-laptop">
             <div className="ml-signgate-screen">
+              <div className="ml-signgate-sweep" />
               <div className="ml-signgate-chrome">
                 <span className="ml-signgate-dot" /><span className="ml-signgate-dot" /><span className="ml-signgate-dot" />
-                <span className="ml-signgate-url">linkedin.com</span>
+                <span className="ml-signgate-url">linkedin.com/jobs</span>
               </div>
-              <div className="ml-signgate-page">
-                <div className="ml-signgate-line" style={{ width: '68%' }} />
-                <div className="ml-signgate-line" style={{ width: '46%' }} />
-                <div className="ml-signgate-panel">
-                  <span className="ml-signgate-panel-icon" />
-                  <span className="ml-signgate-panel-label">ToInbox</span>
-                  <span className="ml-signgate-panel-dot" />
+              <div className="ml-signgate-li">
+                <div className="ml-signgate-li-main">
+                  <div className="ml-signgate-li-top">
+                    <span className="ml-signgate-li-logo">in</span>
+                    <span className="ml-signgate-li-search" />
+                  </div>
+                  <div className="ml-signgate-li-job ml-signgate-li-job-active">
+                    <span className="ml-signgate-li-joblogo" />
+                    <div className="ml-signgate-li-jobtext">
+                      <span className="ml-signgate-li-jobline" style={{ width: '82%' }} />
+                      <span className="ml-signgate-li-jobline ml-signgate-li-sm" style={{ width: '56%' }} />
+                    </div>
+                  </div>
+                  <div className="ml-signgate-li-job">
+                    <span className="ml-signgate-li-joblogo" style={{ background: '#e5a52e' }} />
+                    <div className="ml-signgate-li-jobtext">
+                      <span className="ml-signgate-li-jobline" style={{ width: '64%' }} />
+                      <span className="ml-signgate-li-jobline ml-signgate-li-sm" style={{ width: '40%' }} />
+                    </div>
+                  </div>
+                </div>
+                <svg className="ml-signgate-connector" viewBox="0 0 40 112">
+                  <path d="M0 40 C 18 40, 20 40, 40 40" stroke="var(--accent)" strokeWidth="1.5" strokeDasharray="3 4" strokeLinecap="round" fill="none" />
+                </svg>
+                <div className="ml-signgate-li-panel">
+                  <div className="ml-signgate-panel-head">
+                    <span className="ml-signgate-panel-icon" />
+                    <span className="ml-signgate-panel-label">ToInbox</span>
+                    <span className="ml-signgate-panel-dot" />
+                  </div>
+                  <span className="ml-signgate-panel-line" style={{ width: '80%' }} />
+                  <span className="ml-signgate-panel-line" style={{ width: '55%' }} />
+                  <div className="ml-signgate-panel-btn">Send Application</div>
                 </div>
               </div>
             </div>
