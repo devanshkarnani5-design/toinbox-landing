@@ -399,7 +399,7 @@
 }
 .ml-signgate-float-1 { top: -6px; left: 2%; transform: rotate(-4deg); animation-delay: 0.2s; }
 .ml-signgate-float-2 { bottom: 14px; left: -4px; transform: rotate(-3deg); animation-delay: 1.6s; }
-.ml-signgate-float-3 { top: 42%; right: -10px; transform: rotate(4deg); animation-delay: 0.9s; white-space: nowrap; }
+.ml-signgate-float-3 { top: -6px; right: 0%; transform: rotate(4deg); animation-delay: 0.9s; white-space: nowrap; }
 @keyframes mlFloatBob { 0%,100% { transform: translateY(0) rotate(-4deg); } 50% { transform: translateY(-5px) rotate(-4deg); } }
 .ml-signgate-float-tick { width: 15px; height: 15px; border-radius: 50%; background: #e6f4ea; color: #057642; display: flex; align-items: center; justify-content: center; }
 .ml-signgate-float-live { width: 7px; height: 7px; border-radius: 50%; background: #4ade80; box-shadow: 0 0 0 3px rgba(74,222,128,0.2); }
