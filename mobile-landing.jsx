@@ -62,7 +62,7 @@ const ML_HIW_STEPS = [
 
 // ---------- nav ----------
 
-function MLNav() {
+function MLNav({ onSignInClick }) {
   const [open, setOpen] = useStateML(false);
   const links = [
     { href: '#why', label: 'Why' },
@@ -89,9 +89,9 @@ function MLNav() {
         {links.map((l) => (
           <a key={l.label} href={l.href} className="ml-menu-link" onClick={() => setOpen(false)}>{l.label}</a>
         ))}
-        <a href="https://app.toinbox.app" className="ml-btn ml-btn-accent ml-menu-cta">
+        <button onClick={() => { setOpen(false); onSignInClick(); }} className="ml-btn ml-btn-accent ml-menu-cta">
           Sign In <Icon name="arrow" size={14} />
-        </a>
+        </button>
       </div>
     </>
   );
@@ -137,7 +137,7 @@ function MLHeroVisual() {
   );
 }
 
-function MLHero() {
+function MLHero({ onSignInClick }) {
   return (
     <section className="ml-section ml-hero">
       <MLReveal>
@@ -149,7 +149,7 @@ function MLHero() {
           ToInbox finds the key decision-makers and relevant department heads behind any LinkedIn job and sends your personalised job application straight to their mail boxes — get noticed, get replies.
         </p>
         <div className="ml-hero-cta">
-          <a href="https://app.toinbox.app" className="ml-btn ml-btn-accent">Sign In <Icon name="arrow" size={16} /></a>
+          <button onClick={onSignInClick} className="ml-btn ml-btn-accent">Sign In <Icon name="arrow" size={16} /></button>
           <a href="#how-section" className="ml-btn ml-btn-ghost"><Icon name="play" size={13} /> How it works</a>
         </div>
       </MLReveal>
@@ -411,7 +411,7 @@ function MLProduct() {
 
 // ---------- pricing (featured plan first) ----------
 
-function MLPricing() {
+function MLPricing({ onSignInClick }) {
   // Exact mirror of the desktop Pricing() detection in sections.jsx.
   const [region, setRegion] = useStateML('in'); // default to India; flips on detect
   useEffectML(() => {
@@ -456,7 +456,7 @@ function MLPricing() {
                 <div className="ml-price-feat" key={f}><span className="ml-price-check"><Icon name="check" size={10} /></span>{f}</div>
               ))}
             </div>
-            <a href="https://app.toinbox.app" className="ml-btn ml-btn-ghost">Sign In <Icon name="arrow" size={14} /></a>
+            <button onClick={onSignInClick} className="ml-btn ml-btn-ghost">Sign In <Icon name="arrow" size={14} /></button>
           </div>
         </MLReveal>
         <MLReveal style={{ transitionDelay: '120ms' }}>
@@ -471,7 +471,7 @@ function MLPricing() {
                 <div className="ml-price-feat" key={f}><span className="ml-price-check"><Icon name="check" size={10} /></span>{f}</div>
               ))}
             </div>
-            <a href="https://app.toinbox.app" className="ml-btn ml-btn-accent">Sign In <Icon name="arrow" size={14} /></a>
+            <button onClick={onSignInClick} className="ml-btn ml-btn-accent">Sign In <Icon name="arrow" size={14} /></button>
           </div>
         </MLReveal>
         <MLReveal style={{ transitionDelay: '180ms' }}>
@@ -486,7 +486,7 @@ function MLPricing() {
                 <div className="ml-price-feat" key={f}><span className="ml-price-check"><Icon name="check" size={10} /></span>{f}</div>
               ))}
             </div>
-            <a href="https://app.toinbox.app" className="ml-btn ml-btn-primary">Sign In <Icon name="arrow" size={14} /></a>
+            <button onClick={onSignInClick} className="ml-btn ml-btn-primary">Sign In <Icon name="arrow" size={14} /></button>
           </div>
         </MLReveal>
       </div>
@@ -496,7 +496,7 @@ function MLPricing() {
 
 // ---------- final CTA ----------
 
-function MLFinalCTA() {
+function MLFinalCTA({ onSignInClick }) {
   return (
     <section className="ml-section">
       <MLReveal>
@@ -507,7 +507,7 @@ function MLFinalCTA() {
           <h2 className="ml-h2">Your dream startup won't notice another Easy Apply.</h2>
           <p className="ml-lead">Send personalised job applications — show intent, get noticed, land more interviews, and secure your dream job.</p>
           <div className="ml-hero-cta">
-            <a href="https://app.toinbox.app" className="ml-btn ml-btn-accent">Sign In <Icon name="arrow" size={15} /></a>
+            <button onClick={onSignInClick} className="ml-btn ml-btn-accent">Sign In <Icon name="arrow" size={15} /></button>
             <a href="#how-section" className="ml-btn ml-btn-ghost" style={{ color: 'rgba(255,255,255,0.8)', borderColor: 'rgba(255,255,255,0.2)' }}>See how it works</a>
           </div>
           <div className="ml-final-note">NO CARD REQUIRED · 10 FREE CREDITS · WORKS ON LINKEDIN</div>
@@ -539,17 +539,54 @@ function MLFooter() {
 
 // ---------- root ----------
 
+// ---------- sign-in gate (mobile only) ----------
+function MLSignInGate({ onClose }) {
+  return (
+    <div className="ml-signgate-overlay" onClick={onClose}>
+      <div className="ml-signgate-card" onClick={(e) => e.stopPropagation()}>
+        <div className="ml-signgate-illo">
+          <div className="ml-signgate-glow" />
+          <div className="ml-signgate-laptop">
+            <div className="ml-signgate-screen">
+              <div className="ml-signgate-chrome">
+                <span className="ml-signgate-dot" /><span className="ml-signgate-dot" /><span className="ml-signgate-dot" />
+                <span className="ml-signgate-url">linkedin.com</span>
+              </div>
+              <div className="ml-signgate-ext">
+                <span className="ml-signgate-ext-icon" />
+                <span>ToInbox</span>
+              </div>
+            </div>
+            <div className="ml-signgate-base" />
+          </div>
+          <div className="ml-signgate-phone">
+            <div className="ml-signgate-phone-body" />
+            <svg className="ml-signgate-slash" viewBox="0 0 40 40" fill="none">
+              <line x1="7" y1="7" x2="33" y2="33" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
+            </svg>
+          </div>
+        </div>
+        <p className="ml-signgate-text">ToInbox is a Chrome extension that works on laptop/desktop. Please sign in from there.</p>
+        <button className="ml-btn ml-btn-accent ml-signgate-btn" onClick={onClose}>Got it</button>
+      </div>
+    </div>
+  );
+}
+
 function MobileLanding() {
+  const [showSignGate, setShowSignGate] = useStateML(false);
+  const openSignGate = () => setShowSignGate(true);
   return (
     <div className="ml-root">
-      <MLNav />
-      <MLHero />
+      <MLNav onSignInClick={openSignGate} />
+      <MLHero onSignInClick={openSignGate} />
       <MLBenefits />
       <MLHowItWorks />
       <MLProduct />
-      <MLPricing />
-      <MLFinalCTA />
+      <MLPricing onSignInClick={openSignGate} />
+      <MLFinalCTA onSignInClick={openSignGate} />
       <MLFooter />
+      {showSignGate && <MLSignInGate onClose={() => setShowSignGate(false)} />}
     </div>
   );
 }
