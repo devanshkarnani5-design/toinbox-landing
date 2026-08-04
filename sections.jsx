@@ -504,7 +504,6 @@ function Pricing() {
             </div>
             <div className="price-feats">
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>10 personalized sends</div>
-              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Auto follow-up in 40 hrs</div>
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Cover letter + cold email pair</div>
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Dashboard + Analytics</div>
             </div>
@@ -522,7 +521,6 @@ function Pricing() {
             </div>
             <div className="price-feats">
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>50 personalized sends</div>
-              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Auto follow-up in 40 hrs</div>
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Cover letter + cold email pair</div>
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Dashboard + Analytics</div>
             </div>

@@ -452,7 +452,7 @@ function MLPricing({ onSignInClick }) {
               <div className="ml-price-sub">Try before you commit.</div>
             </div>
             <div className="ml-price-feats">
-              {['10 personalized sends', 'Auto follow-up in 40 hrs', 'Cover letter + cold email pair', 'Dashboard + Analytics'].map((f) => (
+              {['10 personalized sends', 'Cover letter + cold email pair', 'Dashboard + Analytics'].map((f) => (
                 <div className="ml-price-feat" key={f}><span className="ml-price-check"><Icon name="check" size={10} /></span>{f}</div>
               ))}
             </div>
@@ -467,7 +467,7 @@ function MLPricing({ onSignInClick }) {
               <div className="ml-price-amt"><span className="ml-currency">{cur}</span>{starterAmt}</div>
             </div>
             <div className="ml-price-feats">
-              {['50 personalized sends', 'Auto follow-up in 40 hrs', 'Cover letter + cold email pair', 'Dashboard + Analytics'].map((f) => (
+              {['50 personalized sends', 'Cover letter + cold email pair', 'Dashboard + Analytics'].map((f) => (
                 <div className="ml-price-feat" key={f}><span className="ml-price-check"><Icon name="check" size={10} /></span>{f}</div>
               ))}
             </div>
