@@ -4,9 +4,9 @@ const { useEffect: useEffectS } = React;
 function Benefits() {
   const items = [
     { ico: 'panel', t: 'Lives where you already are', s: "A Chrome extension that sits inside LinkedIn. No new app to learn, no second tab to keep open." },
-    { ico: 'target', t: 'Skip Easy Apply queues', s: 'Thousands apply through LinkedIn and go unseen. Reach the key decision-maker and department head directly, where your application gets noticed.' },
+    { ico: 'target', t: 'Skip Easy Apply queues', s: 'Thousands apply through LinkedIn and go unseen. Reach the relevant department head & recruiter directly, where your application gets noticed.' },
     { ico: 'forward', t: 'Forwarded to hiring directly', s: 'Leadership often move such applications straight to interviews or forward them to HR. These applications carry an advantage and move quicker.' },
-    { ico: 'sparkle', t: 'Tailored, never templated', s: 'Every application — to a key decision-maker or department head — is unique and personalised based on job description and your resume.' },
+    { ico: 'sparkle', t: 'Tailored, never templated', s: 'Every application — to a relevant department head or recruiter — is unique and personalised based on job description and your resume.' },
     { ico: 'bolt', t: 'Fifteen-second applications', s: 'Detect → enroll → send. Personalized outreach creates stronger intent, and strong intent increases replies.' },
     { ico: 'chart', t: 'Decision-makers reply at multiples', s: 'Leadership value candidates who show genuine interest. Personalized outreach leads to more replies and interviews.' },
   ];
@@ -312,7 +312,7 @@ function Testimonials() {
     <section className="section" id="proof">
       <div className="wrap">
         <div className="section-head" data-reveal>
-          <span className="eyebrow"><span className="dot" />Real replies from decision-makers</span>
+          <span className="eyebrow"><span className="dot" />Real replies from department heads & recruiters</span>
           <h2 className="h-section">The people who decide reply to intent.<br /><em>Here's what that looks like.</em></h2>
           <p className="lead">These are the actual mailboxes that fill up after using ToInbox. Personal outreach generates real conversations.</p>
         </div>
@@ -579,7 +579,7 @@ function Footer() {
         <div className="footer-inner">
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
             <div className="brand"><span className="brand-mark" /> ToInbox</div>
-            <div style={{ fontSize: 12.5, color: 'var(--ink-4)' }}>The Chrome extension for decision-maker-first LinkedIn applications.</div>
+            <div style={{ fontSize: 12.5, color: 'var(--ink-4)' }}>The Chrome extension that reaches relevant department heads & recruiters on LinkedIn.</div>
           </div>
           <div className="foot-links">
             <a href="#why">Why</a>
