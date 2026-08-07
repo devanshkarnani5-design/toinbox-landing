@@ -45,7 +45,7 @@ function MLReveal({ children, style }) {
 
 const ML_BENEFITS = [
   { ico: 'panel', t: 'Lives where you already are', s: "A Chrome extension that works in LinkedIn. Just download it from chrome web store in laptop/desktop that's it." },
-  { ico: 'target', t: 'Skip Easy Apply queues', s: 'Thousands apply through LinkedIn and go unseen. Reach the key decision-maker and department head directly.' },
+  { ico: 'target', t: 'Skip Easy Apply queues', s: 'Thousands apply through LinkedIn and go unseen. Reach the relevant department head and recruiter directly.' },
   { ico: 'sparkle', t: 'Tailored, never templated', s: 'Every application is unique, personalised to the job description and your resume.' },
   { ico: 'bolt', t: 'Fifteen-second applications', s: 'Detect → enroll → send. Personalized outreach creates stronger intent.' },
   { ico: 'chart', t: 'Decision-makers reply at multiples', s: 'Personalized outreach leads to more replies and interviews than a portal application.' },
