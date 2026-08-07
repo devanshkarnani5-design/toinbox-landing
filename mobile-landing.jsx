@@ -54,7 +54,7 @@ const ML_BENEFITS = [
 const ML_HIW_STEPS = [
   { t: 'Sign in & add the Chrome extension', s: 'Complete Sign In & Install ToInbox in your laptop/desktop from Chrome Web Store.' },
   { t: 'Open LinkedIn, click on a job', s: 'Open any LinkedIn job you want to apply & click Send Application in the ToInbox panel. It instantly enrolls the job and starts processing.' },
-  { t: 'ToInbox finds contacts, drafts your application.', s: 'It finds the relevant dept. head and leaders behind that job and drafts a personalized mail using your resume and the job description.' },
+  { t: 'ToInbox finds contacts, drafts your application.', s: 'It finds the relevant dept. head and recruiter behind that job and drafts a personalized mail using your resume and the job description.' },
   { t: 'Sent from your Gmail', s: 'Personalized cover letter + resume delivered straight to their mailboxes.' },
   { t: 'Get noticed, land more interviews', s: 'Genuine intent gets seen — and gets replies.' },
 ];
@@ -452,7 +452,7 @@ function MLPricing({ onSignInClick }) {
               <div className="ml-price-sub">Try before you commit.</div>
             </div>
             <div className="ml-price-feats">
-              {['10 personalized sends', 'Cover letter + cold email pair', 'Dashboard + Analytics'].map((f) => (
+              {['10 personalized sends', 'Dashboard + Analytics'].map((f) => (
                 <div className="ml-price-feat" key={f}><span className="ml-price-check"><Icon name="check" size={10} /></span>{f}</div>
               ))}
             </div>
@@ -467,7 +467,7 @@ function MLPricing({ onSignInClick }) {
               <div className="ml-price-amt"><span className="ml-currency">{cur}</span>{starterAmt}</div>
             </div>
             <div className="ml-price-feats">
-              {['50 personalized sends', 'Cover letter + cold email pair', 'Dashboard + Analytics'].map((f) => (
+              {['50 personalized sends', 'Dashboard + Analytics', 'Prior customer support'].map((f) => (
                 <div className="ml-price-feat" key={f}><span className="ml-price-check"><Icon name="check" size={10} /></span>{f}</div>
               ))}
             </div>
