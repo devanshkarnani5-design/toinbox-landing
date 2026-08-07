@@ -143,10 +143,10 @@ function MLHero({ onSignInClick }) {
       <MLReveal>
         <span className="ml-eyebrow"><span className="ml-dot" />Chrome extension · works inside LinkedIn</span>
         <h1 className="ml-h1">
-          Tired of applying on LinkedIn? Send your application directly to hiring team & land more interviews.
+          Tired of applying on LinkedIn? Send your application directly to the hiring team & land more interviews.
         </h1>
         <p className="ml-lead">
-          ToInbox finds the key decision-makers and relevant department heads behind any LinkedIn job and sends your personalised job application straight to their mail boxes — get noticed, get replies.
+          ToInbox finds the relevant department head and recruiter behind any LinkedIn job and sends your personalised job application straight to their mail boxes — get noticed, get replies.
         </p>
         <div className="ml-hero-cta">
           <button onClick={onSignInClick} className="ml-btn ml-btn-accent">Sign In <Icon name="arrow" size={16} /></button>
