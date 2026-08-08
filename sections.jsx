@@ -6,9 +6,9 @@ function Benefits() {
     { ico: 'panel', t: 'Lives where you already are', s: "A Chrome extension that sits inside LinkedIn. No new app to learn, no second tab to keep open." },
     { ico: 'target', t: 'Skip Easy Apply queues', s: 'Thousands apply through LinkedIn and go unseen. Reach the relevant department head & recruiter directly, where your application gets noticed.' },
     { ico: 'forward', t: 'Forwarded to hiring directly', s: 'Leadership often move such applications straight to interviews or forward them to HR. These applications carry an advantage and move quicker.' },
-    { ico: 'sparkle', t: 'Tailored, never templated', s: 'Every application — to a relevant department head or recruiter — is unique and personalised based on job description and your resume.' },
+    { ico: 'sparkle', t: 'Tailored, never templated', s: 'Every application — to a relevant department head and a recruiter — is unique and personalised based on job description and your resume.' },
     { ico: 'bolt', t: 'Fifteen-second applications', s: 'Detect → enroll → send. Personalized outreach creates stronger intent, and strong intent increases replies.' },
-    { ico: 'chart', t: 'Decision-makers reply at multiples', s: 'Leadership value candidates who show genuine interest. Personalized outreach leads to more replies and interviews.' },
+    { ico: 'chart', t: 'Decision-makers reply at multiples', s: 'Hiring Manager value candidates who show genuine interest. Personalized outreach leads to more replies and interviews.' },
   ];
   return (
     <section className="section" id="why">
@@ -504,7 +504,6 @@ function Pricing() {
             </div>
             <div className="price-feats">
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>10 personalized sends</div>
-              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Cover letter + cold email pair</div>
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Dashboard + Analytics</div>
             </div>
             <a href="https://app.toinbox.app" className="btn btn-outline" style={{ marginTop: 'auto' }}>Sign In <Icon name="arrow" size={14} className="chev" /></a>
@@ -521,8 +520,8 @@ function Pricing() {
             </div>
             <div className="price-feats">
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>50 personalized sends</div>
-              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Cover letter + cold email pair</div>
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Dashboard + Analytics</div>
+              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Prior customer support</div>
             </div>
             <a href="https://app.toinbox.app" className="btn btn-accent" style={{ marginTop: 'auto', alignSelf: 'flex-start' }}>Sign In <Icon name="arrow" size={14} className="chev" /></a>
           </div>
