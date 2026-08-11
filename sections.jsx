@@ -503,7 +503,7 @@ function Pricing() {
               <div className="price-sub">Try before you commit.</div>
             </div>
             <div className="price-feats">
-              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>10 personalized sends</div>
+              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>7 personalized sends</div>
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Dashboard + Analytics</div>
             </div>
             <a href="https://app.toinbox.app" className="btn btn-outline" style={{ marginTop: 'auto' }}>Sign In <Icon name="arrow" size={14} className="chev" /></a>
@@ -564,7 +564,7 @@ function FinalCTA() {
             <a href="https://app.toinbox.app" className="btn btn-accent">Sign In <Icon name="arrow" size={14} className="chev" /></a>
             <a href="#how-section" className="btn btn-ghost" style={{ color: 'rgba(255,255,255,0.8)' }}>See how it works</a>
           </div>
-          <div style={{ marginTop: 36, fontSize: 12.5, color: 'rgba(255,255,255,0.5)', fontFamily: 'var(--font-mono)' }}>NO CARD REQUIRED · 10 FREE CREDITS · WORKS ON LINKEDIN</div>
+          <div style={{ marginTop: 36, fontSize: 12.5, color: 'rgba(255,255,255,0.5)', fontFamily: 'var(--font-mono)' }}>NO CARD REQUIRED · 7 FREE CREDITS · WORKS ON LINKEDIN</div>
         </div>
       </div>
     </section>
