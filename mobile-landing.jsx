@@ -452,7 +452,7 @@ function MLPricing({ onSignInClick }) {
               <div className="ml-price-sub">Try before you commit.</div>
             </div>
             <div className="ml-price-feats">
-              {['7 personalized sends', 'Dashboard + Analytics'].map((f) => (
+              {['5 personalized sends', 'Dashboard + Analytics'].map((f) => (
                 <div className="ml-price-feat" key={f}><span className="ml-price-check"><Icon name="check" size={10} /></span>{f}</div>
               ))}
             </div>
@@ -510,7 +510,7 @@ function MLFinalCTA({ onSignInClick }) {
             <button onClick={onSignInClick} className="ml-btn ml-btn-accent">Sign In <Icon name="arrow" size={15} /></button>
             <a href="#how-section" className="ml-btn ml-btn-ghost" style={{ color: 'rgba(255,255,255,0.8)', borderColor: 'rgba(255,255,255,0.2)' }}>See how it works</a>
           </div>
-          <div className="ml-final-note">NO CARD REQUIRED · 7 FREE CREDITS · WORKS ON LINKEDIN</div>
+          <div className="ml-final-note">NO CARD REQUIRED · 5 FREE CREDITS · WORKS ON LINKEDIN</div>
         </div>
       </MLReveal>
     </section>
