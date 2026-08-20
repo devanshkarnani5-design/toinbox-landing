@@ -504,7 +504,6 @@ function Pricing() {
             </div>
             <div className="price-feats">
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>4 personalized sends</div>
-              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>3 follow-up credits</div>
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Dashboard + Analytics</div>
             </div>
             <a href="https://app.toinbox.app" className="btn btn-outline" style={{ marginTop: 'auto' }}>Sign In <Icon name="arrow" size={14} className="chev" /></a>
