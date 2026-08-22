@@ -504,7 +504,7 @@ function Pricing() {
             </div>
             <div className="price-feats">
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>4 personalized sends</div>
-              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>4 follow-up credits</div>
+              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>4 auto follow-up credits</div>
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Dashboard + Analytics</div>
             </div>
             <a href="https://app.toinbox.app" className="btn btn-outline" style={{ marginTop: 'auto' }}>Sign In <Icon name="arrow" size={14} className="chev" /></a>
@@ -521,7 +521,7 @@ function Pricing() {
             </div>
             <div className="price-feats">
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>40 personalized sends</div>
-              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>40 follow-up credits</div>
+              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>40 auto follow-up credits</div>
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Dashboard + Analytics</div>
             </div>
             <a href="https://app.toinbox.app" className="btn btn-accent" style={{ marginTop: 'auto', alignSelf: 'flex-start' }}>Sign In <Icon name="arrow" size={14} className="chev" /></a>
@@ -537,7 +537,7 @@ function Pricing() {
             </div>
             <div className="price-feats">
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>80 personalized sends</div>
-              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>80 follow-up credits</div>
+              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>80 auto follow-up credits</div>
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Dashboard + Analytics</div>
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Best for an active search</div>
             </div>
