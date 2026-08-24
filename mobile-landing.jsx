@@ -7,7 +7,7 @@
 // styles.css.
 const { useState: useStateML, useEffect: useEffectML, useRef: useRefML } = React;
 
-function useIsMobile(breakpoint = 430) {
+function useIsMobile(breakpoint = 768) {
   const [isMobile, setIsMobile] = useStateML(
     typeof window !== 'undefined' ? window.innerWidth <= breakpoint : false
   );
