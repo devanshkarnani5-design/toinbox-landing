@@ -517,7 +517,7 @@ function Pricing() {
               <div style={{ display: 'flex', alignItems: 'baseline', gap: 4, marginTop: 8 }}>
                 <span className="price-amt"><span className="currency">{cur}</span>{starter}<span className="per">one-time</span></span>
               </div>
-              <div className="price-sub">50 credits · valid 60 days</div>
+              <div className="price-sub">40 credits · valid 60 days</div>
             </div>
             <div className="price-feats">
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>40 personalized sends</div>
@@ -533,7 +533,7 @@ function Pricing() {
               <div style={{ display: 'flex', alignItems: 'baseline', gap: 4, marginTop: 8 }}>
                 <span className="price-amt"><span className="currency">{cur}</span>{pro}<span className="per">one-time</span></span>
               </div>
-              <div className="price-sub">100 credits · valid 60 days</div>
+              <div className="price-sub">80 credits · valid 60 days</div>
             </div>
             <div className="price-feats">
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>80 personalized sends</div>
