@@ -490,7 +490,7 @@ function Pricing() {
         <div className="section-head center" data-reveal>
           <span className="eyebrow"><span className="dot" />Pricing</span>
           <h2 className="h-section">Simple one-time credit packs. Pay only for what you send.</h2>
-          <p className="lead" style={{ textAlign: 'center' }}>No subscription. Buy credits once — they stay valid for 60 days.</p>
+          <p className="lead" style={{ textAlign: 'center' }}>No subscription. Buy credits once — as you require.</p>
         </div>
 
         <div className="pricing-grid" style={{ gridTemplateColumns: 'repeat(3, 1fr)' }}>
@@ -586,7 +586,7 @@ function FinalCTA() {
             <a href="https://app.toinbox.app" className="btn btn-accent">Sign In <Icon name="arrow" size={14} className="chev" /></a>
             <a href="#how-section" className="btn btn-ghost" style={{ color: 'rgba(255,255,255,0.8)' }}>See how it works</a>
           </div>
-          <div style={{ marginTop: 36, fontSize: 12.5, color: 'rgba(255,255,255,0.5)', fontFamily: 'var(--font-mono)' }}>NO CARD REQUIRED · 4 FREE CREDITS · WORKS ON LINKEDIN</div>
+          <div style={{ marginTop: 36, fontSize: 12.5, color: 'rgba(255,255,255,0.5)', fontFamily: 'var(--font-mono)' }}>NO CARD REQUIRED · WORKS ON LINKEDIN</div>
         </div>
       </div>
     </section>

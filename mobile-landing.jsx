@@ -441,7 +441,7 @@ function MLPricing({ onSignInClick }) {
       <MLReveal>
         <span className="ml-eyebrow"><span className="ml-dot" />Pricing</span>
         <h2 className="ml-h2">Simple one-time credit packs. Pay only for what you send.</h2>
-        <p className="ml-lead">No subscription. Buy credits once — they stay valid for 60 days.</p>
+        <p className="ml-lead">No subscription. Buy credits once — as you require.</p>
       </MLReveal>
       <div className="ml-price-stack">
         <MLReveal style={{ transitionDelay: '60ms' }}>
@@ -528,7 +528,7 @@ function MLFinalCTA({ onSignInClick }) {
             <button onClick={onSignInClick} className="ml-btn ml-btn-accent">Sign In <Icon name="arrow" size={15} /></button>
             <a href="#how-section" className="ml-btn ml-btn-ghost" style={{ color: 'rgba(255,255,255,0.8)', borderColor: 'rgba(255,255,255,0.2)' }}>See how it works</a>
           </div>
-          <div className="ml-final-note">NO CARD REQUIRED · 4 FREE CREDITS · WORKS ON LINKEDIN</div>
+          <div className="ml-final-note">NO CARD REQUIRED · WORKS ON LINKEDIN</div>
         </div>
       </MLReveal>
     </section>
