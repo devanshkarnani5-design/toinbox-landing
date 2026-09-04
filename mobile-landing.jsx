@@ -446,17 +446,35 @@ function MLPricing({ onSignInClick }) {
       <div className="ml-price-stack">
         <MLReveal style={{ transitionDelay: '60ms' }}>
           <div className="ml-price-card">
-            <div>
-              <div className="ml-price-name">Free Trial</div>
-              <div className="ml-price-amt"><span className="ml-currency">{cur}</span>0</div>
-              <div className="ml-price-sub">Try before you commit.</div>
-            </div>
-            <div className="ml-price-feats">
-              {['4 personalized sends', '4 auto follow-up credits', 'Dashboard + Analytics'].map((f) => (
-                <div className="ml-price-feat" key={f}><span className="ml-price-check"><Icon name="check" size={10} /></span>{f}</div>
-              ))}
-            </div>
-            <button onClick={onSignInClick} className="ml-btn ml-btn-ghost">Sign In <Icon name="arrow" size={14} /></button>
+            {isIndia ? (
+              <>
+                <div>
+                  <div className="ml-price-name">Basic</div>
+                  <div className="ml-price-amt"><span className="ml-currency">{cur}</span>99</div>
+                  <div className="ml-price-sub">12 credits · valid 20 days</div>
+                </div>
+                <div className="ml-price-feats">
+                  {['12 personalized sends', '12 auto follow-up credits', 'Dashboard + Analytics'].map((f) => (
+                    <div className="ml-price-feat" key={f}><span className="ml-price-check"><Icon name="check" size={10} /></span>{f}</div>
+                  ))}
+                </div>
+                <button onClick={onSignInClick} className="ml-btn ml-btn-ghost">Sign In <Icon name="arrow" size={14} /></button>
+              </>
+            ) : (
+              <>
+                <div>
+                  <div className="ml-price-name">Free Trial</div>
+                  <div className="ml-price-amt"><span className="ml-currency">{cur}</span>0</div>
+                  <div className="ml-price-sub">Try before you commit.</div>
+                </div>
+                <div className="ml-price-feats">
+                  {['4 personalized sends', '4 auto follow-up credits', 'Dashboard + Analytics'].map((f) => (
+                    <div className="ml-price-feat" key={f}><span className="ml-price-check"><Icon name="check" size={10} /></span>{f}</div>
+                  ))}
+                </div>
+                <button onClick={onSignInClick} className="ml-btn ml-btn-ghost">Sign In <Icon name="arrow" size={14} /></button>
+              </>
+            )}
           </div>
         </MLReveal>
         <MLReveal style={{ transitionDelay: '120ms' }}>
