@@ -495,19 +495,39 @@ function Pricing() {
 
         <div className="pricing-grid" style={{ gridTemplateColumns: 'repeat(3, 1fr)' }}>
           <div className="price-card" data-reveal>
-            <div>
-              <div className="price-name">Free Trial</div>
-              <div style={{ display: 'flex', alignItems: 'baseline', gap: 4, marginTop: 8 }}>
-                <span className="price-amt"><span className="currency">{cur}</span>0</span>
-              </div>
-              <div className="price-sub">Try before you commit.</div>
-            </div>
-            <div className="price-feats">
-              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>4 personalized sends</div>
-              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>4 auto follow-up credits</div>
-              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Dashboard + Analytics</div>
-            </div>
-            <a href="https://app.toinbox.app" className="btn btn-outline" style={{ marginTop: 'auto' }}>Sign In <Icon name="arrow" size={14} className="chev" /></a>
+            {isIndia ? (
+              <>
+                <div>
+                  <div className="price-name">Basic</div>
+                  <div style={{ display: 'flex', alignItems: 'baseline', gap: 4, marginTop: 8 }}>
+                    <span className="price-amt"><span className="currency">{cur}</span>99<span className="per">one-time</span></span>
+                  </div>
+                  <div className="price-sub">12 credits · valid 20 days</div>
+                </div>
+                <div className="price-feats">
+                  <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>12 personalized sends</div>
+                  <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>12 auto follow-up credits</div>
+                  <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Dashboard + Analytics</div>
+                </div>
+                <a href="https://app.toinbox.app" className="btn btn-outline" style={{ marginTop: 'auto' }}>Sign In <Icon name="arrow" size={14} className="chev" /></a>
+              </>
+            ) : (
+              <>
+                <div>
+                  <div className="price-name">Free Trial</div>
+                  <div style={{ display: 'flex', alignItems: 'baseline', gap: 4, marginTop: 8 }}>
+                    <span className="price-amt"><span className="currency">{cur}</span>0</span>
+                  </div>
+                  <div className="price-sub">Try before you commit.</div>
+                </div>
+                <div className="price-feats">
+                  <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>4 personalized sends</div>
+                  <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>4 auto follow-up credits</div>
+                  <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Dashboard + Analytics</div>
+                </div>
+                <a href="https://app.toinbox.app" className="btn btn-outline" style={{ marginTop: 'auto' }}>Sign In <Icon name="arrow" size={14} className="chev" /></a>
+              </>
+            )}
           </div>
 
           <div className="price-card featured" data-reveal style={{ transitionDelay: '90ms' }}>
