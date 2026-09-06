@@ -500,13 +500,13 @@ function Pricing() {
                 <div>
                   <div className="price-name">Basic</div>
                   <div style={{ display: 'flex', alignItems: 'baseline', gap: 4, marginTop: 8 }}>
-                    <span className="price-amt"><span className="currency">{cur}</span>99<span className="per">one-time</span></span>
+                    <span className="price-amt"><span className="currency">{cur}</span>129<span className="per">one-time</span></span>
                   </div>
                   <div className="price-sub">12 credits · valid 15 days</div>
                 </div>
                 <div className="price-feats">
-                  <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>12 personalized sends</div>
-                  <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>12 auto follow-up credits</div>
+                  <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>15 personalized sends</div>
+                  <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>15 auto follow-up credits</div>
                   <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Dashboard + Analytics</div>
                 </div>
                 <a href="https://app.toinbox.app" className="btn btn-outline" style={{ marginTop: 'auto' }}>Sign In <Icon name="arrow" size={14} className="chev" /></a>
