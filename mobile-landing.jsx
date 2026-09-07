@@ -451,7 +451,6 @@ function MLPricing({ onSignInClick }) {
                 <div>
                   <div className="ml-price-name">Basic</div>
                   <div className="ml-price-amt"><span className="ml-currency">{cur}</span>129</div>
-                  <div className="ml-price-sub">12 credits · valid 15 days</div>
                 </div>
                 <div className="ml-price-feats">
                   {['15 personalized sends', '15 auto follow-up credits', 'Dashboard + Analytics'].map((f) => (
