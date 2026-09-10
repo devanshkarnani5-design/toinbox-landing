@@ -502,7 +502,7 @@ function Pricing() {
                   <div style={{ display: 'flex', alignItems: 'baseline', gap: 4, marginTop: 8 }}>
                     <span className="price-amt"><span className="currency">{cur}</span>129<span className="per">one-time</span></span>
                   </div>
-                  <div className="price-sub">15 credits · valid 15 days</div>
+                  <div className="price-sub">valid 15 days</div>
                 </div>
                 <div className="price-feats">
                   <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>15 personalized sends</div>
