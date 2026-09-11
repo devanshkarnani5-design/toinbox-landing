@@ -505,7 +505,7 @@ function Pricing() {
                   <div className="price-sub">valid 15 days</div>
                 </div>
                 <div className="price-feats">
-                  <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>15 personalized sends</div>
+                  <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>15 personalized emails</div>
                   <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>15 auto follow-up credits</div>
                   <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Dashboard + Analytics</div>
                 </div>
@@ -521,7 +521,7 @@ function Pricing() {
                   <div className="price-sub">Try before you commit.</div>
                 </div>
                 <div className="price-feats">
-                  <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>4 personalized sends</div>
+                  <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>4 personalized emails</div>
                   <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>4 auto follow-up credits</div>
                   <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Dashboard + Analytics</div>
                 </div>
@@ -540,7 +540,7 @@ function Pricing() {
               <div className="price-sub">valid 40 days</div>
             </div>
             <div className="price-feats">
-              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>40 personalized sends</div>
+              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>40 personalized emails</div>
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>40 auto follow-up credits</div>
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Dashboard + Analytics</div>
             </div>
@@ -556,7 +556,7 @@ function Pricing() {
               <div className="price-sub">valid 60 days</div>
             </div>
             <div className="price-feats">
-              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>80 personalized sends</div>
+              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>80 personalized emails</div>
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>80 auto follow-up credits</div>
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Dashboard + Analytics</div>
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Best for an active search</div>
