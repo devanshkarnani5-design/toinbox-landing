@@ -481,8 +481,8 @@ function Pricing() {
 
   const isIndia = region === 'in';
   const cur = isIndia ? '\u20B9' : '$';
-  const starter = isIndia ? '299' : '24';
-  const pro = isIndia ? '499' : '39';
+  const starter = isIndia ? '299' : '19';
+  const pro = isIndia ? '499' : '29';
 
   return (
     <section className="section" id="pricing">

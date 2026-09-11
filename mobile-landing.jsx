@@ -433,8 +433,8 @@ function MLPricing({ onSignInClick }) {
   }, []);
   const isIndia = region === 'in';
   const cur = isIndia ? '₹' : '$';
-  const starterAmt = isIndia ? 299 : 24;
-  const proAmt = isIndia ? 499 : 39;
+  const starterAmt = isIndia ? 299 : 19;
+  const proAmt = isIndia ? 499 : 29;
 
   return (
     <section className="ml-section" id="pricing">
