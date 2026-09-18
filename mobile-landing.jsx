@@ -433,16 +433,39 @@ function MLPricing({ onSignInClick }) {
   }, []);
   const isIndia = region === 'in';
   const cur = isIndia ? '₹' : '$';
-  const starterAmt = isIndia ? 299 : 19;
-  const proAmt = isIndia ? 499 : 29;
+  const starterAmt = 299; // India one-time only
+  const proAmt = 499;     // India one-time only
+  const [period, setPeriod] = useStateML('monthly'); // outside India: weekly | monthly
+  const SUB = {
+    starter: { weekly: { price: 12, credits: 25 }, monthly: { price: 39, credits: 100 } },
+    pro: { weekly: { price: 18, credits: 40 }, monthly: { price: 59, credits: 160 } },
+  };
 
   return (
     <section className="ml-section" id="pricing">
       <MLReveal>
         <span className="ml-eyebrow"><span className="ml-dot" />Pricing</span>
         <h2 className="ml-h2">Simple one-time credit packs. Pay only for what you send.</h2>
-        <p className="ml-lead">No subscription. Buy credits once — as you require.</p>
+        <p className="ml-lead">{isIndia ? 'No subscription. Buy credits once — as you require.' : 'Simple weekly or monthly plans. Cancel anytime.'}</p>
       </MLReveal>
+      {!isIndia && (
+        <div style={{ display: 'flex', justifyContent: 'center', margin: '4px 0 16px' }}>
+          <div style={{ display: 'inline-flex', padding: 3, borderRadius: 999, background: 'var(--bg-soft)', border: '1px solid var(--line)' }}>
+            <button
+              onClick={() => setPeriod('weekly')}
+              style={{ padding: '7px 18px', borderRadius: 999, fontSize: 13, fontWeight: 500, background: period === 'weekly' ? 'var(--accent)' : 'transparent', color: period === 'weekly' ? '#fff' : 'var(--ink-3)' }}
+            >
+              Weekly
+            </button>
+            <button
+              onClick={() => setPeriod('monthly')}
+              style={{ padding: '7px 18px', borderRadius: 999, fontSize: 13, fontWeight: 500, background: period === 'monthly' ? 'var(--accent)' : 'transparent', color: period === 'monthly' ? '#fff' : 'var(--ink-3)' }}
+            >
+              Monthly
+            </button>
+          </div>
+        </div>
+      )}
       <div className="ml-price-stack">
         <MLReveal style={{ transitionDelay: '60ms' }}>
           <div className="ml-price-card">
@@ -481,10 +504,15 @@ function MLPricing({ onSignInClick }) {
             <div className="ml-price-tag">BEST VALUE</div>
             <div>
               <div className="ml-price-name">Starter</div>
-              <div className="ml-price-amt"><span className="ml-currency">{cur}</span>{starterAmt}</div>
+              <div className="ml-price-amt"><span className="ml-currency">{cur}</span>{isIndia ? starterAmt : SUB.starter[period].price}</div>
+              {!isIndia && <div className="ml-price-sub">{SUB.starter[period].credits} credits every {period === 'weekly' ? 'week' : 'month'}</div>}
             </div>
             <div className="ml-price-feats">
-              {['40 personalized emails', '40 auto follow-up credits', 'Dashboard + Analytics'].map((f) => (
+              {[
+                `${isIndia ? 40 : SUB.starter[period].credits} personalized emails`,
+                `${isIndia ? 40 : SUB.starter[period].credits} auto follow-up credits`,
+                'Dashboard + Analytics',
+              ].map((f) => (
                 <div className="ml-price-feat" key={f}><span className="ml-price-check"><Icon name="check" size={10} /></span>{f}</div>
               ))}
             </div>
@@ -495,11 +523,16 @@ function MLPricing({ onSignInClick }) {
           <div className="ml-price-card">
             <div>
               <div className="ml-price-name">Pro</div>
-              <div className="ml-price-amt"><span className="ml-currency">{cur}</span>{proAmt}</div>
-              <div className="ml-price-sub">Best for active job searches.</div>
+              <div className="ml-price-amt"><span className="ml-currency">{cur}</span>{isIndia ? proAmt : SUB.pro[period].price}</div>
+              <div className="ml-price-sub">{isIndia ? 'Best for active job searches.' : `${SUB.pro[period].credits} credits every ${period === 'weekly' ? 'week' : 'month'}`}</div>
             </div>
             <div className="ml-price-feats">
-              {['80 personalized emails', '80 auto follow-up credits', 'Dashboard + Analytics', 'Best for an active search'].map((f) => (
+              {[
+                `${isIndia ? 80 : SUB.pro[period].credits} personalized emails`,
+                `${isIndia ? 80 : SUB.pro[period].credits} auto follow-up credits`,
+                'Dashboard + Analytics',
+                'Best for an active search',
+              ].map((f) => (
                 <div className="ml-price-feat" key={f}><span className="ml-price-check"><Icon name="check" size={10} /></span>{f}</div>
               ))}
             </div>

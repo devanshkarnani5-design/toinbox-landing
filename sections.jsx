@@ -481,8 +481,13 @@ function Pricing() {
 
   const isIndia = region === 'in';
   const cur = isIndia ? '\u20B9' : '$';
-  const starter = isIndia ? '299' : '19';
-  const pro = isIndia ? '499' : '29';
+  const starter = '299'; // India one-time only
+  const pro = '499';     // India one-time only
+  const [period, setPeriod] = useStateP('monthly'); // outside India: weekly | monthly
+  const SUB = {
+    starter: { weekly: { price: 12, credits: 25 }, monthly: { price: 39, credits: 100 } },
+    pro: { weekly: { price: 18, credits: 40 }, monthly: { price: 59, credits: 160 } },
+  };
 
   return (
     <section className="section" id="pricing">
@@ -490,8 +495,27 @@ function Pricing() {
         <div className="section-head center" data-reveal>
           <span className="eyebrow"><span className="dot" />Pricing</span>
           <h2 className="h-section">Simple one-time credit packs. Pay only for what you send.</h2>
-          <p className="lead" style={{ textAlign: 'center' }}>No subscription. Buy credits once — as you require.</p>
+          <p className="lead" style={{ textAlign: 'center' }}>{isIndia ? 'No subscription. Buy credits once — as you require.' : 'Simple weekly or monthly plans. Cancel anytime.'}</p>
         </div>
+
+        {!isIndia && (
+          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 28 }}>
+            <div style={{ display: 'inline-flex', padding: 3, borderRadius: 999, background: 'var(--bg-soft)', border: '1px solid var(--line)' }}>
+              <button
+                onClick={() => setPeriod('weekly')}
+                style={{ padding: '7px 18px', borderRadius: 999, fontSize: 13, fontWeight: 500, background: period === 'weekly' ? 'var(--accent)' : 'transparent', color: period === 'weekly' ? '#fff' : 'var(--ink-3)' }}
+              >
+                Weekly
+              </button>
+              <button
+                onClick={() => setPeriod('monthly')}
+                style={{ padding: '7px 18px', borderRadius: 999, fontSize: 13, fontWeight: 500, background: period === 'monthly' ? 'var(--accent)' : 'transparent', color: period === 'monthly' ? '#fff' : 'var(--ink-3)' }}
+              >
+                Monthly
+              </button>
+            </div>
+          </div>
+        )}
 
         <div className="pricing-grid" style={{ gridTemplateColumns: 'repeat(3, 1fr)' }}>
           <div className="price-card" data-reveal>
@@ -535,13 +559,13 @@ function Pricing() {
             <div>
               <div className="price-name">Starter</div>
               <div style={{ display: 'flex', alignItems: 'baseline', gap: 4, marginTop: 8 }}>
-                <span className="price-amt"><span className="currency">{cur}</span>{starter}<span className="per">one-time</span></span>
+                <span className="price-amt"><span className="currency">{cur}</span>{isIndia ? starter : SUB.starter[period].price}<span className="per">{isIndia ? 'one-time' : `/${period === 'weekly' ? 'week' : 'month'}`}</span></span>
               </div>
-              <div className="price-sub">valid 40 days</div>
+              <div className="price-sub">{isIndia ? 'valid 40 days' : `${SUB.starter[period].credits} credits every ${period === 'weekly' ? 'week' : 'month'}`}</div>
             </div>
             <div className="price-feats">
-              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>40 personalized emails</div>
-              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>40 auto follow-up credits</div>
+              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>{isIndia ? 40 : SUB.starter[period].credits} personalized emails</div>
+              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>{isIndia ? 40 : SUB.starter[period].credits} auto follow-up credits</div>
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Dashboard + Analytics</div>
             </div>
             <a href="https://app.toinbox.app" className="btn btn-accent" style={{ marginTop: 'auto', alignSelf: 'flex-start' }}>Sign In <Icon name="arrow" size={14} className="chev" /></a>
@@ -551,13 +575,13 @@ function Pricing() {
             <div>
               <div className="price-name">Pro</div>
               <div style={{ display: 'flex', alignItems: 'baseline', gap: 4, marginTop: 8 }}>
-                <span className="price-amt"><span className="currency">{cur}</span>{pro}<span className="per">one-time</span></span>
+                <span className="price-amt"><span className="currency">{cur}</span>{isIndia ? pro : SUB.pro[period].price}<span className="per">{isIndia ? 'one-time' : `/${period === 'weekly' ? 'week' : 'month'}`}</span></span>
               </div>
-              <div className="price-sub">valid 60 days</div>
+              <div className="price-sub">{isIndia ? 'valid 60 days' : `${SUB.pro[period].credits} credits every ${period === 'weekly' ? 'week' : 'month'}`}</div>
             </div>
             <div className="price-feats">
-              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>80 personalized emails</div>
-              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>80 auto follow-up credits</div>
+              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>{isIndia ? 80 : SUB.pro[period].credits} personalized emails</div>
+              <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>{isIndia ? 80 : SUB.pro[period].credits} auto follow-up credits</div>
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Dashboard + Analytics</div>
               <div className="price-feat"><span className="check"><Icon name="check" size={11} /></span>Best for an active search</div>
             </div>
