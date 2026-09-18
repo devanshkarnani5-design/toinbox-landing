@@ -449,7 +449,7 @@ function MLPricing({ onSignInClick }) {
         <p className="ml-lead">Choose the plan that fits your search.</p>
       </MLReveal>
       {!isIndia && (
-        <div style={{ display: 'flex', justifyContent: 'center', margin: '4px 0 16px' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', margin: '20px 0 16px' }}>
           <div style={{ display: 'inline-flex', padding: 3, borderRadius: 999, background: 'var(--bg-soft)', border: '1px solid var(--line)' }}>
             <button
               onClick={() => setPeriod('weekly')}
