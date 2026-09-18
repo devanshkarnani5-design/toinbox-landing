@@ -494,8 +494,8 @@ function Pricing() {
       <div className="wrap">
         <div className="section-head center" data-reveal>
           <span className="eyebrow"><span className="dot" />Pricing</span>
-          <h2 className="h-section">Simple one-time credit packs. Pay only for what you send.</h2>
-          <p className="lead" style={{ textAlign: 'center' }}>{isIndia ? 'No subscription. Buy credits once — as you require.' : 'Simple weekly or monthly plans. Cancel anytime.'}</p>
+          <h2 className="h-section">Simple, transparent pricing. Pay only for what you send.</h2>
+          <p className="lead" style={{ textAlign: 'center' }}>Choose the plan that fits your search.</p>
         </div>
 
         {!isIndia && (

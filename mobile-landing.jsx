@@ -445,8 +445,8 @@ function MLPricing({ onSignInClick }) {
     <section className="ml-section" id="pricing">
       <MLReveal>
         <span className="ml-eyebrow"><span className="ml-dot" />Pricing</span>
-        <h2 className="ml-h2">Simple one-time credit packs. Pay only for what you send.</h2>
-        <p className="ml-lead">{isIndia ? 'No subscription. Buy credits once — as you require.' : 'Simple weekly or monthly plans. Cancel anytime.'}</p>
+        <h2 className="ml-h2">Simple, transparent pricing. Pay only for what you send.</h2>
+        <p className="ml-lead">Choose the plan that fits your search.</p>
       </MLReveal>
       {!isIndia && (
         <div style={{ display: 'flex', justifyContent: 'center', margin: '4px 0 16px' }}>
