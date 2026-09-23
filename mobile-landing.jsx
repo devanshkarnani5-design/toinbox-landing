@@ -69,7 +69,6 @@ function MLNav({ onSignInClick }) {
     { href: '#how-section', label: 'How it works' },
     { href: '#product', label: 'Product' },
     { href: '#pricing', label: 'Pricing' },
-    { href: '/affiliates', label: 'Affiliates' },
   ];
   return (
     <>
