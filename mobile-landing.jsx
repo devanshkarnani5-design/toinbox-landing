@@ -434,7 +434,7 @@ function MLPricing({ onSignInClick }) {
   const cur = isIndia ? '₹' : '$';
   const starterAmt = 299; // India one-time only
   const proAmt = 499;     // India one-time only
-  const [period, setPeriod] = useStateML('monthly'); // outside India: weekly | monthly
+  const [period, setPeriod] = useStateML('weekly'); // outside India: weekly | monthly
   const SUB = {
     starter: { weekly: { price: 12, credits: 25 }, monthly: { price: 39, credits: 100 } },
     pro: { weekly: { price: 18, credits: 40 }, monthly: { price: 59, credits: 160 } },
