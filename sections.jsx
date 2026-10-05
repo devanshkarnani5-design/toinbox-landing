@@ -485,8 +485,8 @@ function Pricing() {
   const pro = '499';     // India one-time only
   const [period, setPeriod] = useStateP('weekly'); // outside India: weekly | monthly
   const SUB = {
-    starter: { weekly: { price: 12, credits: 25 }, monthly: { price: 39, credits: 100 } },
-    pro: { weekly: { price: 18, credits: 40 }, monthly: { price: 59, credits: 160 } },
+    starter: { weekly: { price: 9, credits: 25 }, monthly: { price: 34, credits: 100 } },
+    pro: { weekly: { price: 14, credits: 40 }, monthly: { price: 52, credits: 160 } },
   };
 
   return (
