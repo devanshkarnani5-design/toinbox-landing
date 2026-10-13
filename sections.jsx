@@ -479,7 +479,7 @@ function Pricing() {
     return () => { cancelled = true; };
   }, []);
 
-  const isIndia = region === 'in';
+  const isIndia = false; // international-only: everyone sees USD subscriptions
   const cur = isIndia ? '\u20B9' : '$';
   const starter = '299'; // India one-time only
   const pro = '499';     // India one-time only

@@ -430,7 +430,7 @@ function MLPricing({ onSignInClick }) {
       });
     return () => { cancelled = true; };
   }, []);
-  const isIndia = region === 'in';
+  const isIndia = false; // international-only: everyone sees USD subscriptions
   const cur = isIndia ? '₹' : '$';
   const starterAmt = 299; // India one-time only
   const proAmt = 499;     // India one-time only
